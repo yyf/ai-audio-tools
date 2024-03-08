@@ -1,5 +1,5 @@
 # ai-audio-tools
-Community list of AI-based tools for audio, music, and speech applications 
+Community list of open-source AI tools for audio, music, and speech applications 
 
 # To contribute to the list
 
@@ -7,11 +7,10 @@ Edit the README and make a PR
 
 # Audio
 
-## Effects
+## DAW
 
 - [OpenVINO](https://www.audacityteam.org/blog/openvino-ai-effects/): OpenVINO AI effects for Audacity
-- [] (): 
-
+- [](): 
 
 # Music
 
@@ -19,6 +18,8 @@ Edit the README and make a PR
 
 - [Essentia](https://github.com/MTG/essentia): open-source C++ library for audio analysis and audio-based music information retrieval  
 - [Librosa](https://github.com/librosa/librosa): Python library for audio and music analysis 
+- [DDSP](https://github.com/magenta/ddsp): DDSP is a library of differentiable versions of common DSP functions (such as synthesizers, waveshapers, and filters). This allows these interpretable elements to be used as part of an deep learning model, especially as the output layers for audio generation
+- [MIDI-DDSP](https://github.com/magenta/midi-ddsp?tab=readme-ov-file): MIDI-DDSP is a hierarchical audio generation model for synthesizing MIDI expanded from DDSP
 - [](): 
 
 ## Production
