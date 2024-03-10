@@ -87,6 +87,7 @@ Edit the README and make a PR
 - [pocketsphinx](https://github.com/cmusphinx/pocketsphinx): A small speech recognizer 
 - [FunASR](https://github.com/alibaba-damo-academy/FunASR): A Fundamental End-to-End Speech Recognition Toolkit and Open Source SOTA Pretrained Models
 - [NeuralSpeech](https://github.com/microsoft/NeuralSpeech): a research project at Microsoft Research Asia, which focuses on neural network based speech processing, including automatic speech recognition (ASR), text-to-speech synthesis (TTS), spatial audio synthesis, video dubbing, etc
+- [espnet](https://github.com/espnet/espnet): End-to-End Speech Processing Toolkit 
 
 
 ## Production
@@ -108,3 +109,12 @@ Edit the README and make a PR
 - [elevenlabs-pythons](https://github.com/elevenlabs/elevenlabs-python): The official Python API for ElevenLabs Text to Speech. 
 - [tortoise-tts](https://github.com/neonbjb/tortoise-tts): A multi-voice TTS system trained with an emphasis on quality 
 - [lyrebird](https://github.com/lyrebird-voice-changer/lyrebird): Simple and powerful voice changer for Linux, written with Python & GTK 
+- [elevenlabs](https://github.com/elevenlabs/elevenlabs-python): The official Python API for ElevenLabs Text to Speech
+- [piper](https://github.com/rhasspy/piper): A fast, local neural text to speech system
+- [tts-generation-webui](https://github.com/rsxdalv/tts-generation-webui): TTS Generation Web UI (Bark, MusicGen + AudioGen, Tortoise, RVC, Vocos, Demucs, SeamlessM4T, MAGNet) 
+- [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS): 1 min voice data can also be used to train a good TTS model! (few shot voice cloning) 
+- [metavoice-src](https://github.com/metavoiceio/metavoice-src): Foundational model for human-like, expressive TTS 
+- [Real-Time-Voice-Cloning](https://github.com/CorentinJ/Real-Time-Voice-Cloning): Clone a voice in 5 seconds to generate arbitrary speech in real-time 
+- [Retrieval-based-Voice-Conversion-WebUI](https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI): Voice data <= 10 mins can also be used to train a good VC model! 
+- [midi2voice](https://github.com/mathigatti/midi2voice): Singing synthesis from MIDI file 
+- [OpenVoice](https://github.com/myshell-ai/OpenVoice): Instant voice cloning by MyShell
