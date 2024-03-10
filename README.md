@@ -10,7 +10,6 @@ Edit the README and make a PR
 ## DAW
 
 - [OpenVINO](https://www.audacityteam.org/blog/openvino-ai-effects/): OpenVINO AI effects for Audacity
-- [](): 
 
 # Music
 
@@ -72,6 +71,7 @@ Edit the README and make a PR
 - [riffusion](https://github.com/riffusion/riffusion): Stable diffusion for real-time music generation 
 - [muzic](https://github.com/microsoft/muzic): Music Understanding and Generation with Artificial Intelligence 
 - [midi-lm](https://github.com/jeremyjordan/midi-lm): Generative modeling of MIDI files 
+- [UniAudio](https://github.com/yangdongchao/UniAudio): The Open Source Code of UniAudio 
 
 # Speech
 
