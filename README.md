@@ -10,7 +10,7 @@ Edit the README and make a PR
 ## DAW
 
 - [OpenVINO](https://www.audacityteam.org/blog/openvino-ai-effects/): OpenVINO AI effects for Audacity
-- [TuneFlow] (https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
+- [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
 
 # Music
 
@@ -73,6 +73,7 @@ Edit the README and make a PR
 - [muzic](https://github.com/microsoft/muzic): Music Understanding and Generation with Artificial Intelligence 
 - [midi-lm](https://github.com/jeremyjordan/midi-lm): Generative modeling of MIDI files 
 - [UniAudio](https://github.com/yangdongchao/UniAudio): The Open Source Code of UniAudio 
+- [MuseGAN](https://github.com/salu133445/musegan): An AI for Music Generation 
 
 # Speech
 
