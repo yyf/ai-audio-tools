@@ -10,6 +10,7 @@ Edit the README and make a PR
 ## DAW
 
 - [OpenVINO](https://www.audacityteam.org/blog/openvino-ai-effects/): OpenVINO AI effects for Audacity
+- [TuneFlow] (https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
 
 # Music
 
@@ -52,7 +53,7 @@ Edit the README and make a PR
 ## Generation
 
 - [StableAudio](https://github.com/Stability-AI/stable-audio-tools): Generative models for conditional audio generation 
-- [AudioCraft](https://github.com/facebookresearch/audiocraft): a PyTorch library for deep learning research on audio generation
+- [AudioCraft](https://github.com/facebookresearch/audiocraft): a PyTorch library for deep learning research on audio generation. AudioCraft contains inference and training code for two state-of-the-art AI generative models producing high-quality audio: AudioGen and MusicGen.
 - [Jukebox](https://github.com/openai/jukebox): A generative model for music
 - [Magenta](https://github.com/magenta/symbolic-music-diffusion): symbolic music generation with diffusion models 
 - [TorchSynth](https://github.com/torchsynth/torchsynth): A GPU-optional modular synthesizer in pytorch, 16200x faster than realtime, for audio ML researchers
