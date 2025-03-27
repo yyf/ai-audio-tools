@@ -75,6 +75,7 @@ Edit the README and make a PR
 - [midi-lm](https://github.com/jeremyjordan/midi-lm): Generative modeling of MIDI files 
 - [UniAudio](https://github.com/yangdongchao/UniAudio): The Open Source Code of UniAudio 
 - [MuseGAN](https://github.com/salu133445/musegan): An AI for Music Generation 
+- [YuE](https://github.com/multimodal-art-projection/YuE): Open Full-song Music Generation Foundation Model, something similar to Suno.ai but open
 
 # Speech
 
@@ -121,3 +122,4 @@ Edit the README and make a PR
 - [Retrieval-based-Voice-Conversion-WebUI](https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI): Voice data <= 10 mins can also be used to train a good VC model! 
 - [midi2voice](https://github.com/mathigatti/midi2voice): Singing synthesis from MIDI file 
 - [OpenVoice](https://github.com/myshell-ai/OpenVoice): Instant voice cloning by MyShell
+- [ChatTTS](https://github.com/2noise/ChatTTS): A generative speech model for daily dialogue
