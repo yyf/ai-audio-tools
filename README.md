@@ -76,6 +76,7 @@ Edit the README and make a PR
 - [UniAudio](https://github.com/yangdongchao/UniAudio): The Open Source Code of UniAudio 
 - [MuseGAN](https://github.com/salu133445/musegan): An AI for Music Generation 
 - [YuE](https://github.com/multimodal-art-projection/YuE): Open Full-song Music Generation Foundation Model, something similar to Suno.ai but open
+- [Bark](https://github.com/suno-ai/bark): Bark is Suno's open-source text-to-speech+ model. Text-Prompted Generative Audio Model
 
 # Speech
 
