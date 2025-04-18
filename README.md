@@ -77,6 +77,10 @@ Edit the README and make a PR
 - [MuseGAN](https://github.com/salu133445/musegan): An AI for Music Generation 
 - [YuE](https://github.com/multimodal-art-projection/YuE): Open Full-song Music Generation Foundation Model, something similar to Suno.ai but open
 - [Bark](https://github.com/suno-ai/bark): Bark is Suno's open-source text-to-speech+ model. Text-Prompted Generative Audio Model
+- [MG²](https://github.com/shaopengw/Awesome-Music-Generation): Awesome music generation model——MG²
+- [MusicGPT](https://github.com/gabotechs/MusicGPT): Generate music based on natural language prompts using LLMs running locally
+- [InspireMusic](https://github.com/FunAudioLLM/InspireMusic): InspireMusic: A Unified Framework for Music, Song, Audio Generation.
+- [riffusion-hobby](https://github.com/riffusion/riffusion-hobby): Stable diffusion for real-time music generation
 
 # Speech
 
