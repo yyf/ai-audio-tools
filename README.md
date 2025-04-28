@@ -12,6 +12,10 @@ Edit the README and make a PR
 - [OpenVINO](https://www.audacityteam.org/blog/openvino-ai-effects/): OpenVINO AI effects for Audacity
 - [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
 
+## Foundation model
+
+- [Kimi-Audio](http://github.com/MoonshotAI/Kimi-Audio?tab=readme-ov-file#evaluation-toolkit): Kimi-Audio, an open-source audio foundation model excelling in audio understanding, generation, and conversation
+
 # Music
 
 ## Analysis
