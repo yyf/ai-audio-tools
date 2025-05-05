@@ -9,7 +9,7 @@ Edit the README and make a PR
 
 ## DAW
 
-- [OpenVINO](https://www.audacityteam.org/blog/openvino-ai-effects/): OpenVINO AI effects for Audacity
+- [OpenVINO](https://github.com/intel/openvino-plugins-ai-audacity/tree/main): OpenVINO AI effects for Audacity (Windows, Linux)
 - [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
 
 ## Foundation model
