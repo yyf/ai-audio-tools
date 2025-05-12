@@ -53,7 +53,7 @@ Edit the README and make a PR
 - [AudioDec](https://github.com/facebookresearch/AudioDec): An Open-source Streaming High-fidelity Neural Audio Codec 
 - [USS](https://github.com/bytedance/uss): This is the PyTorch implementation of the Universal Source Separation with Weakly labelled Data
 - [FAST-RIR](https://github.com/anton-jeran/FAST-RIR): This is the official implementation of our neural-network-based fast diffuse room impulse response generator (FAST-RIR) for generating room impulse responses (RIRs) for a given rectangular acoustic environment
-- [FoleyCrafter] (https://foleycrafter.github.io/): FoleyCrafter is a video-to-audio generation framework which can produce realistic sound effects semantically relevant and synchronized with videos. 
+- [FoleyCrafter](https://foleycrafter.github.io/): FoleyCrafter is a video-to-audio generation framework which can produce realistic sound effects semantically relevant and synchronized with videos. 
 
 ## Generation
 
