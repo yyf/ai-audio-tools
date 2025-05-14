@@ -101,6 +101,7 @@ Edit the README and make a PR
 - [FunASR](https://github.com/alibaba-damo-academy/FunASR): A Fundamental End-to-End Speech Recognition Toolkit and Open Source SOTA Pretrained Models
 - [NeuralSpeech](https://github.com/microsoft/NeuralSpeech): a research project at Microsoft Research Asia, which focuses on neural network based speech processing, including automatic speech recognition (ASR), text-to-speech synthesis (TTS), spatial audio synthesis, video dubbing, etc
 - [espnet](https://github.com/espnet/espnet): End-to-End Speech Processing Toolkit 
+- [RealTimeSTT](https://github.com/KoljaB/RealtimeSTT): A robust, efficient, low-latency speech-to-text library with advanced voice activity detection, wake word activation and instant transcription
 
 
 ## Production
