@@ -1,25 +1,19 @@
 # ai-audio-tools
-Community list of open-source AI tools for audio, music, and speech applications 
+Community list of open-source AI tools, models, and datasets for audio, music, and speech applications 
 
 # To contribute to the list
 
 Edit the README and make a PR
 
 # Audio
-
-## DAW
-
-- [OpenVINO](https://github.com/intel/openvino-plugins-ai-audacity/tree/main): OpenVINO AI effects for Audacity (Windows, Linux)
-- [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
+## Dataset
+- [HuggingFace](https://huggingface.co/datasets?modality=modality:audio): datasets with tag "audio" on Hugging Face
 
 ## Foundation model
-
-- [Kimi-Audio](http://github.com/MoonshotAI/Kimi-Audio?tab=readme-ov-file#evaluation-toolkit): Kimi-Audio, an open-source audio foundation model excelling in audio understanding, generation, and conversation
+- [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
 
 # Music
-
 ## Analysis
-
 - [Essentia](https://github.com/MTG/essentia): open-source C++ library for audio analysis and audio-based music information retrieval  
 - [Librosa](https://github.com/librosa/librosa): Python library for audio and music analysis 
 - [DDSP](https://github.com/magenta/ddsp): DDSP is a library of differentiable versions of common DSP functions (such as synthesizers, waveshapers, and filters). This allows these interpretable elements to be used as part of an deep learning model, especially as the output layers for audio generation
@@ -46,7 +40,8 @@ Edit the README and make a PR
 - [Audio-Flamingo-2](https://github.com/NVIDIA/audio-flamingo): Audio Flamingo 2: An Audio-Language Model with Long-Audio Understanding and Expert Reasoning Abilities
 
 ## Production
-
+- [OpenVINO](https://github.com/intel/openvino-plugins-ai-audacity/tree/main): OpenVINO AI effects for Audacity (Windows, Linux)
+- [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
 - [Spleeter](https://github.com/deezer/spleeter): Deezer source separation library including pretrained models
 - [DeepAFx](https://github.com/adobe-research/DeepAFx?tab=readme-ov-file): Third-party audio effects plugins as differentiable layers within deep neural networks
 - [matchering](https://github.com/sergree/matchering): open source audio matching and mastering 
@@ -54,9 +49,10 @@ Edit the README and make a PR
 - [USS](https://github.com/bytedance/uss): This is the PyTorch implementation of the Universal Source Separation with Weakly labelled Data
 - [FAST-RIR](https://github.com/anton-jeran/FAST-RIR): This is the official implementation of our neural-network-based fast diffuse room impulse response generator (FAST-RIR) for generating room impulse responses (RIRs) for a given rectangular acoustic environment
 - [FoleyCrafter](https://foleycrafter.github.io/): FoleyCrafter is a video-to-audio generation framework which can produce realistic sound effects semantically relevant and synchronized with videos. 
+- [OpenVINO](https://github.com/intel/openvino-plugins-ai-audacity/tree/main): OpenVINO AI effects for Audacity (Windows, Linux)
+- [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
 
 ## Generation
-
 - [StableAudio](https://github.com/Stability-AI/stable-audio-tools): Generative models for conditional audio generation 
 - [AudioCraft](https://github.com/facebookresearch/audiocraft): a PyTorch library for deep learning research on audio generation. AudioCraft contains inference and training code for two state-of-the-art AI generative models producing high-quality audio: AudioGen and MusicGen.
 - [Jukebox](https://github.com/openai/jukebox): A generative model for music
@@ -87,9 +83,7 @@ Edit the README and make a PR
 - [riffusion-hobby](https://github.com/riffusion/riffusion-hobby): Stable diffusion for real-time music generation
 
 # Speech
-
 ## Recognition
-
 - [Whisper](https://github.com/openai/whisper): a multitasking model that can perform multilingual speech recognition, speech translation, and language identification
 - [Deep Speech](https://github.com/mozilla/DeepSpeech): Mozilla's open-source speech-to-text engine
 - [Kaldi ASR](https://kaldi-asr.org/): open-source speech recognition toolkit written in C++ 
@@ -103,16 +97,13 @@ Edit the README and make a PR
 - [espnet](https://github.com/espnet/espnet): End-to-End Speech Processing Toolkit 
 - [RealTimeSTT](https://github.com/KoljaB/RealtimeSTT): A robust, efficient, low-latency speech-to-text library with advanced voice activity detection, wake word activation and instant transcription
 
-
 ## Production
-
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
 - [Meta encodec](https://github.com/facebookresearch/encodec): State-of-the-art deep learning based audio codec supporting both mono 24 kHz audio and stereo 48 kHz audio 
 - [audino](https://github.com/midas-research/audino): Open source audio annotation tool for humans 
 
 ## Synthesis
-
 - [Coqui TTS](https://github.com/coqui-ai/TTS): a deep learning toolkit for Text-to-Speech, battle-tested in research and production  
 - [DiffSinger](https://github.com/MoonInTheRiver/DiffSinger): singing voice synthesis via shallow diffusion mechanism 
 - [Real-Time-Voice-Cloning](https://github.com/CorentinJ/Real-Time-Voice-Cloning): Clone a voice in 5 seconds to generate arbitrary speech in real-time 
