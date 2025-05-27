@@ -38,6 +38,8 @@ Edit the README and make a PR
 - [basic-pitch](https://github.com/spotify/basic-pitch): A lightweight yet powerful audio-to-MIDI converter with pitch bend detection 
 - [jams](https://github.com/marl/jams): A JSON Annotated Music Specification for Reproducible MIR Research 
 - [Audio-Flamingo-2](https://github.com/NVIDIA/audio-flamingo): Audio Flamingo 2: An Audio-Language Model with Long-Audio Understanding and Expert Reasoning Abilities
+- [machinehearing](https://github.com/jonnor/machinehearing): Machine Learning applied to sound
+- [machinelistening](https://machinelistening.github.io): The slides & materials for the lecture Computational Analysis of Sound and Music at TU Ilmenau
 
 ## Production
 - [OpenVINO](https://github.com/intel/openvino-plugins-ai-audacity/tree/main): OpenVINO AI effects for Audacity (Windows, Linux)
