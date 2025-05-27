@@ -9,7 +9,7 @@ Edit the README and make a PR
 ## Dataset
 - [HuggingFace](https://huggingface.co/datasets?modality=modality:audio): datasets with tag "audio" on Hugging Face
 
-## Foundation model
+## Model
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
 
 # Music
@@ -124,3 +124,4 @@ Edit the README and make a PR
 - [midi2voice](https://github.com/mathigatti/midi2voice): Singing synthesis from MIDI file 
 - [OpenVoice](https://github.com/myshell-ai/OpenVoice): Instant voice cloning by MyShell
 - [ChatTTS](https://github.com/2noise/ChatTTS): A generative speech model for daily dialogue
+- [csm](https://github.com/SesameAILabs/csm): A Conversational Speech Generation Model
