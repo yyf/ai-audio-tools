@@ -83,6 +83,7 @@ Edit the README and make a PR
 - [MusicGPT](https://github.com/gabotechs/MusicGPT): Generate music based on natural language prompts using LLMs running locally
 - [InspireMusic](https://github.com/FunAudioLLM/InspireMusic): InspireMusic: A Unified Framework for Music, Song, Audio Generation.
 - [riffusion-hobby](https://github.com/riffusion/riffusion-hobby): Stable diffusion for real-time music generation
+- [MusicVAE](https://github.com/magenta/magenta/blob/main/magenta/models/music_vae/README.md): A hierarchical recurrent variational autoencoder for music
 
 # Speech
 ## Recognition
