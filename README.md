@@ -8,9 +8,12 @@ Edit the README and make a PR
 # Audio
 ## Dataset
 - [HuggingFace](https://huggingface.co/datasets?modality=modality:audio): datasets with tag "audio" on Hugging Face
+- [PaperWithCode](https://paperswithcode.com/datasets?mod=audio&page=1): datasets with tag "audio" on Paper with Code
+- [Kaggle](https://www.kaggle.com/datasets?search=audio): datasets with tag "audio" on Kaggle
 
 ## Model
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
+- [Kaggle](https://www.kaggle.com/models?query=audio): models with tag "audio" on Kaggle
 
 # Music
 ## Analysis
