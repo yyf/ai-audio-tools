@@ -15,6 +15,9 @@ Edit the README and make a PR
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
 - [Kaggle](https://www.kaggle.com/models?query=audio): models with tag "audio" on Kaggle
 
+## Security
+- [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
+
 # Music
 ## Analysis
 - [Essentia](https://github.com/MTG/essentia): open-source C++ library for audio analysis and audio-based music information retrieval  
