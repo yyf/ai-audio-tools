@@ -8,6 +8,7 @@ Edit the README and make a PR
 # Audio
 ## Benchmark
 - [PaperWithCode](https://paperswithcode.com/area/audio): SoTA audio benchmarks on Paper with Code
+- [PaperWithCode](https://paperswithcode.com/area/music): SoTA music benchmarks on Paper with Code
 
 ## Dataset
 - [HuggingFace](https://huggingface.co/datasets?modality=modality:audio): datasets with tag "audio" on Hugging Face
