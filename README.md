@@ -96,6 +96,10 @@ Edit the README and make a PR
 - [MusicVAE](https://github.com/magenta/magenta/blob/main/magenta/models/music_vae/README.md): A hierarchical recurrent variational autoencoder for music
 
 # Speech
+## Benchmark
+- [ArtificialAnalysis](https://artificialanalysis.ai/speech-to-text): Speech to Text AI Model & Provider Leaderboard on Aritifical Analysis
+- [ArtificialAnalysis](https://artificialanalysis.ai/text-to-speech): Text to Speech AI Model & Provider Leaderboard on Aritifical Analysis
+
 ## Recognition
 - [Whisper](https://github.com/openai/whisper): a multitasking model that can perform multilingual speech recognition, speech translation, and language identification
 - [Deep Speech](https://github.com/mozilla/DeepSpeech): Mozilla's open-source speech-to-text engine
