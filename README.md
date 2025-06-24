@@ -1,6 +1,23 @@
 # ai-audio-tools
 Community list of open-source AI tools, models, and datasets for audio, music, and speech applications 
 
+## Table of Contents
+- [To contribute to the list](#to-contribute-to-the-list)
+- [Audio](#audio)
+  - [Benchmark](#benchmark)
+  - [Dataset](#dataset)
+  - [Model](#model)
+  - [Security](#security)
+- [Music](#music)
+  - [Analysis](#analysis)
+  - [Production](#production)
+  - [Generation](#generation)
+- [Speech](#speech)
+  - [Benchmark](#benchmark-1)
+  - [Recognition](#recognition)
+  - [Production](#production-1)
+  - [Synthesis](#synthesis)
+
 # To contribute to the list
 
 Edit the README and make a PR
