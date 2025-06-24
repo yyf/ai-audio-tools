@@ -26,6 +26,7 @@ Edit the README and make a PR
 ## Benchmark
 - [PaperWithCode](https://paperswithcode.com/area/audio): SoTA audio benchmarks on Paper with Code
 - [PaperWithCode](https://paperswithcode.com/area/music): SoTA music benchmarks on Paper with Code
+- [SAILResearch](https://github.com/SAILResearch/awesome-foundation-model-leaderboards?tab=readme-ov-file#audio): A list of audio model ranking from Sail Research
 
 ## Dataset
 - [HuggingFace](https://huggingface.co/datasets?modality=modality:audio): datasets with tag "audio" on Hugging Face
