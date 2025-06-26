@@ -9,11 +9,12 @@ Community list of open-source AI tools, models, and datasets for audio, music, a
   - [Model](#model)
   - [Security](#security)
 - [Music](#music)
+  - [Benchmark](#benchmark-1)
   - [Analysis](#analysis)
   - [Production](#production)
   - [Generation](#generation)
 - [Speech](#speech)
-  - [Benchmark](#benchmark-1)
+  - [Benchmark](#benchmark-2)
   - [Recognition](#recognition)
   - [Production](#production-1)
   - [Synthesis](#synthesis)
@@ -41,6 +42,9 @@ Edit the README and make a PR
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
 
 # Music
+## Benchmark
+- [PaperWithCode](https://paperswithcode.com/sota/text-to-music-generation-on-musiccaps): Text-to-Music Generation on MusicCaps
+
 ## Analysis
 - [Essentia](https://github.com/MTG/essentia): open-source C++ library for audio analysis and audio-based music information retrieval  
 - [Librosa](https://github.com/librosa/librosa): Python library for audio and music analysis 
