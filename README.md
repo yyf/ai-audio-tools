@@ -74,6 +74,7 @@ Edit the README and make a PR
 - [Audio-Flamingo-2](https://github.com/NVIDIA/audio-flamingo): Audio Flamingo 2: An Audio-Language Model with Long-Audio Understanding and Expert Reasoning Abilities
 - [machinehearing](https://github.com/jonnor/machinehearing): Machine Learning applied to sound
 - [machinelistening](https://machinelistening.github.io): The slides & materials for the lecture Computational Analysis of Sound and Music at TU Ilmenau
+- [Audio-Flamingo-3](https://huggingface.co/nvidia/audio-flamingo-3): Audio Flamingo 3 (AF3) is a fully open, state-of-the-art Large Audio-Language Model (LALM) that advances reasoning and understanding across speech, sounds, and music
 
 ## Production
 - [OpenVINO](https://github.com/intel/openvino-plugins-ai-audacity/tree/main): OpenVINO AI effects for Audacity (Windows, Linux)
