@@ -45,6 +45,7 @@ Edit the README and make a PR
 # Music
 ## Benchmark
 - [PaperWithCode](https://paperswithcode.com/sota/text-to-music-generation-on-musiccaps): Text-to-Music Generation on MusicCaps
+- [MusGO_framework](https://roserbatlleroca.github.io/MusGO_framework/index.html): MusGO Framework- Assessing Openness in Music-Generative AI
 
 ## Analysis
 - [Essentia](https://github.com/MTG/essentia): open-source C++ library for audio analysis and audio-based music information retrieval  
