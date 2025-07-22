@@ -168,3 +168,4 @@ Edit the README and make a PR
 - [OpenVoice](https://github.com/myshell-ai/OpenVoice): Instant voice cloning by MyShell
 - [ChatTTS](https://github.com/2noise/ChatTTS): A generative speech model for daily dialogue
 - [csm](https://github.com/SesameAILabs/csm): A Conversational Speech Generation Model
+- [chatterbox](https://github.com/resemble-ai/chatterbox): Resemble AI's first production-grade open source TTS model
