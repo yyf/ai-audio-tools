@@ -106,7 +106,7 @@ Edit the README and make a PR
 - [stable-audio-tools](https://github.com/Stability-AI/stable-audio-tools): Generative models for conditional audio generation 
 - [MidiTok](https://github.com/Natooz/MidiTok): MIDI / symbolic music tokenizers for Deep Learning models
 - [muspy](https://salu133445.github.io/muspy/): an open source Python library for symbolic music generation
-- [MusicLM] (https://google-research.github.io/seanet/musiclm/examples/): a model generating high-fidelity music from text descriptions 
+- [MusicLM](https://google-research.github.io/seanet/musiclm/examples/): a model generating high-fidelity music from text descriptions 
 - [riffusion](https://github.com/riffusion/riffusion): Stable diffusion for real-time music generation 
 - [muzic](https://github.com/microsoft/muzic): Music Understanding and Generation with Artificial Intelligence 
 - [midi-lm](https://github.com/jeremyjordan/midi-lm): Generative modeling of MIDI files 
