@@ -29,6 +29,7 @@ Edit the README and make a PR
 - [PaperWithCode](https://paperswithcode.com/area/music): SoTA music benchmarks on Paper with Code
 - [SAILResearch](https://github.com/SAILResearch/awesome-foundation-model-leaderboards?tab=readme-ov-file#audio): A list of audio model ranking from Sail Research
 - [HEAR](https://hearbenchmark.com/hear-leaderboard.html): Holistic Evaluation of Audio Representations
+- [MSEB](https://research.google/blog/from-waveforms-to-wisdom-the-new-benchmark-for-auditory-intelligence/): The Massive Sound Embedding Benchmark (MSEB) from Google Research 
 
 ## Dataset
 - [HuggingFace](https://huggingface.co/datasets?modality=modality:audio): datasets with tag "audio" on Hugging Face
@@ -86,7 +87,6 @@ Edit the README and make a PR
 - [USS](https://github.com/bytedance/uss): This is the PyTorch implementation of the Universal Source Separation with Weakly labelled Data
 - [FAST-RIR](https://github.com/anton-jeran/FAST-RIR): This is the official implementation of our neural-network-based fast diffuse room impulse response generator (FAST-RIR) for generating room impulse responses (RIRs) for a given rectangular acoustic environment
 - [FoleyCrafter](https://foleycrafter.github.io/): FoleyCrafter is a video-to-audio generation framework which can produce realistic sound effects semantically relevant and synchronized with videos. 
-- [OpenVINO](https://github.com/intel/openvino-plugins-ai-audacity/tree/main): OpenVINO AI effects for Audacity (Windows, Linux)
 - [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
 
 ## Generation
@@ -119,6 +119,7 @@ Edit the README and make a PR
 - [InspireMusic](https://github.com/FunAudioLLM/InspireMusic): InspireMusic: A Unified Framework for Music, Song, Audio Generation.
 - [riffusion-hobby](https://github.com/riffusion/riffusion-hobby): Stable diffusion for real-time music generation
 - [MusicVAE](https://github.com/magenta/magenta/blob/main/magenta/models/music_vae/README.md): A hierarchical recurrent variational autoencoder for music
+- [MagentaRT](https://github.com/magenta/magenta-realtime): a Python library for live music audio generation on your local device
 
 # Speech
 ## Benchmark
