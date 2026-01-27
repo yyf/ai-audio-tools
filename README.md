@@ -120,6 +120,7 @@ Edit the README and make a PR
 - [riffusion-hobby](https://github.com/riffusion/riffusion-hobby): Stable diffusion for real-time music generation
 - [MusicVAE](https://github.com/magenta/magenta/blob/main/magenta/models/music_vae/README.md): A hierarchical recurrent variational autoencoder for music
 - [MagentaRT](https://github.com/magenta/magenta-realtime): a Python library for live music audio generation on your local device
+- [OmniAudio](https://github.com/liuhuadai/OmniAudio): a model for generating spatial audio from 360-degree videos.
 
 # Speech
 ## Benchmark
