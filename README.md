@@ -121,6 +121,7 @@ Edit the README and make a PR
 - [MusicVAE](https://github.com/magenta/magenta/blob/main/magenta/models/music_vae/README.md): A hierarchical recurrent variational autoencoder for music
 - [MagentaRT](https://github.com/magenta/magenta-realtime): a Python library for live music audio generation on your local device
 - [OmniAudio](https://github.com/liuhuadai/OmniAudio): a model for generating spatial audio from 360-degree videos.
+- [MidiLLM](https://github.com/slSeanWU/MIDI-LLM): an LLM for generating multitrack MIDI music from free-form text prompts
 
 # Speech
 ## Benchmark
