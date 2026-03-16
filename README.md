@@ -122,6 +122,7 @@ Edit the README and make a PR
 - [MagentaRT](https://github.com/magenta/magenta-realtime): a Python library for live music audio generation on your local device
 - [OmniAudio](https://github.com/liuhuadai/OmniAudio): a model for generating spatial audio from 360-degree videos.
 - [MidiLLM](https://github.com/slSeanWU/MIDI-LLM): an LLM for generating multitrack MIDI music from free-form text prompts
+- [Vision2Audio](https://github.com/Xiaohao-Liu/Awesome-Vison2Audio): A curated list of Vision (video/image) to Audio Generation
 
 # Speech
 ## Benchmark
