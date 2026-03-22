@@ -174,3 +174,4 @@ Edit the README and make a PR
 - [ChatTTS](https://github.com/2noise/ChatTTS): A generative speech model for daily dialogue
 - [csm](https://github.com/SesameAILabs/csm): A Conversational Speech Generation Model
 - [chatterbox](https://github.com/resemble-ai/chatterbox): Resemble AI's first production-grade open source TTS model
+- [Fish-Audio](https://github.com/fishaudio/fish-speech): Fish Audio S2 Pro is the most advanced multimodal model developed by Fish Audio
