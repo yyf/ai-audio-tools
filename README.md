@@ -176,3 +176,4 @@ Edit the README and make a PR
 - [chatterbox](https://github.com/resemble-ai/chatterbox): Resemble AI's first production-grade open source TTS model
 - [Fish-Audio](https://github.com/fishaudio/fish-speech): Fish Audio S2 Pro is the most advanced multimodal model developed by Fish Audio
 - [KittenTTS](https://github.com/KittenML/KittenTTS): State-of-the-art TTS model under 25MB
+- [Covo-Audio](https://github.com/Tencent/Covo-Audio): Covo-Audio is a 7B-parameter end-to-end large audio language model that directly processes continuous audio inputs and generates audio outputs within a single unified architecture.
