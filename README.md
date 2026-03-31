@@ -42,6 +42,7 @@ Edit the README and make a PR
 
 ## Security
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
+- [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
 
 # Music
 ## Benchmark
@@ -177,3 +178,4 @@ Edit the README and make a PR
 - [Fish-Audio](https://github.com/fishaudio/fish-speech): Fish Audio S2 Pro is the most advanced multimodal model developed by Fish Audio
 - [KittenTTS](https://github.com/KittenML/KittenTTS): State-of-the-art TTS model under 25MB
 - [Covo-Audio](https://github.com/Tencent/Covo-Audio): Covo-Audio is a 7B-parameter end-to-end large audio language model that directly processes continuous audio inputs and generates audio outputs within a single unified architecture.
+- [TTS-arxiv-daily](https://github.com/liutaocode/TTS-arxiv-daily?tab=readme-ov-file): Automatically Update Text-to-speech (TTS) Papers Daily using Github Actions (Update Every 12th hours)
