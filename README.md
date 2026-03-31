@@ -6,6 +6,7 @@ Community list of open-source AI tools, models, and datasets for audio, music, a
 - [Audio](#audio)
   - [Benchmark](#benchmark)
   - [Dataset](#dataset)
+  - [Annotation](#annotation)
   - [Model](#model)
   - [Security](#security)
 - [Music](#music)
@@ -35,6 +36,10 @@ Edit the README and make a PR
 - [HuggingFace](https://huggingface.co/datasets?modality=modality:audio): datasets with tag "audio" on Hugging Face
 - [PaperWithCode](https://paperswithcode.com/datasets?mod=audio&page=1): datasets with tag "audio" on Paper with Code
 - [Kaggle](https://www.kaggle.com/datasets?search=audio): datasets with tag "audio" on Kaggle
+
+## Annotation
+- [audino](https://github.com/midas-research/audino): Open source audio annotation tool for humans 
+- [audiomentations](https://github.com/iver56/audiomentations): A Python library for audio data augmentation.
 
 ## Model
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
@@ -149,7 +154,6 @@ Edit the README and make a PR
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
 - [Meta encodec](https://github.com/facebookresearch/encodec): State-of-the-art deep learning based audio codec supporting both mono 24 kHz audio and stereo 48 kHz audio 
-- [audino](https://github.com/midas-research/audino): Open source audio annotation tool for humans 
 - [pipecat](https://github.com/pipecat-ai/pipecat): Open Source framework for voice and multimodal conversational AI
 
 ## Synthesis
