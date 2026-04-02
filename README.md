@@ -131,6 +131,7 @@ Edit the README and make a PR
 - [MidiLLM](https://github.com/slSeanWU/MIDI-LLM): an LLM for generating multitrack MIDI music from free-form text prompts
 - [Vision2Audio](https://github.com/Xiaohao-Liu/Awesome-Vison2Audio): A curated list of Vision (video/image) to Audio Generation
 - [AudioX](https://github.com/ZeyueT/AudioX): A Unified Framework for Anything-to-Audio Generation
+- [MMAudio](https://github.com/hkchengrex/MMAudio): Taming Multimodal Joint Training for High-Quality Video-to-Audio Synthesis
 
 # Speech
 ## Benchmark
