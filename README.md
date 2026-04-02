@@ -130,6 +130,7 @@ Edit the README and make a PR
 - [OmniAudio](https://github.com/liuhuadai/OmniAudio): a model for generating spatial audio from 360-degree videos.
 - [MidiLLM](https://github.com/slSeanWU/MIDI-LLM): an LLM for generating multitrack MIDI music from free-form text prompts
 - [Vision2Audio](https://github.com/Xiaohao-Liu/Awesome-Vison2Audio): A curated list of Vision (video/image) to Audio Generation
+- [AudioX](https://github.com/ZeyueT/AudioX): A Unified Framework for Anything-to-Audio Generation
 
 # Speech
 ## Benchmark
