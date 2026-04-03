@@ -132,6 +132,7 @@ Edit the README and make a PR
 - [Vision2Audio](https://github.com/Xiaohao-Liu/Awesome-Vison2Audio): A curated list of Vision (video/image) to Audio Generation
 - [AudioX](https://github.com/ZeyueT/AudioX): A Unified Framework for Anything-to-Audio Generation
 - [MMAudio](https://github.com/hkchengrex/MMAudio): Taming Multimodal Joint Training for High-Quality Video-to-Audio Synthesis
+- [ACE-Step-1.5](https://github.com/ace-step/ACE-Step-1.5): a highly efficient open-source music foundation model that brings commercial-grade generation to consumer hardware. 
 
 # Speech
 ## Benchmark
