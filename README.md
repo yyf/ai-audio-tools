@@ -186,3 +186,4 @@ Edit the README and make a PR
 - [KittenTTS](https://github.com/KittenML/KittenTTS): State-of-the-art TTS model under 25MB
 - [Covo-Audio](https://github.com/Tencent/Covo-Audio): Covo-Audio is a 7B-parameter end-to-end large audio language model that directly processes continuous audio inputs and generates audio outputs within a single unified architecture.
 - [TTS-arxiv-daily](https://github.com/liutaocode/TTS-arxiv-daily?tab=readme-ov-file): Automatically Update Text-to-speech (TTS) Papers Daily using Github Actions (Update Every 12th hours)
+- [kokoro](https://github.com/hexgrad/kokoro): an open-weight TTS model with 82 million parameters
