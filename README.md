@@ -152,6 +152,7 @@ Edit the README and make a PR
 - [NeuralSpeech](https://github.com/microsoft/NeuralSpeech): a research project at Microsoft Research Asia, which focuses on neural network based speech processing, including automatic speech recognition (ASR), text-to-speech synthesis (TTS), spatial audio synthesis, video dubbing, etc
 - [espnet](https://github.com/espnet/espnet): End-to-End Speech Processing Toolkit 
 - [RealTimeSTT](https://github.com/KoljaB/RealtimeSTT): A robust, efficient, low-latency speech-to-text library with advanced voice activity detection, wake word activation and instant transcription
+- [AudenAI](https://github.com/AudenAI/Auden): A comprehensive toolbox for audio & multimodal understanding tasks including ASR, CLAP, audio captioning, speaker identification, speech-llm and more.
 
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
