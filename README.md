@@ -95,6 +95,7 @@ Edit the README and make a PR
 - [FAST-RIR](https://github.com/anton-jeran/FAST-RIR): This is the official implementation of our neural-network-based fast diffuse room impulse response generator (FAST-RIR) for generating room impulse responses (RIRs) for a given rectangular acoustic environment
 - [FoleyCrafter](https://foleycrafter.github.io/): FoleyCrafter is a video-to-audio generation framework which can produce realistic sound effects semantically relevant and synchronized with videos. 
 - [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
+- [Woosh](https://github.com/SonyResearch/Woosh): Public release of the Sound Effect Foundation model by Sony AI.
 
 ## Generation
 - [StableAudio](https://github.com/Stability-AI/stable-audio-tools): Generative models for conditional audio generation 
