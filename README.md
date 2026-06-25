@@ -48,6 +48,7 @@ Edit the README and make a PR
 ## Security
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
 - [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
+- [LibriSeVoc](https://github.com/csun22/Synthetic-Voice-Detection-Vocoder-Artifacts): AI-Synthesized Voice Detection Using Neural Vocoder Artifacts, CVPR Workshop on Media Forensic 2023
 
 # Music
 ## Benchmark
