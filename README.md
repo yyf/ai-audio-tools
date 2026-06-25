@@ -49,6 +49,7 @@ Edit the README and make a PR
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
 - [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
 - [LibriSeVoc](https://github.com/csun22/Synthetic-Voice-Detection-Vocoder-Artifacts): AI-Synthesized Voice Detection Using Neural Vocoder Artifacts, CVPR Workshop on Media Forensic 2023
+- [SynthID](https://github.com/google-deepmind/synthid-text): This repository provides a reference implementation of the SynthID Text watermarking and detection capabilities for the research paper published in Nature. It is not intended for production use.
 
 # Music
 ## Benchmark
