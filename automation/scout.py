@@ -24,8 +24,8 @@ MAX_QUERIES = 5
 MAX_RESULTS_PER_QUERY = 10
 MAX_CANDIDATES = 30
 MIN_STARS = 30
-RECENCY_DAYS = 7
-HIGH_QUALITY_THRESHOLD = 80
+RECENCY_DAYS = 30
+HIGH_QUALITY_THRESHOLD = 60
 PR_THRESHOLD = 1
 BOT_BRANCH_PREFIX = "bot/daily-candidates-"
 README_PATH = Path("README.md")
@@ -244,25 +244,30 @@ def score_repo(
     reasons: list[str] = []
 
     if stars > MIN_STARS:
-        score += 15
+        score += 18
         reasons.append(f"{stars} stars")
+    if stars >= 50:
+        score += 7
     if stars >= 100:
-        score += 10
+        score += 5
     if stars >= 500:
-        score += 10
+        score += 5
     if pushed_at >= recency_cutoff:
-        score += 25
-        reasons.append("pushed in last 7 days")
+        score += 22
+        reasons.append(f"pushed in last {RECENCY_DAYS} days")
+    if len(description) >= 10:
+        score += 12
+        reasons.append("has description")
     if len(description) >= 20:
-        score += 15
+        score += 6
         reasons.append("clear README description")
-    if keyword_hits >= 2:
-        score += 15
-        reasons.append(f"topic fit ({category[0]} > {category[1]})")
-    elif keyword_hits == 1:
-        score += 8
-    if owner in NOTABLE_ORGS:
+    if keyword_hits >= 1:
         score += 10
+        reasons.append(f"topic fit ({category[0]} > {category[1]})")
+    if keyword_hits >= 2:
+        score += 5
+    if owner in NOTABLE_ORGS:
+        score += 8
         reasons.append(f"notable org ({owner})")
 
     score = min(score, 100)
@@ -414,7 +419,7 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
         "## Summary",
         f"- Run date: {run_date}",
         f"- Candidates scanned: {stats.scanned}",
-        f"- High-quality (≥80): {len(candidates)}",
+        f"- High-quality (≥{HIGH_QUALITY_THRESHOLD}): {len(candidates)}",
         f"- PR opened because {len(candidates)} ≥ {PR_THRESHOLD}",
         "",
         "**This PR is proposal-only. Do not auto-merge.**",
@@ -502,11 +507,11 @@ def main() -> int:
     git(
         "commit",
         "-m",
-        f"Daily candidates: {run_date} ({len(candidates)} entries, conf >=80)",
+        f"Daily candidates: {run_date} ({len(candidates)} entries, conf >={HIGH_QUALITY_THRESHOLD})",
     )
     git("push", "--force", "origin", branch)
 
-    title = f"Daily candidates: {run_date} ({len(candidates)} entries, conf ≥80)"
+    title = f"Daily candidates: {run_date} ({len(candidates)} entries, conf ≥{HIGH_QUALITY_THRESHOLD})"
     body = build_pr_body(run_date, stats, candidates)
     create_pr(branch, title, body)
     return 0
