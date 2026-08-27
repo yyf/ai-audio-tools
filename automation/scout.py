@@ -27,6 +27,7 @@ MIN_STARS = 10
 RECENCY_DAYS = 90
 HIGH_QUALITY_THRESHOLD = 40
 PR_THRESHOLD = 1
+MAX_PR_ENTRIES = 10
 BOT_BRANCH_PREFIX = "bot/daily-candidates-"
 README_PATH = Path("README.md")
 QUERIES_PATH = Path("automation/queries.json")
@@ -353,7 +354,7 @@ def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) 
             break
 
     candidates.sort(key=lambda c: (-c.confidence, -c.stars))
-    return candidates
+    return candidates[:MAX_PR_ENTRIES]
 
 
 def format_readme_line(candidate: Candidate) -> str:
@@ -460,17 +461,37 @@ def git(*args: str) -> None:
 
 def create_pr(branch: str, title: str, body: str) -> None:
     owner, repo = os.environ["GITHUB_REPOSITORY"].split("/")
-    result = github_request(
-        f"/repos/{owner}/{repo}/pulls",
-        method="POST",
-        body={
-            "title": title,
-            "head": branch,
-            "base": "main",
-            "body": body,
-        },
-    )
-    log(f"Opened PR #{result['number']}: {result['html_url']}")
+    try:
+        result = github_request(
+            f"/repos/{owner}/{repo}/pulls",
+            method="POST",
+            body={
+                "title": title,
+                "head": branch,
+                "base": "main",
+                "body": body,
+            },
+        )
+        log(f"Opened PR #{result['number']}: {result['html_url']}")
+    except RuntimeError as exc:
+        if "403" not in str(exc):
+            raise
+        compare = f"https://github.com/{owner}/{repo}/compare/main...{branch}?expand=1"
+        log("ERROR: GitHub Actions is not permitted to create pull requests.")
+        log("Enable: Settings → Actions → General → Workflow permissions")
+        log("      → Allow GitHub Actions to create and approve pull requests")
+        log(f"Branch pushed — open a PR manually: {compare}")
+        raise SystemExit(1) from exc
+
+
+def write_pr_artifacts(branch: str, title: str, body: str) -> None:
+    """Write PR metadata for a follow-up workflow step (survives on runner)."""
+    temp = Path(os.environ.get("RUNNER_TEMP", "."))
+    temp.mkdir(parents=True, exist_ok=True)
+    (temp / "scout-pr-body.md").write_text(body, encoding="utf-8")
+    (temp / "scout-pr-branch.txt").write_text(branch, encoding="utf-8")
+    (temp / "scout-pr-title.txt").write_text(title, encoding="utf-8")
+    log(f"PR artifacts written to {temp}")
 
 
 def main() -> int:
@@ -505,7 +526,7 @@ def main() -> int:
 
     git("config", "user.name", "github-actions[bot]")
     git("config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com")
-    git("checkout", "-b", branch)
+    git("checkout", "-B", branch)
     git("add", str(README_PATH))
     git(
         "commit",
@@ -516,6 +537,12 @@ def main() -> int:
 
     title = f"Daily candidates: {run_date} ({len(candidates)} entries, conf ≥{HIGH_QUALITY_THRESHOLD})"
     body = build_pr_body(run_date, stats, candidates)
+    write_pr_artifacts(branch, title, body)
+
+    if os.environ.get("SCOUT_SKIP_PR") == "1":
+        log("SCOUT_SKIP_PR=1 — branch pushed; PR step runs in workflow")
+        return 0
+
     create_pr(branch, title, body)
     return 0
 

@@ -11,6 +11,8 @@ concurrency:
   group: daily-repo-scout
   cancel-in-progress: false
 
+# Requires repo setting: Settings → Actions → General → Workflow permissions
+# → "Read and write" AND "Allow GitHub Actions to create and approve pull requests"
 permissions:
   contents: write
   pull-requests: write
@@ -29,8 +31,38 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Run repo scout
+      - name: Run repo scout (search, commit, push branch)
+        id: scout
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: python automation/scout.py
+          SCOUT_SKIP_PR: "1"
+        run: |
+          set -euo pipefail
+          python automation/scout.py
+          if [ -f "$RUNNER_TEMP/scout-pr-branch.txt" ]; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "Bot branch: $(cat "$RUNNER_TEMP/scout-pr-branch.txt")"
+          else
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "No candidates met threshold."
+          fi
+
+      - name: Open pull request
+        if: steps.scout.outputs.found == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          branch="$(cat "$RUNNER_TEMP/scout-pr-branch.txt")"
+          title="$(cat "$RUNNER_TEMP/scout-pr-title.txt")"
+          if gh pr view "$branch" --json number >/dev/null 2>&1; then
+            echo "PR already open for branch $branch"
+            gh pr view "$branch"
+            exit 0
+          fi
+          gh pr create \
+            --base main \
+            --head "$branch" \
+            --title "$title" \
+            --body-file "$RUNNER_TEMP/scout-pr-body.md"
