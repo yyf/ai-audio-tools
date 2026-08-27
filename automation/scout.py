@@ -23,9 +23,9 @@ from pathlib import Path
 MAX_QUERIES = 5
 MAX_RESULTS_PER_QUERY = 10
 MAX_CANDIDATES = 30
-MIN_STARS = 30
-RECENCY_DAYS = 30
-HIGH_QUALITY_THRESHOLD = 60
+MIN_STARS = 10
+RECENCY_DAYS = 90
+HIGH_QUALITY_THRESHOLD = 40
 PR_THRESHOLD = 1
 BOT_BRANCH_PREFIX = "bot/daily-candidates-"
 README_PATH = Path("README.md")
@@ -199,8 +199,7 @@ def load_rejected_keys() -> set[str]:
 
 def parse_queries() -> list[str]:
     templates = json.loads(QUERIES_PATH.read_text(encoding="utf-8"))
-    since = (datetime.now(timezone.utc) - timedelta(days=RECENCY_DAYS)).strftime("%Y-%m-%d")
-    return [q.replace("{date}", since) for q in templates[:MAX_QUERIES]]
+    return [q.replace("{date}", "") for q in templates[:MAX_QUERIES]]
 
 
 def search_repositories(query: str) -> list[dict]:
@@ -244,30 +243,29 @@ def score_repo(
     reasons: list[str] = []
 
     if stars > MIN_STARS:
-        score += 18
+        score += 15
         reasons.append(f"{stars} stars")
-    if stars >= 50:
-        score += 7
+    if stars >= 30:
+        score += 8
     if stars >= 100:
         score += 5
     if stars >= 500:
         score += 5
     if pushed_at >= recency_cutoff:
-        score += 22
+        score += 15
         reasons.append(f"pushed in last {RECENCY_DAYS} days")
-    if len(description) >= 10:
-        score += 12
+    if len(description) >= 5:
+        score += 10
         reasons.append("has description")
     if len(description) >= 20:
-        score += 6
-        reasons.append("clear README description")
+        score += 5
     if keyword_hits >= 1:
-        score += 10
+        score += 8
         reasons.append(f"topic fit ({category[0]} > {category[1]})")
     if keyword_hits >= 2:
-        score += 5
+        score += 4
     if owner in NOTABLE_ORGS:
-        score += 8
+        score += 5
         reasons.append(f"notable org ({owner})")
 
     score = min(score, 100)
@@ -291,6 +289,10 @@ def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) 
             items = search_repositories(query)
         except RuntimeError as exc:
             stats.skipped.append(f"query failed — {exc}")
+            continue
+
+        if not items:
+            stats.skipped.append(f"query returned 0 results — {query[:60]}")
             continue
 
         for repo in items:
@@ -482,12 +484,13 @@ def main() -> int:
     stats = RunStats()
     candidates = collect_candidates(existing, rejected, stats)
 
+    log(f"Candidates scanned: {stats.scanned}")
     log(f"High-quality candidates: {len(candidates)}")
     if len(candidates) < PR_THRESHOLD:
         log("Threshold not met — exiting without PR")
         if stats.skipped:
             log("Skipped summary:")
-            for item in stats.skipped[:20]:
+            for item in stats.skipped[:30]:
                 log(f"  - {item}")
         return 0
 
