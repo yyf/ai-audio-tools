@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Daily repo scout — rule-based GitHub search and PR proposal.
+"""Daily sound scout — rule-based GitHub search and PR proposal.
 
 Behavior is defined in automation/SPEC.md (v1, script-only, GitHub Actions).
 """
