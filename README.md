@@ -32,6 +32,7 @@ Edit the README and make a PR
 - [HEAR](https://hearbenchmark.com/hear-leaderboard.html): Holistic Evaluation of Audio Representations
 - [MSEB](https://research.google/blog/from-waveforms-to-wisdom-the-new-benchmark-for-auditory-intelligence/): The Massive Sound Embedding Benchmark (MSEB) from Google Research 
 
+- [server](https://github.com/music-assistant/server): Music Assistant is a free, opensource Media library manager that connects to your streaming services and a wide range of connected speakers. The server is the beating heart, the core of Music Assistant and must run on an always-on device like a Raspberry Pi, a NAS or an Intel NUC or alike
 ## Dataset
 - [HuggingFace](https://huggingface.co/datasets?modality=modality:audio): datasets with tag "audio" on Hugging Face
 - [PaperWithCode](https://paperswithcode.com/datasets?mod=audio&page=1): datasets with tag "audio" on Paper with Code
@@ -45,6 +46,14 @@ Edit the README and make a PR
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
 - [Kaggle](https://www.kaggle.com/models?query=audio): models with tag "audio" on Kaggle
 
+- [audio.cpp](https://github.com/0xShug0/audio.cpp): An all-in-one, pure C++ inference engine for audio models, powered by ggml. Supports TTS, STT, VAD, voice conversion, music generation, and more, with highly optimized performance. No Python dependency
+- [transformers](https://github.com/huggingface/transformers): 🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training
+- [resonus](https://github.com/juananzzz/resonus): A clean Android music player for your self-hosted server, and your local files
+- [music-cli](https://github.com/luongnv89/music-cli): A command-line music player for coders. Background daemon with radio streaming, local MP3s, and AI-generated music
+- [DroppedNeedle](https://github.com/DroppedNeedle/DroppedNeedle): DroppedNeedle
+- [home](https://github.com/ProfMoo/home): My homelab baremetal-to-k8s media and "do anything" server. Codified and GitOpsified
+- [Vinto-Music](https://github.com/invaliduser231/Vinto-Music): A Music Bot for Fluxer
+- [wolfXspotify-API](https://github.com/WOLVAREX/wolfXspotify-API): Free, unlimited Spotify music data API. No API key, no OAuth, no sign-up required
 ## Security
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
 - [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
@@ -86,6 +95,9 @@ Edit the README and make a PR
 - [Audio-Flamingo-3](https://huggingface.co/nvidia/audio-flamingo-3): Audio Flamingo 3 (AF3) is a fully open, state-of-the-art Large Audio-Language Model (LALM) that advances reasoning and understanding across speech, sounds, and music
 - [Sci-Phi](https://sci-phi-audio.github.io/demo/): A Large Language Model Spatial Audio Descriptor
 
+- [speex](https://github.com/xiph/speex): Speex voice codec mirror - THIS IS A MIRROR, DEVELOPMENT HAPPENS AT https://gitlab.xiph.org/xiph/speex
+- [gaia](https://github.com/MTG/gaia): C++ library  to apply similarity measures and classiﬁcations on the results of audio analysis, including Python bindings. Together with Essentia it can be used to compute high-level descriptions of music
+- [DeepSparkInference](https://github.com/Deep-Spark/DeepSparkInference): DeepSparkInference has selected 216 inference models of both small and large sizes. The small models cover fields such as computer vision, natural language processing, and speech recognition; the LLMs involve various frameworks including vLLM, TGI and LMDeploy. This repository is the mirror of Gitee
 ## Production
 - [OpenVINO](https://github.com/intel/openvino-plugins-ai-audacity/tree/main): OpenVINO AI effects for Audacity (Windows, Linux)
 - [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
@@ -137,6 +149,7 @@ Edit the README and make a PR
 - [MMAudio](https://github.com/hkchengrex/MMAudio): Taming Multimodal Joint Training for High-Quality Video-to-Audio Synthesis
 - [ACE-Step-1.5](https://github.com/ace-step/ACE-Step-1.5): a highly efficient open-source music foundation model that brings commercial-grade generation to consumer hardware. 
 
+- [claude-skills](https://github.com/idanbeck/claude-skills): Claude Code skills collection - image generation, email access, music generation
 # Speech
 ## Benchmark
 - [ArtificialAnalysis](https://artificialanalysis.ai/speech-to-text): Speech to Text AI Model & Provider Leaderboard on Aritifical Analysis
@@ -157,12 +170,23 @@ Edit the README and make a PR
 - [RealTimeSTT](https://github.com/KoljaB/RealtimeSTT): A robust, efficient, low-latency speech-to-text library with advanced voice activity detection, wake word activation and instant transcription
 - [AudenAI](https://github.com/AudenAI/Auden): A comprehensive toolbox for audio & multimodal understanding tasks including ASR, CLAP, audio captioning, speaker identification, speech-llm and more.
 
+- [matrix-live-diarizer](https://github.com/lgy1027/matrix-live-diarizer): Local-first meeting transcription — audio & transcripts never leave your machine. Live captions + upload diarization + voice matching
+- [voiceblender](https://github.com/VoiceBlender/voiceblender): A programmable Voice AI platform: SIP and WebRTC call control, multi-party mixing, recording, TTS/STT, and pluggable AI agents (ElevenLabs, VAPI, Pipecat, Deepgram) — all driven through a REST API, webhooks, and a WebSocket event stream
+- [neurolink](https://github.com/juspay/neurolink): One TypeScript interface for 24+ LLM providers — swap providers without rewriting. MCP-native (connect any MCP server), voice (TTS/STT/realtime), RAG, memory, file processors. Production-origin: powers Tara, Yama, and Clairvoyance at Juspay
+- [parakeet-dictation](https://github.com/tristanmuzzu/parakeet-dictation): Free, unlimited voice dictation for Windows, built for talking to your AI coding agents. Like Wispr Flow, but you don't pay and there's no word limit
+- [dictus-android](https://github.com/getdictus/dictus-android): Dictus is a privacy-first Android keyboard for offline voice dictation. All speech recognition runs on-device — no cloud, no data collection
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
 - [Meta encodec](https://github.com/facebookresearch/encodec): State-of-the-art deep learning based audio codec supporting both mono 24 kHz audio and stereo 48 kHz audio 
 - [pipecat](https://github.com/pipecat-ai/pipecat): Open Source framework for voice and multimodal conversational AI
 
+- [FlipBits](https://github.com/camellia2077/FlipBits): 文本转无线电声音生成器与双轨 FSK 变声器，带实时二进制可视化 | Text-to-radio audio generator & dual-track FSK voice changer with real-time binary visualizers
+- [Acoustic-Voice-Call-Data-Relay](https://github.com/Sayjad21/Acoustic-Voice-Call-Data-Relay): This is a crisis-tech solution that transmits short data payloads (like GPS or emergency codes) over standard 2G GSM voice calls during internet and SMS blackouts. It proposes using acoustic coupling (speaker-to-mic) and robust, low-bitrate FSK modulation to bypass OS restrictions and survive severe voice codec distortion
+- [blue-codec](https://github.com/maxmelichov/blue-codec): Fast and Small codec for flow-matching models
+- [codec2_talkie](https://github.com/sh123/codec2_talkie): Turn your Android phone into Amateur Radio Codec2/OPUS APRS enabled DV handheld transceiver (Bluetooth/BLE/USB/TCPIP KISS/Sound modem client for DV digital voice communication)
+- [pilk](https://github.com/foyoux/pilk): python silk codec bindings 支持微信语音编解码
+- [X-VC](https://github.com/Jerrister/X-VC): X-VC: Zero-shot Streaming Voice Conversion in Codec Space
 ## Synthesis
 - [Coqui TTS](https://github.com/coqui-ai/TTS): a deep learning toolkit for Text-to-Speech, battle-tested in research and production  
 - [DiffSinger](https://github.com/MoonInTheRiver/DiffSinger): singing voice synthesis via shallow diffusion mechanism 
@@ -190,4 +214,8 @@ Edit the README and make a PR
 - [KittenTTS](https://github.com/KittenML/KittenTTS): State-of-the-art TTS model under 25MB
 - [Covo-Audio](https://github.com/Tencent/Covo-Audio): Covo-Audio is a 7B-parameter end-to-end large audio language model that directly processes continuous audio inputs and generates audio outputs within a single unified architecture.
 - [TTS-arxiv-daily](https://github.com/liutaocode/TTS-arxiv-daily?tab=readme-ov-file): Automatically Update Text-to-speech (TTS) Papers Daily using Github Actions (Update Every 12th hours)
-- [kokoro](https://github.com/hexgrad/kokoro): an open-weight TTS model with 82 million parameters
+- [kokoro](https://github.com/hexgrad/kokoro): an open-weight TTS model with 82 million parameters- [mastra](https://github.com/mastra-ai/mastra): Mastra is the modern TypeScript framework for AI-powered applications and agents
+- [franken_tts](https://github.com/Dicklesworthstone/franken_tts): Pure-Rust, CPU-hyper-optimized runtime for Qwen3-TTS zero-shot voice cloning — turns the model's hidden 15-step residual-code microdecoder from its largest CPU liability into its largest optimization advantage
+- [legadoC](https://github.com/CCSSNE/legadoC): 阅读Color 主打优化听书体验操作和界面向番茄靠齐。 书架升级✅，操作升级✅，书源融合✅，AI 净化✅，UI 升级✅ ，多媒体插入✅，Ai生图⬜，TTS重点优化⬜ 好用点点star谢谢喵
+- [voice-cast](https://github.com/luongnv89/voice-cast): Your words, any voice.  Voice cloning and text-to-speech with multiple TTS engines. Clone any voice from a short audio sample and generate speech in that voice
+- [KokoroGUI](https://github.com/CoffeeMethod/KokoroGUI): An advanced TTS software, built for audiobooks, podcasts, videos, and more
