@@ -1,0 +1,36 @@
+name: Daily repo scout
+
+on:
+  schedule:
+    # Weekdays 09:00 America/Los_Angeles (approx; GitHub cron is UTC-only).
+    # 17:00 UTC = 09:00 PST / 10:00 PDT.
+    - cron: "0 17 * * 1-5"
+  workflow_dispatch:
+
+concurrency:
+  group: daily-repo-scout
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run repo scout
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python automation/scout.py

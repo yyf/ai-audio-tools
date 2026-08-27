@@ -2,9 +2,9 @@
 
 > **Status:** Active
 >
-> Defines a Cursor Automation for discovering new audio/music/speech AI
-> repositories and proposing README additions via pull request only.
-> Runs entirely on Cursor Cloud + GitHub — no local machine required.
+> Defines a **GitHub Actions** workflow for discovering new audio/music/speech
+> AI repositories and proposing README additions via pull request only.
+> Runs on GitHub-hosted runners — no Cursor Cloud Agent, no local machine.
 
 ---
 
@@ -24,18 +24,6 @@ tables (`| a | b |`). Pipe tables wrap poorly in narrow editor panes.
 - **Separators** — box drawing: `+`, `-`, `|`
 - **No pipe tables** — do not use `| a | b |` in this spec (PR templates excepted)
 
-**Template:**
-
-```text
-+-------------+-------------------------------------------------------------+
-| Field       | Value                                                       |
-+-------------+-------------------------------------------------------------+
-| Short label | Single-line value fits here                                   |
-| Long label  | First line of a value that needs to wrap onto the next row   |
-|             | Second line aligned under the value column                    |
-+-------------+-------------------------------------------------------------+
-```
-
 ---
 
 ## Overview
@@ -51,8 +39,9 @@ tables (`| a | b |`). Pipe tables wrap poorly in narrow editor panes.
 | Repo        | yyf/ai-audio-tools (this project only)                        |
 | Base branch | main                                                          |
 | Bot branch  | bot/daily-candidates-YYYY-MM-DD                               |
-| Schedule    | Weekdays 9:00 AM America/Los_Angeles (adjust in Automations |
-|             | editor)                                                       |
+| Schedule    | Weekdays 9:00 AM America/Los_Angeles (GitHub Actions cron)    |
+| Runner      | GitHub-hosted ubuntu-latest                                   |
+| Script      | automation/scout.py (rule-based, no LLM)                      |
 | Outcome     | Silent exit when zero high-quality finds; otherwise one PR    |
 |             | with scored candidates for maintainer merge                   |
 +-------------+-------------------------------------------------------------+
@@ -60,17 +49,17 @@ tables (`| a | b |`). Pipe tables wrap poorly in narrow editor panes.
 
 ---
 
-## Cloud execution
+## GitHub Actions execution
 
 ```text
 +-------------+-------------------------------------------------------------+
 | Component   | Where                                                       |
 +-------------+-------------------------------------------------------------+
-| Scheduled   | Cursor Cloud Agent                                          |
+| Workflow    | .github/workflows/daily-repo-scout.yml                      |
+| Scheduled   | GitHub Actions cron (weekdays)                                |
 | run         |                                                             |
-| Repo        | GitHub (yyf/ai-audio-tools)                                 |
-| checkout    |                                                             |
-| Discovery   | GitHub search API only (v1)                                 |
+| Discovery   | automation/scout.py + GitHub Search API                     |
+| Queries     | automation/queries.json                                     |
 | Review      | GitHub PR UI (maintainer only)                              |
 | and merge   |                                                             |
 +-------------+-------------------------------------------------------------+
@@ -78,10 +67,18 @@ tables (`| a | b |`). Pipe tables wrap poorly in narrow editor panes.
 
 **Prerequisites before first run:**
 
-- [ ] This file committed on `main`
+- [ ] This file and workflow committed on `main`
 - [ ] Branch protection on `main` (PR required, no force push, maintainer approval)
-- [ ] GitHub connected to Cursor with permission to create branches and PRs
-- [ ] Cursor Automation created from this spec; dry run once before enabling cron
+- [ ] Actions enabled for the repo (Settings → Actions)
+- [ ] Workflow permissions: `contents: write`, `pull-requests: write`
+- [ ] Manual dry run via **Actions → Daily repo scout → Run workflow**
+
+**Manual dry run:**
+
+1. GitHub → **Actions** → **Daily repo scout** → **Run workflow**
+2. Zero finds → green run, no PR (expected most days)
+3. One or more finds → bot branch + PR with confidence/category table
+4. Close test PR without merging if undesired
 
 ---
 
@@ -93,30 +90,22 @@ tables (`| a | b |`). Pipe tables wrap poorly in narrow editor panes.
 +---------------------------+-----------------------------------------------+
 | Allowed                   | Forbidden                                     |
 +---------------------------+-----------------------------------------------+
-| Read/write files in this  | Access other repos, orgs, or local paths      |
-| repo on a dedicated       | outside the project                           |
-| branch                    |                                               |
-| Read README.md and        | Clone, fork, or modify external repositories  |
-| optional repo-local       |                                               |
-| config (e.g. automation/  |                                               |
-| rejected.md)              |                                               |
-| Open a PR into this repo  | Push to main, merge PRs, delete protected     |
-|                           | branches                                      |
-| GitHub search read-only   | Broad account sweeps, private repo inventory, |
-| for discovery (scoped     | unscoped org listing                          |
-| queries)                  |                                               |
+| Read/write README in this | Modify other repositories                     |
+| repo on a bot branch only |                                             |
+| Read automation/queries.  | Clone or execute external repo code           |
+| json, automation/rejected |                                             |
+| .md, this spec            |                                             |
+| GitHub Search API         | Private repo inventory, unscoped org sweeps   |
+| (read-only)               |                                             |
+| Open/close PRs in this    | Push to main, merge PRs, delete main history  |
+| repo only                 |                                             |
 +---------------------------+-----------------------------------------------+
 ```
 
-**Default:** if an action is not explicitly allowed below, it is **denied**.
+### 2. Search scope — GitHub only, bounded
 
-### 2. Search scope — GitHub only, relevant entries, no massive crawls
-
-**v1 discovery:** GitHub repository search **only**. No Hugging Face, arXiv,
-PaperWithCode, Kaggle, or web crawls.
-
-**In-scope topics:** audio, music, MIR, speech, ASR, TTS, voice cloning,
-audio codecs, audio LLMs, audio datasets/benchmarks, audio security/watermarking.
+**v1 discovery:** GitHub repository search **only** via `automation/scout.py`.
+No Hugging Face, arXiv, web crawls, or LLM calls.
 
 **Search limits (hard caps per run):**
 
@@ -124,32 +113,17 @@ audio codecs, audio LLMs, audio datasets/benchmarks, audio security/watermarking
 +-------------+-------------------------------------------------------------+
 | Limit       | Value                                                       |
 +-------------+-------------------------------------------------------------+
-| GitHub      | <= 5 queries, each with narrow filters                      |
+| GitHub      | <= 5 queries (automation/queries.json)                      |
 | search      |                                                             |
-| Results per | <= 10 repos (top by relevance/recency)                      |
+| Results per | <= 10 repos per query                                       |
 | query       |                                                             |
-| Max         | <= 30 total                                                 |
+| Max         | <= 30 unique candidates total                               |
 | candidates  |                                                             |
-| Star floor  | stars:>30 (unknown authors)                                 |
-| Time window | created: or pushed: within last 7 days                      |
-| Crawl depth | No link following, no scraping, no pagination beyond caps   |
+| Star floor  | stars:>30                                                   |
+| Time window | pushed within last 7 days                                   |
+| Crawl depth | No pagination beyond caps, no link following                |
 +-------------+-------------------------------------------------------------+
 ```
-
-**Example allowed query shape:**
-
-```
-speech OR TTS stars:>30 pushed:>YYYY-MM-DD
-```
-
-**Forbidden:**
-
-- Unbounded pagination
-- “Search all of GitHub for audio”
-- Hugging Face, arXiv, PaperWithCode, Kaggle, or any non-GitHub discovery
-- Scraping awesome-lists or star-history sweeps
-- Downloading datasets, cloning repos, or running project code
-- Arbitrary `curl`, web fetch, or MCP-based external lookups
 
 ### 3. README — never overwrite without approval
 
@@ -157,54 +131,29 @@ speech OR TTS stars:>30 pushed:>YYYY-MM-DD
 +-------------+-------------------------------------------------------------+
 | Rule        | Behavior                                                    |
 +-------------+-------------------------------------------------------------+
-| Never edit  | All README changes on a bot branch only                     |
+| Never edit  | All README changes on bot/daily-candidates-YYYY-MM-DD only    |
 | main        |                                                             |
-| Never merge | Agent opens PR; maintainer merges manually                  |
-| Never       | No --force, no rewriting main history                       |
+| Never merge | Workflow opens PR; maintainer merges manually                 |
+| Never       | No force-push to main                                       |
 | force-push  |                                                             |
 | Approval =  | README on main changes only after PR merge                  |
 | merge       |                                                             |
-| Dry runs    | If zero high-quality finds: no branch, no README write, no  |
-|             | PR                                                          |
+| Zero finds  | No branch, no README write, no PR                           |
 +-------------+-------------------------------------------------------------+
 ```
 
-**Allowed write:** `README.md` on branch `bot/daily-candidates-YYYY-MM-DD` only
-when opening a PR.
-
-### 4. Privileges — least privilege by default
-
-**Tools to enable (minimal):**
+### 4. Workflow permissions — least privilege
 
 ```text
 +-------------+-------------------------------------------------------------+
-| Tool        | Use                                                         |
+| Enabled     | Disabled / not used                                           |
 +-------------+-------------------------------------------------------------+
-| Git         | Checkout branch, commit, push branch (this repo only)       |
-| GitHub      | Search (read), list/close PRs (bot PRs only), open PR       |
-|             | (create only); scoped to this repo                          |
-| File        | Read/write this repo only                                   |
-| read/write  |                                                             |
-+-------------+-------------------------------------------------------------+
-```
-
-**Tools to disable / not grant:**
-
-```text
-+-------------+-------------------------------------------------------------+
-| Disabled    | Reason                                                      |
-+-------------+-------------------------------------------------------------+
-| Auto-merge  | Maintainer gates all merges                                 |
-| Push to     | Prevents silent overwrites                                  |
-| main        |                                                             |
-| Slack /     | Out of scope for v1                                         |
-| email /     |                                                             |
-| webhooks    |                                                             |
-| MCP servers | Not required for v1; reduce attack surface                  |
-| Arbitrary   | GitHub search only — no web crawls                          |
-| shell + net |                                                             |
-| PR comment  | Off by default                                              |
-| spam, etc.  |                                                             |
+| GITHUB_TOKEN| Auto-merge                                                    |
+| contents:   | Push to main                                                  |
+| write       | External API keys / LLM secrets                               |
+| pull-       | Slack, email, issue creation                                  |
+| requests:   | Cursor Cloud Agent                                            |
+| write       |                                                             |
 +-------------+-------------------------------------------------------------+
 ```
 
@@ -218,20 +167,16 @@ when opening a PR.
 
 ## Discovery and quality logic
 
-### Pipeline
+### Pipeline (`automation/scout.py`)
 
-1. Read `automation/SPEC.md` and follow it exactly.
-2. Read `README.md` → build normalized URL set (GitHub URLs; also match HF
-   links already in list for dedupe).
-3. Run **bounded GitHub-only** searches (see caps above).
-4. Score each candidate **0–100**; assign **one** category from existing README
-   hierarchy.
-5. Count **high-quality** entries: confidence **≥ 80**, in-scope, deduped,
-   clear README/activity/impact.
-6. **If count = 0 → stop** (no PR, no writes).
-7. **If count ≥ 1 →** close any open bot PRs (branch prefix
-   `bot/daily-candidates-`), edit README on a new bot branch, open PR with
-   full metadata table.
+1. Load `README.md` → normalized GitHub URL dedupe set
+2. Load optional `automation/rejected.md` skip list
+3. Run bounded searches from `automation/queries.json`
+4. Rule-based **confidence** score (0–100) and **category** assignment
+5. Keep candidates with confidence **≥ 80**
+6. **If count = 0 →** exit 0 (no PR)
+7. **If count ≥ 1 →** close open `bot/daily-candidates-*` PRs, create bot
+   branch, insert README lines, push, open PR
 
 ### Category paths (must match README)
 
@@ -241,7 +186,10 @@ Music  > Benchmark | Analysis | Production | Generation
 Speech > Benchmark | Recognition | Production | Synthesis
 ```
 
-### Confidence bands
+Category assignment uses keyword matching on repo name, description, and
+GitHub topics (see `CATEGORY_KEYWORDS` in `automation/scout.py`).
+
+### Confidence scoring (rule-based)
 
 ```text
 +-------------+-------------------------------------------------------------+
@@ -254,19 +202,11 @@ Speech > Benchmark | Recognition | Production | Synthesis
 +-------------+-------------------------------------------------------------+
 ```
 
-### High-quality bar
+**Score inputs:** stars (>30 base, tiers at 100/500), recency (7 days),
+description quality, keyword/topic fit, notable org list.
 
-An entry counts toward the PR threshold only if **all** of:
-
-- Confidence **≥ 80**
-- Clearly not already in `README.md` (normalized URL dedupe)
-- README present, identifiable purpose, reasonable activity (e.g. commit in
-  last ~90 days unless a major lab release)
-- Non-trivial impact: stars > 30, notable org, benchmark/dataset/model
-  release, or clear SoTA claim with evidence
-
-**Does not count:** “maybe” items, duplicates, generic ML repos with a small
-audio demo, empty/stale repos.
+**High-quality bar (≥ 80):** in-scope, deduped, not archived/fork, passes
+score threshold.
 
 ---
 
@@ -274,47 +214,16 @@ audio demo, empty/stale repos.
 
 **Title:** `Daily candidates: YYYY-MM-DD (N entries, conf ≥80)`
 
-**Body must include per entry:**
-
-- Repo name + URL
-- **Confidence** (0–100)
-- **Category** (path from hierarchy above)
-- One-line rationale + impact signal
-- Dedupe note (e.g. “not duplicate of X”)
-
-**README diff:** only entries with confidence ≥ 80, in list format:
+**README diff:** only entries with confidence ≥ 80:
 
 ```markdown
 - [Name](url): short description
 ```
 
-**PR body template** (markdown for GitHub PR description — pipe table OK there):
+**PR body:** summary table with confidence + category per entry, entry
+details, and skipped list (generated by `automation/scout.py`).
 
-```markdown
-## Summary
-- Run date: YYYY-MM-DD
-- Candidates scanned: X
-- High-quality (≥80): N
-- PR opened because N ≥ 1
-
-**This PR is proposal-only. Do not auto-merge.**
-
-## Proposed additions
-
-| Repo | Confidence | Category | One-line rationale |
-|------|------------|----------|-------------------|
-| [name](url) | 92 | Speech > Synthesis | Open TTS from X; active, 2k★, not in list |
-
-### Entry details
-
-#### 1. [name](url) — **92** — `Speech > Synthesis`
-- **Why:** ...
-- **Impact:** ...
-- **Dedupe:** not duplicate of ...
-
-## Skipped
-- repo — reason (off-topic / duplicate / stale)
-```
+**Footer:** `This PR is proposal-only. Do not auto-merge.`
 
 ---
 
@@ -323,69 +232,28 @@ audio demo, empty/stale repos.
 - **No PR**
 - **No branch**
 - **No README changes**
-- **Silent exit:** log in automation run output only
+- Workflow completes successfully; see Actions log for skipped summary
 
 ---
 
-## Agent instructions (prompt)
-
-```
-At the start of each run, read automation/SPEC.md and follow it exactly.
-
-You maintain a curated awesome-list for yyf/ai-audio-tools. You run on a
-schedule with strict limits. Base branch is main.
-
-SCOPE
-- Work only in yyf/ai-audio-tools.
-- Do not access other repos, paths, or accounts beyond read-only GitHub search.
-
-SEARCH (GitHub only — v1)
-- Audio/music/speech AI only.
-- Max 5 GitHub queries, 10 results each, 30 candidates total, 7-day recency window.
-- Star floor: stars:>30 for unknown authors.
-- No Hugging Face, arXiv, web fetch, MCP, or non-GitHub discovery.
-- No bulk crawls, pagination beyond caps, or recursive link following.
-
-README
-- Read README.md first; dedupe by normalized URL.
-- Never modify main. Never merge. Never force-push.
-- Write README only on bot/daily-candidates-YYYY-MM-DD when opening a PR.
-
-QUALITY GATE
-- Score 0-100 and assign one existing category per candidate.
-- High-quality = confidence >= 80, in-scope, deduped, clear README/activity/impact.
-- Open a PR only if high-quality count >= 1.
-- Otherwise exit with no file writes.
-
-PR
-- Before opening a new PR, close any open PR from branch bot/daily-candidates-*.
-- Include confidence + category for every proposed entry.
-- Match list format: - [Name](url): description
-- State clearly: proposal only; do not auto-merge.
-
-DENY BY DEFAULT
-- If unsure whether an action is allowed, do not do it.
-```
-
----
-
-## Cursor Automation draft
+## Repository files
 
 ```text
 +-------------+-------------------------------------------------------------+
-| Field       | Value                                                       |
+| File        | Role                                                        |
 +-------------+-------------------------------------------------------------+
-| Name        | Daily audio-tools repo scout                                  |
-| Description | Bounded daily GitHub search for new audio/music/speech      |
-|             | repos; opens a PR with scored candidates when >=1           |
-|             | high-quality find; never merges.                            |
-| Trigger     | Cron: weekdays 9:00 AM America/Los_Angeles                   |
-| Tools       | Git (this repo), GitHub search + open/close PR (this repo   |
-|             | only)                                                       |
-| Instructions| Agent prompt block above; follow automation/SPEC.md exactly  |
-|             | each run                                                    |
-| Resolved    | Repo: yyf/ai-audio-tools; base: main; bot branch:           |
-| settings    | bot/daily-candidates-*                                      |
+| automation/ | This spec — policy and configuration reference              |
+| SPEC.md     |                                                             |
+| automation/ | Rule-based scout script                                     |
+| scout.py    |                                                             |
+| automation/ | Search query templates ({date} = 7-day cutoff)              |
+| queries.json|                                                             |
+| automation/ | Optional: repos to never suggest again                      |
+| rejected.md |                                                             |
+| .github/    | Scheduled + manual workflow                                 |
+| workflows/  |                                                             |
+| daily-repo- |                                                             |
+| scout.yml   |                                                             |
 +-------------+-------------------------------------------------------------+
 ```
 
@@ -393,16 +261,15 @@ DENY BY DEFAULT
 
 ## Explicit deny list
 
-The agent must **never**:
+The workflow and script must **never**:
 
 - Auto-merge or approve its own PR
 - Push directly to `main`
-- Edit `README.md` on `main` or without an open PR
-- Run unbounded searches or use non-GitHub discovery (HF, arXiv, web crawls)
-- Clone external repos or execute their code
-- Create secrets, change CI, or modify unrelated files
-- Delete branches on `main` or rewrite git history
-- Post publicly (Slack/issues) unless explicitly enabled later
+- Edit `README.md` on `main` without an open PR
+- Use non-GitHub discovery or LLM scoring
+- Clone external repos or run their code
+- Exceed search caps in `queries.json` / `scout.py`
+- Create secrets in the repo
 
 ---
 
@@ -412,24 +279,38 @@ The agent must **never**:
 +-------------+-------------------------------------------------------------+
 | Setting     | Value                                                       |
 +-------------+-------------------------------------------------------------+
-| Discovery   | GitHub search only                                          |
+| Execution   | GitHub Actions only (no Cursor Cloud Agent)                 |
+| Discovery   | GitHub search API, script-only scoring                        |
 | Star floor  | stars:>30                                                   |
-| Recency     | 7 days                                                      |
+| Recency     | 7 days (pushed)                                             |
 | window      |                                                             |
 | PR          | >= 1 high-quality find (confidence >= 80)                   |
 | threshold   |                                                             |
-| Schedule    | Weekdays 9:00 AM America/Los_Angeles                        |
-| Stale bot   | Close open bot/daily-candidates-* PRs before opening a new  |
-| PRs         | one                                                         |
-| Sub-        | Silent exit (zero finds)                                    |
+| Schedule    | Weekdays ~9:00 AM America/Los_Angeles (cron 17:00 UTC)       |
+| Stale bot   | Close open bot/daily-candidates-* PRs before new one        |
+| PRs         |                                                             |
+| Sub-        | Silent success exit (zero finds)                            |
 | threshold   |                                                             |
 | runs        |                                                             |
 | Notifications| PR only (GitHub)                                           |
 +-------------+-------------------------------------------------------------+
 ```
 
-> **Note:** Threshold is set to ≥ 1 for initial review. Raise to ≥ 6 later in
-> this file and the agent prompt if PR volume is too high.
+> **Note:** Threshold is ≥ 1 for initial review. Raise `PR_THRESHOLD` in
+> `automation/scout.py` (and this file) if PR volume is too high.
+
+> **Note:** Cron is UTC-only on GitHub. `0 17 * * 1-5` ≈ 9:00 AM PST /
+> 10:00 AM PDT. Adjust workflow cron if needed.
+
+---
+
+## Tuning
+
+- **Queries:** edit `automation/queries.json` (max 5 used)
+- **Keywords / scoring:** edit `CATEGORY_KEYWORDS` and scoring in
+  `automation/scout.py`
+- **Reject list:** add URLs to `automation/rejected.md`
+- **Threshold / caps:** constants at top of `automation/scout.py`
 
 ---
 
@@ -439,9 +320,10 @@ The agent must **never**:
 +------------+--------------------------------------------------------------+
 | Date       | Change                                                       |
 +------------+--------------------------------------------------------------+
-| 2026-08-27 | Initial draft spec                                           |
-| 2026-08-27 | v1 hardening: GitHub-only, threshold >=1, stars>30, cloud    |
-|            | config, status Active                                        |
-| 2026-08-27 | ASCII fixed-width tables; document conventions section         |
+| 2026-08-27 | Initial draft (Cursor Automation)                            |
+| 2026-08-27 | v1 hardening: GitHub-only, threshold >=1, stars>30           |
+| 2026-08-27 | ASCII fixed-width tables                                     |
+| 2026-08-27 | Switched to GitHub Actions + automation/scout.py; removed    |
+|            | Cursor Cloud Agent path                                      |
 +------------+--------------------------------------------------------------+
 ```
