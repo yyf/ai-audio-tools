@@ -1,0 +1,7 @@
+[
+  "(speech OR TTS OR ASR OR \"speech recognition\") stars:>30 pushed:>{date}",
+  "(\"audio LLM\" OR \"audio language model\" OR \"large audio model\") stars:>30 pushed:>{date}",
+  "(\"music generation\" OR \"text-to-music\" OR musicgen) stars:>30 pushed:>{date}",
+  "(\"voice cloning\" OR \"audio codec\" OR audiocraft) stars:>30 pushed:>{date}",
+  "(\"audio watermark\" OR \"voice detection\" OR \"audio generation\") stars:>30 pushed:>{date}"
+]
