@@ -1,4 +1,4 @@
-name: Daily repo scout
+name: Daily sound scout
 
 on:
   schedule:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: daily-repo-scout
+  group: daily-sound-scout
   cancel-in-progress: false
 
 # Requires repo setting: Settings → Actions → General → Workflow permissions
@@ -31,7 +31,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Run repo scout (search, commit, push branch)
+      - name: Run sound scout (search, commit, push branch)
         id: scout
         env:
           GITHUB_TOKEN: ${{ github.token }}
