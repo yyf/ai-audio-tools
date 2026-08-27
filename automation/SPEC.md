@@ -70,8 +70,20 @@ tables (`| a | b |`). Pipe tables wrap poorly in narrow editor panes.
 - [ ] This file and workflow committed on `main`
 - [ ] Branch protection on `main` (PR required, no force push, maintainer approval)
 - [ ] Actions enabled for the repo (Settings → Actions)
-- [ ] Workflow permissions: `contents: write`, `pull-requests: write`
+- [ ] Workflow permissions: **Read and write** + **Allow GitHub Actions to
+      create and approve pull requests** (Settings → Actions → General)
 - [ ] Manual dry run via **Actions → Daily repo scout → Run workflow**
+
+**One-time repo setting (required for PR creation):**
+
+GitHub → **Settings → Actions → General → Workflow permissions**
+
+1. Select **Read and write permissions**
+2. Check **Allow GitHub Actions to create and approve pull requests**
+3. Save
+
+Without step 2, the workflow can push the bot branch but fails with HTTP 403
+when opening the PR.
 
 **Manual dry run:**
 
@@ -289,6 +301,7 @@ The workflow and script must **never**:
 | window      |                                                             |
 | PR          | >= 1 high-quality find (confidence >= 40)                   |
 | threshold   |                                                             |
+| Max per PR  | 10 entries (top by confidence; see MAX_PR_ENTRIES)          |
 | Schedule    | Weekdays ~9:00 AM America/Los_Angeles (cron 17:00 UTC)       |
 | Stale bot   | Close open bot/daily-candidates-* PRs before new one        |
 | PRs         |                                                             |
@@ -332,5 +345,7 @@ The workflow and script must **never**:
 | 2026-08-27 | Loosen filters: confidence >=60, 30-day recency, scoring   |
 | 2026-08-27 | Fix empty search (drop pushed: from queries); floor >=40,  |
 |            | 90-day recency, stars>10                                    |
+| 2026-08-27 | Fix GHA PR 403: split PR step, cap 10 entries, docs for     |
+|            | workflow permissions setting                                  |
 +------------+--------------------------------------------------------------+
 ```
