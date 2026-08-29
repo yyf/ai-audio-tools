@@ -45,7 +45,6 @@ Edit the README and make a PR
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
 - [Kaggle](https://www.kaggle.com/models?query=audio): models with tag "audio" on Kaggle
 
-- [transformers](https://github.com/huggingface/transformers): 🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training
 ## Security
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
 - [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
@@ -86,8 +85,6 @@ Edit the README and make a PR
 - [machinelistening](https://machinelistening.github.io): The slides & materials for the lecture Computational Analysis of Sound and Music at TU Ilmenau
 - [Audio-Flamingo-3](https://huggingface.co/nvidia/audio-flamingo-3): Audio Flamingo 3 (AF3) is a fully open, state-of-the-art Large Audio-Language Model (LALM) that advances reasoning and understanding across speech, sounds, and music
 - [Sci-Phi](https://sci-phi-audio.github.io/demo/): A Large Language Model Spatial Audio Descriptor
-
-- [Google-Shortcuts-Launcher](https://github.com/WSTxda/Google-Shortcuts-Launcher): Easily access essential Google apps features directly from your launcher app drawer
 - [speex](https://github.com/xiph/speex): Speex voice codec mirror - THIS IS A MIRROR, DEVELOPMENT HAPPENS AT https://gitlab.xiph.org/xiph/speex
 ## Production
 - [OpenVINO](https://github.com/intel/openvino-plugins-ai-audacity/tree/main): OpenVINO AI effects for Audacity (Windows, Linux)
@@ -163,7 +160,7 @@ Edit the README and make a PR
 - [OGAM](https://github.com/off-grid-ai/OGAM): The Swiss Army Knife of Offline AI. Chat, see, speak, and generate images on your phone or Mac — GGUF LLMs, vision, Whisper speech-to-text, Stable Diffusion, tool calling, and local-network servers. Runs on your CPU, GPU, or NPU. No account, no API key, zero data leaves your device
 - [matrix-live-diarizer](https://github.com/lgy1027/matrix-live-diarizer): Local-first meeting transcription — audio & transcripts never leave your machine. Live captions + upload diarization + voice matching
 - [voiceblender](https://github.com/VoiceBlender/voiceblender): A programmable Voice AI platform: SIP and WebRTC call control, multi-party mixing, recording, TTS/STT, and pluggable AI agents (ElevenLabs, VAPI, Pipecat, Deepgram) — all driven through a REST API, webhooks, and a WebSocket event stream
-- [neurolink](https://github.com/juspay/neurolink): One TypeScript interface for 24+ LLM providers — swap providers without rewriting. MCP-native (connect any MCP server), voice (TTS/STT/realtime), RAG, memory, file processors. Production-origin: powers Tara, Yama, and Clairvoyance at Juspay
+
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
