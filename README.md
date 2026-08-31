@@ -45,6 +45,12 @@ Edit the README and make a PR
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
 - [Kaggle](https://www.kaggle.com/models?query=audio): models with tag "audio" on Kaggle
 
+- [transformers](https://github.com/huggingface/transformers): 🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training
+- [diffuse](https://github.com/icidasset/diffuse): A music player that connects to your cloud/distributed storage
+- [musicblocks](https://github.com/sugarlabs/musicblocks): Music Blocks -- A musical microworld
+- [openbook](https://github.com/veltzer/openbook): OpenBook is an open source Jazz real book
+- [plattenalbum](https://github.com/SoongNoonien/plattenalbum): Connect to your music
+- [Kodama](https://github.com/KiyoshiTheDevil/Kodama): Kodama - a desktop YouTube Music client (Tauri 2 · React · Python · Rust)
 ## Security
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
 - [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
@@ -137,6 +143,7 @@ Edit the README and make a PR
 - [MMAudio](https://github.com/hkchengrex/MMAudio): Taming Multimodal Joint Training for High-Quality Video-to-Audio Synthesis
 - [ACE-Step-1.5](https://github.com/ace-step/ACE-Step-1.5): a highly efficient open-source music foundation model that brings commercial-grade generation to consumer hardware. 
 
+- [live-coding-music-mcp](https://github.com/williamzujkowski/live-coding-music-mcp): A Model Context Protocol (MCP) server that gives Claude direct control over Strudel.cc for AI-assisted music generation and live coding
 # Speech
 ## Benchmark
 - [ArtificialAnalysis](https://artificialanalysis.ai/speech-to-text): Speech to Text AI Model & Provider Leaderboard on Aritifical Analysis
@@ -167,6 +174,7 @@ Edit the README and make a PR
 - [Meta encodec](https://github.com/facebookresearch/encodec): State-of-the-art deep learning based audio codec supporting both mono 24 kHz audio and stereo 48 kHz audio 
 - [pipecat](https://github.com/pipecat-ai/pipecat): Open Source framework for voice and multimodal conversational AI
 
+- [FlipBits](https://github.com/camellia2077/FlipBits): 文本转无线电声音生成器与双轨 FSK 变声器，带实时二进制可视化 | Text-to-radio audio generator & dual-track FSK voice changer with real-time binary visualizers
 ## Synthesis
 - [Coqui TTS](https://github.com/coqui-ai/TTS): a deep learning toolkit for Text-to-Speech, battle-tested in research and production  
 - [DiffSinger](https://github.com/MoonInTheRiver/DiffSinger): singing voice synthesis via shallow diffusion mechanism 
@@ -197,3 +205,5 @@ Edit the README and make a PR
 - [kokoro](https://github.com/hexgrad/kokoro): an open-weight TTS model with 82 million parameters- [unsloth](https://github.com/unslothai/unsloth): Local UI to run and train LLMs and diffusion models. Supports GGUF, MLX, Qwen3.8, Kimi K3, MiniMax-H3, Gemma 4, FLUX and more
 - [mastra](https://github.com/mastra-ai/mastra): Mastra is the modern TypeScript framework for AI-powered applications and agents
 - [Google-TTS-For-NVDA](https://github.com/nguyenanhduc09/Google-TTS-For-NVDA): An NVDA screen-reader synthesizer add-on that exposes Google's Chrome WASM text-to-speech voices to NVDA
+- [Stable-Diffusion](https://github.com/FurkanGozukara/Stable-Diffusion): FLUX, Stable Diffusion, SDXL, SD3, LoRA, Fine Tuning, DreamBooth, Training, Automatic1111, Forge WebUI, SwarmUI, DeepFake, TTS, Animation, Text To Video, Tutorials, Guides, Lectures, Courses, ComfyUI, Google Colab, RunPod, Kaggle, NoteBooks, ControlNet, TTS, Voice Cloning, AI, AI News, ML, ML News, News, Tech, Tech News, Kohya, Midjourney, RunPod
+- [libratory](https://github.com/subev/libratory): Your free book and audiobook laboratory. Turn the PDFs you own into chapter-marked M4B audiobooks and read-along books, on your own machine. Local TTS, AI cleanup, translations and rewrites, RAG chat with cited sources across your library. Apple Silicon Mac, Linux, or one Docker container on a headless server
