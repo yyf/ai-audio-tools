@@ -45,6 +45,11 @@ Edit the README and make a PR
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
 - [Kaggle](https://www.kaggle.com/models?query=audio): models with tag "audio" on Kaggle
 
+- [transformers](https://github.com/huggingface/transformers): 🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training
+- [Metrolist](https://github.com/MetrolistGroup/Metrolist): YouTube Music client for Android
+- [rmpc](https://github.com/mierak/rmpc): A modern, configurable, terminal based MPD Client with album art support via various terminal image protocols
+- [App](https://github.com/Jellify-Music/App): A cross-platform, free and open source music player for Jellyfin, powered by React Native
+- [mobile-app](https://github.com/music-assistant/mobile-app): The (official) Music Assistant Mobile app is a cross-platform client application designed for Android and iOS. Developed using Kotlin Multiplatform (KMP) and Compose Multiplatform frameworks, this project aims to provide a unified codebase for seamless music management across multiple platforms
 ## Security
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
 - [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
@@ -161,12 +166,15 @@ Edit the README and make a PR
 - [matrix-live-diarizer](https://github.com/lgy1027/matrix-live-diarizer): Local-first meeting transcription — audio & transcripts never leave your machine. Live captions + upload diarization + voice matching
 - [voiceblender](https://github.com/VoiceBlender/voiceblender): A programmable Voice AI platform: SIP and WebRTC call control, multi-party mixing, recording, TTS/STT, and pluggable AI agents (ElevenLabs, VAPI, Pipecat, Deepgram) — all driven through a REST API, webhooks, and a WebSocket event stream
 
+- [agent-cli](https://github.com/basnijholt/agent-cli): Local transcription, agentic coding worktree management, RAG and memory proxies, TTS and STT servers with smart memory management, MacOS App (OSS Wisprflow), and more!
+- [neurolink](https://github.com/juspay/neurolink): One TypeScript interface for 24+ LLM providers — swap providers without rewriting. MCP-native (connect any MCP server), voice (TTS/STT/realtime), RAG, memory, file processors. Production-origin: powers Tara, Yama, and Clairvoyance at Juspay
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
 - [Meta encodec](https://github.com/facebookresearch/encodec): State-of-the-art deep learning based audio codec supporting both mono 24 kHz audio and stereo 48 kHz audio 
 - [pipecat](https://github.com/pipecat-ai/pipecat): Open Source framework for voice and multimodal conversational AI
 
+- [FlipBits](https://github.com/camellia2077/FlipBits): 文本转无线电声音生成器与双轨 FSK 变声器，带实时二进制可视化 | Text-to-radio audio generator & dual-track FSK voice changer with real-time binary visualizers
 ## Synthesis
 - [Coqui TTS](https://github.com/coqui-ai/TTS): a deep learning toolkit for Text-to-Speech, battle-tested in research and production  
 - [DiffSinger](https://github.com/MoonInTheRiver/DiffSinger): singing voice synthesis via shallow diffusion mechanism 
@@ -197,3 +205,5 @@ Edit the README and make a PR
 - [kokoro](https://github.com/hexgrad/kokoro): an open-weight TTS model with 82 million parameters- [unsloth](https://github.com/unslothai/unsloth): Local UI to run and train LLMs and diffusion models. Supports GGUF, MLX, Qwen3.8, Kimi K3, MiniMax-H3, Gemma 4, FLUX and more
 - [mastra](https://github.com/mastra-ai/mastra): Mastra is the modern TypeScript framework for AI-powered applications and agents
 - [Google-TTS-For-NVDA](https://github.com/nguyenanhduc09/Google-TTS-For-NVDA): An NVDA screen-reader synthesizer add-on that exposes Google's Chrome WASM text-to-speech voices to NVDA
+- [VoiceStudio](https://github.com/debpalash/VoiceStudio): VoiceStudio is the open-source, fully-local ElevenLabs alternative — voice cloning, voice design, video dubbing, dictation, transcription & audiobook creation in 646 languages
+- [Vocello](https://github.com/PowerBeef/Vocello): Vocello: a local, private voice studio for Apple Silicon. Write a script, pick or describe a voice, and generate speech on-device, faster than realtime on an 8 GB M2 Mac mini. Native Swift + MLX, no Python. Mac app out now, iPhone beta on TestFlight. (Formerly QwenVoice.)
