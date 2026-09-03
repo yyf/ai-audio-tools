@@ -86,6 +86,9 @@ Edit the README and make a PR
 - [Audio-Flamingo-3](https://huggingface.co/nvidia/audio-flamingo-3): Audio Flamingo 3 (AF3) is a fully open, state-of-the-art Large Audio-Language Model (LALM) that advances reasoning and understanding across speech, sounds, and music
 - [Sci-Phi](https://sci-phi-audio.github.io/demo/): A Large Language Model Spatial Audio Descriptor
 - [speex](https://github.com/xiph/speex): Speex voice codec mirror - THIS IS A MIRROR, DEVELOPMENT HAPPENS AT https://gitlab.xiph.org/xiph/speex
+- [strawberry](https://github.com/strawberrymusicplayer/strawberry): :strawberry: Strawberry Music Player
+- [beatify](https://github.com/mholzi/beatify): 🎵 Music quiz party game for Home Assistant with two modes, guess the release year or name the title and artist. Streams from Spotify, Apple Music, Tidal, Deezer, YouTube Music and Amazon Music, or plays your own library via Plex, Jellyfin and local files. Runs on Sonos, Alexa and any Music Assistant speaker
+  
 ## Production
 - [OpenVINO](https://github.com/intel/openvino-plugins-ai-audacity/tree/main): OpenVINO AI effects for Audacity (Windows, Linux)
 - [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
@@ -156,10 +159,10 @@ Edit the README and make a PR
 - [espnet](https://github.com/espnet/espnet): End-to-End Speech Processing Toolkit 
 - [RealTimeSTT](https://github.com/KoljaB/RealtimeSTT): A robust, efficient, low-latency speech-to-text library with advanced voice activity detection, wake word activation and instant transcription
 - [AudenAI](https://github.com/AudenAI/Auden): A comprehensive toolbox for audio & multimodal understanding tasks including ASR, CLAP, audio captioning, speaker identification, speech-llm and more.
-
 - [OGAM](https://github.com/off-grid-ai/OGAM): The Swiss Army Knife of Offline AI. Chat, see, speak, and generate images on your phone or Mac — GGUF LLMs, vision, Whisper speech-to-text, Stable Diffusion, tool calling, and local-network servers. Runs on your CPU, GPU, or NPU. No account, no API key, zero data leaves your device
 - [matrix-live-diarizer](https://github.com/lgy1027/matrix-live-diarizer): Local-first meeting transcription — audio & transcripts never leave your machine. Live captions + upload diarization + voice matching
 - [voiceblender](https://github.com/VoiceBlender/voiceblender): A programmable Voice AI platform: SIP and WebRTC call control, multi-party mixing, recording, TTS/STT, and pluggable AI agents (ElevenLabs, VAPI, Pipecat, Deepgram) — all driven through a REST API, webhooks, and a WebSocket event stream
+- [dograh](https://github.com/dograh-hq/dograh): Open source voice AI platform. Self-hosted alternative to Vapi and Retell. On Prem, BYOK across  Speech to Speech or LLM/STT/TTS, with a visual workflow builder, MCP native and telephony support
 
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
@@ -197,3 +200,7 @@ Edit the README and make a PR
 - [kokoro](https://github.com/hexgrad/kokoro): an open-weight TTS model with 82 million parameters- [unsloth](https://github.com/unslothai/unsloth): Local UI to run and train LLMs and diffusion models. Supports GGUF, MLX, Qwen3.8, Kimi K3, MiniMax-H3, Gemma 4, FLUX and more
 - [mastra](https://github.com/mastra-ai/mastra): Mastra is the modern TypeScript framework for AI-powered applications and agents
 - [Google-TTS-For-NVDA](https://github.com/nguyenanhduc09/Google-TTS-For-NVDA): An NVDA screen-reader synthesizer add-on that exposes Google's Chrome WASM text-to-speech voices to NVDA
+- [VoiceStudio](https://github.com/debpalash/VoiceStudio): VoiceStudio is the open-source, fully-local ElevenLabs alternative — voice cloning, voice design, video dubbing, dictation, transcription & audiobook creation in 646 languages
+- [sglang-omni](https://github.com/sgl-project/sglang-omni): SGLang-Omni is a high-performance serving framework for audio models (TTS, ASR) and unified multimodal models
+- [Vocello](https://github.com/PowerBeef/Vocello): Vocello: a local, private voice studio for Apple Silicon. Write a script, pick or describe a voice, and generate speech on-device, faster than realtime on an 8 GB M2 Mac mini. Native Swift + MLX, no Python. Mac app out now, iPhone beta on TestFlight. (Formerly QwenVoice.)
+- [franken_tts](https://github.com/Dicklesworthstone/franken_tts): Pure-Rust, CPU-hyper-optimized runtime for Qwen3-TTS zero-shot voice cloning — turns the model's hidden 15-step residual-code microdecoder from its largest CPU liability into its largest optimization advantage
