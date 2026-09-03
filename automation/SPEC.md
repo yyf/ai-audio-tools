@@ -185,7 +185,9 @@ No Hugging Face, arXiv, web crawls, or LLM calls.
 2. Load optional `automation/rejected.md` skip list
 3. Run bounded searches from `automation/queries.json`
 4. Rule-based **confidence** score (0–100) and **category** assignment
-5. Keep candidates with confidence **≥ 40**
+   (domain-first ToC matching)
+5. Keep candidates with confidence **≥ 40** and category score
+   **≥ MIN_CATEGORY_SCORE**
 6. **If count = 0 →** exit 0 (no PR)
 7. **If count ≥ 1 →** close open `bot/daily-candidates-*` PRs, create bot
    branch, insert README lines, push, open PR
@@ -198,8 +200,17 @@ Music  > Benchmark | Analysis | Production | Generation
 Speech > Benchmark | Recognition | Production | Synthesis
 ```
 
-Category assignment uses keyword matching on repo name, description, and
-GitHub topics (see `CATEGORY_KEYWORDS` in `automation/scout.py`).
+Category assignment is **domain-first** then subsection (see
+`DOMAIN_SIGNALS` / `SUBSECTION_SIGNALS` in `automation/scout.py`):
+
+1. Score Audio / Music / Speech from name, description, and topics
+   (weighted phrases; short tokens use word boundaries)
+2. Within the winning domain, score the README subsection
+3. Skip candidates with category score `< MIN_CATEGORY_SCORE` (weak ToC fit)
+4. Soft negatives reduce cross-domain false positives (e.g. TTS demoting Music)
+
+Fallback subsection when domain is clear but subsection is weak:
+`Audio>Model`, `Music>Analysis`, `Speech>Recognition`.
 
 ### Confidence scoring (rule-based)
 
@@ -216,9 +227,9 @@ GitHub topics (see `CATEGORY_KEYWORDS` in `automation/scout.py`).
 ```
 
 **Score inputs:** stars (>10 base, tiers at 30/100/500), recency (90 days,
-script-side), description quality (≥5 chars), keyword/topic fit, notable org
-list. Search queries do **not** use `pushed:` filters (too restrictive);
-recency is enforced in `score_repo()`.
+script-side), description quality (≥5 chars), ToC category fit
+(`MIN_CATEGORY_SCORE`+), notable org list. Search queries do **not** use
+`pushed:` filters (too restrictive); recency is enforced in `score_repo()`.
 
 **High-quality bar (≥ 40):** in-scope, deduped, not archived/fork, passes
 score threshold.
@@ -324,10 +335,11 @@ The workflow and script must **never**:
 ## Tuning
 
 - **Queries:** edit `automation/queries.json` (max 5 used)
-- **Keywords / scoring:** edit `CATEGORY_KEYWORDS` and scoring in
-  `automation/scout.py`
+- **Keywords / scoring:** edit `DOMAIN_SIGNALS`, `SUBSECTION_SIGNALS`, and
+  scoring in `automation/scout.py`
 - **Reject list:** add URLs to `automation/rejected.md`
 - **Threshold / caps:** constants at top of `automation/scout.py`
+  (`MIN_CATEGORY_SCORE`, `HIGH_QUALITY_THRESHOLD`, …)
 
 ---
 
@@ -347,5 +359,7 @@ The workflow and script must **never**:
 |            | 90-day recency, stars>10                                    |
 | 2026-08-27 | Fix GHA PR 403: split PR step, cap 10 entries, docs for     |
 |            | workflow permissions setting                                  |
+| 2026-09-02 | Domain-first ToC categorization; skip weak category fits;   |
+|            | word-boundary matching for short tokens                       |
 +------------+--------------------------------------------------------------+
 ```

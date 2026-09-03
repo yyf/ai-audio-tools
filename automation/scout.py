@@ -53,76 +53,271 @@ NOTABLE_ORGS = {
     "deepmind",
 }
 
-CATEGORY_KEYWORDS: dict[tuple[str, str], list[str]] = {
-    ("Audio", "Benchmark"): ["benchmark", "leaderboard", "evaluation", "hear"],
-    ("Audio", "Dataset"): ["dataset", "corpus", "benchmark dataset"],
-    ("Audio", "Annotation"): ["annotation", "labeling", "label tool"],
-    ("Audio", "Model"): ["audio model", "audio llm", "audio foundation", "clap"],
-    ("Audio", "Security"): [
-        "watermark",
-        "steganography",
-        "deepfake detection",
-        "voice detection",
-        "synthetic voice",
-        "forensic",
+# Domain-first categorization aligned with README ToC:
+#   Audio  > Benchmark | Dataset | Annotation | Model | Security
+#   Music  > Benchmark | Analysis | Production | Generation
+#   Speech > Benchmark | Recognition | Production | Synthesis
+#
+# Matching is weighted + word-boundary aware for short tokens so generic
+# repos do not dump into Audio > Model by substring accidents (e.g. "mir"
+# in "mirror", "tts" in unrelated strings).
+
+MIN_CATEGORY_SCORE = 3  # skip candidates that cannot map cleanly to the ToC
+
+# (phrase, weight). Phrases with word chars only and len <= 4 use \b matching.
+DOMAIN_SIGNALS: dict[str, list[tuple[str, int]]] = {
+    "Speech": [
+        ("text-to-speech", 6),
+        ("speech-to-text", 6),
+        ("speech recognition", 6),
+        ("speech synthesis", 6),
+        ("voice cloning", 6),
+        ("voice conversion", 5),
+        ("automatic speech", 5),
+        ("speaker verification", 4),
+        ("speaker identification", 4),
+        ("diarization", 5),
+        ("transcription", 4),
+        ("audio codec", 5),
+        ("neural codec", 5),
+        ("speech", 3),
+        ("whisper", 3),
+        ("vocoder", 4),
+        ("encodec", 4),
+        ("tts", 5),
+        ("asr", 5),
+        ("stt", 5),
+        ("funasr", 4),
+        ("kaldi", 3),
+        ("espnet", 3),
+        ("coqui", 3),
+        ("piper", 3),
+        ("codec", 2),
     ],
-    ("Music", "Benchmark"): ["music benchmark", "musiccaps", "music eval"],
+    "Music": [
+        ("text-to-music", 6),
+        ("music generation", 6),
+        ("audio generation", 5),
+        ("text-to-audio", 5),
+        ("symbolic music", 5),
+        ("music information", 5),
+        ("music analysis", 5),
+        ("source separation", 5),
+        ("musicgen", 5),
+        ("musiccaps", 4),
+        ("music", 4),
+        ("midi", 4),
+        ("song", 3),
+        ("mir", 3),
+        ("daw", 3),
+        ("riffusion", 4),
+        ("jukebox", 3),
+        ("essentia", 3),
+        ("librosa", 3),
+        ("demucs", 4),
+        ("spleeter", 4),
+    ],
+    "Audio": [
+        ("audio language model", 5),
+        ("audio-language", 5),
+        ("audio llm", 5),
+        ("audio foundation", 4),
+        ("audio model", 4),
+        ("sound event", 4),
+        ("audio tagging", 4),
+        ("audio watermark", 5),
+        ("steganography", 4),
+        ("deepfake", 5),
+        ("synthetic voice", 5),
+        ("synthesized voice", 5),
+        ("voice detection", 5),
+        ("clap", 4),
+        ("hear benchmark", 4),
+        ("audio dataset", 4),
+        ("audio", 2),
+        ("sound", 2),
+        ("foley", 3),
+        ("forensic", 3),
+        ("watermark", 4),
+    ],
+}
+
+# Subsection signals are scored only after a domain is chosen.
+SUBSECTION_SIGNALS: dict[tuple[str, str], list[tuple[str, int]]] = {
+    ("Audio", "Benchmark"): [
+        ("leaderboard", 5),
+        ("benchmark", 4),
+        ("evaluation", 3),
+        ("hear", 3),
+        ("sota", 2),
+    ],
+    ("Audio", "Dataset"): [
+        ("dataset", 5),
+        ("corpus", 4),
+        ("collections of audio", 3),
+    ],
+    ("Audio", "Annotation"): [
+        ("annotation", 5),
+        ("labeling", 4),
+        ("labelling", 4),
+        ("label tool", 4),
+        ("data augmentation", 3),
+        ("audiomentations", 4),
+    ],
+    ("Audio", "Model"): [
+        ("audio language model", 6),
+        ("audio-language", 5),
+        ("audio llm", 5),
+        ("audio foundation", 5),
+        ("audio model", 4),
+        ("foundation model", 3),
+        ("clap", 4),
+        ("embedding", 2),
+    ],
+    ("Audio", "Security"): [
+        ("watermark", 6),
+        ("steganography", 6),
+        ("deepfake", 5),
+        ("synthetic voice", 5),
+        ("synthesized voice", 5),
+        ("voice detection", 5),
+        ("forensic", 4),
+        ("authenticity", 3),
+        ("spoofing", 4),
+    ],
+    ("Music", "Benchmark"): [
+        ("musiccaps", 6),
+        ("music benchmark", 6),
+        ("music eval", 5),
+        ("leaderboard", 3),
+        ("benchmark", 3),
+        ("evaluation", 2),
+    ],
     ("Music", "Analysis"): [
-        "music analysis",
-        "mir",
-        "music information",
-        "audio analysis",
-        "librosa",
-        "essentia",
-        "tagging",
+        ("music analysis", 6),
+        ("music information", 6),
+        ("audio analysis", 4),
+        ("feature extraction", 4),
+        ("pitch detection", 4),
+        ("audio-to-midi", 5),
+        ("mir", 4),
+        ("tagging", 3),
+        ("librosa", 4),
+        ("essentia", 4),
+        ("madmom", 3),
+        ("understanding", 2),
     ],
     ("Music", "Production"): [
-        "daw",
-        "mastering",
-        "source separation",
-        "spleeter",
-        "demucs",
-        "audio effect",
-        "mixing",
+        ("source separation", 6),
+        ("mastering", 5),
+        ("audio effect", 5),
+        ("stem separation", 5),
+        ("demucs", 5),
+        ("spleeter", 5),
+        ("mixing", 3),
+        ("daw", 4),
+        ("foley", 4),
+        ("room impulse", 4),
+        ("audacity", 3),
     ],
     ("Music", "Generation"): [
-        "music generation",
-        "text-to-music",
-        "musicgen",
-        "midi generation",
-        "symbolic music",
-        "audio generation",
-        "riff",
-        "suno",
+        ("music generation", 6),
+        ("text-to-music", 6),
+        ("midi generation", 5),
+        ("symbolic music", 5),
+        ("audio generation", 4),
+        ("text-to-audio", 4),
+        ("musicgen", 5),
+        ("song generation", 5),
+        ("riffusion", 4),
+        ("generate music", 5),
+        ("generative music", 5),
     ],
-    ("Speech", "Benchmark"): ["speech benchmark", "asr benchmark", "tts benchmark"],
+    ("Speech", "Benchmark"): [
+        ("speech benchmark", 6),
+        ("asr benchmark", 6),
+        ("tts benchmark", 6),
+        ("leaderboard", 4),
+        ("benchmark", 3),
+        ("evaluation", 2),
+    ],
     ("Speech", "Recognition"): [
-        "asr",
-        "speech recognition",
-        "speech-to-text",
-        "stt",
-        "transcription",
-        "whisper",
-        "funasr",
-        "kaldi",
+        ("speech recognition", 6),
+        ("speech-to-text", 6),
+        ("automatic speech", 5),
+        ("transcription", 5),
+        ("diarization", 5),
+        ("whisper", 4),
+        ("funasr", 4),
+        ("kaldi", 4),
+        ("asr", 5),
+        ("stt", 5),
+        ("dictation", 4),
+        ("keyword spotting", 4),
     ],
     ("Speech", "Production"): [
-        "voice agent",
-        "conversational",
-        "pipecat",
-        "codec",
-        "encodec",
-        "speech pipeline",
+        ("voice agent", 6),
+        ("conversational ai", 5),
+        ("speech pipeline", 5),
+        ("audio codec", 5),
+        ("neural codec", 5),
+        ("encodec", 5),
+        ("pipecat", 5),
+        ("webrtc", 3),
+        ("voice ai platform", 5),
+        ("codec", 3),
     ],
     ("Speech", "Synthesis"): [
-        "tts",
-        "text-to-speech",
-        "voice cloning",
-        "vocoder",
-        "speech synthesis",
-        "talking head",
-        "singing voice",
+        ("text-to-speech", 6),
+        ("speech synthesis", 6),
+        ("voice cloning", 6),
+        ("voice conversion", 5),
+        ("singing voice", 5),
+        ("talking head", 4),
+        ("vocoder", 4),
+        ("tts", 5),
+        ("bark", 3),
+        ("so-vits", 4),
+        ("openvoice", 4),
     ],
+}
+
+# Soft negatives: reduce a domain score when these dominate (cross-domain noise).
+DOMAIN_NEGATIVES: dict[str, list[tuple[str, int]]] = {
+    "Speech": [
+        ("music generation", 4),
+        ("text-to-music", 4),
+        ("midi", 2),
+        ("watermark", 4),
+        ("steganography", 4),
+        ("deepfake", 5),
+        ("voice detection", 5),
+        ("forensic", 4),
+        ("synthetic voice", 3),
+        ("synthesized voice", 3),
+    ],
+    "Music": [
+        ("text-to-speech", 4),
+        ("speech-to-text", 4),
+        ("voice cloning", 3),
+        ("asr", 3),
+        ("tts", 2),
+        ("watermark", 3),
+        ("deepfake", 3),
+    ],
+    "Audio": [
+        ("text-to-speech", 3),
+        ("speech-to-text", 3),
+        ("music generation", 3),
+        ("text-to-music", 3),
+        ("audio generation", 3),
+    ],
+}
+
+DOMAIN_DEFAULT_SUBSECTION: dict[str, str] = {
+    "Audio": "Model",
+    "Music": "Analysis",
+    "Speech": "Recognition",
 }
 
 
@@ -216,22 +411,69 @@ def search_repositories(query: str) -> list[dict]:
     return result.get("items", [])
 
 
+def _phrase_matches(blob: str, phrase: str) -> bool:
+    """Match phrase in blob; use word boundaries for short alphanumeric tokens."""
+    phrase = phrase.lower()
+    if " " in phrase or "-" in phrase or len(phrase) > 4:
+        return phrase in blob
+    return re.search(rf"\b{re.escape(phrase)}\b", blob) is not None
+
+
+def _weighted_score(blob: str, signals: list[tuple[str, int]]) -> tuple[int, int]:
+    """Return (total_weight, number_of_matching_phrases)."""
+    total = 0
+    hits = 0
+    for phrase, weight in signals:
+        if _phrase_matches(blob, phrase):
+            total += weight
+            hits += 1
+    return total, hits
+
+
 def categorize(full_name: str, description: str, topics: list[str]) -> tuple[tuple[str, str], int]:
+    """Assign README ToC category via domain-first weighted matching.
+
+    Returns ((Domain, Subsection), category_score). category_score is used both
+    as a placement quality signal and for confidence scoring.
+    """
     blob = " ".join([full_name, description or "", " ".join(topics)]).lower()
-    best_cat = ("Audio", "Model")
-    best_hits = 0
-    for category, keywords in CATEGORY_KEYWORDS.items():
-        hits = sum(1 for kw in keywords if kw in blob)
-        if hits > best_hits:
-            best_hits = hits
-            best_cat = category
-    return best_cat, best_hits
+
+    domain_scores: dict[str, int] = {}
+    for domain, signals in DOMAIN_SIGNALS.items():
+        score, _ = _weighted_score(blob, signals)
+        neg, _ = _weighted_score(blob, DOMAIN_NEGATIVES.get(domain, []))
+        domain_scores[domain] = max(0, score - neg)
+
+    # Prefer Speech > Music > Audio on ties — speech signals are more specific.
+    domain = max(
+        ("Speech", "Music", "Audio"),
+        key=lambda d: (domain_scores[d], {"Speech": 3, "Music": 2, "Audio": 1}[d]),
+    )
+    domain_score = domain_scores[domain]
+
+    best_sub = DOMAIN_DEFAULT_SUBSECTION[domain]
+    best_sub_score = 0
+    best_sub_hits = 0
+    for (dom, subsection), signals in SUBSECTION_SIGNALS.items():
+        if dom != domain:
+            continue
+        sub_score, sub_hits = _weighted_score(blob, signals)
+        if sub_score > best_sub_score or (
+            sub_score == best_sub_score and sub_hits > best_sub_hits
+        ):
+            best_sub_score = sub_score
+            best_sub_hits = sub_hits
+            best_sub = subsection
+
+    # Combined score: need real domain signal; subsection adds placement confidence.
+    category_score = domain_score + best_sub_score
+    return (domain, best_sub), category_score
 
 
 def score_repo(
     repo: dict,
     category: tuple[str, str],
-    keyword_hits: int,
+    category_score: int,
 ) -> tuple[int, str]:
     stars = repo.get("stargazers_count", 0)
     description = (repo.get("description") or "").strip()
@@ -260,11 +502,13 @@ def score_repo(
         reasons.append("has description")
     if len(description) >= 20:
         score += 5
-    if keyword_hits >= 1:
+    if category_score >= MIN_CATEGORY_SCORE:
         score += 8
         reasons.append(f"topic fit ({category[0]} > {category[1]})")
-    if keyword_hits >= 2:
+    if category_score >= MIN_CATEGORY_SCORE + 4:
         score += 4
+    if category_score >= MIN_CATEGORY_SCORE + 8:
+        score += 3
     if owner in NOTABLE_ORGS:
         score += 5
         reasons.append(f"notable org ({owner})")
@@ -320,12 +564,20 @@ def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) 
                 stats.skipped.append(f"{full_name} — rejected list")
                 continue
 
-            category, keyword_hits = categorize(
+            category, category_score = categorize(
                 full_name,
                 repo.get("description") or "",
                 repo.get("topics") or [],
             )
-            confidence, rationale = score_repo(repo, category, keyword_hits)
+            if category_score < MIN_CATEGORY_SCORE:
+                stats.skipped.append(
+                    f"{full_name} — weak ToC fit "
+                    f"({category[0]} > {category[1]}, score {category_score} "
+                    f"< {MIN_CATEGORY_SCORE})"
+                )
+                continue
+
+            confidence, rationale = score_repo(repo, category, category_score)
 
             if confidence < HIGH_QUALITY_THRESHOLD:
                 stats.skipped.append(
