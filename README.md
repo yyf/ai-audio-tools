@@ -51,6 +51,7 @@ Edit the README and make a PR
 - [LibriSeVoc](https://github.com/csun22/Synthetic-Voice-Detection-Vocoder-Artifacts): AI-Synthesized Voice Detection Using Neural Vocoder Artifacts, CVPR Workshop on Media Forensic 2023
 - [SynthID](https://github.com/google-deepmind/synthid-text): This repository provides a reference implementation of the SynthID Text watermarking and detection capabilities for the research paper published in Nature. It is not intended for production use.
 
+- [CapCut-Pro-Cracker](https://github.com/LegendVibrate/CapCut-Pro-Cracker): CapCut-Pro-Cracker unlocks all premium features of CapCut video editor: watermark removal, 4K Ultra HD export, all filters, transitions, effects, AI background removal, auto-captions, and full music library. No account or login required
 # Music
 ## Benchmark
 - [PaperWithCode](https://paperswithcode.com/sota/text-to-music-generation-on-musiccaps): Text-to-Music Generation on MusicCaps
@@ -89,6 +90,11 @@ Edit the README and make a PR
 - [strawberry](https://github.com/strawberrymusicplayer/strawberry): :strawberry: Strawberry Music Player
 - [beatify](https://github.com/mholzi/beatify): 🎵 Music quiz party game for Home Assistant with two modes, guess the release year or name the title and artist. Streams from Spotify, Apple Music, Tidal, Deezer, YouTube Music and Amazon Music, or plays your own library via Plex, Jellyfin and local files. Runs on Sonos, Alexa and any Music Assistant speaker
   
+- [FluentFlyout](https://github.com/unchihugo/FluentFlyout): The modern Flyout app for Windows 11, built with Fluent 2 Design principles. Media Flyouts, Taskbar Widgets and more
+- [Musify](https://github.com/gokadzev/Musify): Unlock the full potential of music: Stream effortlessly with one app!
+- [folia-major](https://github.com/chthollyphile/folia-major): 专注于绚丽的歌词动画效果的本地音乐/navidrome/第三方多平台在线音乐播放器
+- [N-Zik](https://github.com/N-Zik-Group/N-Zik): A multilingual YouTube Music frontend for Android, focused on performance, UI/UX refinements, feature expansion, and long-term support
+- [Levyra-deepsound](https://github.com/LUC4N3X/Levyra-deepsound): A modern open-source music player for Android & Windows, focused on immersive playback, smart discovery, synced lyrics and rich artwork 🎶
 ## Production
 - [OpenVINO](https://github.com/intel/openvino-plugins-ai-audacity/tree/main): OpenVINO AI effects for Audacity (Windows, Linux)
 - [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
@@ -164,6 +170,7 @@ Edit the README and make a PR
 - [voiceblender](https://github.com/VoiceBlender/voiceblender): A programmable Voice AI platform: SIP and WebRTC call control, multi-party mixing, recording, TTS/STT, and pluggable AI agents (ElevenLabs, VAPI, Pipecat, Deepgram) — all driven through a REST API, webhooks, and a WebSocket event stream
 - [dograh](https://github.com/dograh-hq/dograh): Open source voice AI platform. Self-hosted alternative to Vapi and Retell. On Prem, BYOK across  Speech to Speech or LLM/STT/TTS, with a visual workflow builder, MCP native and telephony support
 
+- [transformers](https://github.com/huggingface/transformers): 🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
@@ -204,3 +211,6 @@ Edit the README and make a PR
 - [sglang-omni](https://github.com/sgl-project/sglang-omni): SGLang-Omni is a high-performance serving framework for audio models (TTS, ASR) and unified multimodal models
 - [Vocello](https://github.com/PowerBeef/Vocello): Vocello: a local, private voice studio for Apple Silicon. Write a script, pick or describe a voice, and generate speech on-device, faster than realtime on an 8 GB M2 Mac mini. Native Swift + MLX, no Python. Mac app out now, iPhone beta on TestFlight. (Formerly QwenVoice.)
 - [franken_tts](https://github.com/Dicklesworthstone/franken_tts): Pure-Rust, CPU-hyper-optimized runtime for Qwen3-TTS zero-shot voice cloning — turns the model's hidden 15-step residual-code microdecoder from its largest CPU liability into its largest optimization advantage
+- [core](https://github.com/mx-space/core): AI-powered CMS core for personal blogs and creator websites, with AI summaries, translation, moderation, and writing workflows
+- [chime_tts](https://github.com/nimroddolev/chime_tts): A custom Home Assistant integration to play combined audio files before and/or after text-to-speech (TTS) messages
+- [Meuxe](https://github.com/meet447/Meuxe): A self-hosted AI companion web app with anime-style Live2D and VRM characters. Talk with your companion via text or voice they respond with expressive facial animations, lip-synced speech, and per-sentence emotional reactions
