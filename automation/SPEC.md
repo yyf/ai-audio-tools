@@ -186,8 +186,8 @@ No Hugging Face, arXiv, web crawls, or LLM calls.
 3. Run bounded searches from `automation/queries.json`
 4. Rule-based **confidence** score (0–100) and **category** assignment
    (domain-first ToC matching)
-5. Keep candidates with confidence **≥ 40** and category score
-   **≥ MIN_CATEGORY_SCORE**
+5. Keep candidates with confidence **≥ 55**, category score
+   **≥ MIN_CATEGORY_SCORE (7)**, and no **NEGATIVE_KEYWORDS** hit
 6. **If count = 0 →** exit 0 (no PR)
 7. **If count ≥ 1 →** close open `bot/daily-candidates-*` PRs, create bot
    branch, insert README lines, push, open PR
@@ -208,6 +208,8 @@ Category assignment is **domain-first** then subsection (see
 2. Within the winning domain, score the README subsection
 3. Skip candidates with category score `< MIN_CATEGORY_SCORE` (weak ToC fit)
 4. Soft negatives reduce cross-domain false positives (e.g. TTS demoting Music)
+5. Hard reject via `NEGATIVE_KEYWORDS` (discord bots, homelab, generic LLM
+   UIs, etc.) before scoring
 
 Fallback subsection when domain is clear but subsection is weak:
 `Audio>Model`, `Music>Analysis`, `Speech>Recognition`.
@@ -220,9 +222,9 @@ Fallback subsection when domain is clear but subsection is weak:
 +-------------+-------------------------------------------------------------+
 | 90-100      | Strong fit; merge with little or no edit                    |
 | 80-89       | Good fit; included in PR                                    |
-| 60-79       | Moderate fit; included in PR for review                     |
-| 40-59       | Borderline; included in PR — scrutinize before merge        |
-| < 40        | Skip                                                        |
+| 70-79       | Moderate fit; included in PR for review                     |
+| 55-69       | Borderline; included in PR — scrutinize before merge        |
+| < 55        | Skip                                                        |
 +-------------+-------------------------------------------------------------+
 ```
 
@@ -231,16 +233,16 @@ script-side), description quality (≥5 chars), ToC category fit
 (`MIN_CATEGORY_SCORE`+), notable org list. Search queries do **not** use
 `pushed:` filters (too restrictive); recency is enforced in `score_repo()`.
 
-**High-quality bar (≥ 40):** in-scope, deduped, not archived/fork, passes
-score threshold.
+**High-quality bar (≥ 55):** in-scope, deduped, not archived/fork, no
+negative-keyword hit, ToC fit ≥ 7, passes confidence threshold.
 
 ---
 
 ## PR format (when threshold met)
 
-**Title:** `Daily candidates: YYYY-MM-DD (N entries, conf ≥40)`
+**Title:** `Daily candidates: YYYY-MM-DD (N entries, conf ≥55)`
 
-**README diff:** only entries with confidence ≥ 40:
+**README diff:** only entries with confidence ≥ 55:
 
 ```markdown
 - [Name](url): short description
@@ -310,8 +312,10 @@ The workflow and script must **never**:
 | Star floor  | stars:>10 in search; recency in script                      |
 | Recency     | 90 days (pushed), enforced in scout.py                       |
 | window      |                                                             |
-| PR          | >= 1 high-quality find (confidence >= 40)                   |
+| PR          | >= 1 high-quality find (confidence >= 55)                   |
 | threshold   |                                                             |
+| ToC floor   | category score >= 7 (MIN_CATEGORY_SCORE)                    |
+| Negatives   | NEGATIVE_KEYWORDS hard-skip before scoring                    |
 | Max per PR  | 10 entries (top by confidence; see MAX_PR_ENTRIES)          |
 | Schedule    | Weekdays ~9:00 AM America/Los_Angeles (cron 17:00 UTC)       |
 | Stale bot   | Close open bot/daily-candidates-* PRs before new one        |
@@ -323,9 +327,9 @@ The workflow and script must **never**:
 +-------------+-------------------------------------------------------------+
 ```
 
-> **Note:** Confidence floor is ≥ 40 for review-friendly PR volume. Raise
-> `HIGH_QUALITY_THRESHOLD` in `automation/scout.py` (and this file) if PR
-> volume is too high.
+> **Note:** Confidence floor is ≥ 55 and ToC floor is ≥ 7 to cut borderline
+> PR noise. Tune `HIGH_QUALITY_THRESHOLD`, `MIN_CATEGORY_SCORE`,
+> `NEGATIVE_KEYWORDS`, and `automation/queries.json` together.
 
 > **Note:** Cron is UTC-only on GitHub. `0 17 * * 1-5` ≈ 9:00 AM PST /
 > 10:00 AM PDT. Adjust workflow cron if needed.
@@ -334,9 +338,10 @@ The workflow and script must **never**:
 
 ## Tuning
 
-- **Queries:** edit `automation/queries.json` (max 5 used)
-- **Keywords / scoring:** edit `DOMAIN_SIGNALS`, `SUBSECTION_SIGNALS`, and
-  scoring in `automation/scout.py`
+- **Queries:** edit `automation/queries.json` (max 5 used; prefer quoted
+  phrases over loose single-token ORs)
+- **Keywords / scoring:** edit `DOMAIN_SIGNALS`, `SUBSECTION_SIGNALS`,
+  `NEGATIVE_KEYWORDS`, and scoring in `automation/scout.py`
 - **Reject list:** add URLs to `automation/rejected.md`
 - **Threshold / caps:** constants at top of `automation/scout.py`
   (`MIN_CATEGORY_SCORE`, `HIGH_QUALITY_THRESHOLD`, …)
@@ -361,5 +366,7 @@ The workflow and script must **never**:
 |            | workflow permissions setting                                  |
 | 2026-09-02 | Domain-first ToC categorization; skip weak category fits;   |
 |            | word-boundary matching for short tokens                       |
+| 2026-09-09 | Relevance harden: conf >=55, ToC >=7, NEGATIVE_KEYWORDS,    |
+|            | tighter quoted search queries                                  |
 +------------+--------------------------------------------------------------+
 ```

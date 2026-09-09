@@ -1,7 +1,7 @@
 [
-  "speech OR TTS OR ASR stars:>10",
-  "audio machine learning OR audio LLM stars:>10",
-  "music generation OR text-to-music stars:>10",
-  "voice cloning OR audio codec stars:>10",
-  "audio watermark OR synthetic voice stars:>10"
+  "\"text-to-speech\" OR \"speech recognition\" OR \"speech-to-text\" stars:>10",
+  "\"audio language model\" OR \"audio LLM\" OR CLAP stars:>10",
+  "\"music generation\" OR \"text-to-music\" OR MusicGen stars:>10",
+  "\"voice cloning\" OR \"neural codec\" OR \"audio codec\" stars:>10",
+  "\"audio watermark\" OR \"synthetic voice detection\" OR steganography stars:>10"
 ]

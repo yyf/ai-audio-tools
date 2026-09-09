@@ -25,7 +25,7 @@ MAX_RESULTS_PER_QUERY = 10
 MAX_CANDIDATES = 30
 MIN_STARS = 10
 RECENCY_DAYS = 90
-HIGH_QUALITY_THRESHOLD = 40
+HIGH_QUALITY_THRESHOLD = 55
 PR_THRESHOLD = 1
 MAX_PR_ENTRIES = 10
 BOT_BRANCH_PREFIX = "bot/daily-candidates-"
@@ -62,7 +62,27 @@ NOTABLE_ORGS = {
 # repos do not dump into Audio > Model by substring accidents (e.g. "mir"
 # in "mirror", "tts" in unrelated strings).
 
-MIN_CATEGORY_SCORE = 3  # skip candidates that cannot map cleanly to the ToC
+MIN_CATEGORY_SCORE = 7  # skip candidates that cannot map cleanly to the ToC
+
+# Hard rejects: generic / off-list products that match loose search terms.
+# Matched against name + description + topics (same blob as categorization).
+NEGATIVE_KEYWORDS: list[str] = [
+    "discord bot",
+    "telegram bot",
+    "music player",
+    "music bot",
+    "homelab",
+    "agent framework",
+    "typescript framework",
+    "screen reader",
+    "stable diffusion",
+    "image generation",
+    "vscode extension",
+    "chrome extension",
+    "clipboard",
+    "gguf",
+    "ollama",
+]
 
 # (phrase, weight). Phrases with word chars only and len <= 4 use \b matching.
 DOMAIN_SIGNALS: dict[str, list[tuple[str, int]]] = {
@@ -419,6 +439,15 @@ def _phrase_matches(blob: str, phrase: str) -> bool:
     return re.search(rf"\b{re.escape(phrase)}\b", blob) is not None
 
 
+def negative_hit(full_name: str, description: str, topics: list[str]) -> str | None:
+    """Return the first negative keyword matched, else None."""
+    blob = " ".join([full_name, description or "", " ".join(topics)]).lower()
+    for phrase in NEGATIVE_KEYWORDS:
+        if _phrase_matches(blob, phrase):
+            return phrase
+    return None
+
+
 def _weighted_score(blob: str, signals: list[tuple[str, int]]) -> tuple[int, int]:
     """Return (total_weight, number_of_matching_phrases)."""
     total = 0
@@ -564,10 +593,17 @@ def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) 
                 stats.skipped.append(f"{full_name} — rejected list")
                 continue
 
+            description = repo.get("description") or ""
+            topics = repo.get("topics") or []
+            bad = negative_hit(full_name, description, topics)
+            if bad:
+                stats.skipped.append(f"{full_name} — negative keyword ({bad})")
+                continue
+
             category, category_score = categorize(
                 full_name,
-                repo.get("description") or "",
-                repo.get("topics") or [],
+                description,
+                topics,
             )
             if category_score < MIN_CATEGORY_SCORE:
                 stats.skipped.append(
@@ -589,7 +625,7 @@ def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) 
                 Candidate(
                     full_name=full_name,
                     html_url=html_url,
-                    description=(repo.get("description") or full_name.split("/")[-1]).strip(),
+                    description=(description or full_name.split("/")[-1]).strip(),
                     stars=repo.get("stargazers_count", 0),
                     pushed_at=datetime.fromisoformat(
                         (repo.get("pushed_at") or datetime.now(timezone.utc).isoformat()).replace(
