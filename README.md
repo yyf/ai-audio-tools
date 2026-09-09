@@ -89,6 +89,7 @@ Edit the README and make a PR
 - [strawberry](https://github.com/strawberrymusicplayer/strawberry): :strawberry: Strawberry Music Player
 - [beatify](https://github.com/mholzi/beatify): 🎵 Music quiz party game for Home Assistant with two modes, guess the release year or name the title and artist. Streams from Spotify, Apple Music, Tidal, Deezer, YouTube Music and Amazon Music, or plays your own library via Plex, Jellyfin and local files. Runs on Sonos, Alexa and any Music Assistant speaker
   
+- [AudioMuse-AI](https://github.com/NeptuneHub/AudioMuse-AI): AudioMuse-AI uses sonic analysis to rediscover forgotten songs, uncover hidden connections in your music library, and generate intelligent playlists for Navidrome, Jellyfin, LMS, Lyrion, Emby and Plex: no metadata or external services required
 ## Production
 - [OpenVINO](https://github.com/intel/openvino-plugins-ai-audacity/tree/main): OpenVINO AI effects for Audacity (Windows, Linux)
 - [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
@@ -102,6 +103,7 @@ Edit the README and make a PR
 - [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
 - [Woosh](https://github.com/SonyResearch/Woosh): Public release of the Sound Effect Foundation model by Sony AI.
 
+- [anklang](https://github.com/tim-janik/anklang): MIDI and Audio Synthesizer and Composer
 ## Generation
 - [StableAudio](https://github.com/Stability-AI/stable-audio-tools): Generative models for conditional audio generation 
 - [AudioCraft](https://github.com/facebookresearch/audiocraft): a PyTorch library for deep learning research on audio generation. AudioCraft contains inference and training code for two state-of-the-art AI generative models producing high-quality audio: AudioGen and MusicGen.
@@ -140,6 +142,10 @@ Edit the README and make a PR
 - [MMAudio](https://github.com/hkchengrex/MMAudio): Taming Multimodal Joint Training for High-Quality Video-to-Audio Synthesis
 - [ACE-Step-1.5](https://github.com/ace-step/ACE-Step-1.5): a highly efficient open-source music foundation model that brings commercial-grade generation to consumer hardware. 
 
+- [LocalAI](https://github.com/mudler/LocalAI): LocalAI is the open-source AI engine. Run any model - LLMs, vision, voice, image, video - on any hardware. No GPU required
+- [live-coding-music-mcp](https://github.com/williamzujkowski/live-coding-music-mcp): A Model Context Protocol (MCP) server that gives Claude direct control over Strudel.cc for AI-assisted music generation and live coding
+- [HOT-Step-CPP](https://github.com/scragnog/HOT-Step-CPP): Turn dials. Summon bangers! NOW WITH MORE C++! Local AI music generation powered by GGML
+- [melodyc](https://github.com/andrebuilds/melodyc): Open-source SaaS platform for AI-powered music generation. Generate full tracks with audio and cover art from a text description, custom lyrics, or a style prompt. Built with Next.js 15, Python/Modal (GPU), ACE-Step, Qwen2, SDXL-Turbo, Inngest, Polar.sh and BetterAuth
 # Speech
 ## Benchmark
 - [ArtificialAnalysis](https://artificialanalysis.ai/speech-to-text): Speech to Text AI Model & Provider Leaderboard on Aritifical Analysis
@@ -164,6 +170,9 @@ Edit the README and make a PR
 - [voiceblender](https://github.com/VoiceBlender/voiceblender): A programmable Voice AI platform: SIP and WebRTC call control, multi-party mixing, recording, TTS/STT, and pluggable AI agents (ElevenLabs, VAPI, Pipecat, Deepgram) — all driven through a REST API, webhooks, and a WebSocket event stream
 - [dograh](https://github.com/dograh-hq/dograh): Open source voice AI platform. Self-hosted alternative to Vapi and Retell. On Prem, BYOK across  Speech to Speech or LLM/STT/TTS, with a visual workflow builder, MCP native and telephony support
 
+- [screenpipe](https://github.com/screenpipe/screenpipe): YC (S26) | Open Computer History | Record your screen continuously locally and provide context to your agents (Claude, Codex, Openclaw, Hermes, Runner...)
+- [audio.cpp](https://github.com/0xShug0/audio.cpp): An all-in-one, pure C++ inference engine for audio models, powered by ggml. Supports TTS, STT, VAD, voice conversion, music generation, and more, with highly optimized performance. No Python dependency
+- [expo-ai-kit](https://github.com/saidkaban/expo-ai-kit): On-device AI for Expo and React Native. Local LLM, speech-to-text, vision, and embeddings. No API keys, no cloud
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
@@ -204,3 +213,4 @@ Edit the README and make a PR
 - [sglang-omni](https://github.com/sgl-project/sglang-omni): SGLang-Omni is a high-performance serving framework for audio models (TTS, ASR) and unified multimodal models
 - [Vocello](https://github.com/PowerBeef/Vocello): Vocello: a local, private voice studio for Apple Silicon. Write a script, pick or describe a voice, and generate speech on-device, faster than realtime on an 8 GB M2 Mac mini. Native Swift + MLX, no Python. Mac app out now, iPhone beta on TestFlight. (Formerly QwenVoice.)
 - [franken_tts](https://github.com/Dicklesworthstone/franken_tts): Pure-Rust, CPU-hyper-optimized runtime for Qwen3-TTS zero-shot voice cloning — turns the model's hidden 15-step residual-code microdecoder from its largest CPU liability into its largest optimization advantage
+- [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
