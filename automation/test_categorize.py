@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from scout import MIN_CATEGORY_SCORE, categorize  # noqa: E402
+from scout import MIN_CATEGORY_SCORE, categorize, negative_hit  # noqa: E402
 
 CASES: list[tuple[str, str, list[str], tuple[str, str]]] = [
     # Speech
@@ -142,6 +142,28 @@ WEAK: list[tuple[str, str, list[str]]] = [
     ),
 ]
 
+# Hard-reject via NEGATIVE_KEYWORDS even if audio-adjacent wording appears.
+NEGATIVE_CASES: list[tuple[str, str, list[str], str]] = [
+    (
+        "someone/cool-discord-music",
+        "A Discord bot for playing music and TTS clips",
+        ["discord", "bot"],
+        "discord bot",
+    ),
+    (
+        "someone/homelab-audio",
+        "My homelab media stack with Whisper and TTS",
+        ["homelab"],
+        "homelab",
+    ),
+    (
+        "someone/gguf-whisper-ui",
+        "Run Whisper and LLMs locally with GGUF models",
+        ["gguf", "whisper"],
+        "gguf",
+    ),
+]
+
 
 def main() -> int:
     failed = 0
@@ -161,7 +183,16 @@ def main() -> int:
             failed += 1
         print(f"{status}: weak {full_name} -> {got[0]} > {got[1]} (score={score}) expect < {MIN_CATEGORY_SCORE}")
 
-    print(f"\n{len(CASES) + len(WEAK) - failed}/{len(CASES) + len(WEAK)} passed")
+    for full_name, desc, topics, expect_phrase in NEGATIVE_CASES:
+        hit = negative_hit(full_name, desc, topics)
+        ok = hit == expect_phrase
+        status = "OK" if ok else "FAIL"
+        if not ok:
+            failed += 1
+        print(f"{status}: negative {full_name} -> {hit!r} expected {expect_phrase!r}")
+
+    total = len(CASES) + len(WEAK) + len(NEGATIVE_CASES)
+    print(f"\n{total - failed}/{total} passed")
     return 1 if failed else 0
 
 
