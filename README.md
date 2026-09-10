@@ -45,7 +45,6 @@ Edit the README and make a PR
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
 - [Kaggle](https://www.kaggle.com/models?query=audio): models with tag "audio" on Kaggle
 
-- [clap](https://github.com/clap-rs/clap): A full featured, fast Command Line Argument Parser for Rust
 ## Security
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
 - [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
@@ -143,7 +142,6 @@ Edit the README and make a PR
 - [ACE-Step-1.5](https://github.com/ace-step/ACE-Step-1.5): a highly efficient open-source music foundation model that brings commercial-grade generation to consumer hardware. 
 
 - [genmusic_demo_list](https://github.com/affige/genmusic_demo_list): a list of demo websites for automatic music generation research
-- [LocalAI](https://github.com/mudler/LocalAI): LocalAI is the open-source AI engine. Run any model - LLMs, vision, voice, image, video - on any hardware. No GPU required
 - [HOT-Step-CPP](https://github.com/scragnog/HOT-Step-CPP): Turn dials. Summon bangers! NOW WITH MORE C++! Local AI music generation powered by GGML
 # Speech
 ## Benchmark
