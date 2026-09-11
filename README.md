@@ -45,6 +45,7 @@ Edit the README and make a PR
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
 - [Kaggle](https://www.kaggle.com/models?query=audio): models with tag "audio" on Kaggle
 
+- [Dplug](https://github.com/AuburnSounds/Dplug): Make VST2 / VST3 / AU / AAX / CLAP / LV2 / FLP  plug-ins for Linux/macOS/Windows, using D
 ## Security
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
 - [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
@@ -103,6 +104,7 @@ Edit the README and make a PR
 - [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
 - [Woosh](https://github.com/SonyResearch/Woosh): Public release of the Sound Effect Foundation model by Sony AI.
 
+- [RetroPlug](https://github.com/tommitytom/RetroPlug): A frontend for the SameBoy Game Boy and Mesen NES emulators, with a focus on music creation. It runs standalone and can be used as an audio plugin (CLAP / VST3 / VST2 / AU) in your favourite DAW!
 ## Generation
 - [StableAudio](https://github.com/Stability-AI/stable-audio-tools): Generative models for conditional audio generation 
 - [AudioCraft](https://github.com/facebookresearch/audiocraft): a PyTorch library for deep learning research on audio generation. AudioCraft contains inference and training code for two state-of-the-art AI generative models producing high-quality audio: AudioGen and MusicGen.
@@ -143,6 +145,8 @@ Edit the README and make a PR
 
 - [genmusic_demo_list](https://github.com/affige/genmusic_demo_list): a list of demo websites for automatic music generation research
 - [HOT-Step-CPP](https://github.com/scragnog/HOT-Step-CPP): Turn dials. Summon bangers! NOW WITH MORE C++! Local AI music generation powered by GGML
+- [LocalAI](https://github.com/mudler/LocalAI): LocalAI is the open-source AI engine. Run any model - LLMs, vision, voice, image, video - on any hardware. No GPU required
+- [gary4juce](https://github.com/betweentwomidnights/gary4juce): seven open source ai music models inside the DAW
 # Speech
 ## Benchmark
 - [ArtificialAnalysis](https://artificialanalysis.ai/speech-to-text): Speech to Text AI Model & Provider Leaderboard on Aritifical Analysis
@@ -172,6 +176,9 @@ Edit the README and make a PR
 - [audio.cpp](https://github.com/0xShug0/audio.cpp): An all-in-one, pure C++ inference engine for audio models, powered by ggml. Supports TTS, STT, VAD, voice conversion, music generation, and more, with highly optimized performance. No Python dependency
 - [izwi](https://github.com/izwi-ai/izwi): Voice AI runtime. Local first transcription, speaker diarization, TTS, and voice cloning with an OpenAI compatible API
 - [murmur](https://github.com/janisbelozerovs-dev/murmur): Private, on-device voice dictation for macOS
+- [react-native-executorch](https://github.com/software-mansion/react-native-executorch): High-performance, privacy-first on-device AI inference library for React Native, powered by PyTorch's ExecuTorch runtime
+- [hex](https://github.com/anomalyco/hex): Local-first voice dictation for macOS. Hold a shortcut, speak, and paste into any app. Native Rust, on-device speech recognition, and a Linux beta
+- [VideoNote-MCP](https://github.com/HuangYincan/VideoNote-MCP): VideoNote：将视频转成结构化笔记。理解画面/弹幕/评论；支持主流平台；工具解耦；多格式导出。
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
@@ -212,3 +219,6 @@ Edit the README and make a PR
 - [sglang-omni](https://github.com/sgl-project/sglang-omni): SGLang-Omni is a high-performance serving framework for audio models (TTS, ASR) and unified multimodal models
 - [Vocello](https://github.com/PowerBeef/Vocello): Vocello: a local, private voice studio for Apple Silicon. Write a script, pick or describe a voice, and generate speech on-device, faster than realtime on an 8 GB M2 Mac mini. Native Swift + MLX, no Python. Mac app out now, iPhone beta on TestFlight. (Formerly QwenVoice.)
 - [franken_tts](https://github.com/Dicklesworthstone/franken_tts): Pure-Rust, CPU-hyper-optimized runtime for Qwen3-TTS zero-shot voice cloning — turns the model's hidden 15-step residual-code microdecoder from its largest CPU liability into its largest optimization advantage
+- [awesome-ai-voice](https://github.com/wildminder/awesome-ai-voice): List of open-source TTS, voice cloning, and music generation models
+- [AuK](https://github.com/Tencent-Hunyuan/AuK): AuK: An Open-Source Foundational Model for Speech Generation and Editing
+- [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
