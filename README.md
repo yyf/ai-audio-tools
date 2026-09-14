@@ -45,6 +45,7 @@ Edit the README and make a PR
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
 - [Kaggle](https://www.kaggle.com/models?query=audio): models with tag "audio" on Kaggle
 
+- [clap](https://github.com/clap-rs/clap): A full featured, fast Command Line Argument Parser for Rust
 ## Security
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
 - [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
@@ -143,6 +144,9 @@ Edit the README and make a PR
 
 - [genmusic_demo_list](https://github.com/affige/genmusic_demo_list): a list of demo websites for automatic music generation research
 - [HOT-Step-CPP](https://github.com/scragnog/HOT-Step-CPP): Turn dials. Summon bangers! NOW WITH MORE C++! Local AI music generation powered by GGML
+- [LocalAI](https://github.com/mudler/LocalAI): LocalAI is the open-source AI engine. Run any model - LLMs, vision, voice, image, video - on any hardware. No GPU required
+- [ACE-Step-Studio](https://github.com/timoncool/ACE-Step-Studio): Portable AI music generator — full songs with vocals, covers, music videos. One-click install, 100% offline, NVIDIA GPU
+- [ComfyUI_FL-HeartMuLa](https://github.com/filliptm/ComfyUI_FL-HeartMuLa): FL HeartMuLa - Multilingual AI music generation nodes for ComfyUI. Generate full songs with lyrics using HeartMuLa
 # Speech
 ## Benchmark
 - [ArtificialAnalysis](https://artificialanalysis.ai/speech-to-text): Speech to Text AI Model & Provider Leaderboard on Aritifical Analysis
@@ -172,6 +176,12 @@ Edit the README and make a PR
 - [audio.cpp](https://github.com/0xShug0/audio.cpp): An all-in-one, pure C++ inference engine for audio models, powered by ggml. Supports TTS, STT, VAD, voice conversion, music generation, and more, with highly optimized performance. No Python dependency
 - [izwi](https://github.com/izwi-ai/izwi): Voice AI runtime. Local first transcription, speaker diarization, TTS, and voice cloning with an OpenAI compatible API
 - [murmur](https://github.com/janisbelozerovs-dev/murmur): Private, on-device voice dictation for macOS
+- [screenpipe](https://github.com/screenpipe/screenpipe): YC (S26) | Open Computer History | Record your screen continuously locally and provide context to your agents (Claude, Codex, Openclaw, Hermes, Runner...)
+- [minutes](https://github.com/silverstein/minutes): Open-source, local-first Granola/Otter alternative that Claude Code, Codex, Cursor, and any MCP client can query. Meetings, calls, and voice memos transcribed on-device into markdown you own
+- [audio-ai-hub](https://github.com/BinWang28/audio-ai-hub): The hub for audio AI research: papers, open models, benchmarks & datasets across audio LLMs, speech recognition, TTS, music & audio generation
+- [macparakeet](https://github.com/moona3k/macparakeet): Fast, private, local-first voice app for Apple Silicon Macs — dictation, file/media transcription, meeting recording, Transforms, and a public automation CLI. Free and open-source
+- [speech_to_text](https://github.com/csdcorp/speech_to_text): A Flutter plugin that exposes device specific text to speech recognition capability
+- [petal](https://github.com/Aayush9029/petal): Petal is a native macOS menu bar app for fast, local-first audio transcription
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
