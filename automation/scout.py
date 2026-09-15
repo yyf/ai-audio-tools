@@ -26,8 +26,11 @@ MAX_CANDIDATES = 30
 MIN_STARS = 10
 RECENCY_DAYS = 90
 HIGH_QUALITY_THRESHOLD = 55
+KEEP_THRESHOLD = 70  # PR body: Keep (≥70) vs Review (55–69)
 PR_THRESHOLD = 1
 MAX_PR_ENTRIES = 10
+MAX_PER_SECTION = 3  # max entries per Domain > Subsection in one PR
+MIN_DESCRIPTION_LEN = 15  # skip empty / placeholder descriptions
 BOT_BRANCH_PREFIX = "bot/daily-candidates-"
 README_PATH = Path("README.md")
 QUERIES_PATH = Path("automation/queries.json")
@@ -82,7 +85,43 @@ NEGATIVE_KEYWORDS: list[str] = [
     "clipboard",
     "gguf",
     "ollama",
+    "party game",
+    "music quiz",
+    "home assistant",
+    "media library",
+    "jellyfin",
+    "plex plugin",
+    "spotify downloader",
+    "youtube downloader",
 ]
+
+# Bonus when GitHub topics include these (cleaner signal than free-text).
+TOPIC_BONUS: set[str] = {
+    "tts",
+    "text-to-speech",
+    "speech-recognition",
+    "speech-to-text",
+    "asr",
+    "stt",
+    "voice-cloning",
+    "voice-conversion",
+    "speaker-recognition",
+    "diarization",
+    "music-generation",
+    "text-to-music",
+    "audio-generation",
+    "source-separation",
+    "music-information-retrieval",
+    "mir",
+    "audio-watermark",
+    "watermarking",
+    "deepfake-detection",
+    "audio-language-model",
+    "clap",
+    "neural-audio-codec",
+    "speech-synthesis",
+    "singing-voice-synthesis",
+}
 
 # (phrase, weight). Phrases with word chars only and len <= 4 use \b matching.
 DOMAIN_SIGNALS: dict[str, list[tuple[str, int]]] = {
@@ -349,6 +388,7 @@ class Candidate:
     stars: int
     pushed_at: datetime
     category: tuple[str, str]
+    category_score: int
     confidence: int
     rationale: str
     dedupe_note: str = "not in README"
@@ -504,8 +544,10 @@ def score_repo(
     category: tuple[str, str],
     category_score: int,
 ) -> tuple[int, str]:
+    """Score a repo with ToC fit weighted above popularity proxies."""
     stars = repo.get("stargazers_count", 0)
     description = (repo.get("description") or "").strip()
+    topics = {t.lower() for t in (repo.get("topics") or [])}
     owner = repo.get("owner", {}).get("login", "").lower()
     pushed_raw = repo.get("pushed_at") or ""
     pushed_at = datetime.fromisoformat(pushed_raw.replace("Z", "+00:00"))
@@ -514,32 +556,45 @@ def score_repo(
     score = 0
     reasons: list[str] = []
 
+    # Popularity (capped lower so stars alone cannot dominate).
     if stars > MIN_STARS:
-        score += 15
+        score += 8
         reasons.append(f"{stars} stars")
     if stars >= 30:
-        score += 8
+        score += 4
     if stars >= 100:
-        score += 5
+        score += 3
     if stars >= 500:
-        score += 5
+        score += 3
+
     if pushed_at >= recency_cutoff:
-        score += 15
-        reasons.append(f"pushed in last {RECENCY_DAYS} days")
-    if len(description) >= 5:
         score += 10
-        reasons.append("has description")
-    if len(description) >= 20:
-        score += 5
-    if category_score >= MIN_CATEGORY_SCORE:
+        reasons.append(f"pushed in last {RECENCY_DAYS} days")
+
+    if len(description) >= MIN_DESCRIPTION_LEN:
         score += 8
+        reasons.append("has description")
+    if len(description) >= 40:
+        score += 4
+
+    # ToC fit is the primary relevance signal.
+    if category_score >= MIN_CATEGORY_SCORE:
+        score += 12
         reasons.append(f"topic fit ({category[0]} > {category[1]})")
     if category_score >= MIN_CATEGORY_SCORE + 4:
-        score += 4
+        score += 6
     if category_score >= MIN_CATEGORY_SCORE + 8:
-        score += 3
+        score += 6
+    if category_score >= MIN_CATEGORY_SCORE + 12:
+        score += 4
+
+    topic_hits = sorted(topics & TOPIC_BONUS)
+    if topic_hits:
+        score += 6
+        reasons.append(f"github topics ({', '.join(topic_hits[:3])})")
+
     if owner in NOTABLE_ORGS:
-        score += 5
+        score += 4
         reasons.append(f"notable org ({owner})")
 
     score = min(score, 100)
@@ -551,6 +606,31 @@ def is_duplicate(full_name: str, html_url: str, existing: set[str]) -> bool:
     key = html_url.lower().rstrip("/")
     short = full_name.lower()
     return key in existing or short in existing
+
+
+def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidate]:
+    """Rank by ToC fit, then confidence; cap per README section."""
+    ranked = sorted(
+        candidates,
+        key=lambda c: (-c.category_score, -c.confidence, -c.stars),
+    )
+    selected: list[Candidate] = []
+    per_section: dict[tuple[str, str], int] = {}
+
+    for c in ranked:
+        count = per_section.get(c.category, 0)
+        if count >= MAX_PER_SECTION:
+            stats.skipped.append(
+                f"{c.full_name} — section cap "
+                f"({c.category[0]} > {c.category[1]} already has {MAX_PER_SECTION})"
+            )
+            continue
+        per_section[c.category] = count + 1
+        selected.append(c)
+        if len(selected) >= MAX_PR_ENTRIES:
+            break
+
+    return selected
 
 
 def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) -> list[Candidate]:
@@ -593,8 +673,15 @@ def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) 
                 stats.skipped.append(f"{full_name} — rejected list")
                 continue
 
-            description = repo.get("description") or ""
+            description = (repo.get("description") or "").strip()
             topics = repo.get("topics") or []
+            if len(description) < MIN_DESCRIPTION_LEN:
+                stats.skipped.append(
+                    f"{full_name} — description too short "
+                    f"({len(description)} < {MIN_DESCRIPTION_LEN})"
+                )
+                continue
+
             bad = negative_hit(full_name, description, topics)
             if bad:
                 stats.skipped.append(f"{full_name} — negative keyword ({bad})")
@@ -625,7 +712,7 @@ def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) 
                 Candidate(
                     full_name=full_name,
                     html_url=html_url,
-                    description=(description or full_name.split("/")[-1]).strip(),
+                    description=description,
                     stars=repo.get("stargazers_count", 0),
                     pushed_at=datetime.fromisoformat(
                         (repo.get("pushed_at") or datetime.now(timezone.utc).isoformat()).replace(
@@ -633,6 +720,7 @@ def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) 
                         )
                     ),
                     category=category,
+                    category_score=category_score,
                     confidence=confidence,
                     rationale=rationale,
                 )
@@ -641,8 +729,7 @@ def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) 
         if len(seen) >= MAX_CANDIDATES:
             break
 
-    candidates.sort(key=lambda c: (-c.confidence, -c.stars))
-    return candidates[:MAX_PR_ENTRIES]
+    return select_for_pr(candidates, stats)
 
 
 def format_readme_line(candidate: Candidate) -> str:
@@ -705,33 +792,66 @@ def close_open_bot_prs() -> None:
             )
 
 
+def _md_cell(text: str, max_len: int = 160) -> str:
+    """Sanitize text for a single markdown table cell."""
+    cleaned = " ".join((text or "").split())
+    if len(cleaned) > max_len:
+        cleaned = cleaned[: max_len - 1].rstrip() + "…"
+    return cleaned.replace("|", "\\|")
+
+
 def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -> str:
+    keep = [c for c in candidates if c.confidence >= KEEP_THRESHOLD]
+    review = [c for c in candidates if c.confidence < KEEP_THRESHOLD]
+
     lines = [
         "## Summary",
         f"- Run date: {run_date}",
         f"- Candidates scanned: {stats.scanned}",
         f"- High-quality (≥{HIGH_QUALITY_THRESHOLD}): {len(candidates)}",
+        f"- Keep (≥{KEEP_THRESHOLD}): {len(keep)} · Review ({HIGH_QUALITY_THRESHOLD}–{KEEP_THRESHOLD - 1}): {len(review)}",
         f"- PR opened because {len(candidates)} ≥ {PR_THRESHOLD}",
+        f"- Section cap: ≤{MAX_PER_SECTION} per Domain > Subsection",
         "",
         "**This PR is proposal-only. Do not auto-merge.**",
         "",
-        "## Proposed additions",
-        "",
-        "| Repo | Confidence | Category | One-line rationale |",
-        "|------|------------|----------|-------------------|",
     ]
-    for c in candidates:
-        cat = f"{c.category[0]} > {c.category[1]}"
-        lines.append(
-            f"| [{c.full_name}]({c.html_url}) | {c.confidence} | {cat} | {c.rationale} |"
-        )
-    lines.extend(["", "### Entry details", ""])
-    for i, c in enumerate(candidates, 1):
-        cat = f"{c.category[0]} > {c.category[1]}"
+
+    def append_table(title: str, rows: list[Candidate]) -> None:
+        lines.extend([f"## {title}", ""])
+        if not rows:
+            lines.extend(["_None._", ""])
+            return
         lines.extend(
             [
-                f"#### {i}. [{c.full_name}]({c.html_url}) — **{c.confidence}** — `{cat}`",
+                "| Repo | Conf | ToC | Category | Description | Rationale |",
+                "|------|------|-----|----------|-------------|-----------|",
+            ]
+        )
+        for c in rows:
+            cat = f"{c.category[0]} > {c.category[1]}"
+            lines.append(
+                f"| [{c.full_name}]({c.html_url}) | {c.confidence} | {c.category_score} | "
+                f"{cat} | {_md_cell(c.description)} | {_md_cell(c.rationale, 120)} |"
+            )
+        lines.append("")
+
+    append_table(f"Keep (confidence ≥{KEEP_THRESHOLD})", keep)
+    append_table(
+        f"Review (confidence {HIGH_QUALITY_THRESHOLD}–{KEEP_THRESHOLD - 1})",
+        review,
+    )
+
+    lines.extend(["### Entry details", ""])
+    for i, c in enumerate(candidates, 1):
+        cat = f"{c.category[0]} > {c.category[1]}"
+        band = "Keep" if c.confidence >= KEEP_THRESHOLD else "Review"
+        lines.extend(
+            [
+                f"#### {i}. [{c.full_name}]({c.html_url}) — **{c.confidence}** ({band}) — `{cat}`",
+                f"- **Description:** {c.description}",
                 f"- **Why:** {c.rationale}",
+                f"- **ToC score:** {c.category_score}",
                 f"- **Impact:** {c.stars} stars; updated {c.pushed_at.date().isoformat()}",
                 f"- **Dedupe:** {c.dedupe_note}",
                 "",
