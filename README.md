@@ -88,7 +88,8 @@ Edit the README and make a PR
 - [speex](https://github.com/xiph/speex): Speex voice codec mirror - THIS IS A MIRROR, DEVELOPMENT HAPPENS AT https://gitlab.xiph.org/xiph/speex
 - [strawberry](https://github.com/strawberrymusicplayer/strawberry): :strawberry: Strawberry Music Player
 - [beatify](https://github.com/mholzi/beatify): 🎵 Music quiz party game for Home Assistant with two modes, guess the release year or name the title and artist. Streams from Spotify, Apple Music, Tidal, Deezer, YouTube Music and Amazon Music, or plays your own library via Plex, Jellyfin and local files. Runs on Sonos, Alexa and any Music Assistant speaker
-  
+- [AudioMuse-AI](https://github.com/NeptuneHub/AudioMuse-AI): AudioMuse-AI uses sonic analysis to rediscover forgotten songs, uncover hidden connections in your music library, and generate intelligent playlists for Navidrome, Jellyfin, LMS, Lyrion, Emby and Plex: no metadata or external services required
+
 ## Production
 - [OpenVINO](https://github.com/intel/openvino-plugins-ai-audacity/tree/main): OpenVINO AI effects for Audacity (Windows, Linux)
 - [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
@@ -139,7 +140,11 @@ Edit the README and make a PR
 - [AudioX](https://github.com/ZeyueT/AudioX): A Unified Framework for Anything-to-Audio Generation
 - [MMAudio](https://github.com/hkchengrex/MMAudio): Taming Multimodal Joint Training for High-Quality Video-to-Audio Synthesis
 - [ACE-Step-1.5](https://github.com/ace-step/ACE-Step-1.5): a highly efficient open-source music foundation model that brings commercial-grade generation to consumer hardware. 
-
+- [genmusic_demo_list](https://github.com/affige/genmusic_demo_list): a list of demo websites for automatic music generation research
+- [HOT-Step-CPP](https://github.com/scragnog/HOT-Step-CPP): Turn dials. Summon bangers! NOW WITH MORE C++! Local AI music generation powered by GGML
+- [ACE-Step-Studio](https://github.com/timoncool/ACE-Step-Studio): Portable AI music generator — full songs with vocals, covers, music videos. One-click install, 100% offline, NVIDIA GPU
+- [ComfyUI_FL-HeartMuLa](https://github.com/filliptm/ComfyUI_FL-HeartMuLa): FL HeartMuLa - Multilingual AI music generation nodes for ComfyUI. Generate full songs with lyrics using HeartMuLa
+  
 # Speech
 ## Benchmark
 - [ArtificialAnalysis](https://artificialanalysis.ai/speech-to-text): Speech to Text AI Model & Provider Leaderboard on Aritifical Analysis
@@ -163,7 +168,16 @@ Edit the README and make a PR
 - [matrix-live-diarizer](https://github.com/lgy1027/matrix-live-diarizer): Local-first meeting transcription — audio & transcripts never leave your machine. Live captions + upload diarization + voice matching
 - [voiceblender](https://github.com/VoiceBlender/voiceblender): A programmable Voice AI platform: SIP and WebRTC call control, multi-party mixing, recording, TTS/STT, and pluggable AI agents (ElevenLabs, VAPI, Pipecat, Deepgram) — all driven through a REST API, webhooks, and a WebSocket event stream
 - [dograh](https://github.com/dograh-hq/dograh): Open source voice AI platform. Self-hosted alternative to Vapi and Retell. On Prem, BYOK across  Speech to Speech or LLM/STT/TTS, with a visual workflow builder, MCP native and telephony support
-
+- [openwhispr](https://github.com/OpenWhispr/openwhispr): Voice-to-text dictation app with local (Nvidia Parakeet/Whisper) and cloud models (BYOK). Privacy-first and available cross-platform
+- [mlx-audio](https://github.com/Blaizzy/mlx-audio): A text-to-speech (TTS), speech-to-text (STT) and speech-to-speech (STS) library built on Apple's MLX framework, providing efficient speech analysis on Apple Silicon
+- [audio.cpp](https://github.com/0xShug0/audio.cpp): An all-in-one, pure C++ inference engine for audio models, powered by ggml. Supports TTS, STT, VAD, voice conversion, music generation, and more, with highly optimized performance. No Python dependency
+- [izwi](https://github.com/izwi-ai/izwi): Voice AI runtime. Local first transcription, speaker diarization, TTS, and voice cloning with an OpenAI compatible API
+- [murmur](https://github.com/janisbelozerovs-dev/murmur): Private, on-device voice dictation for macOS
+- [audio-ai-hub](https://github.com/BinWang28/audio-ai-hub): The hub for audio AI research: papers, open models, benchmarks & datasets across audio LLMs, speech recognition, TTS, music & audio generation
+- [macparakeet](https://github.com/moona3k/macparakeet): Fast, private, local-first voice app for Apple Silicon Macs — dictation, file/media transcription, meeting recording, Transforms, and a public automation CLI. Free and open-source
+- [speech_to_text](https://github.com/csdcorp/speech_to_text): A Flutter plugin that exposes device specific text to speech recognition capability
+- [petal](https://github.com/Aayush9029/petal): Petal is a native macOS menu bar app for fast, local-first audio transcription
+  
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
