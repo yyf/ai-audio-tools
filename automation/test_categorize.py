@@ -7,7 +7,16 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from scout import MIN_CATEGORY_SCORE, categorize, negative_hit  # noqa: E402
+from scout import (  # noqa: E402
+    KEEP_THRESHOLD,
+    MAX_PER_SECTION,
+    MIN_CATEGORY_SCORE,
+    Candidate,
+    RunStats,
+    categorize,
+    negative_hit,
+    select_for_pr,
+)
 
 CASES: list[tuple[str, str, list[str], tuple[str, str]]] = [
     # Speech
@@ -162,7 +171,35 @@ NEGATIVE_CASES: list[tuple[str, str, list[str], str]] = [
         ["gguf", "whisper"],
         "gguf",
     ),
+    (
+        "strawberrymusicplayer/strawberry",
+        "Strawberry Music Player",
+        ["music", "player"],
+        "music player",
+    ),
+    (
+        "mholzi/beatify",
+        "Music quiz party game for Home Assistant",
+        ["homeassistant"],
+        "party game",
+    ),
 ]
+
+
+def _fake_candidate(name: str, category: tuple[str, str], cat_score: int, conf: int) -> Candidate:
+    from datetime import datetime, timezone
+
+    return Candidate(
+        full_name=name,
+        html_url=f"https://github.com/{name}",
+        description="x" * 20,
+        stars=50,
+        pushed_at=datetime.now(timezone.utc),
+        category=category,
+        category_score=cat_score,
+        confidence=conf,
+        rationale="test",
+    )
 
 
 def main() -> int:
@@ -191,7 +228,30 @@ def main() -> int:
             failed += 1
         print(f"{status}: negative {full_name} -> {hit!r} expected {expect_phrase!r}")
 
-    total = len(CASES) + len(WEAK) + len(NEGATIVE_CASES)
+    # Section cap: 4 Speech>Synthesis candidates → keep MAX_PER_SECTION.
+    stats = RunStats()
+    pool = [
+        _fake_candidate(f"org/tts-{i}", ("Speech", "Synthesis"), 30 - i, 80 - i)
+        for i in range(4)
+    ]
+    pool.append(_fake_candidate("org/asr-1", ("Speech", "Recognition"), 40, 90))
+    selected = select_for_pr(pool, stats)
+    synth = [c for c in selected if c.category == ("Speech", "Synthesis")]
+    recog = [c for c in selected if c.category == ("Speech", "Recognition")]
+    ok_cap = len(synth) == MAX_PER_SECTION and len(recog) == 1
+    # Highest ToC scores first within the section.
+    ok_order = [c.category_score for c in synth] == sorted(
+        (c.category_score for c in synth), reverse=True
+    )
+    status = "OK" if ok_cap and ok_order else "FAIL"
+    if not (ok_cap and ok_order):
+        failed += 1
+    print(
+        f"{status}: section cap synth={len(synth)} recog={len(recog)} "
+        f"(max={MAX_PER_SECTION}); keep_band={KEEP_THRESHOLD}"
+    )
+
+    total = len(CASES) + len(WEAK) + len(NEGATIVE_CASES) + 1
     print(f"\n{total - failed}/{total} passed")
     return 1 if failed else 0
 
