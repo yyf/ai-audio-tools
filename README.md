@@ -39,7 +39,6 @@ Edit the README and make a PR
 
 ## Annotation
 - [audino](https://github.com/midas-research/audino): Open source audio annotation tool for humans 
-- [audiomentations](https://github.com/iver56/audiomentations): A Python library for audio data augmentation.
 
 ## Model
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
@@ -100,7 +99,6 @@ Edit the README and make a PR
 - [USS](https://github.com/bytedance/uss): This is the PyTorch implementation of the Universal Source Separation with Weakly labelled Data
 - [FAST-RIR](https://github.com/anton-jeran/FAST-RIR): This is the official implementation of our neural-network-based fast diffuse room impulse response generator (FAST-RIR) for generating room impulse responses (RIRs) for a given rectangular acoustic environment
 - [FoleyCrafter](https://foleycrafter.github.io/): FoleyCrafter is a video-to-audio generation framework which can produce realistic sound effects semantically relevant and synchronized with videos. 
-- [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
 - [Woosh](https://github.com/SonyResearch/Woosh): Public release of the Sound Effect Foundation model by Sony AI.
 
 ## Generation
@@ -117,7 +115,6 @@ Edit the README and make a PR
 - [AudioLDM](https://audioldm.github.io/): This toolbox aims to unify audio generation model evaluation for easier comparison
 - [Make-An-Audio](https://github.com/Text-to-Audio/Make-An-Audio): a conditional diffusion probabilistic model capable of generating high fidelity audio efficiently from X modality
 - [Diffuser](https://github.com/huggingface/diffusers): Diffusers is the go-to library for state-of-the-art pretrained diffusion models for generating images, audio, and even 3D structures of molecules
-- [stable-audio-tools](https://github.com/Stability-AI/stable-audio-tools): Generative models for conditional audio generation 
 - [MidiTok](https://github.com/Natooz/MidiTok): MIDI / symbolic music tokenizers for Deep Learning models
 - [muspy](https://salu133445.github.io/muspy/): an open source Python library for symbolic music generation
 - [MusicLM](https://google-research.github.io/seanet/musiclm/examples/): a model generating high-fidelity music from text descriptions 
@@ -192,7 +189,6 @@ Edit the README and make a PR
 - [FastSpeech2](https://github.com/ming024/FastSpeech2): An implementation of Microsoft's "FastSpeech 2: Fast and High-Quality End-to-End Text to Speech" 
 - [MelGAN](http://swpark.me/melgan/): Unofficial PyTorch implementation of MelGAN vocoder
 - [hifi-gan](https://github.com/jik876/hifi-gan): Generative Adversarial Networks for Efficient and High Fidelity Speech Synthesis 
-- [elevenlabs-pythons](https://github.com/elevenlabs/elevenlabs-python): The official Python API for ElevenLabs Text to Speech. 
 - [tortoise-tts](https://github.com/neonbjb/tortoise-tts): A multi-voice TTS system trained with an emphasis on quality 
 - [lyrebird](https://github.com/lyrebird-voice-changer/lyrebird): Simple and powerful voice changer for Linux, written with Python & GTK 
 - [elevenlabs](https://github.com/elevenlabs/elevenlabs-python): The official Python API for ElevenLabs Text to Speech
@@ -200,7 +196,6 @@ Edit the README and make a PR
 - [tts-generation-webui](https://github.com/rsxdalv/tts-generation-webui): TTS Generation Web UI (Bark, MusicGen + AudioGen, Tortoise, RVC, Vocos, Demucs, SeamlessM4T, MAGNet) 
 - [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS): 1 min voice data can also be used to train a good TTS model! (few shot voice cloning) 
 - [metavoice-src](https://github.com/metavoiceio/metavoice-src): Foundational model for human-like, expressive TTS 
-- [Real-Time-Voice-Cloning](https://github.com/CorentinJ/Real-Time-Voice-Cloning): Clone a voice in 5 seconds to generate arbitrary speech in real-time 
 - [Retrieval-based-Voice-Conversion-WebUI](https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI): Voice data <= 10 mins can also be used to train a good VC model! 
 - [midi2voice](https://github.com/mathigatti/midi2voice): Singing synthesis from MIDI file 
 - [OpenVoice](https://github.com/myshell-ai/OpenVoice): Instant voice cloning by MyShell
