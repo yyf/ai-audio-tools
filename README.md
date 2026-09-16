@@ -9,6 +9,7 @@ Community list of open-source AI tools, models, and datasets for audio, music, a
   - [Annotation](#annotation)
   - [Model](#model)
   - [Security](#security)
+  - [Framework](#framework)
 - [Music](#music)
   - [Benchmark](#benchmark-1)
   - [Analysis](#analysis)
@@ -49,6 +50,9 @@ Edit the README and make a PR
 - [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
 - [LibriSeVoc](https://github.com/csun22/Synthetic-Voice-Detection-Vocoder-Artifacts): AI-Synthesized Voice Detection Using Neural Vocoder Artifacts, CVPR Workshop on Media Forensic 2023
 - [SynthID](https://github.com/google-deepmind/synthid-text): This repository provides a reference implementation of the SynthID Text watermarking and detection capabilities for the research paper published in Nature. It is not intended for production use.
+
+## Framework
+- [yup](https://github.com/kunitoki/yup): The modern framework optimized for realtime audio and GPU-native creative software
 
 # Music
 ## Benchmark
@@ -144,7 +148,10 @@ Edit the README and make a PR
 - [ComfyUI_FL-HeartMuLa](https://github.com/filliptm/ComfyUI_FL-HeartMuLa): FL HeartMuLa - Multilingual AI music generation nodes for ComfyUI. Generate full songs with lyrics using HeartMuLa
 - [ComfyUI-MiniMax-Music-Production-Toolkit](https://github.com/jplenio/ComfyUI-MiniMax-Music-Production-Toolkit): Complete Production Environment for professional MiniMax Music 3 audio generation, including Prompt Generation, Metadata generation including Cover Art, Sound Enhancement to improve Minimax weaknesses, mastering, and saving in various file formats
 - [heartlib](https://github.com/HeartMuLa/heartlib): HeartMuLa Official Repo: The Most Powerful Open-Source Music Generation Model of 2026
-- [ComfyUI-FL-YuE2](https://github.com/filliptm/ComfyUI-FL-YuE2): YuE2 music generation and an editable piano roll for ComfyUI
+- [ComfyUI-FL-YuE2](https://github.com/filliptm/ComfyUI-FL-YuE2): YuE2 music generation and an editable piano roll for ComfyUI  
+- [ComfyUI-SongScribe](https://github.com/TheLocalLab/ComfyUI-SongScribe): AI music prompt nodes for ComfyUI — 73 style presets plus song analysis for MiniMax Music 3 and YuE2. Runs on CPU
+- [minimax-music-ui](https://github.com/adambenhassen/minimax-music-ui): Suno-style web UI for a self-hosted MiniMax-Music3 inference server
+- [ComfyUI_YuE](https://github.com/smthemex/ComfyUI_YuE): YuE is a groundbreaking series of open-source foundation models designed for music generation, specifically for transforming lyrics into full songs (lyrics2song). you can use it in comfyUI
   
 # Speech
 ## Benchmark
@@ -179,7 +186,10 @@ Edit the README and make a PR
 - [speech_to_text](https://github.com/csdcorp/speech_to_text): A Flutter plugin that exposes device specific text to speech recognition capability
 - [petal](https://github.com/Aayush9029/petal): Petal is a native macOS menu bar app for fast, local-first audio transcription  
 - [Speech](https://github.com/NVIDIA-NeMo/Speech): A scalable generative AI framework built for researchers and developers working on Large Language Models, Multimodal, and Speech AI (Automatic Speech Recognition and Text-to-Speech)
-
+- [vernacula](https://github.com/christopherthompson81/vernacula): ONNX speech pipeline library for ASR (diarization, VAD), and TTS
+- [benchmarks](https://github.com/coval-ai/benchmarks): Reproducible voice-AI benchmarking — TTS / STT latency and accuracy
+- [dictus-ios](https://github.com/getdictus/dictus-ios): Open-source iOS voice dictation keyboard — fully offline, private, no subscription required for core features
+  
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
