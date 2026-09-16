@@ -44,6 +44,8 @@ Edit the README and make a PR
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
 - [Kaggle](https://www.kaggle.com/models?query=audio): models with tag "audio" on Kaggle
 
+- [yup](https://github.com/kunitoki/yup): The modern framework optimized for realtime audio and GPU-native creative software
+- [tod](https://github.com/tod-org/tod): An unofficial Todoist command line client written in Rust
 ## Security
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
 - [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
@@ -146,6 +148,9 @@ Edit the README and make a PR
 - [heartlib](https://github.com/HeartMuLa/heartlib): HeartMuLa Official Repo: The Most Powerful Open-Source Music Generation Model of 2026
 - [ComfyUI-FL-YuE2](https://github.com/filliptm/ComfyUI-FL-YuE2): YuE2 music generation and an editable piano roll for ComfyUI
   
+- [ComfyUI-SongScribe](https://github.com/TheLocalLab/ComfyUI-SongScribe): AI music prompt nodes for ComfyUI — 73 style presets plus song analysis for MiniMax Music 3 and YuE2. Runs on CPU
+- [minimax-music-ui](https://github.com/adambenhassen/minimax-music-ui): Suno-style web UI for a self-hosted MiniMax-Music3 inference server
+- [ComfyUI_YuE](https://github.com/smthemex/ComfyUI_YuE): YuE is a groundbreaking series of open-source foundation models designed for music generation, specifically for transforming lyrics into full songs (lyrics2song). you can use it in comfyUI
 # Speech
 ## Benchmark
 - [ArtificialAnalysis](https://artificialanalysis.ai/speech-to-text): Speech to Text AI Model & Provider Leaderboard on Aritifical Analysis
@@ -180,6 +185,9 @@ Edit the README and make a PR
 - [petal](https://github.com/Aayush9029/petal): Petal is a native macOS menu bar app for fast, local-first audio transcription  
 - [Speech](https://github.com/NVIDIA-NeMo/Speech): A scalable generative AI framework built for researchers and developers working on Large Language Models, Multimodal, and Speech AI (Automatic Speech Recognition and Text-to-Speech)
 
+- [vernacula](https://github.com/christopherthompson81/vernacula): ONNX speech pipeline library for ASR (diarization, VAD), and TTS
+- [benchmarks](https://github.com/coval-ai/benchmarks): Reproducible voice-AI benchmarking — TTS / STT latency and accuracy
+- [dictus-ios](https://github.com/getdictus/dictus-ios): Open-source iOS voice dictation keyboard — fully offline, private, no subscription required for core features
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
