@@ -45,8 +45,6 @@ Edit the README and make a PR
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
 - [Kaggle](https://www.kaggle.com/models?query=audio): models with tag "audio" on Kaggle
 
-- [Dplug](https://github.com/AuburnSounds/Dplug): Make VST2 / VST3 / AU / AAX / CLAP / LV2 / FLP  plug-ins for Linux/macOS/Windows, using D
-- [tod](https://github.com/tod-org/tod): An unofficial Todoist command line client written in Rust
 ## Security
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
 - [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
@@ -107,8 +105,9 @@ Edit the README and make a PR
 - [FoleyCrafter](https://foleycrafter.github.io/): FoleyCrafter is a video-to-audio generation framework which can produce realistic sound effects semantically relevant and synchronized with videos. 
 - [Woosh](https://github.com/SonyResearch/Woosh): Public release of the Sound Effect Foundation model by Sony AI.
 - [anklang](https://github.com/tim-janik/anklang): MIDI and Audio Synthesizer and Composer
-  
+- [Dplug](https://github.com/AuburnSounds/Dplug): Make VST2 / VST3 / AU / AAX / CLAP / LV2 / FLP  plug-ins for Linux/macOS/Windows, using D  
 - [milimomusic](https://github.com/mainza-ai/milimomusic): Open-source AI music generation, neural transcription, multitrack DAW, stem separation, and music video studio powered by MiniMax Music 3
+- 
 ## Generation
 - [StableAudio](https://github.com/Stability-AI/stable-audio-tools): Generative models for conditional audio generation 
 - [AudioCraft](https://github.com/facebookresearch/audiocraft): a PyTorch library for deep learning research on audio generation. AudioCraft contains inference and training code for two state-of-the-art AI generative models producing high-quality audio: AudioGen and MusicGen.
@@ -154,10 +153,10 @@ Edit the README and make a PR
 - [ComfyUI-FL-YuE2](https://github.com/filliptm/ComfyUI-FL-YuE2): YuE2 music generation and an editable piano roll for ComfyUI  
 - [ComfyUI-SongScribe](https://github.com/TheLocalLab/ComfyUI-SongScribe): AI music prompt nodes for ComfyUI — 73 style presets plus song analysis for MiniMax Music 3 and YuE2. Runs on CPU
 - [minimax-music-ui](https://github.com/adambenhassen/minimax-music-ui): Suno-style web UI for a self-hosted MiniMax-Music3 inference server
-- [ComfyUI_YuE](https://github.com/smthemex/ComfyUI_YuE): YuE is a groundbreaking series of open-source foundation models designed for music generation, specifically for transforming lyrics into full songs (lyrics2song). you can use it in comfyUI
-  
+- [ComfyUI_YuE](https://github.com/smthemex/ComfyUI_YuE): YuE is a groundbreaking series of open-source foundation models designed for music generation, specifically for transforming lyrics into full songs (lyrics2song). you can use it in comfyUI  
 - [ai-dj](https://github.com/innermost47/ai-dj): AI music generation for live performance - Standalone (Ableton Link) + VST3/AU. 8 tracks, 9 AI models. It occasionally hallucinates. Not a song generator - you still have to do the work. Stay human
 - [LocalAI](https://github.com/mudler/LocalAI): LocalAI is the open-source AI engine. Run any model - LLMs, vision, voice, image, video - on any hardware. No GPU required
+
 # Speech
 ## Benchmark
 - [ArtificialAnalysis](https://artificialanalysis.ai/speech-to-text): Speech to Text AI Model & Provider Leaderboard on Aritifical Analysis
@@ -193,8 +192,7 @@ Edit the README and make a PR
 - [Speech](https://github.com/NVIDIA-NeMo/Speech): A scalable generative AI framework built for researchers and developers working on Large Language Models, Multimodal, and Speech AI (Automatic Speech Recognition and Text-to-Speech)
 - [vernacula](https://github.com/christopherthompson81/vernacula): ONNX speech pipeline library for ASR (diarization, VAD), and TTS
 - [benchmarks](https://github.com/coval-ai/benchmarks): Reproducible voice-AI benchmarking — TTS / STT latency and accuracy
-- [dictus-ios](https://github.com/getdictus/dictus-ios): Open-source iOS voice dictation keyboard — fully offline, private, no subscription required for core features
-  
+- [dictus-ios](https://github.com/getdictus/dictus-ios): Open-source iOS voice dictation keyboard — fully offline, private, no subscription required for core features  
 - [CrispASR](https://github.com/CrispStrobe/CrispASR): C++ ggml runtime hub for multilingual ASR and TTS models: Cohere Transcribe, Parakeet TDT, Voxtral, Canary 1B v2, etc, plus universal forced alignment, and more
 - [lokalbot](https://github.com/stevyhacker/lokalbot): A local LLM workhorse that keeps a memory of your workday. On-device meeting notes, dictation, autocomplete, and recall for macOS. GPLv3
 - [mila](https://github.com/island-io/mila): Mila — native macOS local transcription app (whisper.cpp) with optional speaker diarization. Apache-2.0
@@ -204,7 +202,6 @@ Edit the README and make a PR
 - [Meta encodec](https://github.com/facebookresearch/encodec): State-of-the-art deep learning based audio codec supporting both mono 24 kHz audio and stereo 48 kHz audio 
 - [pipecat](https://github.com/pipecat-ai/pipecat): Open Source framework for voice and multimodal conversational AI
 
-- [RAWcooked](https://github.com/MediaArea/RAWcooked): Encodes RAW audio-visual data into the Matroska container (MKV), using the video codec FFV1 for the image and audio codec FLAC for the sound
 ## Synthesis
 - [Coqui TTS](https://github.com/coqui-ai/TTS): a deep learning toolkit for Text-to-Speech, battle-tested in research and production  
 - [DiffSinger](https://github.com/MoonInTheRiver/DiffSinger): singing voice synthesis via shallow diffusion mechanism 
