@@ -45,7 +45,6 @@ Edit the README and make a PR
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
 - [Kaggle](https://www.kaggle.com/models?query=audio): models with tag "audio" on Kaggle
 
-- [clap-verbosity-flag](https://github.com/clap-rs/clap-verbosity-flag): Easily add a --verbose flag to CLIs using Clap
 ## Security
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
 - [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
@@ -157,8 +156,8 @@ Edit the README and make a PR
 - [ComfyUI_YuE](https://github.com/smthemex/ComfyUI_YuE): YuE is a groundbreaking series of open-source foundation models designed for music generation, specifically for transforming lyrics into full songs (lyrics2song). you can use it in comfyUI  
 - [ai-dj](https://github.com/innermost47/ai-dj): AI music generation for live performance - Standalone (Ableton Link) + VST3/AU. 8 tracks, 9 AI models. It occasionally hallucinates. Not a song generator - you still have to do the work. Stay human
 - [LocalAI](https://github.com/mudler/LocalAI): LocalAI is the open-source AI engine. Run any model - LLMs, vision, voice, image, video - on any hardware. No GPU required
-
 - [remiqora](https://github.com/inikolax/remiqora): Local AI music studio unifying ACE-Step 1.5 and YuE2-3B in one Vue interface — text-to-music generation, stem separation, MIDI transcription, and LoRA fine-tuning, with a built-in multitrack DAW
+  
 # Speech
 ## Benchmark
 - [ArtificialAnalysis](https://artificialanalysis.ai/speech-to-text): Speech to Text AI Model & Provider Leaderboard on Aritifical Analysis
@@ -200,7 +199,7 @@ Edit the README and make a PR
 - [mila](https://github.com/island-io/mila): Mila — native macOS local transcription app (whisper.cpp) with optional speaker diarization. Apache-2.0
 - [voice-ai](https://github.com/rapidaai/voice-ai): Rapida is an open-source, end-to-end voice AI orchestration platform for building real-time conversational voice agents with audio streaming, STT, TTS, VAD, multi-channel integration, agent state management, and observability
 - [typewhisper-win](https://github.com/TypeWhisper/typewhisper-win): TypeWhisper for Windows - Local speech-to-text with translation
-- [wngmn](https://github.com/F-kItShipIt/wngmn): Live on-device transcription for Zoom and Google Meet calls on macOS. Knows the moment a question ends, then drafts an answer from your own notes with Claude. Audio never leaves your Mac
+
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
