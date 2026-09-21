@@ -45,6 +45,7 @@ Edit the README and make a PR
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
 - [Kaggle](https://www.kaggle.com/models?query=audio): models with tag "audio" on Kaggle
 
+- [Fun-Audio-Chat](https://github.com/QwenAudio/Fun-Audio-Chat): Fun-Audio-Chat is a Large Audio Language Model built for natural, low-latency voice interactions
 ## Security
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
 - [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
@@ -108,6 +109,7 @@ Edit the README and make a PR
 - [Dplug](https://github.com/AuburnSounds/Dplug): Make VST2 / VST3 / AU / AAX / CLAP / LV2 / FLP  plug-ins for Linux/macOS/Windows, using D  
 - [milimomusic](https://github.com/mainza-ai/milimomusic): Open-source AI music generation, neural transcription, multitrack DAW, stem separation, and music video studio powered by MiniMax Music 3
 - 
+- [RetroPlug](https://github.com/tommitytom/RetroPlug): A frontend for the SameBoy Game Boy and Mesen NES emulators, with a focus on music creation. It runs standalone and can be used as an audio plugin (CLAP / VST3 / VST2 / AU) in your favourite DAW!
 ## Generation
 - [StableAudio](https://github.com/Stability-AI/stable-audio-tools): Generative models for conditional audio generation 
 - [AudioCraft](https://github.com/facebookresearch/audiocraft): a PyTorch library for deep learning research on audio generation. AudioCraft contains inference and training code for two state-of-the-art AI generative models producing high-quality audio: AudioGen and MusicGen.
@@ -158,6 +160,8 @@ Edit the README and make a PR
 - [LocalAI](https://github.com/mudler/LocalAI): LocalAI is the open-source AI engine. Run any model - LLMs, vision, voice, image, video - on any hardware. No GPU required
 - [remiqora](https://github.com/inikolax/remiqora): Local AI music studio unifying ACE-Step 1.5 and YuE2-3B in one Vue interface — text-to-music generation, stem separation, MIDI transcription, and LoRA fine-tuning, with a built-in multitrack DAW
   
+- [gary4juce](https://github.com/betweentwomidnights/gary4juce): seven open source ai music models inside the DAW
+- [ACE-Step-Studio-pinokio](https://github.com/timoncool/ACE-Step-Studio-pinokio): One-click Pinokio launcher for ACE-Step Studio — local AI music generation (Suno at home). Cross-platform: Win/Linux/macOS
 # Speech
 ## Benchmark
 - [ArtificialAnalysis](https://artificialanalysis.ai/speech-to-text): Speech to Text AI Model & Provider Leaderboard on Aritifical Analysis
@@ -200,6 +204,9 @@ Edit the README and make a PR
 - [voice-ai](https://github.com/rapidaai/voice-ai): Rapida is an open-source, end-to-end voice AI orchestration platform for building real-time conversational voice agents with audio streaming, STT, TTS, VAD, multi-channel integration, agent state management, and observability
 - [typewhisper-win](https://github.com/TypeWhisper/typewhisper-win): TypeWhisper for Windows - Local speech-to-text with translation
 
+- [transcribe-anything](https://github.com/zackees/transcribe-anything): Multi-backend whisper app. Blazing fast. Mac-arm optimized. Easy install. Input a local file or url and this service will transcribe it using Whisper AI. Completely private and Free 🤯🤯🤯
+- [screenpipe](https://github.com/screenpipe/screenpipe): YC (S26) | Open Computer History | Record your screen continuously locally and provide context to your agents (Claude, Codex, Openclaw, Hermes, Runner...)
+- [mod_audio_stream](https://github.com/amigniter/mod_audio_stream): FreeSWITCH module to stream audio to websocket and receive response
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
@@ -241,3 +248,5 @@ Edit the README and make a PR
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [EDDiscovery](https://github.com/EDDiscovery/EDDiscovery): Captains log and 3d star map for Elite Dangerous
+- [projectBEA](https://github.com/emqnuele/projectBEA): ProjectBEA is an always-on AI persona engine: she talks, plays Minecraft with real people, and remembers you between sessions. One mind across Discord, Telegram, Twitch and Minecraft — not a bot per platform
