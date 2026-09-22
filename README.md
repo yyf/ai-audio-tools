@@ -11,11 +11,13 @@ Community list of open-source AI tools, models, and datasets for audio, music, a
   - [Security](#security)
   - [Framework](#framework)
 - [Music](#music)
+  - [Model](#model-1)
   - [Benchmark](#benchmark-1)
   - [Analysis](#analysis)
   - [Production](#production)
   - [Generation](#generation)
 - [Speech](#speech)
+  - [Model](#model-2)
   - [Benchmark](#benchmark-2)
   - [Recognition](#recognition)
   - [Production](#production-1)
@@ -55,6 +57,9 @@ Edit the README and make a PR
 - [yup](https://github.com/kunitoki/yup): The modern framework optimized for realtime audio and GPU-native creative software
 
 # Music
+## Model
+- 
+
 ## Benchmark
 - [PaperWithCode](https://paperswithcode.com/sota/text-to-music-generation-on-musiccaps): Text-to-Music Generation on MusicCaps
 - [MusGO_framework](https://roserbatlleroca.github.io/MusGO_framework/index.html): MusGO Framework- Assessing Openness in Music-Generative AI
@@ -159,6 +164,9 @@ Edit the README and make a PR
 - [remiqora](https://github.com/inikolax/remiqora): Local AI music studio unifying ACE-Step 1.5 and YuE2-3B in one Vue interface — text-to-music generation, stem separation, MIDI transcription, and LoRA fine-tuning, with a built-in multitrack DAW
   
 # Speech
+## Model
+- 
+
 ## Benchmark
 - [ArtificialAnalysis](https://artificialanalysis.ai/speech-to-text): Speech to Text AI Model & Provider Leaderboard on Aritifical Analysis
 - [ArtificialAnalysis](https://artificialanalysis.ai/text-to-speech): Text to Speech AI Model & Provider Leaderboard on Aritifical Analysis
