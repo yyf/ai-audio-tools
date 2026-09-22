@@ -107,6 +107,30 @@ CASES: list[tuple[str, str, list[str], tuple[str, str]]] = [
         ("Audio", "Model"),
     ),
     (
+        "NVIDIA/audio-flamingo",
+        "Audio Flamingo 2: An Audio-Language Model with Long-Audio Understanding",
+        ["audio-language-model"],
+        ("Audio", "Model"),
+    ),
+    (
+        "multimodal-art-projection/YuE",
+        "Open Full-song Music Generation Foundation Model",
+        ["music-generation", "foundation-model"],
+        ("Music", "Model"),
+    ),
+    (
+        "someone/speech-foundation",
+        "A pretrained speech foundation model for multilingual understanding",
+        ["speech", "foundation-model"],
+        ("Speech", "Model"),
+    ),
+    (
+        "kunitoki/yup",
+        "The modern framework optimized for realtime audio and GPU-native creative software",
+        ["audio", "framework"],
+        ("Audio", "Framework"),
+    ),
+    (
         "hearbenchmark/hear-eval-kit",
         "Holistic Evaluation of Audio Representations benchmark leaderboard",
         ["benchmark", "evaluation"],

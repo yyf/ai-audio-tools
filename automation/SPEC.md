@@ -197,9 +197,9 @@ No Hugging Face, arXiv, web crawls, or LLM calls.
 ### Category paths (must match README)
 
 ```
-Audio  > Benchmark | Dataset | Annotation | Model | Security
-Music  > Benchmark | Analysis | Production | Generation
-Speech > Benchmark | Recognition | Production | Synthesis
+Audio  > Benchmark | Dataset | Annotation | Model | Security | Framework
+Music  > Model | Benchmark | Analysis | Production | Generation
+Speech > Model | Benchmark | Recognition | Production | Synthesis
 ```
 
 Category assignment is **domain-first** then subsection (see
@@ -208,14 +208,17 @@ Category assignment is **domain-first** then subsection (see
 1. Score Audio / Music / Speech from name, description, and topics
    (weighted phrases; short tokens use word boundaries)
 2. Within the winning domain, score the README subsection
-3. Skip candidates with category score `< MIN_CATEGORY_SCORE` (weak ToC fit)
-4. Soft negatives reduce cross-domain false positives (e.g. TTS demoting Music)
-5. Hard reject via `NEGATIVE_KEYWORDS` (discord bots, music players,
+3. **Model gate:** `Audio|Music|Speech > Model` only if subsection score
+   ≥ `MIN_MODEL_SECTION_SCORE` (foundation / pretrained / language-model
+   signals). Task toolkits stay in Recognition, Synthesis, Generation, etc.
+4. Skip candidates with category score `< MIN_CATEGORY_SCORE` (weak ToC fit)
+5. Soft negatives reduce cross-domain false positives (e.g. TTS demoting Music)
+6. Hard reject via `NEGATIVE_KEYWORDS` (discord bots, music players,
    homelab, quiz apps, generic LLM UIs, etc.) before scoring
-6. Bonus via `TOPIC_BONUS` when GitHub topics match curated tags
+7. Bonus via `TOPIC_BONUS` when GitHub topics match curated tags
 
-Fallback subsection when domain is clear but subsection is weak:
-`Audio>Model`, `Music>Analysis`, `Speech>Recognition`.
+Fallback subsection when domain is clear but subsection is weak (never Model):
+`Audio>Framework`, `Music>Analysis`, `Speech>Recognition`.
 
 ### Confidence scoring (rule-based)
 
@@ -353,7 +356,8 @@ The workflow and script must **never**:
   `NEGATIVE_KEYWORDS`, `TOPIC_BONUS`, and scoring in `automation/scout.py`
 - **Reject list:** add URLs to `automation/rejected.md`
 - **Threshold / caps:** constants at top of `automation/scout.py`
-  (`MIN_CATEGORY_SCORE`, `HIGH_QUALITY_THRESHOLD`, `MAX_PER_SECTION`, …)
+  (`MIN_CATEGORY_SCORE`, `MIN_MODEL_SECTION_SCORE`,
+  `HIGH_QUALITY_THRESHOLD`, `MAX_PER_SECTION`, …)
 
 ---
 
@@ -380,5 +384,7 @@ The workflow and script must **never**:
 | 2026-09-14 | ToC-weighted scoring, topic bonus, section cap, desc floor, |
 |            | Keep/Review PR bands, expanded negatives                      |
 | 2026-09-14 | PR body tables include original GitHub description            |
+| 2026-09-21 | Add Music/Speech Model (+ Audio Framework) ToC paths; gate   |
+|            | Model sections to foundation/pretrained/LLM-style repos only  |
 +------------+--------------------------------------------------------------+
 ```

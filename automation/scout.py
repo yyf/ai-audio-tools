@@ -57,15 +57,19 @@ NOTABLE_ORGS = {
 }
 
 # Domain-first categorization aligned with README ToC:
-#   Audio  > Benchmark | Dataset | Annotation | Model | Security
-#   Music  > Benchmark | Analysis | Production | Generation
-#   Speech > Benchmark | Recognition | Production | Synthesis
+#   Audio  > Benchmark | Dataset | Annotation | Model | Security | Framework
+#   Music  > Model | Benchmark | Analysis | Production | Generation
+#   Speech > Model | Benchmark | Recognition | Production | Synthesis
 #
 # Matching is weighted + word-boundary aware for short tokens so generic
-# repos do not dump into Audio > Model by substring accidents (e.g. "mir"
+# repos do not dump into * > Model by substring accidents (e.g. "mir"
 # in "mirror", "tts" in unrelated strings).
+# * > Model is reserved for foundation / pretrained / language-model repos;
+# task toolkits stay in Recognition, Synthesis, Generation, etc.
 
 MIN_CATEGORY_SCORE = 7  # skip candidates that cannot map cleanly to the ToC
+# Subsection score required before any Domain > Model assignment.
+MIN_MODEL_SECTION_SCORE = 6
 
 # Hard rejects: generic / off-list products that match loose search terms.
 # Matched against name + description + topics (same blob as categorization).
@@ -121,6 +125,8 @@ TOPIC_BONUS: set[str] = {
     "neural-audio-codec",
     "speech-synthesis",
     "singing-voice-synthesis",
+    "foundation-model",
+    "pretrained-model",
 }
 
 # (phrase, weight). Phrases with word chars only and len <= 4 use \b matching.
@@ -224,14 +230,16 @@ SUBSECTION_SIGNALS: dict[tuple[str, str], list[tuple[str, int]]] = {
         ("audiomentations", 4),
     ],
     ("Audio", "Model"): [
-        ("audio language model", 6),
+        ("audio language model", 7),
+        ("audio-language model", 7),
         ("audio-language", 5),
-        ("audio llm", 5),
+        ("audio llm", 6),
+        ("audio foundation model", 7),
         ("audio foundation", 5),
-        ("audio model", 4),
-        ("foundation model", 3),
-        ("clap", 4),
-        ("embedding", 2),
+        ("pretrained audio model", 6),
+        ("foundation model", 4),
+        ("audio model", 3),
+        ("clap", 5),
     ],
     ("Audio", "Security"): [
         ("watermark", 6),
@@ -243,6 +251,24 @@ SUBSECTION_SIGNALS: dict[tuple[str, str], list[tuple[str, int]]] = {
         ("forensic", 4),
         ("authenticity", 3),
         ("spoofing", 4),
+    ],
+    ("Audio", "Framework"): [
+        ("audio framework", 6),
+        ("realtime audio", 5),
+        ("real-time audio", 5),
+        ("gpu-native", 4),
+        ("creative software", 3),
+        ("audio engine", 4),
+    ],
+    ("Music", "Model"): [
+        ("music foundation model", 8),
+        ("music language model", 7),
+        ("music llm", 6),
+        ("pretrained music model", 7),
+        ("music foundation", 6),
+        ("foundation model", 6),
+        ("pretrained model", 5),
+        ("music model", 3),
     ],
     ("Music", "Benchmark"): [
         ("musiccaps", 6),
@@ -291,6 +317,17 @@ SUBSECTION_SIGNALS: dict[tuple[str, str], list[tuple[str, int]]] = {
         ("riffusion", 4),
         ("generate music", 5),
         ("generative music", 5),
+    ],
+    ("Speech", "Model"): [
+        ("speech foundation model", 8),
+        ("speech language model", 7),
+        ("speech llm", 6),
+        ("pretrained speech model", 7),
+        ("large audio language", 6),
+        ("speech foundation", 6),
+        ("foundation model", 6),
+        ("pretrained model", 5),
+        ("speech model", 3),
     ],
     ("Speech", "Benchmark"): [
         ("speech benchmark", 6),
@@ -374,7 +411,8 @@ DOMAIN_NEGATIVES: dict[str, list[tuple[str, int]]] = {
 }
 
 DOMAIN_DEFAULT_SUBSECTION: dict[str, str] = {
-    "Audio": "Model",
+    # Never default into Model — Model requires MIN_MODEL_SECTION_SCORE.
+    "Audio": "Framework",
     "Music": "Analysis",
     "Speech": "Recognition",
 }
@@ -504,6 +542,9 @@ def categorize(full_name: str, description: str, topics: list[str]) -> tuple[tup
 
     Returns ((Domain, Subsection), category_score). category_score is used both
     as a placement quality signal and for confidence scoring.
+
+    Domain > Model is gated: only repos with a strong model-section score
+    (foundation / pretrained / language-model signals) may land there.
     """
     blob = " ".join([full_name, description or "", " ".join(topics)]).lower()
 
@@ -520,21 +561,55 @@ def categorize(full_name: str, description: str, topics: list[str]) -> tuple[tup
     )
     domain_score = domain_scores[domain]
 
-    best_sub = DOMAIN_DEFAULT_SUBSECTION[domain]
-    best_sub_score = 0
-    best_sub_hits = 0
+    scored: list[tuple[str, int, int]] = []
     for (dom, subsection), signals in SUBSECTION_SIGNALS.items():
         if dom != domain:
             continue
         sub_score, sub_hits = _weighted_score(blob, signals)
-        if sub_score > best_sub_score or (
-            sub_score == best_sub_score and sub_hits > best_sub_hits
-        ):
-            best_sub_score = sub_score
-            best_sub_hits = sub_hits
-            best_sub = subsection
+        scored.append((subsection, sub_score, sub_hits))
 
-    # Combined score: need real domain signal; subsection adds placement confidence.
+    scored.sort(key=lambda row: (row[1], row[2]), reverse=True)
+
+    if scored and scored[0][1] > 0:
+        best_sub, best_sub_score, _ = scored[0]
+    else:
+        best_sub = DOMAIN_DEFAULT_SUBSECTION[domain]
+        best_sub_score = 0
+
+    # Gate Model: task toolkits must not dump into Audio/Music/Speech > Model.
+    if best_sub == "Model" and best_sub_score < MIN_MODEL_SECTION_SCORE:
+        fallback = next(
+            ((sub, score) for sub, score, _ in scored if sub != "Model" and score > 0),
+            None,
+        )
+        if fallback:
+            best_sub, best_sub_score = fallback
+        else:
+            best_sub = DOMAIN_DEFAULT_SUBSECTION[domain]
+            best_sub_score = 0
+
+    # Prefer Model over task sections when foundation/LLM framing is present
+    # and Model cleared the gate (e.g. "music generation foundation model").
+    model_row = next((row for row in scored if row[0] == "Model"), None)
+    foundationish = (
+        _phrase_matches(blob, "foundation model")
+        or _phrase_matches(blob, "language model")
+        or _phrase_matches(blob, "audio llm")
+        or _phrase_matches(blob, "speech llm")
+        or _phrase_matches(blob, "music llm")
+        or _phrase_matches(blob, "pretrained model")
+        or _phrase_matches(blob, "pretrained speech model")
+        or _phrase_matches(blob, "pretrained music model")
+        or _phrase_matches(blob, "pretrained audio model")
+    )
+    if (
+        model_row
+        and model_row[1] >= MIN_MODEL_SECTION_SCORE
+        and best_sub in {"Generation", "Recognition", "Synthesis", "Analysis", "Production"}
+        and foundationish
+    ):
+        best_sub, best_sub_score = model_row[0], model_row[1]
+
     category_score = domain_score + best_sub_score
     return (domain, best_sub), category_score
 
