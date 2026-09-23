@@ -163,6 +163,8 @@ Edit the README and make a PR
 - [LocalAI](https://github.com/mudler/LocalAI): LocalAI is the open-source AI engine. Run any model - LLMs, vision, voice, image, video - on any hardware. No GPU required
 - [remiqora](https://github.com/inikolax/remiqora): Local AI music studio unifying ACE-Step 1.5 and YuE2-3B in one Vue interface — text-to-music generation, stem separation, MIDI transcription, and LoRA fine-tuning, with a built-in multitrack DAW
   
+- [YuE2-Studio](https://github.com/timoncool/YuE2-Studio): Local AI song generator with an editable score — YuE2 on your GPU: full songs with vocals, sheet music, covers, exact replay. Native Windows app, no Python, installer with auto-update
+- [gary4juce](https://github.com/betweentwomidnights/gary4juce): seven open source ai music models inside the DAW
 # Speech
 ## Model
 - 
@@ -208,6 +210,9 @@ Edit the README and make a PR
 - [voice-ai](https://github.com/rapidaai/voice-ai): Rapida is an open-source, end-to-end voice AI orchestration platform for building real-time conversational voice agents with audio streaming, STT, TTS, VAD, multi-channel integration, agent state management, and observability
 - [typewhisper-win](https://github.com/TypeWhisper/typewhisper-win): TypeWhisper for Windows - Local speech-to-text with translation
 
+- [amanu](https://github.com/gsamat/amanu): Records and transcribes online meetings. Automatically
+- [baibot](https://github.com/etkecc/baibot): 🤖 A Matrix bot for using different capabilities (text-generation, text-to-speech, speech-to-text, image-generation, etc.) of AI / Large Language Models (OpenAI, Anthropic, etc.)
+- [presspeech](https://github.com/rcourtman/presspeech): Fast, private push-to-talk dictation for Apple Silicon Macs — local Parakeet TDT v3, no cloud or telemetry
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
@@ -249,3 +254,4 @@ Edit the README and make a PR
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [awesome-ai-voice](https://github.com/wildminder/awesome-ai-voice): List of open-source TTS, voice cloning, and music generation models
