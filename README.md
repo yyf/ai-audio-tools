@@ -165,10 +165,12 @@ Edit the README and make a PR
   
 - [YuE2-Studio](https://github.com/timoncool/YuE2-Studio): Local AI song generator with an editable score — YuE2 on your GPU: full songs with vocals, sheet music, covers, exact replay. Native Windows app, no Python, installer with auto-update
 - [ACE-Step-Studio-pinokio](https://github.com/timoncool/ACE-Step-Studio-pinokio): One-click Pinokio launcher for ACE-Step Studio — local AI music generation (Suno at home). Cross-platform: Win/Linux/macOS
+- [waivepulse](https://github.com/weellio/waivepulse): Local offline AI music generation and some editing - lyrics + genre tags → MP3 with vocals
 # Speech
 ## Model
 - 
 
+- [VivaDicta](https://github.com/n0an/VivaDicta): iOS & watchOS speech-to-text app with AI voice keyboard, on-device RAG, and chat with your notes - powered by Apple Foundation Models, WhisperKit, NVIDIA Parakeet, and 20+ AI providers
 ## Benchmark
 - [ArtificialAnalysis](https://artificialanalysis.ai/speech-to-text): Speech to Text AI Model & Provider Leaderboard on Aritifical Analysis
 - [ArtificialAnalysis](https://artificialanalysis.ai/text-to-speech): Text to Speech AI Model & Provider Leaderboard on Aritifical Analysis
@@ -213,6 +215,9 @@ Edit the README and make a PR
 - [FluidAudio](https://github.com/FluidInference/FluidAudio): Frontier CoreML audio models in your apps — text-to-speech, speech-to-text, voice activity detection, and speaker diarization. In Swift, powered by SOTA open source
 - [HoldSpeak](https://github.com/karolswdev/HoldSpeak): Cross-platform local voice typing and meeting transcription for macOS and Linux
 - [localvoxtral](https://github.com/T0mSIlver/localvoxtral): Talk to your coding agents by voice. Realtime, fully local macOS dictation that streams words as you speak and grounds LLM polishing in the exact Claude Code session under your cursor — Ghostty, iTerm2, Terminal.app, even a herdr pane. 100% on-device on Apple Silicon
+- [faster-whisper-hotkey](https://github.com/blakkd/faster-whisper-hotkey): Effortless Push-to-Talk Transcription, Anywhere
+- [ODS](https://github.com/Osmantic/ODS): ODS V3 Pre-Release: Public testing and refinement ahead of the official V3 launch. Turn your PC, Mac, or Linux box into a private AI server
+- [screenpipe](https://github.com/screenpipe/screenpipe): YC (S26) | Open Computer History | Record your screen continuously locally and provide context to your agents (Claude, Codex, Openclaw, Hermes, Runner...)
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
