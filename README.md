@@ -113,6 +113,7 @@ Edit the README and make a PR
 - [Dplug](https://github.com/AuburnSounds/Dplug): Make VST2 / VST3 / AU / AAX / CLAP / LV2 / FLP  plug-ins for Linux/macOS/Windows, using D  
 - [milimomusic](https://github.com/mainza-ai/milimomusic): Open-source AI music generation, neural transcription, multitrack DAW, stem separation, and music video studio powered by MiniMax Music 3
 - 
+- [RetroPlug](https://github.com/tommitytom/RetroPlug): A frontend for the SameBoy Game Boy and Mesen NES emulators, with a focus on music creation. It runs standalone and can be used as an audio plugin (CLAP / VST3 / VST2 / AU) in your favourite DAW!
 ## Generation
 - [StableAudio](https://github.com/Stability-AI/stable-audio-tools): Generative models for conditional audio generation 
 - [AudioCraft](https://github.com/facebookresearch/audiocraft): a PyTorch library for deep learning research on audio generation. AudioCraft contains inference and training code for two state-of-the-art AI generative models producing high-quality audio: AudioGen and MusicGen.
@@ -165,6 +166,7 @@ Edit the README and make a PR
   
 - [YuE2-Studio](https://github.com/timoncool/YuE2-Studio): Local AI song generator with an editable score — YuE2 on your GPU: full songs with vocals, sheet music, covers, exact replay. Native Windows app, no Python, installer with auto-update
 - [ACE-Step-Studio-pinokio](https://github.com/timoncool/ACE-Step-Studio-pinokio): One-click Pinokio launcher for ACE-Step Studio — local AI music generation (Suno at home). Cross-platform: Win/Linux/macOS
+- [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
 # Speech
 ## Model
 - 
@@ -213,6 +215,9 @@ Edit the README and make a PR
 - [FluidAudio](https://github.com/FluidInference/FluidAudio): Frontier CoreML audio models in your apps — text-to-speech, speech-to-text, voice activity detection, and speaker diarization. In Swift, powered by SOTA open source
 - [HoldSpeak](https://github.com/karolswdev/HoldSpeak): Cross-platform local voice typing and meeting transcription for macOS and Linux
 - [localvoxtral](https://github.com/T0mSIlver/localvoxtral): Talk to your coding agents by voice. Realtime, fully local macOS dictation that streams words as you speak and grounds LLM polishing in the exact Claude Code session under your cursor — Ghostty, iTerm2, Terminal.app, even a herdr pane. 100% on-device on Apple Silicon
+- [transcripted](https://github.com/r3dbars/transcripted): Record meetings and dictation on your Mac. Everything becomes plain Markdown files that Claude, Codex, or any AI can search. Free, open source, 100% local transcription
+- [hyprwhspr](https://github.com/goodroot/hyprwhspr): Native speech-to-text for Linux - Fast, accurate, private, and hackable system-wide dictation
+- [baibot](https://github.com/etkecc/baibot): 🤖 A Matrix bot for using different capabilities (text-generation, text-to-speech, speech-to-text, image-generation, etc.) of AI / Large Language Models (OpenAI, Anthropic, etc.)
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
@@ -254,3 +259,4 @@ Edit the README and make a PR
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [candela](https://github.com/techempower-org/candela): Open-source neural-voice audiobook player for Android. Reads any text — Royal Road, GitHub, RSS, EPUB, Wikipedia & 20+ more sources — aloud via in-process Piper, Kokoro, KittenTTS & Supertonic voices, System TTS, or optional Azure HD. Hybrid reader, AI chat per fiction, Wear OS + Android Auto
