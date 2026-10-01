@@ -165,6 +165,8 @@ Edit the README and make a PR
   
 - [YuE2-Studio](https://github.com/timoncool/YuE2-Studio): Local AI song generator with an editable score — YuE2 on your GPU: full songs with vocals, sheet music, covers, exact replay. Native Windows app, no Python, installer with auto-update
 - [ACE-Step-Studio-pinokio](https://github.com/timoncool/ACE-Step-Studio-pinokio): One-click Pinokio launcher for ACE-Step Studio — local AI music generation (Suno at home). Cross-platform: Win/Linux/macOS
+- [waivepulse](https://github.com/weellio/waivepulse): Local offline AI music generation and some editing - lyrics + genre tags → MP3 with vocals
+- [melodyc](https://github.com/andrebuilds/melodyc): Open-source SaaS platform for AI-powered music generation. Generate full tracks with audio and cover art from a text description, custom lyrics, or a style prompt. Built with Next.js 15, Python/Modal (GPU), ACE-Step, Qwen2, SDXL-Turbo, Inngest, Polar.sh and BetterAuth
 # Speech
 ## Model
 - 
@@ -213,6 +215,8 @@ Edit the README and make a PR
 - [FluidAudio](https://github.com/FluidInference/FluidAudio): Frontier CoreML audio models in your apps — text-to-speech, speech-to-text, voice activity detection, and speaker diarization. In Swift, powered by SOTA open source
 - [HoldSpeak](https://github.com/karolswdev/HoldSpeak): Cross-platform local voice typing and meeting transcription for macOS and Linux
 - [localvoxtral](https://github.com/T0mSIlver/localvoxtral): Talk to your coding agents by voice. Realtime, fully local macOS dictation that streams words as you speak and grounds LLM polishing in the exact Claude Code session under your cursor — Ghostty, iTerm2, Terminal.app, even a herdr pane. 100% on-device on Apple Silicon
+- [typewhisper-mac](https://github.com/TypeWhisper/typewhisper-mac): Local speech-to-text for macOS  on-device AI, fully private, optional cloud
+- [MioVRC_Translator](https://github.com/CokoIya/MioVRC_Translator): Mio VRC 语音转文字翻译转语音插件
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
@@ -254,3 +258,6 @@ Edit the README and make a PR
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [RVCBench](https://github.com/Nanboy-Ronan/RVCBench): Benchmark for voice cloning robustness, speaker privacy, and audio protection across 26 TTS and VC models
+- [claude-code-video-toolkit](https://github.com/digitalsamba/claude-code-video-toolkit): AI-native video production toolkit for Claude Code
+- [sdk](https://github.com/vargHQ/sdk): AI video generation SDK — JSX for videos. One API for Kling, Flux, ElevenLabs, Veed. Built on Vercel AI SDK
