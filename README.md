@@ -167,6 +167,9 @@ Edit the README and make a PR
 - [ACE-Step-Studio-pinokio](https://github.com/timoncool/ACE-Step-Studio-pinokio): One-click Pinokio launcher for ACE-Step Studio — local AI music generation (Suno at home). Cross-platform: Win/Linux/macOS
 - [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): 🎵 Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
 - [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
+- [Ruach_Studio](https://github.com/igrbible/Ruach_Studio): A full music studio and WebUI for YuE2. Score first (ABC/MIDI), LoRA training, stems, remaster, upscale, lyrics check, DAW export. Songs from words on your own GPU. yue2.cpp · 7 languages · OSEM: Open Source, Engaged & Musical
+- [waivepulse](https://github.com/weellio/waivepulse): Local offline AI music generation and some editing - lyrics + genre tags → MP3 with vocals
+- [gary4juce](https://github.com/betweentwomidnights/gary4juce): seven open source ai music models inside the DAW
 # Speech
 ## Model
 - 
@@ -218,6 +221,9 @@ Edit the README and make a PR
 - [Sotto](https://github.com/stofll/Sotto): Free, open-source, local-first voice dictation for Windows and macOS. Offline speech-to-text with Whisper, Parakeet and GigaAM. Dictate into any app with a hotkey
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
+- [yazses](https://github.com/MSKazemi/yazses): Free, open-source, fully-offline-by-default voice dictation for Linux (X11 & Wayland), macOS & Windows. Hold a key, speak, release — on-device faster-whisper types it into any app. Also transcribes recordings & captures meetings with speaker labels. No cloud, no account, no subscription
+- [minutes](https://github.com/silverstein/minutes): Open-source, local-first Granola/Otter alternative that Claude Code, Codex, Cursor, and any MCP client can query. Meetings, calls, and voice memos transcribed on-device into markdown you own
+- [Brevia](https://github.com/zerolovesea/Brevia): Brevia · 言录(https://brevia.work): A minimal meeting recorder that stays on your device. Transcribe, distill with AI, remember—without the cloud. Clean interface, local storage, complete privacy.  Zen-inspired design
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
