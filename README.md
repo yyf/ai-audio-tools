@@ -113,6 +113,7 @@ Edit the README and make a PR
 - [Dplug](https://github.com/AuburnSounds/Dplug): Make VST2 / VST3 / AU / AAX / CLAP / LV2 / FLP  plug-ins for Linux/macOS/Windows, using D  
 - [milimomusic](https://github.com/mainza-ai/milimomusic): Open-source AI music generation, neural transcription, multitrack DAW, stem separation, and music video studio powered by MiniMax Music 3
 - 
+- [vibez](https://github.com/alexanderwanyoike/vibez): An open-source DAW for electronic music, written in pure Rust
 ## Generation
 - [StableAudio](https://github.com/Stability-AI/stable-audio-tools): Generative models for conditional audio generation 
 - [AudioCraft](https://github.com/facebookresearch/audiocraft): a PyTorch library for deep learning research on audio generation. AudioCraft contains inference and training code for two state-of-the-art AI generative models producing high-quality audio: AudioGen and MusicGen.
@@ -167,6 +168,7 @@ Edit the README and make a PR
 - [ACE-Step-Studio-pinokio](https://github.com/timoncool/ACE-Step-Studio-pinokio): One-click Pinokio launcher for ACE-Step Studio — local AI music generation (Suno at home). Cross-platform: Win/Linux/macOS
 - [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): 🎵 Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
 - [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
+- [skills](https://github.com/sonilo-ai/skills): Agent skills for Sonilo's licensed music, sound-effects, dubbing, and audio-ducking API
 # Speech
 ## Model
 - 
@@ -218,6 +220,9 @@ Edit the README and make a PR
 - [Sotto](https://github.com/stofll/Sotto): Free, open-source, local-first voice dictation for Windows and macOS. Offline speech-to-text with Whisper, Parakeet and GigaAM. Dictate into any app with a hotkey
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
+- [cheetah](https://github.com/Picovoice/cheetah): On-device streaming speech-to-text engine powered by deep learning
+- [hyperwhisper-app](https://github.com/ray-amjad/hyperwhisper-app): HyperWhisper — open-source speech-to-text for macOS, Windows & iOS. Local transcription and bring-your-own-key is free and open; HyperWhisper Cloud is a paid OpenRouter-like router
+- [screenpipe](https://github.com/screenpipe/screenpipe): YC (S26) | Open Computer History | Continuously record your company computer work, map your workflows, help you find work worth automating, and power your agents' context
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
@@ -259,3 +264,6 @@ Edit the README and make a PR
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [showtime](https://github.com/FavioVazquez/showtime): A local video studio for your coding agent. Describe a video in one sentence: your agent directs, your machine renders. Claude Code, Codex, Cursor, Devin and more. No API keys, no uploads
+- [explainroo](https://github.com/vincentsch/explainroo): Explainer videos and product demos made by your AI agent. Free and open source: a local voice (Kokoro), word timing (Whisper) and a canvas renderer turn a script into a narrated MP4
+- [payload-ai](https://github.com/ashbuilds/payload-ai): AI Plugin is a powerful extension for the Payload CMS, integrating advanced AI capabilities to enhance content creation and management
