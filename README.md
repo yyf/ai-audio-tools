@@ -167,6 +167,7 @@ Edit the README and make a PR
 - [ACE-Step-Studio-pinokio](https://github.com/timoncool/ACE-Step-Studio-pinokio): One-click Pinokio launcher for ACE-Step Studio — local AI music generation (Suno at home). Cross-platform: Win/Linux/macOS
 - [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): 🎵 Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
 - [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
+- [Ruach_Studio](https://github.com/igrbible/Ruach_Studio): A full music studio and WebUI for YuE2. Score first (ABC/MIDI), LoRA training, stems, remaster, upscale, lyrics check, DAW export. Songs from words on your own GPU. yue2.cpp · 7 languages · OSEM: Open Source, Engaged & Musical
 # Speech
 ## Model
 - 
@@ -218,12 +219,16 @@ Edit the README and make a PR
 - [Sotto](https://github.com/stofll/Sotto): Free, open-source, local-first voice dictation for Windows and macOS. Offline speech-to-text with Whisper, Parakeet and GigaAM. Dictate into any app with a hotkey
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
+- [whisper_ggml](https://github.com/sk3llo/whisper_ggml): OpenAI Whisper ASR (Automatic Speech Recognition) for Flutter
+- [polished-recognition](https://github.com/georgernstgraf/polished-recognition): A voice keyboard for Android powered by your own AI — dictate, and polished text appears. Bring your own OpenAI-compatible STT + LLM
+- [Dodaios](https://github.com/Dodaios/Dodaios): Your AI assistant, built for the agentic era. Open source and local: talk to it, and it runs your agents, your coding CLIs, your browser and your apps. Windows, macOS, Linux
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
 - [Meta encodec](https://github.com/facebookresearch/encodec): State-of-the-art deep learning based audio codec supporting both mono 24 kHz audio and stereo 48 kHz audio 
 - [pipecat](https://github.com/pipecat-ai/pipecat): Open Source framework for voice and multimodal conversational AI
 
+- [codec.cpp](https://github.com/mybigday/codec.cpp): Neural audio codec inference in C/C++
 ## Synthesis
 - [Coqui TTS](https://github.com/coqui-ai/TTS): a deep learning toolkit for Text-to-Speech, battle-tested in research and production  
 - [DiffSinger](https://github.com/MoonInTheRiver/DiffSinger): singing voice synthesis via shallow diffusion mechanism 
