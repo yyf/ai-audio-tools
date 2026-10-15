@@ -167,6 +167,8 @@ Edit the README and make a PR
 - [ACE-Step-Studio-pinokio](https://github.com/timoncool/ACE-Step-Studio-pinokio): One-click Pinokio launcher for ACE-Step Studio — local AI music generation (Suno at home). Cross-platform: Win/Linux/macOS
 - [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): 🎵 Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
 - [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
+- [gary4juce](https://github.com/betweentwomidnights/gary4juce): seven open source ai music models inside the DAW
+- [ComfyUI-AceStep_SFT](https://github.com/jeankassio/ComfyUI-AceStep_SFT): An node for ComfyUI that implements AceStep 1.5 SFT (Supervised Fine-Tuning), a high-quality music generation model. This node replicates the full functionality of the official Gradio pipeline, offering fine control over audio synthesis parameters
 # Speech
 ## Model
 - 
@@ -218,6 +220,9 @@ Edit the README and make a PR
 - [Sotto](https://github.com/stofll/Sotto): Free, open-source, local-first voice dictation for Windows and macOS. Offline speech-to-text with Whisper, Parakeet and GigaAM. Dictate into any app with a hotkey
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
+- [YouDub-webui](https://github.com/liuzhao1225/YouDub-webui): Open-source AI video localization and dubbing for YouTube/Bilibili: speech recognition, subtitle translation, voice cloning, audio mixing and rendering. 开源 AI 视频翻译配音工具。
+- [sayso](https://github.com/watzon/sayso): Dictation that runs on your own computer. Press a key, speak, and the text lands in the app you are using. Free and open source, for macOS, Windows, and Linux
+- [polished-recognition](https://github.com/georgernstgraf/polished-recognition): A voice keyboard for Android powered by your own AI — dictate, and polished text appears. Bring your own OpenAI-compatible STT + LLM
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
@@ -259,3 +264,4 @@ Edit the README and make a PR
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [openreader](https://github.com/richardr1126/openreader): An open-source read-along document reader server with high-quality TTS options, synchronized highlighting, and audiobook export for EPUB, PDF, DOCX, TXT, and MD
