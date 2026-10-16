@@ -11,8 +11,10 @@ from scout import (  # noqa: E402
     KEEP_THRESHOLD,
     MAX_PER_SECTION,
     MIN_CATEGORY_SCORE,
+    MIN_MODEL_PR_SLOTS,
     Candidate,
     RunStats,
+    build_pr_body,
     categorize,
     negative_hit,
     select_for_pr,
@@ -275,7 +277,35 @@ def main() -> int:
         f"(max={MAX_PER_SECTION}); keep_band={KEEP_THRESHOLD}"
     )
 
-    total = len(CASES) + len(WEAK) + len(NEGATIVE_CASES) + 1
+    # Model focus: reserve slots even when non-model scores higher.
+    stats2 = RunStats()
+    model_pool = [
+        _fake_candidate("org/audio-fm", ("Audio", "Model"), 20, 60),
+        _fake_candidate("org/music-fm", ("Music", "Model"), 18, 58),
+        _fake_candidate("org/speech-fm", ("Speech", "Model"), 16, 56),
+    ]
+    hot_pool = [
+        _fake_candidate(f"org/hot-asr-{i}", ("Speech", "Recognition"), 50 - i, 90 - i)
+        for i in range(8)
+    ]
+    selected2 = select_for_pr(model_pool + hot_pool, stats2)
+    model_count = sum(1 for c in selected2 if c.category[1] == "Model")
+    ok_models = model_count >= min(MIN_MODEL_PR_SLOTS, len(model_pool))
+    ok_first = selected2 and selected2[0].category[1] == "Model"
+    body = build_pr_body("2026-10-16", RunStats(scanned=1), selected2)
+    ok_body = (
+        "Latest open-source models" in body
+        and "music / film / gaming / new media production" in body
+    )
+    status = "OK" if ok_models and ok_first and ok_body else "FAIL"
+    if not (ok_models and ok_first and ok_body):
+        failed += 1
+    print(
+        f"{status}: model focus models={model_count} "
+        f"(min={MIN_MODEL_PR_SLOTS}); first={selected2[0].category if selected2 else None}"
+    )
+
+    total = len(CASES) + len(WEAK) + len(NEGATIVE_CASES) + 2
     print(f"\n{total - failed}/{total} passed")
     return 1 if failed else 0
 
