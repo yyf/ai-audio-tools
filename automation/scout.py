@@ -20,7 +20,7 @@ from pathlib import Path
 
 # --- v1 locked config (keep in sync with automation/SPEC.md) ---
 
-MAX_QUERIES = 5
+MAX_QUERIES = 6
 MAX_RESULTS_PER_QUERY = 10
 MAX_CANDIDATES = 30
 MIN_STARS = 10
@@ -30,6 +30,8 @@ KEEP_THRESHOLD = 70  # PR body: Keep (≥70) vs Review (55–69)
 PR_THRESHOLD = 1
 MAX_PR_ENTRIES = 10
 MAX_PER_SECTION = 3  # max entries per Domain > Subsection in one PR
+# Reserve PR slots for Audio|Music|Speech > Model (latest open-source models task).
+MIN_MODEL_PR_SLOTS = 3
 MIN_DESCRIPTION_LEN = 15  # skip empty / placeholder descriptions
 BOT_BRANCH_PREFIX = "bot/daily-candidates-"
 README_PATH = Path("README.md")
@@ -127,7 +129,35 @@ TOPIC_BONUS: set[str] = {
     "singing-voice-synthesis",
     "foundation-model",
     "pretrained-model",
+    "foley",
+    "sound-design",
+    "game-audio",
 }
+
+# Ideal applications for the latest-models task (soft preference, not a hard filter).
+# Prefer models with clear potential in music / film / gaming / new-media production.
+PRODUCTION_APPLICATION_SIGNALS: list[tuple[str, int]] = [
+    ("music production", 5),
+    ("media production", 5),
+    ("post-production", 5),
+    ("sound design", 5),
+    ("game audio", 5),
+    ("video game", 4),
+    ("new media", 4),
+    ("interactive media", 4),
+    ("film", 4),
+    ("cinema", 4),
+    ("cinematic", 4),
+    ("soundtrack", 4),
+    ("foley", 5),
+    ("gaming", 3),
+    ("game", 2),
+    ("movie", 3),
+    ("broadcast", 3),
+    ("podcast production", 3),
+    ("virtual production", 4),
+    ("creative production", 3),
+]
 
 # (phrase, weight). Phrases with word chars only and len <= 4 use \b matching.
 DOMAIN_SIGNALS: dict[str, list[tuple[str, int]]] = {
@@ -672,6 +702,25 @@ def score_repo(
         score += 4
         reasons.append(f"notable org ({owner})")
 
+    # Latest-models task: prefer foundation/pretrained models with production upside.
+    if category[1] == "Model":
+        blob = " ".join(
+            [
+                repo.get("full_name") or "",
+                description,
+                " ".join(topics),
+            ]
+        ).lower()
+        prod_score = 0
+        prod_labels: list[str] = []
+        for phrase, weight in PRODUCTION_APPLICATION_SIGNALS:
+            if _phrase_matches(blob, phrase):
+                prod_score += weight
+                prod_labels.append(phrase)
+        if prod_score >= 3:
+            score += min(8, 3 + prod_score // 2)
+            reasons.append(f"production upside ({', '.join(prod_labels[:3])})")
+
     score = min(score, 100)
     rationale = "; ".join(reasons) if reasons else "matched search filters"
     return score, rationale
@@ -683,28 +732,81 @@ def is_duplicate(full_name: str, html_url: str, existing: set[str]) -> bool:
     return key in existing or short in existing
 
 
+def _is_model_candidate(c: Candidate) -> bool:
+    return c.category[1] == "Model"
+
+
+def _production_app_score(c: Candidate) -> int:
+    blob = " ".join([c.full_name, c.description]).lower()
+    score, _ = _weighted_score(blob, PRODUCTION_APPLICATION_SIGNALS)
+    return score
+
+
 def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidate]:
-    """Rank by ToC fit, then confidence; cap per README section."""
+    """Rank by ToC fit, then confidence; cap per README section.
+
+    Reserves up to MIN_MODEL_PR_SLOTS for Audio|Music|Speech > Model so each
+    daily PR keeps a dedicated latest-models recommendation band when available.
+    Prefer models with music/film/gaming/new-media production upside.
+    """
     ranked = sorted(
         candidates,
         key=lambda c: (-c.category_score, -c.confidence, -c.stars),
     )
+    models = sorted(
+        [c for c in ranked if _is_model_candidate(c)],
+        key=lambda c: (
+            -_production_app_score(c),
+            -c.category_score,
+            -c.confidence,
+            -c.stars,
+        ),
+    )
+
     selected: list[Candidate] = []
     per_section: dict[tuple[str, str], int] = {}
+    selected_names: set[str] = set()
 
-    for c in ranked:
+    def try_add(c: Candidate) -> bool:
+        if c.full_name in selected_names:
+            return False
+        if len(selected) >= MAX_PR_ENTRIES:
+            return False
         count = per_section.get(c.category, 0)
         if count >= MAX_PER_SECTION:
             stats.skipped.append(
                 f"{c.full_name} — section cap "
                 f"({c.category[0]} > {c.category[1]} already has {MAX_PER_SECTION})"
             )
-            continue
+            return False
         per_section[c.category] = count + 1
         selected.append(c)
+        selected_names.add(c.full_name)
+        return True
+
+    # 1) Seed the latest-models band first (across Audio/Music/Speech > Model).
+    model_added = 0
+    for c in models:
+        if model_added >= MIN_MODEL_PR_SLOTS:
+            break
+        if try_add(c):
+            model_added += 1
+
+    # 2) Fill remaining slots with the overall ranked list (models + others).
+    for c in ranked:
         if len(selected) >= MAX_PR_ENTRIES:
             break
+        try_add(c)
 
+    # Prefer models first in the PR ordering, then remaining by ToC/confidence.
+    selected.sort(
+        key=lambda c: (
+            0 if _is_model_candidate(c) else 1,
+            -c.category_score,
+            -c.confidence,
+            -c.stars,
+        )
+    )
     return selected
 
 
@@ -876,6 +978,7 @@ def _md_cell(text: str, max_len: int = 160) -> str:
 
 
 def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -> str:
+    models = [c for c in candidates if _is_model_candidate(c)]
     keep = [c for c in candidates if c.confidence >= KEEP_THRESHOLD]
     review = [c for c in candidates if c.confidence < KEEP_THRESHOLD]
 
@@ -884,9 +987,14 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
         f"- Run date: {run_date}",
         f"- Candidates scanned: {stats.scanned}",
         f"- High-quality (≥{HIGH_QUALITY_THRESHOLD}): {len(candidates)}",
+        f"- Latest models (Audio|Music|Speech > Model): {len(models)} "
+        f"(reserved up to {MIN_MODEL_PR_SLOTS})",
         f"- Keep (≥{KEEP_THRESHOLD}): {len(keep)} · Review ({HIGH_QUALITY_THRESHOLD}–{KEEP_THRESHOLD - 1}): {len(review)}",
         f"- PR opened because {len(candidates)} ≥ {PR_THRESHOLD}",
         f"- Section cap: ≤{MAX_PER_SECTION} per Domain > Subsection",
+        "",
+        "Ideal model picks have clear potential in **music / film / gaming / "
+        "new media production** (scoring soft-prefers those signals).",
         "",
         "**This PR is proposal-only. Do not auto-merge.**",
         "",
@@ -911,6 +1019,10 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
             )
         lines.append("")
 
+    append_table(
+        "Latest open-source models — prefer music / film / gaming / new media production",
+        models,
+    )
     append_table(f"Keep (confidence ≥{KEEP_THRESHOLD})", keep)
     append_table(
         f"Review (confidence {HIGH_QUALITY_THRESHOLD}–{KEEP_THRESHOLD - 1})",

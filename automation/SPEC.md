@@ -125,7 +125,7 @@ No Hugging Face, arXiv, web crawls, or LLM calls.
 +-------------+-------------------------------------------------------------+
 | Limit       | Value                                                       |
 +-------------+-------------------------------------------------------------+
-| GitHub      | <= 5 queries (automation/queries.json)                      |
+| GitHub      | <= 6 queries (automation/queries.json)                      |
 | search      |                                                             |
 | Results per | <= 10 repos per query                                       |
 | query       |                                                             |
@@ -183,13 +183,16 @@ No Hugging Face, arXiv, web crawls, or LLM calls.
 
 1. Load `README.md` → normalized GitHub URL dedupe set
 2. Load optional `automation/rejected.md` skip list
-3. Run bounded searches from `automation/queries.json`
+3. Run bounded searches from `automation/queries.json` (first query is the
+   **latest open-source models** discovery task — ideally models with
+   potential applications in music / film / gaming / new media production)
 4. Rule-based **confidence** score (0–100) and **category** assignment
    (domain-first ToC matching)
 5. Keep candidates with confidence **≥ 55**, category score
    **≥ MIN_CATEGORY_SCORE (7)**, description length
    **≥ MIN_DESCRIPTION_LEN**, and no **NEGATIVE_KEYWORDS** hit
-6. Rank by ToC score then confidence; apply **MAX_PER_SECTION** cap
+6. Rank by ToC score then confidence; apply **MAX_PER_SECTION** cap;
+   reserve up to **MIN_MODEL_PR_SLOTS** for Audio|Music|Speech > Model
 7. **If count = 0 →** exit 0 (no PR)
 8. **If count ≥ 1 →** close open `bot/daily-candidates-*` PRs, create bot
    branch, insert README lines, push, open PR
@@ -216,6 +219,10 @@ Category assignment is **domain-first** then subsection (see
 6. Hard reject via `NEGATIVE_KEYWORDS` (discord bots, music players,
    homelab, quiz apps, generic LLM UIs, etc.) before scoring
 7. Bonus via `TOPIC_BONUS` when GitHub topics match curated tags
+8. **Production upside (models):** soft preference via
+   `PRODUCTION_APPLICATION_SIGNALS` (music/film/gaming/new media). Not a
+   hard filter — models without those phrases can still qualify, but scored
+   and ordered lower in the latest-models band.
 
 Fallback subsection when domain is clear but subsection is weak (never Model):
 `Audio>Framework`, `Music>Analysis`, `Speech>Recognition`.
@@ -254,9 +261,11 @@ caps at `MAX_PER_SECTION` (3) per Domain > Subsection.
 - [Name](url): short description
 ```
 
-**PR body:** Keep (≥70) and Review (55–69) tables with confidence, ToC
-score, category, **original GitHub description**, and rationale per entry;
-plus entry details and skipped list.
+**PR body:** dedicated **Latest open-source models** table (Audio|Music|
+Speech > Model; ideal for music/film/gaming/new media production), then
+Keep (≥70) and Review (55–69) tables with confidence, ToC score, category,
+**original GitHub description**, and rationale; plus entry details and
+skipped list.
 
 **Footer:** `This PR is proposal-only. Do not auto-merge.`
 
@@ -326,8 +335,11 @@ The workflow and script must **never**:
 | Negatives   | NEGATIVE_KEYWORDS hard-skip before scoring                    |
 | Topics      | TOPIC_BONUS adds confidence when GitHub topics match          |
 | Section cap | <= 3 entries per Domain > Subsection (MAX_PER_SECTION)        |
+| Model focus | Query #1 + reserve <= MIN_MODEL_PR_SLOTS (3) Model entries;  |
+|             | soft-prefer music/film/gaming/new-media production upside   |
 | Keep band   | confidence >= 70 highlighted separately in PR body            |
-| Max per PR  | 10 entries (top by ToC score then confidence)               |
+| Max per PR  | 10 entries (models band first, then ToC/confidence)         |
+| Queries     | <= 6 (MAX_QUERIES); models discovery is first                 |
 | Schedule    | Weekdays ~9:00 AM America/Los_Angeles (cron 17:00 UTC)       |
 | Stale bot   | Close open bot/daily-candidates-* PRs before new one        |
 | PRs         |                                                             |
@@ -350,13 +362,13 @@ The workflow and script must **never**:
 
 ## Tuning
 
-- **Queries:** edit `automation/queries.json` (max 5 used; prefer quoted
-  phrases over loose single-token ORs)
+- **Queries:** edit `automation/queries.json` (max 6 used; prefer quoted
+  phrases; keep query #1 as the latest-models discovery task)
 - **Keywords / scoring:** edit `DOMAIN_SIGNALS`, `SUBSECTION_SIGNALS`,
   `NEGATIVE_KEYWORDS`, `TOPIC_BONUS`, and scoring in `automation/scout.py`
 - **Reject list:** add URLs to `automation/rejected.md`
 - **Threshold / caps:** constants at top of `automation/scout.py`
-  (`MIN_CATEGORY_SCORE`, `MIN_MODEL_SECTION_SCORE`,
+  (`MIN_CATEGORY_SCORE`, `MIN_MODEL_SECTION_SCORE`, `MIN_MODEL_PR_SLOTS`,
   `HIGH_QUALITY_THRESHOLD`, `MAX_PER_SECTION`, …)
 
 ---
@@ -386,5 +398,9 @@ The workflow and script must **never**:
 | 2026-09-14 | PR body tables include original GitHub description            |
 | 2026-09-21 | Add Music/Speech Model (+ Audio Framework) ToC paths; gate   |
 |            | Model sections to foundation/pretrained/LLM-style repos only  |
+| 2026-10-16 | Latest-models daily task: dedicated query, reserved PR slots, |
+|            | and PR body section for Audio|Music|Speech > Model            |
+| 2026-10-16 | Soft-prefer models with music/film/gaming/new-media           |
+|            | production upside in query #1, scoring, and PR ordering       |
 +------------+--------------------------------------------------------------+
 ```
