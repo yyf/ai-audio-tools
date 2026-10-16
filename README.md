@@ -113,6 +113,7 @@ Edit the README and make a PR
 - [Dplug](https://github.com/AuburnSounds/Dplug): Make VST2 / VST3 / AU / AAX / CLAP / LV2 / FLP  plug-ins for Linux/macOS/Windows, using D  
 - [milimomusic](https://github.com/mainza-ai/milimomusic): Open-source AI music generation, neural transcription, multitrack DAW, stem separation, and music video studio powered by MiniMax Music 3
 - 
+- [vibez](https://github.com/alexanderwanyoike/vibez): An open-source DAW for electronic music, written in pure Rust
 ## Generation
 - [StableAudio](https://github.com/Stability-AI/stable-audio-tools): Generative models for conditional audio generation 
 - [AudioCraft](https://github.com/facebookresearch/audiocraft): a PyTorch library for deep learning research on audio generation. AudioCraft contains inference and training code for two state-of-the-art AI generative models producing high-quality audio: AudioGen and MusicGen.
@@ -167,6 +168,9 @@ Edit the README and make a PR
 - [ACE-Step-Studio-pinokio](https://github.com/timoncool/ACE-Step-Studio-pinokio): One-click Pinokio launcher for ACE-Step Studio — local AI music generation (Suno at home). Cross-platform: Win/Linux/macOS
 - [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): 🎵 Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
 - [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
+- [yinchao-ai-music-skill](https://github.com/yinhcao/yinchao-ai-music-skill): AI 音乐生成 Agent Skill：支持文字/歌词生成歌曲、参考音频创作、BGM 与歌曲续写
+- [ComfyUI-YinChao](https://github.com/yinhcao/ComfyUI-YinChao): ComfyUI V3 nodes for YinChao AI music generation: lyrics, prompt-to-song, reference generation, and song extension
+- [gary4juce](https://github.com/betweentwomidnights/gary4juce): seven open source ai music models inside the DAW
 # Speech
 ## Model
 - 
@@ -218,6 +222,9 @@ Edit the README and make a PR
 - [Sotto](https://github.com/stofll/Sotto): Free, open-source, local-first voice dictation for Windows and macOS. Offline speech-to-text with Whisper, Parakeet and GigaAM. Dictate into any app with a hotkey
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
+- [yazses](https://github.com/MSKazemi/yazses): Free, open-source, fully-offline-by-default voice dictation for Linux (X11 & Wayland), macOS & Windows. Hold a key, speak, release — on-device faster-whisper types it into any app. Also transcribes recordings & captures meetings with speaker labels. No cloud, no account, no subscription
+- [murmure](https://github.com/Kieirra/murmure): Fully local, private and cross platform Speech-to-Text with LLM Post-processing
+- [neurobrix](https://github.com/NeuroBrix/neurobrix): Open-source inference engine that runs language, vision, speech, image and video models from one container format, with a PyTorch and a Triton compute branch. Released for NVIDIA GPUs and CPU; Apple Silicon in progress
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
