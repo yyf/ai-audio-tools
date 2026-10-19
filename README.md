@@ -113,6 +113,7 @@ Edit the README and make a PR
 - [Dplug](https://github.com/AuburnSounds/Dplug): Make VST2 / VST3 / AU / AAX / CLAP / LV2 / FLP  plug-ins for Linux/macOS/Windows, using D  
 - [milimomusic](https://github.com/mainza-ai/milimomusic): Open-source AI music generation, neural transcription, multitrack DAW, stem separation, and music video studio powered by MiniMax Music 3
 - 
+- [vibez](https://github.com/alexanderwanyoike/vibez): An open-source DAW for electronic music, written in pure Rust
 ## Generation
 - [StableAudio](https://github.com/Stability-AI/stable-audio-tools): Generative models for conditional audio generation 
 - [AudioCraft](https://github.com/facebookresearch/audiocraft): a PyTorch library for deep learning research on audio generation. AudioCraft contains inference and training code for two state-of-the-art AI generative models producing high-quality audio: AudioGen and MusicGen.
@@ -167,6 +168,8 @@ Edit the README and make a PR
 - [ACE-Step-Studio-pinokio](https://github.com/timoncool/ACE-Step-Studio-pinokio): One-click Pinokio launcher for ACE-Step Studio — local AI music generation (Suno at home). Cross-platform: Win/Linux/macOS
 - [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): 🎵 Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
 - [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
+- [melodyc](https://github.com/andrebuilds/melodyc): Open-source SaaS platform for AI-powered music generation. Generate full tracks with audio and cover art from a text description, custom lyrics, or a style prompt. Built with Next.js 15, Python/Modal (GPU), ACE-Step, Qwen2, SDXL-Turbo, Inngest, Polar.sh and BetterAuth
+- [live-coding-music-mcp](https://github.com/williamzujkowski/live-coding-music-mcp): A Model Context Protocol (MCP) server that gives Claude direct control over Strudel.cc for AI-assisted music generation and live coding
 # Speech
 ## Model
 - 
@@ -218,6 +221,9 @@ Edit the README and make a PR
 - [Sotto](https://github.com/stofll/Sotto): Free, open-source, local-first voice dictation for Windows and macOS. Offline speech-to-text with Whisper, Parakeet and GigaAM. Dictate into any app with a hotkey
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
+- [kesha-voice-kit](https://github.com/drakulavich/kesha-voice-kit): Kesha listens and talks back: local speech to text and text to speech for agents and scripts, fastest on Apple Silicon
+- [dsh-voice-mode](https://github.com/qishuilalala/dsh-voice-mode): DSH 全双工语音插件：流式语音识别入草稿、语音合成按句朗读 + 实时字幕、开口即打断；本地识别免 API Key，可选唤醒词。 · Full-duplex voice plugin for DeepSeek Harness: streaming speech-to-text into an editable draft, text-to-speech read-aloud with live captions, true barge-in and wake word; on-device ASR, no API key
+- [minutes](https://github.com/silverstein/minutes): Open-source, local-first Granola/Otter alternative that Claude Code, Codex, Cursor, and any MCP client can query. Meetings, calls, and voice memos transcribed on-device into markdown you own
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
@@ -259,3 +265,5 @@ Edit the README and make a PR
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [dub-studio](https://github.com/timoncool/dub-studio): Free offline AI video dubbing studio for Windows — voice cloning, translation, subtitles & on-screen-text localization. 100% local, one native .exe, zero Python
+- [tts-bench](https://github.com/5uck1ess/tts-bench): Speed and samples benchmark: for all types of text to speech (TTS) models on Windows/Linux/Mac
