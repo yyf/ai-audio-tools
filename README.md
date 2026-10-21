@@ -167,6 +167,7 @@ Edit the README and make a PR
 - [ACE-Step-Studio-pinokio](https://github.com/timoncool/ACE-Step-Studio-pinokio): One-click Pinokio launcher for ACE-Step Studio — local AI music generation (Suno at home). Cross-platform: Win/Linux/macOS
 - [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): 🎵 Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
 - [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
+- [gary4juce](https://github.com/betweentwomidnights/gary4juce): a bunch of open source ai music models inside the DAW
 # Speech
 ## Model
 - 
@@ -218,12 +219,16 @@ Edit the README and make a PR
 - [Sotto](https://github.com/stofll/Sotto): Free, open-source, local-first voice dictation for Windows and macOS. Offline speech-to-text with Whisper, Parakeet and GigaAM. Dictate into any app with a hotkey
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
+- [kesha-voice-kit](https://github.com/drakulavich/kesha-voice-kit): Kesha listens and talks back: local speech to text and text to speech for agents and scripts, fastest on Apple Silicon
+- [speech-studio](https://github.com/timoncool/speech-studio): Free offline AI voice studio for Windows — text-to-speech with cloned and built-in voices, and speech recognition with speakers. Russian done right. 100% local, one native .exe, zero Python
+- [dictus-android](https://github.com/getdictus/dictus-android): Dictus is a privacy-first Android keyboard for offline voice dictation. All speech recognition runs on-device — no cloud, no data collection
 ## Production
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
 - [Meta encodec](https://github.com/facebookresearch/encodec): State-of-the-art deep learning based audio codec supporting both mono 24 kHz audio and stereo 48 kHz audio 
 - [pipecat](https://github.com/pipecat-ai/pipecat): Open Source framework for voice and multimodal conversational AI
 
+- [Lampline](https://github.com/C4rohan/Lampline): Self-hosted voice agent platform: import your Dialogflow CX and CX Agent Studio agents, build and test them, and take calls on your own hardware. 20 model providers, phone and SIP through jambonz
 ## Synthesis
 - [Coqui TTS](https://github.com/coqui-ai/TTS): a deep learning toolkit for Text-to-Speech, battle-tested in research and production  
 - [DiffSinger](https://github.com/MoonInTheRiver/DiffSinger): singing voice synthesis via shallow diffusion mechanism 
@@ -259,3 +264,6 @@ Edit the README and make a PR
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [ComfyUI-Breeze-TTS-2](https://github.com/Saganaki22/ComfyUI-Breeze-TTS-2): Breeze TTS 2 nodes for ComfyUI: voice clone, voice design, and voice direction with bilingual (EN/ZH) speech, inline vocal events, INT8 ConvRot quantized builds, and full ComfyUI / AIMDO dynamic-VRAM integration
+- [dictionariez](https://github.com/pnlpal/dictionariez): 📚 A customizable dictionary extension that supports double-click lookups in 20+ languages, 1000+ dictionaries, text-to-speech, translation and Anki integration
+- [onion-board](https://github.com/Onion-Alien/onion-board): A free Windows soundboard that plays straight through the mic you already use in Discord and games, no virtual cable. Add sounds from YouTube, SoundCloud and Myinstants in one click, in-game hotkeys and overlay, and bring your board over from Soundpad, Resanance, Soundux or EXP. ⬇️
