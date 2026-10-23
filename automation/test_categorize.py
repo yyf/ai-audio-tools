@@ -277,13 +277,17 @@ def main() -> int:
         f"(max={MAX_PER_SECTION}); keep_band={KEEP_THRESHOLD}"
     )
 
-    # Model focus: reserve slots even when non-model scores higher.
+    # Model focus: reserve slots even when non-model scores higher;
+    # prefer more popular (stars) models in the reserved band.
     stats2 = RunStats()
     model_pool = [
         _fake_candidate("org/audio-fm", ("Audio", "Model"), 20, 60),
         _fake_candidate("org/music-fm", ("Music", "Model"), 18, 58),
         _fake_candidate("org/speech-fm", ("Speech", "Model"), 16, 56),
     ]
+    model_pool[0].stars = 100
+    model_pool[1].stars = 500
+    model_pool[2].stars = 50
     hot_pool = [
         _fake_candidate(f"org/hot-asr-{i}", ("Speech", "Recognition"), 50 - i, 90 - i)
         for i in range(8)
@@ -292,17 +296,28 @@ def main() -> int:
     model_count = sum(1 for c in selected2 if c.category[1] == "Model")
     ok_models = model_count >= min(MIN_MODEL_PR_SLOTS, len(model_pool))
     ok_first = selected2 and selected2[0].category[1] == "Model"
-    body = build_pr_body("2026-10-16", RunStats(scanned=1), selected2)
+    # Most-starred model should lead the models band.
+    ok_popular = selected2 and selected2[0].full_name == "org/music-fm"
+    body = build_pr_body("2026-10-22", RunStats(scanned=1), selected2)
     ok_body = (
-        "Latest open-source models" in body
-        and "music / film / gaming / new media production" in body
+        "Latest & popular models (Audio / Music / Speech)" in body
+        and "| Stars | Updated |" in body
+        and "org/music-fm" in body
+        # Models stay in the dedicated section, not duplicated in Keep/Review.
+        and body.index("## Latest & popular models")
+        < body.index("## Keep")
     )
-    status = "OK" if ok_models and ok_first and ok_body else "FAIL"
-    if not (ok_models and ok_first and ok_body):
+    # Keep table should not re-list Model category rows.
+    keep_section = body.split("## Keep", 1)[-1].split("## Review", 1)[0]
+    ok_no_dup = "org/music-fm" not in keep_section and "org/audio-fm" not in keep_section
+    status = (
+        "OK" if ok_models and ok_first and ok_popular and ok_body and ok_no_dup else "FAIL"
+    )
+    if not (ok_models and ok_first and ok_popular and ok_body and ok_no_dup):
         failed += 1
     print(
         f"{status}: model focus models={model_count} "
-        f"(min={MIN_MODEL_PR_SLOTS}); first={selected2[0].category if selected2 else None}"
+        f"(min={MIN_MODEL_PR_SLOTS}); first={selected2[0].full_name if selected2 else None}"
     )
 
     total = len(CASES) + len(WEAK) + len(NEGATIVE_CASES) + 2

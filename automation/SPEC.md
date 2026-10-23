@@ -193,6 +193,7 @@ No Hugging Face, arXiv, web crawls, or LLM calls.
    **≥ MIN_DESCRIPTION_LEN**, and no **NEGATIVE_KEYWORDS** hit
 6. Rank by ToC score then confidence; apply **MAX_PER_SECTION** cap;
    reserve up to **MIN_MODEL_PR_SLOTS** for Audio|Music|Speech > Model
+   (models band ranked by stars, then last push, then production upside)
 7. **If count = 0 →** exit 0 (no PR)
 8. **If count ≥ 1 →** close open `bot/daily-candidates-*` PRs, create bot
    branch, insert README lines, push, open PR
@@ -219,10 +220,10 @@ Category assignment is **domain-first** then subsection (see
 6. Hard reject via `NEGATIVE_KEYWORDS` (discord bots, music players,
    homelab, quiz apps, generic LLM UIs, etc.) before scoring
 7. Bonus via `TOPIC_BONUS` when GitHub topics match curated tags
-8. **Production upside (models):** soft preference via
-   `PRODUCTION_APPLICATION_SIGNALS` (music/film/gaming/new media). Not a
-   hard filter — models without those phrases can still qualify, but scored
-   and ordered lower in the latest-models band.
+8. **Latest & popular (models):** dedicated PR section ordered by stars
+   then last push. Soft preference via `PRODUCTION_APPLICATION_SIGNALS`
+   (music/film/gaming/new media) after popularity/recency — not a hard
+   filter.
 
 Fallback subsection when domain is clear but subsection is weak (never Model):
 `Audio>Framework`, `Music>Analysis`, `Speech>Recognition`.
@@ -261,11 +262,12 @@ caps at `MAX_PER_SECTION` (3) per Domain > Subsection.
 - [Name](url): short description
 ```
 
-**PR body:** dedicated **Latest open-source models** table (Audio|Music|
-Speech > Model; ideal for music/film/gaming/new media production), then
-Keep (≥70) and Review (55–69) tables with confidence, ToC score, category,
-**original GitHub description**, and rationale; plus entry details and
-skipped list.
+**PR body:** dedicated **Latest & popular models (Audio / Music / Speech)**
+table (Audio|Music|Speech > Model only; ordered by stars then last push;
+soft-prefer music/film/gaming/new media production), then Keep (≥70) and
+Review (55–69) tables for non-model finds with confidence, ToC score,
+category, **original GitHub description**, and rationale; plus entry
+details and skipped list.
 
 **Footer:** `This PR is proposal-only. Do not auto-merge.`
 
@@ -336,7 +338,8 @@ The workflow and script must **never**:
 | Topics      | TOPIC_BONUS adds confidence when GitHub topics match          |
 | Section cap | <= 3 entries per Domain > Subsection (MAX_PER_SECTION)        |
 | Model focus | Query #1 + reserve <= MIN_MODEL_PR_SLOTS (3) Model entries;  |
-|             | soft-prefer music/film/gaming/new-media production upside   |
+|             | PR section ordered by stars then last push; soft-prefer     |
+|             | music/film/gaming/new-media production upside               |
 | Keep band   | confidence >= 70 highlighted separately in PR body            |
 | Max per PR  | 10 entries (models band first, then ToC/confidence)         |
 | Queries     | <= 6 (MAX_QUERIES); models discovery is first                 |
@@ -402,5 +405,7 @@ The workflow and script must **never**:
 |            | and PR body section for Audio|Music|Speech > Model            |
 | 2026-10-16 | Soft-prefer models with music/film/gaming/new-media           |
 |            | production upside in query #1, scoring, and PR ordering       |
+| 2026-10-22 | Dedicated PR section for latest & popular Audio/Music/Speech  |
+|            | models (stars + last push columns; Keep/Review are non-model) |
 +------------+--------------------------------------------------------------+
 ```
