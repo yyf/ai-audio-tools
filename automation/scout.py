@@ -746,8 +746,8 @@ def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidat
     """Rank by ToC fit, then confidence; cap per README section.
 
     Reserves up to MIN_MODEL_PR_SLOTS for Audio|Music|Speech > Model so each
-    daily PR keeps a dedicated latest-models recommendation band when available.
-    Prefer models with music/film/gaming/new-media production upside.
+    daily PR keeps a dedicated latest-and-popular models band when available.
+    Prefer popular (stars) + recently pushed models; soft-prefer production upside.
     """
     ranked = sorted(
         candidates,
@@ -756,10 +756,11 @@ def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidat
     models = sorted(
         [c for c in ranked if _is_model_candidate(c)],
         key=lambda c: (
+            -c.stars,
+            -c.pushed_at.timestamp(),
             -_production_app_score(c),
             -c.category_score,
             -c.confidence,
-            -c.stars,
         ),
     )
 
@@ -798,10 +799,12 @@ def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidat
             break
         try_add(c)
 
-    # Prefer models first in the PR ordering, then remaining by ToC/confidence.
+    # Prefer models first (popular then recent), then remaining by ToC/confidence.
     selected.sort(
         key=lambda c: (
             0 if _is_model_candidate(c) else 1,
+            -c.stars if _is_model_candidate(c) else 0,
+            -c.pushed_at.timestamp() if _is_model_candidate(c) else 0,
             -c.category_score,
             -c.confidence,
             -c.stars,
@@ -977,24 +980,38 @@ def _md_cell(text: str, max_len: int = 160) -> str:
     return cleaned.replace("|", "\\|")
 
 
+def _sort_models_latest_popular(models: list[Candidate]) -> list[Candidate]:
+    """Order models for the dedicated PR section: popular, then recently pushed."""
+    return sorted(
+        models,
+        key=lambda c: (
+            -c.stars,
+            -c.pushed_at.timestamp(),
+            -_production_app_score(c),
+            -c.confidence,
+        ),
+    )
+
+
 def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -> str:
-    models = [c for c in candidates if _is_model_candidate(c)]
-    keep = [c for c in candidates if c.confidence >= KEEP_THRESHOLD]
-    review = [c for c in candidates if c.confidence < KEEP_THRESHOLD]
+    models = _sort_models_latest_popular(
+        [c for c in candidates if _is_model_candidate(c)]
+    )
+    # Keep/Review cover non-model finds; models live only in the dedicated section.
+    others = [c for c in candidates if not _is_model_candidate(c)]
+    keep = [c for c in others if c.confidence >= KEEP_THRESHOLD]
+    review = [c for c in others if c.confidence < KEEP_THRESHOLD]
 
     lines = [
         "## Summary",
         f"- Run date: {run_date}",
         f"- Candidates scanned: {stats.scanned}",
         f"- High-quality (≥{HIGH_QUALITY_THRESHOLD}): {len(candidates)}",
-        f"- Latest models (Audio|Music|Speech > Model): {len(models)} "
+        f"- Latest & popular models (Audio|Music|Speech > Model): {len(models)} "
         f"(reserved up to {MIN_MODEL_PR_SLOTS})",
         f"- Keep (≥{KEEP_THRESHOLD}): {len(keep)} · Review ({HIGH_QUALITY_THRESHOLD}–{KEEP_THRESHOLD - 1}): {len(review)}",
         f"- PR opened because {len(candidates)} ≥ {PR_THRESHOLD}",
         f"- Section cap: ≤{MAX_PER_SECTION} per Domain > Subsection",
-        "",
-        "Ideal model picks have clear potential in **music / film / gaming / "
-        "new media production** (scoring soft-prefers those signals).",
         "",
         "**This PR is proposal-only. Do not auto-merge.**",
         "",
@@ -1019,10 +1036,35 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
             )
         lines.append("")
 
-    append_table(
-        "Latest open-source models — prefer music / film / gaming / new media production",
-        models,
+    # Dedicated latest + popular models band (stars + recency called out).
+    lines.extend(
+        [
+            "## Latest & popular models (Audio / Music / Speech)",
+            "",
+            "Open-source **Audio**, **Music**, and **Speech** foundation / pretrained "
+            "models from this run, ordered by **stars** then **last push**. Soft "
+            "preference for music / film / gaming / new media production upside.",
+            "",
+        ]
     )
+    if not models:
+        lines.extend(["_None in this run._", ""])
+    else:
+        lines.extend(
+            [
+                "| Repo | Stars | Updated | Conf | Category | Description |",
+                "|------|------:|---------|------|----------|-------------|",
+            ]
+        )
+        for c in models:
+            cat = f"{c.category[0]} > {c.category[1]}"
+            lines.append(
+                f"| [{c.full_name}]({c.html_url}) | {c.stars} | "
+                f"{c.pushed_at.date().isoformat()} | {c.confidence} | {cat} | "
+                f"{_md_cell(c.description)} |"
+            )
+        lines.append("")
+
     append_table(f"Keep (confidence ≥{KEEP_THRESHOLD})", keep)
     append_table(
         f"Review (confidence {HIGH_QUALITY_THRESHOLD}–{KEEP_THRESHOLD - 1})",
