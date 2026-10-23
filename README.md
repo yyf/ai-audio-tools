@@ -1,7 +1,9 @@
 # ai-audio-tools
-Community list of open-source AI tools, models, and datasets for audio, music, and speech applications 
+
+Community list of open-source AI tools, models, and datasets for audio, music, and speech applications
 
 ## Table of Contents
+
 - [To contribute to the list](#to-contribute-to-the-list)
 - [Audio](#audio)
   - [Benchmark](#benchmark)
@@ -28,114 +30,129 @@ Community list of open-source AI tools, models, and datasets for audio, music, a
 Edit the README and make a PR
 
 # Audio
+
 ## Benchmark
+
 - [PaperWithCode](https://paperswithcode.com/area/audio): SoTA audio benchmarks on Paper with Code
 - [PaperWithCode](https://paperswithcode.com/area/music): SoTA music benchmarks on Paper with Code
 - [SAILResearch](https://github.com/SAILResearch/awesome-foundation-model-leaderboards?tab=readme-ov-file#audio): A list of audio model ranking from Sail Research
 - [HEAR](https://hearbenchmark.com/hear-leaderboard.html): Holistic Evaluation of Audio Representations
-- [MSEB](https://research.google/blog/from-waveforms-to-wisdom-the-new-benchmark-for-auditory-intelligence/): The Massive Sound Embedding Benchmark (MSEB) from Google Research 
+- [MSEB](https://research.google/blog/from-waveforms-to-wisdom-the-new-benchmark-for-auditory-intelligence/): The Massive Sound Embedding Benchmark (MSEB) from Google Research
 
 ## Dataset
+
 - [HuggingFace](https://huggingface.co/datasets?modality=modality:audio): datasets with tag "audio" on Hugging Face
 - [PaperWithCode](https://paperswithcode.com/datasets?mod=audio&page=1): datasets with tag "audio" on Paper with Code
 - [Kaggle](https://www.kaggle.com/datasets?search=audio): datasets with tag "audio" on Kaggle
 
 ## Annotation
-- [audino](https://github.com/midas-research/audino): Open source audio annotation tool for humans 
+
+- [audino](https://github.com/midas-research/audino): Open source audio annotation tool for humans
 
 ## Model
+
 - [HuggingFace](https://huggingface.co/models?other=audio): models with tag "audio" on Hugging Face
 - [Kaggle](https://www.kaggle.com/models?query=audio): models with tag "audio" on Kaggle
+- [Audio-Flamingo-2](https://github.com/NVIDIA/audio-flamingo): Audio Flamingo 2: An Audio-Language Model with Long-Audio Understanding and Expert Reasoning Abilities
+- [Audio-Flamingo-3](https://huggingface.co/nvidia/audio-flamingo-3): Audio Flamingo 3 (AF3) is a fully open, state-of-the-art Large Audio-Language Model (LALM) that advances reasoning and understanding across speech, sounds, and music
+- [Sci-Phi](https://sci-phi-audio.github.io/demo/): A Large Language Model Spatial Audio Descriptor
+- [Covo-Audio](https://github.com/Tencent/Covo-Audio): Covo-Audio is a 7B-parameter end-to-end large audio language model that directly processes continuous audio inputs and generates audio outputs within a single unified architecture
 
 ## Security
+
 - [Wavmark](https://github.com/wavmark/wavmark): AI-based Audio Watermarking Tool
 - [audio-steganography-algorithms](https://github.com/ktekeli/audio-steganography-algorithms): A Library of Audio Steganography & Watermarking Algorithms
 - [LibriSeVoc](https://github.com/csun22/Synthetic-Voice-Detection-Vocoder-Artifacts): AI-Synthesized Voice Detection Using Neural Vocoder Artifacts, CVPR Workshop on Media Forensic 2023
 - [SynthID](https://github.com/google-deepmind/synthid-text): This repository provides a reference implementation of the SynthID Text watermarking and detection capabilities for the research paper published in Nature. It is not intended for production use.
 
 ## Framework
+
 - [yup](https://github.com/kunitoki/yup): The modern framework optimized for realtime audio and GPU-native creative software
 
 # Music
+
 ## Model
-- 
+
+- [HuggingFace](https://huggingface.co/models?other=music): models with tag "music" on Hugging Face
+- [HuggingFace](https://huggingface.co/models?pipeline_tag=text-to-audio): text-to-audio models on Hugging Face
+- [YuE](https://github.com/multimodal-art-projection/YuE): Open Full-song Music Generation Foundation Model, something similar to Suno.ai but open
+- [ACE-Step-1.5](https://github.com/ace-step/ACE-Step-1.5): a highly efficient open-source music foundation model that brings commercial-grade generation to consumer hardware
+- [heartlib](https://github.com/HeartMuLa/heartlib): HeartMuLa Official Repo: The Most Powerful Open-Source Music Generation Model of 2026
 
 ## Benchmark
+
 - [PaperWithCode](https://paperswithcode.com/sota/text-to-music-generation-on-musiccaps): Text-to-Music Generation on MusicCaps
 - [MusGO_framework](https://roserbatlleroca.github.io/MusGO_framework/index.html): MusGO Framework- Assessing Openness in Music-Generative AI
 
 ## Analysis
-- [Essentia](https://github.com/MTG/essentia): open-source C++ library for audio analysis and audio-based music information retrieval  
-- [Librosa](https://github.com/librosa/librosa): Python library for audio and music analysis 
+
+- [Essentia](https://github.com/MTG/essentia): open-source C++ library for audio analysis and audio-based music information retrieval
+- [Librosa](https://github.com/librosa/librosa): Python library for audio and music analysis
 - [DDSP](https://github.com/magenta/ddsp): DDSP is a library of differentiable versions of common DSP functions (such as synthesizers, waveshapers, and filters). This allows these interpretable elements to be used as part of an deep learning model, especially as the output layers for audio generation
 - [MIDI-DDSP](https://github.com/magenta/midi-ddsp?tab=readme-ov-file): MIDI-DDSP is a hierarchical audio generation model for synthesizing MIDI expanded from DDSP
-- [TorchAudio](https://github.com/pytorch/audio): Data manipulation and transformation for audio signal processing, powered by PyTorch 
-- [nnAudio](https://github.com/KinWaiCheuk/nnAudio): Audio processing by using pytorch 1D convolution network 
-- [pyAudioAnalysis](https://github.com/tyiannak/pyAudioAnalysis/): Python Audio Analysis Library: Feature Extraction, Classification, Segmentation and Applications 
+- [TorchAudio](https://github.com/pytorch/audio): Data manipulation and transformation for audio signal processing, powered by PyTorch
+- [nnAudio](https://github.com/KinWaiCheuk/nnAudio): Audio processing by using pytorch 1D convolution network
+- [pyAudioAnalysis](https://github.com/tyiannak/pyAudioAnalysis/): Python Audio Analysis Library: Feature Extraction, Classification, Segmentation and Applications
 - [mutagen](https://mutagen.readthedocs.io/en/latest/#): a Python module to handle audio metadata
-- [dejavu](https://github.com/worldveil/dejavu): Audio fingerprinting and recognition in Python 
+- [dejavu](https://github.com/worldveil/dejavu): Audio fingerprinting and recognition in Python
 - [audiomentations](https://github.com/iver56/audiomentations): A Python library for audio data augmentation. Inspired by albumentations. Useful for machine learning
-- [soundata](https://github.com/soundata/soundata): Python library for downloading, loading, and working with sound datasets 
+- [soundata](https://github.com/soundata/soundata): Python library for downloading, loading, and working with sound datasets
 - [EfficientAT](https://github.com/fschmid56/EfficientAT): This repository aims at providing efficient CNNs for Audio Tagging. We provide AudioSet pre-trained models ready for downstream training and extraction of audio embeddings
 - [AugLy](https://github.com/facebookresearch/AugLy): A data augmentations library for audio, image, text, and video
 - [Pedalboard](https://github.com/spotify/pedalboard?tab=readme-ov-file): A Python library for working with audio
 - [TinyTag](https://github.com/devsnd/tinytag): a Python library for reading audio file metadata
-- [OpenSmile](https://github.com/audeering/opensmile): The Munich Open-Source Large-Scale Multimedia Feature Extractor 
-- [Madmom](https://github.com/CPJKU/madmom): Python audio and music signal processing library 
+- [OpenSmile](https://github.com/audeering/opensmile): The Munich Open-Source Large-Scale Multimedia Feature Extractor
+- [Madmom](https://github.com/CPJKU/madmom): Python audio and music signal processing library
 - [Beets](https://beets.io/): a music library manager and MusicBrainz tagger
-- [Mirdata](https://github.com/mir-dataset-loaders/mirdata): Python library for working with Music Information Retrieval datasets 
-- [Partitura](https://github.com/CPJKU/partitura): A python package for handling modern staff notation of music 
+- [Mirdata](https://github.com/mir-dataset-loaders/mirdata): Python library for working with Music Information Retrieval datasets
+- [Partitura](https://github.com/CPJKU/partitura): A python package for handling modern staff notation of music
 - [msaf](https://msaf.readthedocs.io/en/latest/#): a python package for the analysis of music structural segmentation algorithms
-- [basic-pitch](https://github.com/spotify/basic-pitch): A lightweight yet powerful audio-to-MIDI converter with pitch bend detection 
-- [jams](https://github.com/marl/jams): A JSON Annotated Music Specification for Reproducible MIR Research 
-- [Audio-Flamingo-2](https://github.com/NVIDIA/audio-flamingo): Audio Flamingo 2: An Audio-Language Model with Long-Audio Understanding and Expert Reasoning Abilities
+- [basic-pitch](https://github.com/spotify/basic-pitch): A lightweight yet powerful audio-to-MIDI converter with pitch bend detection
+- [jams](https://github.com/marl/jams): A JSON Annotated Music Specification for Reproducible MIR Research
 - [machinehearing](https://github.com/jonnor/machinehearing): Machine Learning applied to sound
 - [machinelistening](https://machinelistening.github.io): The slides & materials for the lecture Computational Analysis of Sound and Music at TU Ilmenau
-- [Audio-Flamingo-3](https://huggingface.co/nvidia/audio-flamingo-3): Audio Flamingo 3 (AF3) is a fully open, state-of-the-art Large Audio-Language Model (LALM) that advances reasoning and understanding across speech, sounds, and music
-- [Sci-Phi](https://sci-phi-audio.github.io/demo/): A Large Language Model Spatial Audio Descriptor
 - [speex](https://github.com/xiph/speex): Speex voice codec mirror - THIS IS A MIRROR, DEVELOPMENT HAPPENS AT https://gitlab.xiph.org/xiph/speex
-- [strawberry](https://github.com/strawberrymusicplayer/strawberry): :strawberry: Strawberry Music Player
-- [beatify](https://github.com/mholzi/beatify): 🎵 Music quiz party game for Home Assistant with two modes, guess the release year or name the title and artist. Streams from Spotify, Apple Music, Tidal, Deezer, YouTube Music and Amazon Music, or plays your own library via Plex, Jellyfin and local files. Runs on Sonos, Alexa and any Music Assistant speaker
 - [AudioMuse-AI](https://github.com/NeptuneHub/AudioMuse-AI): AudioMuse-AI uses sonic analysis to rediscover forgotten songs, uncover hidden connections in your music library, and generate intelligent playlists for Navidrome, Jellyfin, LMS, Lyrion, Emby and Plex: no metadata or external services required
 
 ## Production
+
 - [OpenVINO](https://github.com/intel/openvino-plugins-ai-audacity/tree/main): OpenVINO AI effects for Audacity (Windows, Linux)
 - [TuneFlow](https://github.com/tuneflow/tuneflow-py): TuneFlow is a next-gen DAW that aims to boost music making productivity through the power of AI
 - [Spleeter](https://github.com/deezer/spleeter): Deezer source separation library including pretrained models
 - [DeepAFx](https://github.com/adobe-research/DeepAFx?tab=readme-ov-file): Third-party audio effects plugins as differentiable layers within deep neural networks
-- [matchering](https://github.com/sergree/matchering): open source audio matching and mastering 
-- [AudioDec](https://github.com/facebookresearch/AudioDec): An Open-source Streaming High-fidelity Neural Audio Codec 
+- [matchering](https://github.com/sergree/matchering): open source audio matching and mastering
+- [AudioDec](https://github.com/facebookresearch/AudioDec): An Open-source Streaming High-fidelity Neural Audio Codec
 - [USS](https://github.com/bytedance/uss): This is the PyTorch implementation of the Universal Source Separation with Weakly labelled Data
 - [FAST-RIR](https://github.com/anton-jeran/FAST-RIR): This is the official implementation of our neural-network-based fast diffuse room impulse response generator (FAST-RIR) for generating room impulse responses (RIRs) for a given rectangular acoustic environment
-- [FoleyCrafter](https://foleycrafter.github.io/): FoleyCrafter is a video-to-audio generation framework which can produce realistic sound effects semantically relevant and synchronized with videos. 
+- [FoleyCrafter](https://foleycrafter.github.io/): FoleyCrafter is a video-to-audio generation framework which can produce realistic sound effects semantically relevant and synchronized with videos.
 - [Woosh](https://github.com/SonyResearch/Woosh): Public release of the Sound Effect Foundation model by Sony AI.
 - [anklang](https://github.com/tim-janik/anklang): MIDI and Audio Synthesizer and Composer
-- [Dplug](https://github.com/AuburnSounds/Dplug): Make VST2 / VST3 / AU / AAX / CLAP / LV2 / FLP  plug-ins for Linux/macOS/Windows, using D  
+- [Dplug](https://github.com/AuburnSounds/Dplug): Make VST2 / VST3 / AU / AAX / CLAP / LV2 / FLP  plug-ins for Linux/macOS/Windows, using D
 - [milimomusic](https://github.com/mainza-ai/milimomusic): Open-source AI music generation, neural transcription, multitrack DAW, stem separation, and music video studio powered by MiniMax Music 3
-- 
+
 ## Generation
-- [StableAudio](https://github.com/Stability-AI/stable-audio-tools): Generative models for conditional audio generation 
+
+- [StableAudio](https://github.com/Stability-AI/stable-audio-tools): Generative models for conditional audio generation
 - [AudioCraft](https://github.com/facebookresearch/audiocraft): a PyTorch library for deep learning research on audio generation. AudioCraft contains inference and training code for two state-of-the-art AI generative models producing high-quality audio: AudioGen and MusicGen.
 - [Jukebox](https://github.com/openai/jukebox): A generative model for music
-- [Magenta](https://github.com/magenta/symbolic-music-diffusion): symbolic music generation with diffusion models 
+- [Magenta](https://github.com/magenta/symbolic-music-diffusion): symbolic music generation with diffusion models
 - [TorchSynth](https://github.com/torchsynth/torchsynth): A GPU-optional modular synthesizer in pytorch, 16200x faster than realtime, for audio ML researchers
 - [audiobox](https://audiobox.metademolab.com/): Audiobox is Meta’s new foundation research model for audio generation. It can generate voices and sound effects using a combination of voice inputs and natural language text prompts
 - [Amphion](https://github.com/open-mmlab/Amphion): Amphion is a toolkit for Audio, Music, and Speech Generation
 - [AudioGPT](https://github.com/AIGC-Audio/AudioGPT): AudioGPT: Understanding and Generating Speech, Music, Sound, and Talking Head
-- [WaveGAN](https://github.com/chrisdonahue/wavegan): WaveGAN: Learn to synthesize raw audio with generative adversarial networks 
-- [RAVE](https://github.com/acids-ircam/RAVE): Official implementation of the RAVE model: a Realtime Audio Variational autoEncoder 
+- [WaveGAN](https://github.com/chrisdonahue/wavegan): WaveGAN: Learn to synthesize raw audio with generative adversarial networks
+- [RAVE](https://github.com/acids-ircam/RAVE): Official implementation of the RAVE model: a Realtime Audio Variational autoEncoder
 - [AudioLDM](https://audioldm.github.io/): This toolbox aims to unify audio generation model evaluation for easier comparison
 - [Make-An-Audio](https://github.com/Text-to-Audio/Make-An-Audio): a conditional diffusion probabilistic model capable of generating high fidelity audio efficiently from X modality
 - [Diffuser](https://github.com/huggingface/diffusers): Diffusers is the go-to library for state-of-the-art pretrained diffusion models for generating images, audio, and even 3D structures of molecules
 - [MidiTok](https://github.com/Natooz/MidiTok): MIDI / symbolic music tokenizers for Deep Learning models
 - [muspy](https://salu133445.github.io/muspy/): an open source Python library for symbolic music generation
-- [MusicLM](https://google-research.github.io/seanet/musiclm/examples/): a model generating high-fidelity music from text descriptions 
-- [riffusion](https://github.com/riffusion/riffusion): Stable diffusion for real-time music generation 
-- [muzic](https://github.com/microsoft/muzic): Music Understanding and Generation with Artificial Intelligence 
-- [midi-lm](https://github.com/jeremyjordan/midi-lm): Generative modeling of MIDI files 
-- [UniAudio](https://github.com/yangdongchao/UniAudio): The Open Source Code of UniAudio 
-- [MuseGAN](https://github.com/salu133445/musegan): An AI for Music Generation 
-- [YuE](https://github.com/multimodal-art-projection/YuE): Open Full-song Music Generation Foundation Model, something similar to Suno.ai but open
+- [MusicLM](https://google-research.github.io/seanet/musiclm/examples/): a model generating high-fidelity music from text descriptions
+- [riffusion](https://github.com/riffusion/riffusion): Stable diffusion for real-time music generation
+- [muzic](https://github.com/microsoft/muzic): Music Understanding and Generation with Artificial Intelligence
+- [midi-lm](https://github.com/jeremyjordan/midi-lm): Generative modeling of MIDI files
+- [UniAudio](https://github.com/yangdongchao/UniAudio): The Open Source Code of UniAudio
+- [MuseGAN](https://github.com/salu133445/musegan): An AI for Music Generation
 - [Bark](https://github.com/suno-ai/bark): Bark is Suno's open-source text-to-speech+ model. Text-Prompted Generative Audio Model
 - [MG²](https://github.com/shaopengw/Awesome-Music-Generation): Awesome music generation model——MG²
 - [MusicGPT](https://github.com/gabotechs/MusicGPT): Generate music based on natural language prompts using LLMs running locally
@@ -148,45 +165,52 @@ Edit the README and make a PR
 - [Vision2Audio](https://github.com/Xiaohao-Liu/Awesome-Vison2Audio): A curated list of Vision (video/image) to Audio Generation
 - [AudioX](https://github.com/ZeyueT/AudioX): A Unified Framework for Anything-to-Audio Generation
 - [MMAudio](https://github.com/hkchengrex/MMAudio): Taming Multimodal Joint Training for High-Quality Video-to-Audio Synthesis
-- [ACE-Step-1.5](https://github.com/ace-step/ACE-Step-1.5): a highly efficient open-source music foundation model that brings commercial-grade generation to consumer hardware. 
 - [genmusic_demo_list](https://github.com/affige/genmusic_demo_list): a list of demo websites for automatic music generation research
 - [HOT-Step-CPP](https://github.com/scragnog/HOT-Step-CPP): Turn dials. Summon bangers! NOW WITH MORE C++! Local AI music generation powered by GGML
 - [ACE-Step-Studio](https://github.com/timoncool/ACE-Step-Studio): Portable AI music generator — full songs with vocals, covers, music videos. One-click install, 100% offline, NVIDIA GPU
 - [ComfyUI_FL-HeartMuLa](https://github.com/filliptm/ComfyUI_FL-HeartMuLa): FL HeartMuLa - Multilingual AI music generation nodes for ComfyUI. Generate full songs with lyrics using HeartMuLa
 - [ComfyUI-MiniMax-Music-Production-Toolkit](https://github.com/jplenio/ComfyUI-MiniMax-Music-Production-Toolkit): Complete Production Environment for professional MiniMax Music 3 audio generation, including Prompt Generation, Metadata generation including Cover Art, Sound Enhancement to improve Minimax weaknesses, mastering, and saving in various file formats
-- [heartlib](https://github.com/HeartMuLa/heartlib): HeartMuLa Official Repo: The Most Powerful Open-Source Music Generation Model of 2026
-- [ComfyUI-FL-YuE2](https://github.com/filliptm/ComfyUI-FL-YuE2): YuE2 music generation and an editable piano roll for ComfyUI  
+- [ComfyUI-FL-YuE2](https://github.com/filliptm/ComfyUI-FL-YuE2): YuE2 music generation and an editable piano roll for ComfyUI
 - [ComfyUI-SongScribe](https://github.com/TheLocalLab/ComfyUI-SongScribe): AI music prompt nodes for ComfyUI — 73 style presets plus song analysis for MiniMax Music 3 and YuE2. Runs on CPU
 - [minimax-music-ui](https://github.com/adambenhassen/minimax-music-ui): Suno-style web UI for a self-hosted MiniMax-Music3 inference server
-- [ComfyUI_YuE](https://github.com/smthemex/ComfyUI_YuE): YuE is a groundbreaking series of open-source foundation models designed for music generation, specifically for transforming lyrics into full songs (lyrics2song). you can use it in comfyUI  
+- [ComfyUI_YuE](https://github.com/smthemex/ComfyUI_YuE): YuE is a groundbreaking series of open-source foundation models designed for music generation, specifically for transforming lyrics into full songs (lyrics2song). you can use it in comfyUI
 - [ai-dj](https://github.com/innermost47/ai-dj): AI music generation for live performance - Standalone (Ableton Link) + VST3/AU. 8 tracks, 9 AI models. It occasionally hallucinates. Not a song generator - you still have to do the work. Stay human
 - [LocalAI](https://github.com/mudler/LocalAI): LocalAI is the open-source AI engine. Run any model - LLMs, vision, voice, image, video - on any hardware. No GPU required
 - [remiqora](https://github.com/inikolax/remiqora): Local AI music studio unifying ACE-Step 1.5 and YuE2-3B in one Vue interface — text-to-music generation, stem separation, MIDI transcription, and LoRA fine-tuning, with a built-in multitrack DAW
-  
 - [YuE2-Studio](https://github.com/timoncool/YuE2-Studio): Local AI song generator with an editable score — YuE2 on your GPU: full songs with vocals, sheet music, covers, exact replay. Native Windows app, no Python, installer with auto-update
 - [ACE-Step-Studio-pinokio](https://github.com/timoncool/ACE-Step-Studio-pinokio): One-click Pinokio launcher for ACE-Step Studio — local AI music generation (Suno at home). Cross-platform: Win/Linux/macOS
-- [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): 🎵 Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
+- [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
 - [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
+
 # Speech
+
 ## Model
-- 
+
+- [HuggingFace](https://huggingface.co/models?pipeline_tag=automatic-speech-recognition): speech recognition models on Hugging Face
+- [HuggingFace](https://huggingface.co/models?pipeline_tag=text-to-speech): text-to-speech models on Hugging Face
+- [metavoice-src](https://github.com/metavoiceio/metavoice-src): Foundational model for human-like, expressive TTS
+- [csm](https://github.com/SesameAILabs/csm): A Conversational Speech Generation Model
+- [ChatTTS](https://github.com/2noise/ChatTTS): A generative speech model for daily dialogue
+- [Fish-Audio](https://github.com/fishaudio/fish-speech): Fish Audio S2 Pro is the most advanced multimodal model developed by Fish Audio
 
 ## Benchmark
+
 - [ArtificialAnalysis](https://artificialanalysis.ai/speech-to-text): Speech to Text AI Model & Provider Leaderboard on Aritifical Analysis
 - [ArtificialAnalysis](https://artificialanalysis.ai/text-to-speech): Text to Speech AI Model & Provider Leaderboard on Aritifical Analysis
 
 ## Recognition
+
 - [Whisper](https://github.com/openai/whisper): a multitasking model that can perform multilingual speech recognition, speech translation, and language identification
 - [Deep Speech](https://github.com/mozilla/DeepSpeech): Mozilla's open-source speech-to-text engine
-- [Kaldi ASR](https://kaldi-asr.org/): open-source speech recognition toolkit written in C++ 
+- [Kaldi ASR](https://kaldi-asr.org/): open-source speech recognition toolkit written in C++
 - [PaddleSpeech](https://github.com/PaddlePaddle/PaddleSpeech?tab=readme-ov-file): Easy-to-use Speech Toolkit including Self-Supervised Learning model, SOTA/Streaming ASR with punctuation, Streaming TTS with text frontend, Speaker Verification System, End-to-End Speech Translation and Keyword Spotting
-- [NeMo](https://github.com/NVIDIA/NeMo): a framework for generative AI 
-- [julius](https://github.com/julius-speech/julius): Open-Source Large Vocabulary Continuous Speech Recognition Engine 
+- [NeMo](https://github.com/NVIDIA/NeMo): a framework for generative AI
+- [julius](https://github.com/julius-speech/julius): Open-Source Large Vocabulary Continuous Speech Recognition Engine
 - [speechbrain](https://speechbrain.github.io/): an open-source and all-in-one conversational AI toolkit based on PyTorch
-- [pocketsphinx](https://github.com/cmusphinx/pocketsphinx): A small speech recognizer 
+- [pocketsphinx](https://github.com/cmusphinx/pocketsphinx): A small speech recognizer
 - [FunASR](https://github.com/alibaba-damo-academy/FunASR): A Fundamental End-to-End Speech Recognition Toolkit and Open Source SOTA Pretrained Models
 - [NeuralSpeech](https://github.com/microsoft/NeuralSpeech): a research project at Microsoft Research Asia, which focuses on neural network based speech processing, including automatic speech recognition (ASR), text-to-speech synthesis (TTS), spatial audio synthesis, video dubbing, etc
-- [espnet](https://github.com/espnet/espnet): End-to-End Speech Processing Toolkit 
+- [espnet](https://github.com/espnet/espnet): End-to-End Speech Processing Toolkit
 - [RealTimeSTT](https://github.com/KoljaB/RealtimeSTT): A robust, efficient, low-latency speech-to-text library with advanced voice activity detection, wake word activation and instant transcription
 - [AudenAI](https://github.com/AudenAI/Auden): A comprehensive toolbox for audio & multimodal understanding tasks including ASR, CLAP, audio captioning, speaker identification, speech-llm and more.
 - [OGAM](https://github.com/off-grid-ai/OGAM): The Swiss Army Knife of Offline AI. Chat, see, speak, and generate images on your phone or Mac — GGUF LLMs, vision, Whisper speech-to-text, Stable Diffusion, tool calling, and local-network servers. Runs on your CPU, GPU, or NPU. No account, no API key, zero data leaves your device
@@ -201,57 +225,52 @@ Edit the README and make a PR
 - [audio-ai-hub](https://github.com/BinWang28/audio-ai-hub): The hub for audio AI research: papers, open models, benchmarks & datasets across audio LLMs, speech recognition, TTS, music & audio generation
 - [macparakeet](https://github.com/moona3k/macparakeet): Fast, private, local-first voice app for Apple Silicon Macs — dictation, file/media transcription, meeting recording, Transforms, and a public automation CLI. Free and open-source
 - [speech_to_text](https://github.com/csdcorp/speech_to_text): A Flutter plugin that exposes device specific text to speech recognition capability
-- [petal](https://github.com/Aayush9029/petal): Petal is a native macOS menu bar app for fast, local-first audio transcription  
+- [petal](https://github.com/Aayush9029/petal): Petal is a native macOS menu bar app for fast, local-first audio transcription
 - [Speech](https://github.com/NVIDIA-NeMo/Speech): A scalable generative AI framework built for researchers and developers working on Large Language Models, Multimodal, and Speech AI (Automatic Speech Recognition and Text-to-Speech)
 - [vernacula](https://github.com/christopherthompson81/vernacula): ONNX speech pipeline library for ASR (diarization, VAD), and TTS
 - [benchmarks](https://github.com/coval-ai/benchmarks): Reproducible voice-AI benchmarking — TTS / STT latency and accuracy
-- [dictus-ios](https://github.com/getdictus/dictus-ios): Open-source iOS voice dictation keyboard — fully offline, private, no subscription required for core features  
+- [dictus-ios](https://github.com/getdictus/dictus-ios): Open-source iOS voice dictation keyboard — fully offline, private, no subscription required for core features
 - [CrispASR](https://github.com/CrispStrobe/CrispASR): C++ ggml runtime hub for multilingual ASR and TTS models: Cohere Transcribe, Parakeet TDT, Voxtral, Canary 1B v2, etc, plus universal forced alignment, and more
 - [lokalbot](https://github.com/stevyhacker/lokalbot): A local LLM workhorse that keeps a memory of your workday. On-device meeting notes, dictation, autocomplete, and recall for macOS. GPLv3
 - [mila](https://github.com/island-io/mila): Mila — native macOS local transcription app (whisper.cpp) with optional speaker diarization. Apache-2.0
 - [voice-ai](https://github.com/rapidaai/voice-ai): Rapida is an open-source, end-to-end voice AI orchestration platform for building real-time conversational voice agents with audio streaming, STT, TTS, VAD, multi-channel integration, agent state management, and observability
 - [typewhisper-win](https://github.com/TypeWhisper/typewhisper-win): TypeWhisper for Windows - Local speech-to-text with translation
-
 - [FluidAudio](https://github.com/FluidInference/FluidAudio): Frontier CoreML audio models in your apps — text-to-speech, speech-to-text, voice activity detection, and speaker diarization. In Swift, powered by SOTA open source
 - [HoldSpeak](https://github.com/karolswdev/HoldSpeak): Cross-platform local voice typing and meeting transcription for macOS and Linux
 - [localvoxtral](https://github.com/T0mSIlver/localvoxtral): Talk to your coding agents by voice. Realtime, fully local macOS dictation that streams words as you speak and grounds LLM polishing in the exact Claude Code session under your cursor — Ghostty, iTerm2, Terminal.app, even a herdr pane. 100% on-device on Apple Silicon
 - [Sotto](https://github.com/stofll/Sotto): Free, open-source, local-first voice dictation for Windows and macOS. Offline speech-to-text with Whisper, Parakeet and GigaAM. Dictate into any app with a hotkey
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
+
 ## Production
+
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
 - [Descript audio tools](https://github.com/descriptinc/audiotools): Object-oriented handling of audio data, with GPU-powered augmentations, and more
-- [Meta encodec](https://github.com/facebookresearch/encodec): State-of-the-art deep learning based audio codec supporting both mono 24 kHz audio and stereo 48 kHz audio 
+- [Meta encodec](https://github.com/facebookresearch/encodec): State-of-the-art deep learning based audio codec supporting both mono 24 kHz audio and stereo 48 kHz audio
 - [pipecat](https://github.com/pipecat-ai/pipecat): Open Source framework for voice and multimodal conversational AI
 
 ## Synthesis
-- [Coqui TTS](https://github.com/coqui-ai/TTS): a deep learning toolkit for Text-to-Speech, battle-tested in research and production  
-- [DiffSinger](https://github.com/MoonInTheRiver/DiffSinger): singing voice synthesis via shallow diffusion mechanism 
-- [Real-Time-Voice-Cloning](https://github.com/CorentinJ/Real-Time-Voice-Cloning): Clone a voice in 5 seconds to generate arbitrary speech in real-time 
-- [wavenet](https://github.com/ibab/tensorflow-wavenet): A TensorFlow implementation of DeepMind's WaveNet paper 
-- [FastSpeech2](https://github.com/ming024/FastSpeech2): An implementation of Microsoft's "FastSpeech 2: Fast and High-Quality End-to-End Text to Speech" 
+
+- [Coqui TTS](https://github.com/coqui-ai/TTS): a deep learning toolkit for Text-to-Speech, battle-tested in research and production
+- [DiffSinger](https://github.com/MoonInTheRiver/DiffSinger): singing voice synthesis via shallow diffusion mechanism
+- [Real-Time-Voice-Cloning](https://github.com/CorentinJ/Real-Time-Voice-Cloning): Clone a voice in 5 seconds to generate arbitrary speech in real-time
+- [wavenet](https://github.com/ibab/tensorflow-wavenet): A TensorFlow implementation of DeepMind's WaveNet paper
+- [FastSpeech2](https://github.com/ming024/FastSpeech2): An implementation of Microsoft's "FastSpeech 2: Fast and High-Quality End-to-End Text to Speech"
 - [MelGAN](http://swpark.me/melgan/): Unofficial PyTorch implementation of MelGAN vocoder
-- [hifi-gan](https://github.com/jik876/hifi-gan): Generative Adversarial Networks for Efficient and High Fidelity Speech Synthesis 
-- [tortoise-tts](https://github.com/neonbjb/tortoise-tts): A multi-voice TTS system trained with an emphasis on quality 
-- [lyrebird](https://github.com/lyrebird-voice-changer/lyrebird): Simple and powerful voice changer for Linux, written with Python & GTK 
+- [hifi-gan](https://github.com/jik876/hifi-gan): Generative Adversarial Networks for Efficient and High Fidelity Speech Synthesis
+- [tortoise-tts](https://github.com/neonbjb/tortoise-tts): A multi-voice TTS system trained with an emphasis on quality
+- [lyrebird](https://github.com/lyrebird-voice-changer/lyrebird): Simple and powerful voice changer for Linux, written with Python & GTK
 - [elevenlabs](https://github.com/elevenlabs/elevenlabs-python): The official Python API for ElevenLabs Text to Speech
 - [piper](https://github.com/rhasspy/piper): A fast, local neural text to speech system
-- [tts-generation-webui](https://github.com/rsxdalv/tts-generation-webui): TTS Generation Web UI (Bark, MusicGen + AudioGen, Tortoise, RVC, Vocos, Demucs, SeamlessM4T, MAGNet) 
-- [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS): 1 min voice data can also be used to train a good TTS model! (few shot voice cloning) 
-- [metavoice-src](https://github.com/metavoiceio/metavoice-src): Foundational model for human-like, expressive TTS 
-- [Retrieval-based-Voice-Conversion-WebUI](https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI): Voice data <= 10 mins can also be used to train a good VC model! 
-- [midi2voice](https://github.com/mathigatti/midi2voice): Singing synthesis from MIDI file 
+- [tts-generation-webui](https://github.com/rsxdalv/tts-generation-webui): TTS Generation Web UI (Bark, MusicGen + AudioGen, Tortoise, RVC, Vocos, Demucs, SeamlessM4T, MAGNet)
+- [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS): 1 min voice data can also be used to train a good TTS model! (few shot voice cloning)
+- [Retrieval-based-Voice-Conversion-WebUI](https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI): Voice data <= 10 mins can also be used to train a good VC model!
+- [midi2voice](https://github.com/mathigatti/midi2voice): Singing synthesis from MIDI file
 - [OpenVoice](https://github.com/myshell-ai/OpenVoice): Instant voice cloning by MyShell
-- [ChatTTS](https://github.com/2noise/ChatTTS): A generative speech model for daily dialogue
-- [csm](https://github.com/SesameAILabs/csm): A Conversational Speech Generation Model
 - [chatterbox](https://github.com/resemble-ai/chatterbox): Resemble AI's first production-grade open source TTS model
-- [Fish-Audio](https://github.com/fishaudio/fish-speech): Fish Audio S2 Pro is the most advanced multimodal model developed by Fish Audio
 - [KittenTTS](https://github.com/KittenML/KittenTTS): State-of-the-art TTS model under 25MB
-- [Covo-Audio](https://github.com/Tencent/Covo-Audio): Covo-Audio is a 7B-parameter end-to-end large audio language model that directly processes continuous audio inputs and generates audio outputs within a single unified architecture.
 - [TTS-arxiv-daily](https://github.com/liutaocode/TTS-arxiv-daily?tab=readme-ov-file): Automatically Update Text-to-speech (TTS) Papers Daily using Github Actions (Update Every 12th hours)
-- [kokoro](https://github.com/hexgrad/kokoro): an open-weight TTS model with 82 million parameters- [unsloth](https://github.com/unslothai/unsloth): Local UI to run and train LLMs and diffusion models. Supports GGUF, MLX, Qwen3.8, Kimi K3, MiniMax-H3, Gemma 4, FLUX and more
-- [mastra](https://github.com/mastra-ai/mastra): Mastra is the modern TypeScript framework for AI-powered applications and agents
-- [Google-TTS-For-NVDA](https://github.com/nguyenanhduc09/Google-TTS-For-NVDA): An NVDA screen-reader synthesizer add-on that exposes Google's Chrome WASM text-to-speech voices to NVDA
+- [kokoro](https://github.com/hexgrad/kokoro): an open-weight TTS model with 82 million parameters
 - [VoiceStudio](https://github.com/debpalash/VoiceStudio): VoiceStudio is the open-source, fully-local ElevenLabs alternative — voice cloning, voice design, video dubbing, dictation, transcription & audiobook creation in 646 languages
 - [sglang-omni](https://github.com/sgl-project/sglang-omni): SGLang-Omni is a high-performance serving framework for audio models (TTS, ASR) and unified multimodal models
 - [Vocello](https://github.com/PowerBeef/Vocello): Vocello: a local, private voice studio for Apple Silicon. Write a script, pick or describe a voice, and generate speech on-device, faster than realtime on an 8 GB M2 Mac mini. Native Swift + MLX, no Python. Mac app out now, iPhone beta on TestFlight. (Formerly QwenVoice.)
