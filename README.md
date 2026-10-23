@@ -5,21 +5,23 @@ Community list of open-source AI tools, models, and datasets for audio, music, a
 ## Table of Contents
 
 - [To contribute to the list](#to-contribute-to-the-list)
+- [Commercial OK](#commercial-ok)
+  - [Model](#model)
 - [Audio](#audio)
   - [Benchmark](#benchmark)
   - [Dataset](#dataset)
   - [Annotation](#annotation)
-  - [Model](#model)
+  - [Model](#model-1)
   - [Security](#security)
   - [Framework](#framework)
 - [Music](#music)
-  - [Model](#model-1)
+  - [Model](#model-2)
   - [Benchmark](#benchmark-1)
   - [Analysis](#analysis)
   - [Production](#production)
   - [Generation](#generation)
 - [Speech](#speech)
-  - [Model](#model-2)
+  - [Model](#model-3)
   - [Benchmark](#benchmark-2)
   - [Recognition](#recognition)
   - [Production](#production-1)
@@ -28,6 +30,12 @@ Community list of open-source AI tools, models, and datasets for audio, music, a
 # To contribute to the list
 
 Edit the README and make a PR
+
+# Commercial OK
+
+Friendly licenses for featured demos and commercial use: MIT, Apache-2.0, BSD-2/3, ISC, Unlicense, 0BSD, CC0. Prefer MIT / Apache-2.0 on code and weights (repo license ≠ weights). Skip for this section: GPL/AGPL, CC-BY-NC, CC-BY-SA, RAIL / research-only, unknown / gated dual-license. OK with care (not listed here): CC-BY-4.0, MPL-2.0, LGPL.
+
+## Model
 
 # Audio
 
