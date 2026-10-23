@@ -20,7 +20,7 @@ from pathlib import Path
 
 # --- v1 locked config (keep in sync with automation/SPEC.md) ---
 
-MAX_QUERIES = 6
+MAX_QUERIES = 8
 MAX_RESULTS_PER_QUERY = 10
 MAX_CANDIDATES = 30
 MIN_STARS = 10
@@ -32,11 +32,58 @@ MAX_PR_ENTRIES = 10
 MAX_PER_SECTION = 3  # max entries per Domain > Subsection in one PR
 # Reserve PR slots for Audio|Music|Speech > Model (latest open-source models task).
 MIN_MODEL_PR_SLOTS = 3
+# Reserve PR slots for Commercial OK > Model (friendly-license featured demos).
+MIN_COMMERCIAL_OK_PR_SLOTS = 2
 MIN_DESCRIPTION_LEN = 15  # skip empty / placeholder descriptions
 BOT_BRANCH_PREFIX = "bot/daily-candidates-"
 README_PATH = Path("README.md")
 QUERIES_PATH = Path("automation/queries.json")
 REJECTED_PATH = Path("automation/rejected.md")
+
+# Featured demos / Commercial OK — repo SPDX from GitHub (weights may differ).
+COMMERCIAL_OK_DOMAIN = "Commercial OK"
+COMMERCIAL_OK_SECTION = (COMMERCIAL_OK_DOMAIN, "Model")
+FRIENDLY_LICENSES = {
+    "mit",
+    "apache-2.0",
+    "bsd-2-clause",
+    "bsd-3-clause",
+    "isc",
+    "unlicense",
+    "0bsd",
+    "cc0-1.0",
+}
+# Preferred for Commercial OK ranking / scoring (subset of FRIENDLY_LICENSES).
+PREFERRED_COMMERCIAL_LICENSES = {"mit", "apache-2.0"}
+OK_WITH_CARE_LICENSES = {
+    "cc-by-4.0",
+    "mpl-2.0",
+    "lgpl-2.0",
+    "lgpl-2.1",
+    "lgpl-3.0",
+}
+# Topics used by the daily Commercial OK discovery / routing
+# (audio + music + any speech: ASR, TTS, STS, diarization, etc.).
+COMMERCIAL_OK_TOPICS = {
+    "ai-audio",
+    "text-to-speech",
+    "speech-to-text",
+    "speech-recognition",
+    "automatic-speech-recognition",
+    "speech-synthesis",
+    "speech-to-speech",
+    "speech-translation",
+    "voice-cloning",
+    "voice-conversion",
+    "speaker-diarization",
+    "diarization",
+    "asr",
+    "stt",
+    "tts",
+    "music-generation",
+    "text-to-music",
+    "text-to-audio",
+}
 
 NOTABLE_ORGS = {
     "nvidia",
@@ -59,6 +106,7 @@ NOTABLE_ORGS = {
 }
 
 # Domain-first categorization aligned with README ToC:
+#   Commercial OK > Model   (friendly-license featured demos; routed post-score)
 #   Audio  > Benchmark | Dataset | Annotation | Model | Security | Framework
 #   Music  > Model | Benchmark | Analysis | Production | Generation
 #   Speech > Model | Benchmark | Recognition | Production | Synthesis
@@ -107,6 +155,7 @@ TOPIC_BONUS: set[str] = {
     "text-to-speech",
     "speech-recognition",
     "speech-to-text",
+    "speech-translation",
     "asr",
     "stt",
     "voice-cloning",
@@ -115,7 +164,9 @@ TOPIC_BONUS: set[str] = {
     "diarization",
     "music-generation",
     "text-to-music",
+    "text-to-audio",
     "audio-generation",
+    "ai-audio",
     "source-separation",
     "music-information-retrieval",
     "mir",
@@ -460,6 +511,8 @@ class Candidate:
     confidence: int
     rationale: str
     dedupe_note: str = "not in README"
+    license_spdx: str | None = None
+    license_tier: str = "skip"  # friendly | ok_with_care | skip
 
 
 @dataclass
@@ -524,6 +577,54 @@ def load_rejected_keys() -> set[str]:
 def parse_queries() -> list[str]:
     templates = json.loads(QUERIES_PATH.read_text(encoding="utf-8"))
     return [q.replace("{date}", "") for q in templates[:MAX_QUERIES]]
+
+
+def repo_license_spdx(repo: dict) -> str | None:
+    """Return normalized SPDX id from a GitHub repo payload, or None if unknown."""
+    lic = repo.get("license") or {}
+    raw = (lic.get("spdx_id") or lic.get("key") or "").strip()
+    if not raw or raw.upper() in {"NOASSERTION", "NONE", "OTHER"}:
+        return None
+    return raw
+
+
+def license_tier(spdx: str | None) -> str:
+    """Classify license for featured demos / Commercial OK.
+
+    friendly: MIT, Apache-2.0, BSD-2/3, ISC, Unlicense, 0BSD, CC0
+    ok_with_care: CC-BY-4.0, MPL-2.0, LGPL (allowed in general ToC, not Commercial OK)
+    skip: GPL/AGPL, CC-BY-NC, CC-BY-SA, RAIL/research-only, unknown/gated
+    """
+    if not spdx:
+        return "skip"
+    key = spdx.lower().replace("_", "-")
+    if key in FRIENDLY_LICENSES:
+        return "friendly"
+    if key in OK_WITH_CARE_LICENSES:
+        return "ok_with_care"
+    if (
+        "nc" in key
+        or key.startswith("gpl")
+        or key.startswith("agpl")
+        or "cc-by-sa" in key
+        or "rail" in key
+    ):
+        return "skip"
+    return "skip"
+
+
+def should_route_commercial_ok(
+    category: tuple[str, str],
+    topics: list[str] | set[str],
+    tier: str,
+) -> bool:
+    """Route friendly-license model / topic hits into Commercial OK > Model."""
+    if tier != "friendly":
+        return False
+    if category[1] == "Model" and category[0] != COMMERCIAL_OK_DOMAIN:
+        return True
+    topic_set = {t.lower() for t in topics}
+    return bool(topic_set & COMMERCIAL_OK_TOPICS)
 
 
 def search_repositories(query: str) -> list[dict]:
@@ -721,6 +822,20 @@ def score_repo(
             score += min(8, 3 + prod_score // 2)
             reasons.append(f"production upside ({', '.join(prod_labels[:3])})")
 
+    # Commercial OK: prefer MIT / Apache-2.0 (repo license; weights may differ).
+    spdx = repo_license_spdx(repo)
+    tier = license_tier(spdx)
+    if tier == "friendly" and spdx:
+        key = spdx.lower().replace("_", "-")
+        if key in PREFERRED_COMMERCIAL_LICENSES:
+            score += 6
+            reasons.append(f"preferred license ({spdx})")
+        else:
+            score += 3
+            reasons.append(f"friendly license ({spdx})")
+        if category == COMMERCIAL_OK_SECTION:
+            score += 2
+
     score = min(score, 100)
     rationale = "; ".join(reasons) if reasons else "matched search filters"
     return score, rationale
@@ -732,8 +847,13 @@ def is_duplicate(full_name: str, html_url: str, existing: set[str]) -> bool:
     return key in existing or short in existing
 
 
+def _is_commercial_ok_candidate(c: Candidate) -> bool:
+    return c.category == COMMERCIAL_OK_SECTION
+
+
 def _is_model_candidate(c: Candidate) -> bool:
-    return c.category[1] == "Model"
+    """Audio|Music|Speech > Model (excludes Commercial OK featured band)."""
+    return c.category[1] == "Model" and c.category[0] != COMMERCIAL_OK_DOMAIN
 
 
 def _production_app_score(c: Candidate) -> int:
@@ -742,16 +862,37 @@ def _production_app_score(c: Candidate) -> int:
     return score
 
 
+def _preferred_license_rank(c: Candidate) -> int:
+    """Lower is better: MIT/Apache first among friendly licenses."""
+    if not c.license_spdx:
+        return 2
+    key = c.license_spdx.lower().replace("_", "-")
+    if key in PREFERRED_COMMERCIAL_LICENSES:
+        return 0
+    if c.license_tier == "friendly":
+        return 1
+    return 2
+
+
 def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidate]:
     """Rank by ToC fit, then confidence; cap per README section.
 
-    Reserves up to MIN_MODEL_PR_SLOTS for Audio|Music|Speech > Model so each
-    daily PR keeps a dedicated latest-and-popular models band when available.
-    Prefer popular (stars) + recently pushed models; soft-prefer production upside.
+    Reserves Commercial OK > Model slots (friendly MIT/Apache demos), then
+    Audio|Music|Speech > Model slots (latest/popular). Prefer popular + recent
+    models; soft-prefer production upside and MIT/Apache licenses.
     """
     ranked = sorted(
         candidates,
         key=lambda c: (-c.category_score, -c.confidence, -c.stars),
+    )
+    commercial = sorted(
+        [c for c in ranked if _is_commercial_ok_candidate(c)],
+        key=lambda c: (
+            _preferred_license_rank(c),
+            -c.stars,
+            -c.pushed_at.timestamp(),
+            -c.confidence,
+        ),
     )
     models = sorted(
         [c for c in ranked if _is_model_candidate(c)],
@@ -785,7 +926,15 @@ def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidat
         selected_names.add(c.full_name)
         return True
 
-    # 1) Seed the latest-models band first (across Audio/Music/Speech > Model).
+    # 1) Seed Commercial OK (friendly-license featured demos) first.
+    commercial_added = 0
+    for c in commercial:
+        if commercial_added >= MIN_COMMERCIAL_OK_PR_SLOTS:
+            break
+        if try_add(c):
+            commercial_added += 1
+
+    # 2) Seed Audio|Music|Speech > Model band.
     model_added = 0
     for c in models:
         if model_added >= MIN_MODEL_PR_SLOTS:
@@ -793,18 +942,21 @@ def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidat
         if try_add(c):
             model_added += 1
 
-    # 2) Fill remaining slots with the overall ranked list (models + others).
+    # 3) Fill remaining slots with the overall ranked list.
     for c in ranked:
         if len(selected) >= MAX_PR_ENTRIES:
             break
         try_add(c)
 
-    # Prefer models first (popular then recent), then remaining by ToC/confidence.
+    # Order: Commercial OK → ToC models → others.
     selected.sort(
         key=lambda c: (
-            0 if _is_model_candidate(c) else 1,
-            -c.stars if _is_model_candidate(c) else 0,
-            -c.pushed_at.timestamp() if _is_model_candidate(c) else 0,
+            0 if _is_commercial_ok_candidate(c) else 1 if _is_model_candidate(c) else 2,
+            _preferred_license_rank(c) if _is_commercial_ok_candidate(c) else 0,
+            -c.stars if (_is_commercial_ok_candidate(c) or _is_model_candidate(c)) else 0,
+            -c.pushed_at.timestamp()
+            if (_is_commercial_ok_candidate(c) or _is_model_candidate(c))
+            else 0,
             -c.category_score,
             -c.confidence,
             -c.stars,
@@ -880,6 +1032,13 @@ def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) 
                 )
                 continue
 
+            spdx = repo_license_spdx(repo)
+            tier = license_tier(spdx)
+            if should_route_commercial_ok(category, topics, tier):
+                category = COMMERCIAL_OK_SECTION
+                # Keep ToC score; bump slightly so friendly models clear the floor.
+                category_score = max(category_score, MIN_CATEGORY_SCORE)
+
             confidence, rationale = score_repo(repo, category, category_score)
 
             if confidence < HIGH_QUALITY_THRESHOLD:
@@ -903,6 +1062,8 @@ def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) 
                     category_score=category_score,
                     confidence=confidence,
                     rationale=rationale,
+                    license_spdx=spdx,
+                    license_tier=tier,
                 )
             )
 
@@ -915,6 +1076,10 @@ def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) 
 def format_readme_line(candidate: Candidate) -> str:
     name = candidate.full_name.split("/")[-1]
     desc = candidate.description.rstrip(".")
+    if _is_commercial_ok_candidate(candidate) and candidate.license_spdx:
+        return (
+            f"- [{name}]({candidate.html_url}) ({candidate.license_spdx}): {desc}"
+        )
     return f"- [{name}]({candidate.html_url}): {desc}"
 
 
@@ -994,11 +1159,23 @@ def _sort_models_latest_popular(models: list[Candidate]) -> list[Candidate]:
 
 
 def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -> str:
+    commercial = sorted(
+        [c for c in candidates if _is_commercial_ok_candidate(c)],
+        key=lambda c: (
+            _preferred_license_rank(c),
+            -c.stars,
+            -c.pushed_at.timestamp(),
+        ),
+    )
     models = _sort_models_latest_popular(
         [c for c in candidates if _is_model_candidate(c)]
     )
-    # Keep/Review cover non-model finds; models live only in the dedicated section.
-    others = [c for c in candidates if not _is_model_candidate(c)]
+    # Keep/Review: everything else (excludes Commercial OK + ToC models).
+    others = [
+        c
+        for c in candidates
+        if not _is_commercial_ok_candidate(c) and not _is_model_candidate(c)
+    ]
     keep = [c for c in others if c.confidence >= KEEP_THRESHOLD]
     review = [c for c in others if c.confidence < KEEP_THRESHOLD]
 
@@ -1007,6 +1184,8 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
         f"- Run date: {run_date}",
         f"- Candidates scanned: {stats.scanned}",
         f"- High-quality (≥{HIGH_QUALITY_THRESHOLD}): {len(candidates)}",
+        f"- Commercial OK (featured demos): {len(commercial)} "
+        f"(reserved up to {MIN_COMMERCIAL_OK_PR_SLOTS})",
         f"- Latest & popular models (Audio|Music|Speech > Model): {len(models)} "
         f"(reserved up to {MIN_MODEL_PR_SLOTS})",
         f"- Keep (≥{KEEP_THRESHOLD}): {len(keep)} · Review ({HIGH_QUALITY_THRESHOLD}–{KEEP_THRESHOLD - 1}): {len(review)}",
@@ -1033,6 +1212,33 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
             lines.append(
                 f"| [{c.full_name}]({c.html_url}) | {c.confidence} | {c.category_score} | "
                 f"{cat} | {_md_cell(c.description)} | {_md_cell(c.rationale, 120)} |"
+            )
+        lines.append("")
+
+    lines.extend(
+        [
+            "## Commercial OK — featured demos",
+            "",
+            "Friendly licenses only (MIT, Apache-2.0, BSD-2/3, ISC, Unlicense, 0BSD, "
+            "CC0). Prefer **MIT / Apache-2.0**. Repo license ≠ weights — verify "
+            "weight terms before shipping. Ordered by preferred license, then stars.",
+            "",
+        ]
+    )
+    if not commercial:
+        lines.extend(["_None in this run._", ""])
+    else:
+        lines.extend(
+            [
+                "| Repo | License | Stars | Updated | Conf | Description |",
+                "|------|---------|------:|---------|------|-------------|",
+            ]
+        )
+        for c in commercial:
+            lines.append(
+                f"| [{c.full_name}]({c.html_url}) | {c.license_spdx or '—'} | "
+                f"{c.stars} | {c.pushed_at.date().isoformat()} | {c.confidence} | "
+                f"{_md_cell(c.description)} |"
             )
         lines.append("")
 
@@ -1075,11 +1281,15 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
     for i, c in enumerate(candidates, 1):
         cat = f"{c.category[0]} > {c.category[1]}"
         band = "Keep" if c.confidence >= KEEP_THRESHOLD else "Review"
+        license_line = (
+            f"- **License:** {c.license_spdx or 'unknown'} ({c.license_tier})"
+        )
         lines.extend(
             [
                 f"#### {i}. [{c.full_name}]({c.html_url}) — **{c.confidence}** ({band}) — `{cat}`",
                 f"- **Description:** {c.description}",
                 f"- **Why:** {c.rationale}",
+                license_line,
                 f"- **ToC score:** {c.category_score}",
                 f"- **Impact:** {c.stars} stars; updated {c.pushed_at.date().isoformat()}",
                 f"- **Dedupe:** {c.dedupe_note}",

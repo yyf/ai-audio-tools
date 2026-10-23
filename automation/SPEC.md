@@ -183,17 +183,19 @@ No Hugging Face, arXiv, web crawls, or LLM calls.
 
 1. Load `README.md` → normalized GitHub URL dedupe set
 2. Load optional `automation/rejected.md` skip list
-3. Run bounded searches from `automation/queries.json` (first query is the
-   **latest open-source models** discovery task — ideally models with
-   potential applications in music / film / gaming / new media production)
+3. Run bounded searches from `automation/queries.json` (first three are
+   **Commercial OK** topic queries: `ai-audio`; speech (TTS / ASR / STT /
+   synthesis / translation / voice-cloning / diarization); `music-generation`
+   — each with `license:mit` / `license:apache-2.0`, sorted by recently
+   updated; then latest open-source models / general audio queries)
 4. Rule-based **confidence** score (0–100) and **category** assignment
-   (domain-first ToC matching)
+   (domain-first ToC matching), plus **license tier** from GitHub SPDX
 5. Keep candidates with confidence **≥ 55**, category score
    **≥ MIN_CATEGORY_SCORE (7)**, description length
    **≥ MIN_DESCRIPTION_LEN**, and no **NEGATIVE_KEYWORDS** hit
-6. Rank by ToC score then confidence; apply **MAX_PER_SECTION** cap;
-   reserve up to **MIN_MODEL_PR_SLOTS** for Audio|Music|Speech > Model
-   (models band ranked by stars, then last push, then production upside)
+6. Route **friendly-license** model / commercial-topic hits to
+   **Commercial OK > Model**; rank and apply **MAX_PER_SECTION** cap;
+   reserve **MIN_COMMERCIAL_OK_PR_SLOTS** then **MIN_MODEL_PR_SLOTS**
 7. **If count = 0 →** exit 0 (no PR)
 8. **If count ≥ 1 →** close open `bot/daily-candidates-*` PRs, create bot
    branch, insert README lines, push, open PR
@@ -201,6 +203,7 @@ No Hugging Face, arXiv, web crawls, or LLM calls.
 ### Category paths (must match README)
 
 ```
+Commercial OK > Model
 Audio  > Benchmark | Dataset | Annotation | Model | Security | Framework
 Music  > Model | Benchmark | Analysis | Production | Generation
 Speech > Model | Benchmark | Recognition | Production | Synthesis
@@ -220,10 +223,18 @@ Category assignment is **domain-first** then subsection (see
 6. Hard reject via `NEGATIVE_KEYWORDS` (discord bots, music players,
    homelab, quiz apps, generic LLM UIs, etc.) before scoring
 7. Bonus via `TOPIC_BONUS` when GitHub topics match curated tags
-8. **Latest & popular (models):** dedicated PR section ordered by stars
-   then last push. Soft preference via `PRODUCTION_APPLICATION_SIGNALS`
-   (music/film/gaming/new media) after popularity/recency — not a hard
-   filter.
+8. **License tiers (Commercial OK / featured demos):**
+   - **friendly** → MIT, Apache-2.0, BSD-2/3, ISC, Unlicense, 0BSD, CC0
+     (eligible for `Commercial OK > Model`; prefer MIT / Apache-2.0)
+   - **ok_with_care** → CC-BY-4.0, MPL-2.0, LGPL (general ToC only)
+   - **skip for featured** → GPL/AGPL, CC-BY-NC, CC-BY-SA, RAIL /
+     research-only, unknown / TBD / gated dual-license
+   - Note: repo license ≠ weights — Commercial OK list prefers MIT/Apache
+     on code; maintainers should still verify weight terms
+9. **Latest & popular (models):** dedicated PR section for
+   Audio|Music|Speech > Model ordered by stars then last push. Soft
+   preference via `PRODUCTION_APPLICATION_SIGNALS` after
+   popularity/recency.
 
 Fallback subsection when domain is clear but subsection is weak (never Model):
 `Audio>Framework`, `Music>Analysis`, `Speech>Recognition`.
@@ -262,12 +273,11 @@ caps at `MAX_PER_SECTION` (3) per Domain > Subsection.
 - [Name](url): short description
 ```
 
-**PR body:** dedicated **Latest & popular models (Audio / Music / Speech)**
-table (Audio|Music|Speech > Model only; ordered by stars then last push;
-soft-prefer music/film/gaming/new media production), then Keep (≥70) and
-Review (55–69) tables for non-model finds with confidence, ToC score,
-category, **original GitHub description**, and rationale; plus entry
-details and skipped list.
+**PR body:** dedicated **Commercial OK — featured demos** table (friendly
+licenses; prefer MIT/Apache; License column), then **Latest & popular
+models (Audio / Music / Speech)** table, then Keep (≥70) and Review
+(55–69) tables for remaining finds; plus entry details (including
+license) and skipped list.
 
 **Footer:** `This PR is proposal-only. Do not auto-merge.`
 
@@ -337,12 +347,14 @@ The workflow and script must **never**:
 | Negatives   | NEGATIVE_KEYWORDS hard-skip before scoring                    |
 | Topics      | TOPIC_BONUS adds confidence when GitHub topics match          |
 | Section cap | <= 3 entries per Domain > Subsection (MAX_PER_SECTION)        |
-| Model focus | Query #1 + reserve <= MIN_MODEL_PR_SLOTS (3) Model entries;  |
+| Commercial  | Queries #1–3 topic+MIT/Apache; reserve <=                     |
+| OK          | MIN_COMMERCIAL_OK_PR_SLOTS (2); friendly SPDX only            |
+| Model focus | Reserve <= MIN_MODEL_PR_SLOTS (3) Audio|Music|Speech Model;  |
 |             | PR section ordered by stars then last push; soft-prefer     |
 |             | music/film/gaming/new-media production upside               |
 | Keep band   | confidence >= 70 highlighted separately in PR body            |
-| Max per PR  | 10 entries (models band first, then ToC/confidence)         |
-| Queries     | <= 6 (MAX_QUERIES); models discovery is first                 |
+| Max per PR  | 10 entries (Commercial OK, then models, then rest)          |
+| Queries     | <= 8 (MAX_QUERIES); Commercial OK topics first                |
 | Schedule    | Weekdays ~9:00 AM America/Los_Angeles (cron 17:00 UTC)       |
 | Stale bot   | Close open bot/daily-candidates-* PRs before new one        |
 | PRs         |                                                             |
@@ -365,14 +377,17 @@ The workflow and script must **never**:
 
 ## Tuning
 
-- **Queries:** edit `automation/queries.json` (max 6 used; prefer quoted
-  phrases; keep query #1 as the latest-models discovery task)
-- **Keywords / scoring:** edit `DOMAIN_SIGNALS`, `SUBSECTION_SIGNALS`,
-  `NEGATIVE_KEYWORDS`, `TOPIC_BONUS`, and scoring in `automation/scout.py`
+- **Queries:** edit `automation/queries.json` (max 8 used; prefer quoted
+  phrases; keep queries #1–3 as Commercial OK topic+license discovery for
+  audio, speech (ASR+TTS+…), and music)
+- **Keywords / scoring / licenses:** edit `DOMAIN_SIGNALS`,
+  `SUBSECTION_SIGNALS`, `NEGATIVE_KEYWORDS`, `TOPIC_BONUS`,
+  `FRIENDLY_LICENSES`, and scoring in `automation/scout.py`
 - **Reject list:** add URLs to `automation/rejected.md`
 - **Threshold / caps:** constants at top of `automation/scout.py`
   (`MIN_CATEGORY_SCORE`, `MIN_MODEL_SECTION_SCORE`, `MIN_MODEL_PR_SLOTS`,
-  `HIGH_QUALITY_THRESHOLD`, `MAX_PER_SECTION`, …)
+  `MIN_COMMERCIAL_OK_PR_SLOTS`, `HIGH_QUALITY_THRESHOLD`,
+  `MAX_PER_SECTION`, …)
 
 ---
 
@@ -407,5 +422,9 @@ The workflow and script must **never**:
 |            | production upside in query #1, scoring, and PR ordering       |
 | 2026-10-22 | Dedicated PR section for latest & popular Audio/Music/Speech  |
 |            | models (stars + last push columns; Keep/Review are non-model) |
+| 2026-10-22 | Commercial OK section + scout: friendly-license filter,       |
+|            | topic MIT/Apache queries, featured-demos PR band              |
+| 2026-10-22 | Commercial OK speech coverage: ASR/STT + TTS + translation    |
+|            | and related speech topics (not TTS-only)                      |
 +------------+--------------------------------------------------------------+
 ```

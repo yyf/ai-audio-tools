@@ -8,16 +8,20 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from scout import (  # noqa: E402
+    COMMERCIAL_OK_SECTION,
     KEEP_THRESHOLD,
     MAX_PER_SECTION,
     MIN_CATEGORY_SCORE,
+    MIN_COMMERCIAL_OK_PR_SLOTS,
     MIN_MODEL_PR_SLOTS,
     Candidate,
     RunStats,
     build_pr_body,
     categorize,
+    license_tier,
     negative_hit,
     select_for_pr,
+    should_route_commercial_ok,
 )
 
 CASES: list[tuple[str, str, list[str], tuple[str, str]]] = [
@@ -212,19 +216,30 @@ NEGATIVE_CASES: list[tuple[str, str, list[str], str]] = [
 ]
 
 
-def _fake_candidate(name: str, category: tuple[str, str], cat_score: int, conf: int) -> Candidate:
+def _fake_candidate(
+    name: str,
+    category: tuple[str, str],
+    cat_score: int,
+    conf: int,
+    *,
+    license_spdx: str | None = None,
+    license_tier_name: str = "skip",
+    stars: int = 50,
+) -> Candidate:
     from datetime import datetime, timezone
 
     return Candidate(
         full_name=name,
         html_url=f"https://github.com/{name}",
         description="x" * 20,
-        stars=50,
+        stars=stars,
         pushed_at=datetime.now(timezone.utc),
         category=category,
         category_score=cat_score,
         confidence=conf,
         rationale="test",
+        license_spdx=license_spdx,
+        license_tier=license_tier_name,
     )
 
 
@@ -281,19 +296,20 @@ def main() -> int:
     # prefer more popular (stars) models in the reserved band.
     stats2 = RunStats()
     model_pool = [
-        _fake_candidate("org/audio-fm", ("Audio", "Model"), 20, 60),
-        _fake_candidate("org/music-fm", ("Music", "Model"), 18, 58),
-        _fake_candidate("org/speech-fm", ("Speech", "Model"), 16, 56),
+        _fake_candidate("org/audio-fm", ("Audio", "Model"), 20, 60, stars=100),
+        _fake_candidate("org/music-fm", ("Music", "Model"), 18, 58, stars=500),
+        _fake_candidate("org/speech-fm", ("Speech", "Model"), 16, 56, stars=50),
     ]
-    model_pool[0].stars = 100
-    model_pool[1].stars = 500
-    model_pool[2].stars = 50
     hot_pool = [
         _fake_candidate(f"org/hot-asr-{i}", ("Speech", "Recognition"), 50 - i, 90 - i)
         for i in range(8)
     ]
     selected2 = select_for_pr(model_pool + hot_pool, stats2)
-    model_count = sum(1 for c in selected2 if c.category[1] == "Model")
+    model_count = sum(
+        1
+        for c in selected2
+        if c.category[1] == "Model" and c.category[0] != "Commercial OK"
+    )
     ok_models = model_count >= min(MIN_MODEL_PR_SLOTS, len(model_pool))
     ok_first = selected2 and selected2[0].category[1] == "Model"
     # Most-starred model should lead the models band.
@@ -320,7 +336,112 @@ def main() -> int:
         f"(min={MIN_MODEL_PR_SLOTS}); first={selected2[0].full_name if selected2 else None}"
     )
 
-    total = len(CASES) + len(WEAK) + len(NEGATIVE_CASES) + 2
+    # License tiers + Commercial OK routing / reservation.
+    license_cases = [
+        ("MIT", "friendly"),
+        ("Apache-2.0", "friendly"),
+        ("BSD-3-Clause", "friendly"),
+        ("CC0-1.0", "friendly"),
+        ("CC-BY-4.0", "ok_with_care"),
+        ("MPL-2.0", "ok_with_care"),
+        ("LGPL-3.0", "ok_with_care"),
+        ("GPL-3.0", "skip"),
+        ("AGPL-3.0", "skip"),
+        ("CC-BY-NC-4.0", "skip"),
+        ("CC-BY-SA-4.0", "skip"),
+        (None, "skip"),
+    ]
+    ok_tiers = True
+    for spdx, expect in license_cases:
+        got = license_tier(spdx)
+        if got != expect:
+            ok_tiers = False
+            print(f"FAIL: license_tier({spdx!r}) -> {got!r} expected {expect!r}")
+    if ok_tiers:
+        print(f"OK: license_tier ({len(license_cases)} cases)")
+    else:
+        failed += 1
+
+    ok_route = (
+        should_route_commercial_ok(("Audio", "Model"), [], "friendly")
+        and should_route_commercial_ok(
+            ("Speech", "Synthesis"), ["text-to-speech"], "friendly"
+        )
+        and should_route_commercial_ok(
+            ("Speech", "Recognition"), ["speech-recognition", "asr"], "friendly"
+        )
+        and should_route_commercial_ok(
+            ("Speech", "Recognition"), ["speech-to-text"], "friendly"
+        )
+        and should_route_commercial_ok(
+            ("Speech", "Recognition"), ["speech-translation"], "friendly"
+        )
+        and not should_route_commercial_ok(("Audio", "Model"), [], "skip")
+        and not should_route_commercial_ok(
+            ("Speech", "Synthesis"), ["text-to-speech"], "ok_with_care"
+        )
+    )
+    status = "OK" if ok_route else "FAIL"
+    if not ok_route:
+        failed += 1
+    print(f"{status}: should_route_commercial_ok")
+
+    stats3 = RunStats()
+    commercial_pool = [
+        _fake_candidate(
+            "org/mit-tts",
+            COMMERCIAL_OK_SECTION,
+            20,
+            70,
+            license_spdx="MIT",
+            license_tier_name="friendly",
+            stars=80,
+        ),
+        _fake_candidate(
+            "org/apache-music",
+            COMMERCIAL_OK_SECTION,
+            18,
+            68,
+            license_spdx="Apache-2.0",
+            license_tier_name="friendly",
+            stars=200,
+        ),
+    ]
+    hot_pool3 = [
+        _fake_candidate(f"org/hot-tool-{i}", ("Speech", "Recognition"), 50 - i, 90 - i)
+        for i in range(8)
+    ]
+    selected3 = select_for_pr(commercial_pool + hot_pool3, stats3)
+    commercial_count = sum(1 for c in selected3 if c.category == COMMERCIAL_OK_SECTION)
+    ok_commercial = commercial_count >= min(
+        MIN_COMMERCIAL_OK_PR_SLOTS, len(commercial_pool)
+    )
+    ok_commercial_first = selected3 and selected3[0].category == COMMERCIAL_OK_SECTION
+    # Prefer higher stars among MIT/Apache commercial picks.
+    ok_apache_leads = selected3 and selected3[0].full_name == "org/apache-music"
+    body3 = build_pr_body("2026-10-22", RunStats(scanned=1), selected3)
+    ok_commercial_body = (
+        "Commercial OK — featured demos" in body3
+        and "| License |" in body3
+        and "org/apache-music" in body3
+        and body3.index("## Commercial OK") < body3.index("## Latest & popular models")
+    )
+    status = (
+        "OK"
+        if ok_commercial and ok_commercial_first and ok_apache_leads and ok_commercial_body
+        else "FAIL"
+    )
+    if not (
+        ok_commercial and ok_commercial_first and ok_apache_leads and ok_commercial_body
+    ):
+        failed += 1
+    print(
+        f"{status}: commercial OK count={commercial_count} "
+        f"(min={MIN_COMMERCIAL_OK_PR_SLOTS}); "
+        f"first={selected3[0].full_name if selected3 else None}"
+    )
+
+    total = len(CASES) + len(WEAK) + len(NEGATIVE_CASES) + 5
     print(f"\n{total - failed}/{total} passed")
     return 1 if failed else 0
 
