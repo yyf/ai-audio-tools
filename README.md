@@ -37,6 +37,9 @@ Friendly licenses for featured demos and commercial use: MIT, Apache-2.0, BSD-2/
 
 ## Model
 
+- [YouDub-webui](https://github.com/liuzhao1225/YouDub-webui) (Apache-2.0): Open-source AI video localization and dubbing for YouTube/Bilibili: speech recognition, subtitle translation, voice cloning, audio mixing and rendering. 开源 AI 视频翻译配音工具。
+- [mlx-audio-swift](https://github.com/Blaizzy/mlx-audio-swift) (MIT): A modular Swift SDK for audio processing with MLX on Apple Silicon
+- [TTS-MultiModel](https://github.com/ReSerendipity/TTS-MultiModel) (Apache-2.0): 五引擎语音合成：VoxCPM2 / IndexTTS 2.5 / 2.0 / OpenVoice / Step-Audio-EditX，声音克隆、声音设计、剧本配音、流式生成，中英日韩界面 | Multi-engine TTS (5 engines): voice cloning, voice design, script dubbing & streaming, 5-language UI
 # Audio
 
 ## Benchmark
@@ -190,6 +193,7 @@ Friendly licenses for featured demos and commercial use: MIT, Apache-2.0, BSD-2/
 - [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
 - [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
 
+- [gary4juce](https://github.com/betweentwomidnights/gary4juce): a bunch of open source ai music models inside the DAW
 # Speech
 
 ## Model
@@ -250,6 +254,9 @@ Friendly licenses for featured demos and commercial use: MIT, Apache-2.0, BSD-2/
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
 
+- [HaizFlow](https://github.com/MachHongHai/HaizFlow): Free Windows desktop app for AI video translation, subtitles and dubbing, with local CPU/GPU models, voice cloning, batch processing and video downloads
+- [speech-studio](https://github.com/timoncool/speech-studio): Free offline AI voice studio for Windows — text-to-speech with cloned and built-in voices, and speech recognition with speakers. Russian done right. 100% local, one native .exe, zero Python
+- [marmalade-stt-android](https://github.com/maxwhipw/marmalade-stt-android): Offline, private speech-to-text for Android: a voice input engine for FUTO Keyboard and other keyboards and apps. Audio never leaves the phone
 ## Production
 
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
@@ -286,3 +293,6 @@ Friendly licenses for featured demos and commercial use: MIT, Apache-2.0, BSD-2/
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [dub-studio](https://github.com/timoncool/dub-studio): Free offline AI video dubbing studio for Windows — voice cloning, translation, subtitles & on-screen-text localization. 100% local, one native .exe, zero Python
+- [soundbox](https://github.com/HamSanders/soundbox): Free, open-source, local alternative to ElevenLabs and Suno. AI sound effects, music with lyrics, text-to-speech and voice cloning on your own GPU (Stable Audio, ACE-Step and more). No account, no credits, offline. Windows/macOS app, HTTP API and a 21-tool MCP server for Claude Code and Cursor
+- [oneclick-subtitles-generator](https://github.com/nganlinh4/oneclick-subtitles-generator): 🎬 Auto-subtitle videos with AI transcription, translation, voice cloning, professional rendering, background image and music generator
