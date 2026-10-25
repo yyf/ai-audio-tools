@@ -184,18 +184,17 @@ No Hugging Face, arXiv, web crawls, or LLM calls.
 1. Load `README.md` → normalized GitHub URL dedupe set
 2. Load optional `automation/rejected.md` skip list
 3. Run bounded searches from `automation/queries.json` (first three are
-   **Commercial OK** topic queries: `ai-audio`; speech (TTS / ASR / STT /
-   synthesis / translation / voice-cloning / diarization); `music-generation`
-   — each with `license:mit` / `license:apache-2.0`, sorted by recently
-   updated; then latest open-source models / general audio queries)
+   **Commercial OK** topic queries; next are **Pipelines** multi-model /
+   voice-agent queries; then latest open-source models / general audio)
 4. Rule-based **confidence** score (0–100) and **category** assignment
    (domain-first ToC matching), plus **license tier** from GitHub SPDX
 5. Keep candidates with confidence **≥ 55**, category score
    **≥ MIN_CATEGORY_SCORE (7)**, description length
    **≥ MIN_DESCRIPTION_LEN**, and no **NEGATIVE_KEYWORDS** hit
-6. Route **friendly-license** model / commercial-topic hits to
-   **Commercial OK > Model**; rank and apply **MAX_PER_SECTION** cap;
-   reserve **MIN_COMMERCIAL_OK_PR_SLOTS** then **MIN_MODEL_PR_SLOTS**
+6. Route **multi-model chaining** hits to **Pipelines > Applications**,
+   else **friendly-license** model / commercial-topic hits to
+   **Commercial OK > Model**; reserve **MIN_COMMERCIAL_OK_PR_SLOTS**,
+   **MIN_PIPELINE_PR_SLOTS**, then **MIN_MODEL_PR_SLOTS**
 7. **If count = 0 →** exit 0 (no PR)
 8. **If count ≥ 1 →** close open `bot/daily-candidates-*` PRs, create bot
    branch, insert README lines, push, open PR
@@ -204,6 +203,7 @@ No Hugging Face, arXiv, web crawls, or LLM calls.
 
 ```
 Commercial OK > Model
+Pipelines     > Applications
 Audio  > Benchmark | Dataset | Annotation | Model | Security | Framework
 Music  > Model | Benchmark | Analysis | Production | Generation
 Speech > Model | Benchmark | Recognition | Production | Synthesis
@@ -231,7 +231,12 @@ Category assignment is **domain-first** then subsection (see
      research-only, unknown / TBD / gated dual-license
    - Note: repo license ≠ weights — Commercial OK list prefers MIT/Apache
      on code; maintainers should still verify weight terms
-9. **Latest & popular (models):** dedicated PR section for
+9. **Pipelines (multi-model real-world apps):** route when
+   `pipeline_chain_score` ≥ `MIN_PIPELINE_SCORE` (chain / orchestration /
+   voice-agent signals, ideally 2+ capability families like ASR+TTS).
+   Prefer emerging (recent push) + popular (stars). Takes priority over
+   Commercial OK when chaining evidence is present.
+10. **Latest & popular (models):** dedicated PR section for
    Audio|Music|Speech > Model ordered by stars then last push. Soft
    preference via `PRODUCTION_APPLICATION_SIGNALS` after
    popularity/recency.
@@ -273,11 +278,11 @@ caps at `MAX_PER_SECTION` (3) per Domain > Subsection.
 - [Name](url): short description
 ```
 
-**PR body:** dedicated **Commercial OK — featured demos** table (friendly
-licenses; prefer MIT/Apache; License column), then **Latest & popular
-models (Audio / Music / Speech)** table, then Keep (≥70) and Review
-(55–69) tables for remaining finds; plus entry details (including
-license) and skipped list.
+**PR body:** dedicated **Commercial OK — featured demos** table, then
+**Pipelines — multi-model real-world apps** table (stars + last push),
+then **Latest & popular models (Audio / Music / Speech)** table, then
+Keep (≥70) and Review (55–69) for remaining finds; plus entry details
+and skipped list.
 
 **Footer:** `This PR is proposal-only. Do not auto-merge.`
 
@@ -349,12 +354,14 @@ The workflow and script must **never**:
 | Section cap | <= 3 entries per Domain > Subsection (MAX_PER_SECTION)        |
 | Commercial  | Queries #1–3 topic+MIT/Apache; reserve <=                     |
 | OK          | MIN_COMMERCIAL_OK_PR_SLOTS (2); friendly SPDX only            |
+| Pipelines   | Queries #4–5 multi-model / voice-agent; reserve <=            |
+|             | MIN_PIPELINE_PR_SLOTS (2); chain score >= MIN_PIPELINE_SCORE |
 | Model focus | Reserve <= MIN_MODEL_PR_SLOTS (3) Audio|Music|Speech Model;  |
 |             | PR section ordered by stars then last push; soft-prefer     |
 |             | music/film/gaming/new-media production upside               |
 | Keep band   | confidence >= 70 highlighted separately in PR body            |
-| Max per PR  | 10 entries (Commercial OK, then models, then rest)          |
-| Queries     | <= 8 (MAX_QUERIES); Commercial OK topics first                |
+| Max per PR  | 10 (Commercial OK → Pipelines → models → rest)              |
+| Queries     | <= 9 (MAX_QUERIES); Commercial OK then Pipelines first        |
 | Schedule    | Weekdays ~9:00 AM America/Los_Angeles (cron 17:00 UTC)       |
 | Stale bot   | Close open bot/daily-candidates-* PRs before new one        |
 | PRs         |                                                             |
@@ -377,17 +384,17 @@ The workflow and script must **never**:
 
 ## Tuning
 
-- **Queries:** edit `automation/queries.json` (max 8 used; prefer quoted
-  phrases; keep queries #1–3 as Commercial OK topic+license discovery for
-  audio, speech (ASR+TTS+…), and music)
+- **Queries:** edit `automation/queries.json` (max 9 used; prefer quoted
+  phrases; keep #1–3 Commercial OK and #4–5 Pipelines discovery)
 - **Keywords / scoring / licenses:** edit `DOMAIN_SIGNALS`,
   `SUBSECTION_SIGNALS`, `NEGATIVE_KEYWORDS`, `TOPIC_BONUS`,
-  `FRIENDLY_LICENSES`, and scoring in `automation/scout.py`
+  `FRIENDLY_LICENSES`, `PIPELINE_CHAIN_SIGNALS`, and scoring in
+  `automation/scout.py`
 - **Reject list:** add URLs to `automation/rejected.md`
 - **Threshold / caps:** constants at top of `automation/scout.py`
   (`MIN_CATEGORY_SCORE`, `MIN_MODEL_SECTION_SCORE`, `MIN_MODEL_PR_SLOTS`,
-  `MIN_COMMERCIAL_OK_PR_SLOTS`, `HIGH_QUALITY_THRESHOLD`,
-  `MAX_PER_SECTION`, …)
+  `MIN_COMMERCIAL_OK_PR_SLOTS`, `MIN_PIPELINE_PR_SLOTS`,
+  `MIN_PIPELINE_SCORE`, `HIGH_QUALITY_THRESHOLD`, `MAX_PER_SECTION`, …)
 
 ---
 
@@ -426,5 +433,7 @@ The workflow and script must **never**:
 |            | topic MIT/Apache queries, featured-demos PR band              |
 | 2026-10-22 | Commercial OK speech coverage: ASR/STT + TTS + translation    |
 |            | and related speech topics (not TTS-only)                      |
+| 2026-10-24 | Pipelines section + scout: multi-model chaining apps that     |
+|            | solve real-world problems (emerging + popular PR band)        |
 +------------+--------------------------------------------------------------+
 ```

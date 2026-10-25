@@ -20,7 +20,7 @@ from pathlib import Path
 
 # --- v1 locked config (keep in sync with automation/SPEC.md) ---
 
-MAX_QUERIES = 8
+MAX_QUERIES = 9
 MAX_RESULTS_PER_QUERY = 10
 MAX_CANDIDATES = 30
 MIN_STARS = 10
@@ -34,6 +34,9 @@ MAX_PER_SECTION = 3  # max entries per Domain > Subsection in one PR
 MIN_MODEL_PR_SLOTS = 3
 # Reserve PR slots for Commercial OK > Model (friendly-license featured demos).
 MIN_COMMERCIAL_OK_PR_SLOTS = 2
+# Reserve PR slots for Pipelines > Applications (multi-model real-world chaining).
+MIN_PIPELINE_PR_SLOTS = 2
+MIN_PIPELINE_SCORE = 8  # chain / multi-capability floor for Pipelines routing
 MIN_DESCRIPTION_LEN = 15  # skip empty / placeholder descriptions
 BOT_BRANCH_PREFIX = "bot/daily-candidates-"
 README_PATH = Path("README.md")
@@ -43,6 +46,71 @@ REJECTED_PATH = Path("automation/rejected.md")
 # Featured demos / Commercial OK — repo SPDX from GitHub (weights may differ).
 COMMERCIAL_OK_DOMAIN = "Commercial OK"
 COMMERCIAL_OK_SECTION = (COMMERCIAL_OK_DOMAIN, "Model")
+
+# Multi-model chaining apps that solve real-world problems.
+PIPELINES_DOMAIN = "Pipelines"
+PIPELINES_SECTION = (PIPELINES_DOMAIN, "Applications")
+PIPELINE_CHAIN_SIGNALS: list[tuple[str, int]] = [
+    ("voice agent", 6),
+    ("audio pipeline", 6),
+    ("speech pipeline", 6),
+    ("multi-model", 6),
+    ("model pipeline", 5),
+    ("chains models", 5),
+    ("chain models", 5),
+    ("orchestration", 5),
+    ("end-to-end", 4),
+    ("stt and tts", 5),
+    ("asr and tts", 5),
+    ("speech-to-speech", 4),
+    ("meeting transcription", 5),
+    ("meeting notes", 4),
+    ("conversational ai", 4),
+    ("conversational voice", 5),
+    ("workflow", 3),
+    ("real-world", 3),
+    ("production-ready", 3),
+    ("pipecat", 5),
+    ("voice ai platform", 5),
+    ("telephony", 3),
+]
+# Distinct capability families — hitting 2+ supports "chaining" intent.
+PIPELINE_CAPABILITY_FAMILIES: list[tuple[str, tuple[str, ...]]] = [
+    (
+        "asr",
+        (
+            "whisper",
+            "speech-to-text",
+            "speech recognition",
+            "speech-recognition",
+            "automatic speech",
+            "transcription",
+            "asr",
+            "stt",
+        ),
+    ),
+    (
+        "tts",
+        (
+            "text-to-speech",
+            "text to speech",
+            "speech synthesis",
+            "voice cloning",
+            "tts",
+        ),
+    ),
+    (
+        "diarization",
+        ("diarization", "speaker diarization", "speaker identification"),
+    ),
+    ("llm", ("llm", "language model", "gpt", "agent")),
+    (
+        "music",
+        ("music generation", "musicgen", "text-to-music", "text to music"),
+    ),
+    ("vad", ("vad", "voice activity")),
+    ("codec", ("neural codec", "audio codec", "encodec")),
+]
 FRIENDLY_LICENSES = {
     "mit",
     "apache-2.0",
@@ -106,7 +174,8 @@ NOTABLE_ORGS = {
 }
 
 # Domain-first categorization aligned with README ToC:
-#   Commercial OK > Model   (friendly-license featured demos; routed post-score)
+#   Commercial OK > Model        (friendly-license featured demos; routed post-score)
+#   Pipelines > Applications     (multi-model chaining for real-world problems)
 #   Audio  > Benchmark | Dataset | Annotation | Model | Security | Framework
 #   Music  > Model | Benchmark | Analysis | Production | Generation
 #   Speech > Model | Benchmark | Recognition | Production | Synthesis
@@ -183,6 +252,11 @@ TOPIC_BONUS: set[str] = {
     "foley",
     "sound-design",
     "game-audio",
+    "voice-agent",
+    "voice-ai",
+    "audio-pipeline",
+    "speech-pipeline",
+    "pipecat",
 }
 
 # Ideal applications for the latest-models task (soft preference, not a hard filter).
@@ -621,10 +695,55 @@ def should_route_commercial_ok(
     """Route friendly-license model / topic hits into Commercial OK > Model."""
     if tier != "friendly":
         return False
-    if category[1] == "Model" and category[0] != COMMERCIAL_OK_DOMAIN:
+    if category[0] in {COMMERCIAL_OK_DOMAIN, PIPELINES_DOMAIN}:
+        return False
+    if category[1] == "Model":
         return True
     topic_set = {t.lower() for t in topics}
     return bool(topic_set & COMMERCIAL_OK_TOPICS)
+
+
+def pipeline_chain_score(
+    full_name: str,
+    description: str,
+    topics: list[str] | set[str],
+) -> tuple[int, list[str]]:
+    """Score multi-model chaining / real-world pipeline signals."""
+    topic_str = " ".join(topics)
+    blob = f"{full_name} {description} {topic_str}".lower()
+    score, _ = _weighted_score(blob, PIPELINE_CHAIN_SIGNALS)
+    labels: list[str] = [
+        phrase
+        for phrase, _weight in PIPELINE_CHAIN_SIGNALS
+        if _phrase_matches(blob, phrase)
+    ]
+    families_hit = [
+        name
+        for name, phrases in PIPELINE_CAPABILITY_FAMILIES
+        if any(_phrase_matches(blob, p.strip()) for p in phrases)
+    ]
+    if len(families_hit) >= 2:
+        score += 4 + min(4, len(families_hit) - 2)
+        labels.append(f"capabilities ({', '.join(families_hit[:4])})")
+    return score, labels
+
+
+def should_route_pipeline(
+    full_name: str,
+    description: str,
+    topics: list[str] | set[str],
+    category: tuple[str, str],
+) -> bool:
+    """Route multi-model chaining apps into Pipelines > Applications."""
+    if category[0] in {COMMERCIAL_OK_DOMAIN, PIPELINES_DOMAIN}:
+        return False
+    # Single foundation/pretrained models stay in Model / Commercial OK bands.
+    if category[1] == "Model" and category[0] in {"Audio", "Music", "Speech"}:
+        chain, _ = pipeline_chain_score(full_name, description, topics)
+        # Only steal Model entries when chaining evidence is strong.
+        return chain >= MIN_PIPELINE_SCORE + 4
+    score, _ = pipeline_chain_score(full_name, description, topics)
+    return score >= MIN_PIPELINE_SCORE
 
 
 def search_repositories(query: str) -> list[dict]:
@@ -836,6 +955,22 @@ def score_repo(
         if category == COMMERCIAL_OK_SECTION:
             score += 2
 
+    # Pipelines: emerging + popular multi-model chaining for real-world problems.
+    if category == PIPELINES_SECTION:
+        chain, chain_labels = pipeline_chain_score(
+            repo.get("full_name") or "",
+            description,
+            topics,
+        )
+        if chain >= MIN_PIPELINE_SCORE:
+            score += min(10, 4 + chain // 3)
+            reasons.append(
+                f"multi-model pipeline ({', '.join(chain_labels[:3]) or 'signals'})"
+            )
+        if stars >= 30 and pushed_at >= recency_cutoff:
+            score += 3
+            reasons.append("emerging + popular")
+
     score = min(score, 100)
     rationale = "; ".join(reasons) if reasons else "matched search filters"
     return score, rationale
@@ -851,14 +986,26 @@ def _is_commercial_ok_candidate(c: Candidate) -> bool:
     return c.category == COMMERCIAL_OK_SECTION
 
 
+def _is_pipeline_candidate(c: Candidate) -> bool:
+    return c.category == PIPELINES_SECTION
+
+
 def _is_model_candidate(c: Candidate) -> bool:
-    """Audio|Music|Speech > Model (excludes Commercial OK featured band)."""
-    return c.category[1] == "Model" and c.category[0] != COMMERCIAL_OK_DOMAIN
+    """Audio|Music|Speech > Model (excludes Commercial OK / Pipelines bands)."""
+    return c.category[1] == "Model" and c.category[0] not in {
+        COMMERCIAL_OK_DOMAIN,
+        PIPELINES_DOMAIN,
+    }
 
 
 def _production_app_score(c: Candidate) -> int:
     blob = " ".join([c.full_name, c.description]).lower()
     score, _ = _weighted_score(blob, PRODUCTION_APPLICATION_SIGNALS)
+    return score
+
+
+def _pipeline_rank_score(c: Candidate) -> int:
+    score, _ = pipeline_chain_score(c.full_name, c.description, [])
     return score
 
 
@@ -877,9 +1024,9 @@ def _preferred_license_rank(c: Candidate) -> int:
 def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidate]:
     """Rank by ToC fit, then confidence; cap per README section.
 
-    Reserves Commercial OK > Model slots (friendly MIT/Apache demos), then
-    Audio|Music|Speech > Model slots (latest/popular). Prefer popular + recent
-    models; soft-prefer production upside and MIT/Apache licenses.
+    Reserves Commercial OK, Pipelines (multi-model real-world apps), then
+    Audio|Music|Speech > Model slots. Prefer popular + recent for pipelines
+    and models; soft-prefer MIT/Apache for Commercial OK.
     """
     ranked = sorted(
         candidates,
@@ -891,6 +1038,15 @@ def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidat
             _preferred_license_rank(c),
             -c.stars,
             -c.pushed_at.timestamp(),
+            -c.confidence,
+        ),
+    )
+    pipelines = sorted(
+        [c for c in ranked if _is_pipeline_candidate(c)],
+        key=lambda c: (
+            -c.stars,
+            -c.pushed_at.timestamp(),
+            -_pipeline_rank_score(c),
             -c.confidence,
         ),
     )
@@ -926,7 +1082,7 @@ def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidat
         selected_names.add(c.full_name)
         return True
 
-    # 1) Seed Commercial OK (friendly-license featured demos) first.
+    # 1) Seed Commercial OK (friendly-license featured demos).
     commercial_added = 0
     for c in commercial:
         if commercial_added >= MIN_COMMERCIAL_OK_PR_SLOTS:
@@ -934,7 +1090,15 @@ def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidat
         if try_add(c):
             commercial_added += 1
 
-    # 2) Seed Audio|Music|Speech > Model band.
+    # 2) Seed Pipelines (emerging + popular multi-model real-world apps).
+    pipeline_added = 0
+    for c in pipelines:
+        if pipeline_added >= MIN_PIPELINE_PR_SLOTS:
+            break
+        if try_add(c):
+            pipeline_added += 1
+
+    # 3) Seed Audio|Music|Speech > Model band.
     model_added = 0
     for c in models:
         if model_added >= MIN_MODEL_PR_SLOTS:
@@ -942,21 +1106,28 @@ def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidat
         if try_add(c):
             model_added += 1
 
-    # 3) Fill remaining slots with the overall ranked list.
+    # 4) Fill remaining slots with the overall ranked list.
     for c in ranked:
         if len(selected) >= MAX_PR_ENTRIES:
             break
         try_add(c)
 
-    # Order: Commercial OK → ToC models → others.
+    # Order: Commercial OK → Pipelines → ToC models → others.
+    def _band(c: Candidate) -> int:
+        if _is_commercial_ok_candidate(c):
+            return 0
+        if _is_pipeline_candidate(c):
+            return 1
+        if _is_model_candidate(c):
+            return 2
+        return 3
+
     selected.sort(
         key=lambda c: (
-            0 if _is_commercial_ok_candidate(c) else 1 if _is_model_candidate(c) else 2,
+            _band(c),
             _preferred_license_rank(c) if _is_commercial_ok_candidate(c) else 0,
-            -c.stars if (_is_commercial_ok_candidate(c) or _is_model_candidate(c)) else 0,
-            -c.pushed_at.timestamp()
-            if (_is_commercial_ok_candidate(c) or _is_model_candidate(c))
-            else 0,
+            -c.stars if _band(c) <= 2 else 0,
+            -c.pushed_at.timestamp() if _band(c) <= 2 else 0,
             -c.category_score,
             -c.confidence,
             -c.stars,
@@ -1034,9 +1205,12 @@ def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) 
 
             spdx = repo_license_spdx(repo)
             tier = license_tier(spdx)
-            if should_route_commercial_ok(category, topics, tier):
+            # Pipelines (multi-model real-world apps) before Commercial OK Model.
+            if should_route_pipeline(full_name, description, topics, category):
+                category = PIPELINES_SECTION
+                category_score = max(category_score, MIN_CATEGORY_SCORE)
+            elif should_route_commercial_ok(category, topics, tier):
                 category = COMMERCIAL_OK_SECTION
-                # Keep ToC score; bump slightly so friendly models clear the floor.
                 category_score = max(category_score, MIN_CATEGORY_SCORE)
 
             confidence, rationale = score_repo(repo, category, category_score)
@@ -1167,14 +1341,24 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
             -c.pushed_at.timestamp(),
         ),
     )
+    pipelines = sorted(
+        [c for c in candidates if _is_pipeline_candidate(c)],
+        key=lambda c: (
+            -c.stars,
+            -c.pushed_at.timestamp(),
+            -_pipeline_rank_score(c),
+        ),
+    )
     models = _sort_models_latest_popular(
         [c for c in candidates if _is_model_candidate(c)]
     )
-    # Keep/Review: everything else (excludes Commercial OK + ToC models).
+    # Keep/Review: everything else (excludes featured bands).
     others = [
         c
         for c in candidates
-        if not _is_commercial_ok_candidate(c) and not _is_model_candidate(c)
+        if not _is_commercial_ok_candidate(c)
+        and not _is_pipeline_candidate(c)
+        and not _is_model_candidate(c)
     ]
     keep = [c for c in others if c.confidence >= KEEP_THRESHOLD]
     review = [c for c in others if c.confidence < KEEP_THRESHOLD]
@@ -1186,6 +1370,8 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
         f"- High-quality (≥{HIGH_QUALITY_THRESHOLD}): {len(candidates)}",
         f"- Commercial OK (featured demos): {len(commercial)} "
         f"(reserved up to {MIN_COMMERCIAL_OK_PR_SLOTS})",
+        f"- Pipelines (multi-model real-world apps): {len(pipelines)} "
+        f"(reserved up to {MIN_PIPELINE_PR_SLOTS})",
         f"- Latest & popular models (Audio|Music|Speech > Model): {len(models)} "
         f"(reserved up to {MIN_MODEL_PR_SLOTS})",
         f"- Keep (≥{KEEP_THRESHOLD}): {len(keep)} · Review ({HIGH_QUALITY_THRESHOLD}–{KEEP_THRESHOLD - 1}): {len(review)}",
@@ -1238,6 +1424,33 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
             lines.append(
                 f"| [{c.full_name}]({c.html_url}) | {c.license_spdx or '—'} | "
                 f"{c.stars} | {c.pushed_at.date().isoformat()} | {c.confidence} | "
+                f"{_md_cell(c.description)} |"
+            )
+        lines.append("")
+
+    lines.extend(
+        [
+            "## Pipelines — multi-model real-world apps",
+            "",
+            "Emerging and popular repos that **chain multiple AI audio / speech / "
+            "music models** to solve real-world problems (voice agents, meeting "
+            "tools, end-to-end studios). Ordered by **stars** then **last push**.",
+            "",
+        ]
+    )
+    if not pipelines:
+        lines.extend(["_None in this run._", ""])
+    else:
+        lines.extend(
+            [
+                "| Repo | Stars | Updated | Conf | Description |",
+                "|------|------:|---------|------|-------------|",
+            ]
+        )
+        for c in pipelines:
+            lines.append(
+                f"| [{c.full_name}]({c.html_url}) | {c.stars} | "
+                f"{c.pushed_at.date().isoformat()} | {c.confidence} | "
                 f"{_md_cell(c.description)} |"
             )
         lines.append("")

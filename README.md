@@ -7,6 +7,8 @@ Community list of open-source AI tools, models, and datasets for audio, music, a
 - [To contribute to the list](#to-contribute-to-the-list)
 - [Commercial OK](#commercial-ok)
   - [Model](#model)
+- [Pipelines](#pipelines)
+  - [Applications](#applications)
 - [Audio](#audio)
   - [Benchmark](#benchmark)
   - [Dataset](#dataset)
@@ -36,6 +38,12 @@ Edit the README and make a PR
 Friendly licenses for featured demos and commercial use: MIT, Apache-2.0, BSD-2/3, ISC, Unlicense, 0BSD, CC0. Prefer MIT / Apache-2.0 on code and weights (repo license ≠ weights). Skip for this section: GPL/AGPL, CC-BY-NC, CC-BY-SA, RAIL / research-only, unknown / gated dual-license. OK with care (not listed here): CC-BY-4.0, MPL-2.0, LGPL.
 
 ## Model
+
+# Pipelines
+
+Emerging and popular repos that chain multiple AI audio, speech, or music models to solve real-world problems (voice agents, meeting tools, end-to-end studios, multi-model workflows).
+
+## Applications
 
 # Audio
 

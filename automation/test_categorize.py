@@ -14,6 +14,8 @@ from scout import (  # noqa: E402
     MIN_CATEGORY_SCORE,
     MIN_COMMERCIAL_OK_PR_SLOTS,
     MIN_MODEL_PR_SLOTS,
+    MIN_PIPELINE_PR_SLOTS,
+    PIPELINES_SECTION,
     Candidate,
     RunStats,
     build_pr_body,
@@ -22,6 +24,7 @@ from scout import (  # noqa: E402
     negative_hit,
     select_for_pr,
     should_route_commercial_ok,
+    should_route_pipeline,
 )
 
 CASES: list[tuple[str, str, list[str], tuple[str, str]]] = [
@@ -441,7 +444,94 @@ def main() -> int:
         f"first={selected3[0].full_name if selected3 else None}"
     )
 
-    total = len(CASES) + len(WEAK) + len(NEGATIVE_CASES) + 5
+    # Pipelines: multi-model chaining / real-world apps.
+    ok_pipe_route = (
+        should_route_pipeline(
+            "org/voice-agent",
+            "Voice agent platform chaining ASR, LLM, and TTS for telephony",
+            ["voice-agent", "asr", "tts"],
+            ("Speech", "Production"),
+        )
+        and should_route_pipeline(
+            "org/meeting-bot",
+            "End-to-end meeting transcription with whisper diarization and notes",
+            ["speech-to-text", "diarization"],
+            ("Speech", "Recognition"),
+        )
+        and not should_route_pipeline(
+            "org/plain-whisper",
+            "Robust speech recognition via large-scale weak supervision",
+            ["asr", "speech-to-text"],
+            ("Speech", "Recognition"),
+        )
+        and not should_route_pipeline(
+            "org/audio-fm",
+            "An audio language foundation model",
+            ["foundation-model"],
+            ("Audio", "Model"),
+        )
+    )
+    status = "OK" if ok_pipe_route else "FAIL"
+    if not ok_pipe_route:
+        failed += 1
+    print(f"{status}: should_route_pipeline")
+
+    stats4 = RunStats()
+    pipeline_pool = [
+        _fake_candidate(
+            "org/hot-agent",
+            PIPELINES_SECTION,
+            22,
+            75,
+            stars=400,
+        ),
+        _fake_candidate(
+            "org/new-pipeline",
+            PIPELINES_SECTION,
+            20,
+            72,
+            stars=60,
+        ),
+    ]
+    # Give descriptions that reinforce chain scoring for rank helper.
+    pipeline_pool[0].description = (
+        "Popular voice agent chaining speech-to-text, llm, and text-to-speech"
+    )
+    pipeline_pool[1].description = (
+        "Audio pipeline orchestration with ASR and TTS for real-world workflows"
+    )
+    hot_pool4 = [
+        _fake_candidate(f"org/hot-asr-{i}", ("Speech", "Recognition"), 50 - i, 90 - i)
+        for i in range(8)
+    ]
+    selected4 = select_for_pr(pipeline_pool + hot_pool4, stats4)
+    pipeline_count = sum(1 for c in selected4 if c.category == PIPELINES_SECTION)
+    ok_pipe_slots = pipeline_count >= min(MIN_PIPELINE_PR_SLOTS, len(pipeline_pool))
+    # Pipelines come after Commercial OK but before generic Recognition when
+    # no commercial rows are present — first should be a pipeline.
+    ok_pipe_first = selected4 and selected4[0].category == PIPELINES_SECTION
+    ok_pipe_popular = selected4 and selected4[0].full_name == "org/hot-agent"
+    body4 = build_pr_body("2026-10-24", RunStats(scanned=1), selected4)
+    ok_pipe_body = (
+        "Pipelines — multi-model real-world apps" in body4
+        and "org/hot-agent" in body4
+        and body4.index("## Pipelines") < body4.index("## Latest & popular models")
+        and body4.index("## Commercial OK") < body4.index("## Pipelines")
+    )
+    status = (
+        "OK"
+        if ok_pipe_slots and ok_pipe_first and ok_pipe_popular and ok_pipe_body
+        else "FAIL"
+    )
+    if not (ok_pipe_slots and ok_pipe_first and ok_pipe_popular and ok_pipe_body):
+        failed += 1
+    print(
+        f"{status}: pipelines count={pipeline_count} "
+        f"(min={MIN_PIPELINE_PR_SLOTS}); "
+        f"first={selected4[0].full_name if selected4 else None}"
+    )
+
+    total = len(CASES) + len(WEAK) + len(NEGATIVE_CASES) + 7
     print(f"\n{total - failed}/{total} passed")
     return 1 if failed else 0
 
