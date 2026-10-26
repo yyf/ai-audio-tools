@@ -39,12 +39,16 @@ Friendly licenses for featured demos and commercial use: MIT, Apache-2.0, BSD-2/
 
 ## Model
 
+- [YouDub-webui](https://github.com/liuzhao1225/YouDub-webui) (Apache-2.0): Open-source AI video localization and dubbing for YouTube/Bilibili: speech recognition, subtitle translation, voice cloning, audio mixing and rendering. 开源 AI 视频翻译配音工具。
+- [minutes](https://github.com/silverstein/minutes) (MIT): Open-source, local-first Granola/Otter alternative that Claude Code, Codex, Cursor, and any MCP client can query. Meetings, calls, and voice memos transcribed on-device into markdown you own
+- [TTS-MultiModel](https://github.com/ReSerendipity/TTS-MultiModel) (Apache-2.0): 五引擎语音合成：VoxCPM2 / IndexTTS 2.5 / 2.0 / OpenVoice / Step-Audio-EditX，声音克隆、声音设计、剧本配音、流式生成，中英日韩界面 | Multi-engine TTS (5 engines): voice cloning, voice design, script dubbing & streaming, 5-language UI
 # Pipelines
 
 Emerging and popular repos that chain multiple AI audio, speech, or music models to solve real-world problems (voice agents, meeting tools, end-to-end studios, multi-model workflows).
 
 ## Applications
 
+- [mlx-audio-swift](https://github.com/Blaizzy/mlx-audio-swift): A modular Swift SDK for audio processing with MLX on Apple Silicon
 # Audio
 
 ## Benchmark
@@ -198,6 +202,8 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
 - [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
 
+- [Ruach_Studio](https://github.com/igrbible/Ruach_Studio): Finetuned YuE2 Ruach Studio Sound Heresy. Borderless Open Weights SUNO Killer based on YuE2 SOTA Model. Creator, Writer, Refiner, Artist, Librarian, Trainer — Six as One. Everything you missed in SUNO and such. Turn the songs of your Heart into thundering energy — clear and unmuffled. Thus we call it OSEM: Open Source, Engaged & Musical
+- [ComfyUI-AceStep_SFT](https://github.com/jeankassio/ComfyUI-AceStep_SFT): An node for ComfyUI that implements AceStep 1.5 SFT (Supervised Fine-Tuning), a high-quality music generation model. This node replicates the full functionality of the official Gradio pipeline, offering fine control over audio synthesis parameters
 # Speech
 
 ## Model
@@ -258,6 +264,7 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
 
+- [myna](https://github.com/canonical/myna): Myna is a lightweight speech-to-text application for Ubuntu Desktop
 ## Production
 
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
@@ -294,3 +301,6 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [dub-studio](https://github.com/timoncool/dub-studio): Free offline AI video dubbing studio for Windows — voice cloning, translation, subtitles & on-screen-text localization. 100% local, one native .exe, zero Python
+- [CloneTTS](https://github.com/sipeter/CloneTTS): A lightweight, offline Android Text-to-Speech (TTS) engine enabling seamless system-wide voice cloning and high-fidelity text reading. / 运行在安卓本地的轻量级文字转语音 (TTS) 引擎，支持离线发音人提取、零门槛音色克隆与双擎系统级全局听书。
+- [VieNeuTTSApp](https://github.com/NguyenSiTrung/VieNeuTTSApp): Cross-platform, fully-offline Vietnamese/English text-to-speech desktop workstation powered by VieNeu-TTS v3 Turbo (ONNX/CUDA, Voice Cloning, EPUB Audiobooks, PySide6/QML)
