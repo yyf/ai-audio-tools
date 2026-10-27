@@ -39,12 +39,16 @@ Friendly licenses for featured demos and commercial use: MIT, Apache-2.0, BSD-2/
 
 ## Model
 
+- [yovoice](https://github.com/leemysw/yovoice) (Apache-2.0): Open-source local AI audio & music studio for macOS & Windows. TTS, voice cloning, songs with lyrics, and multi-track scores — 100% offline, zero API fees
+- [hex](https://github.com/anomalyco/hex) (MIT): Local-first voice dictation for macOS. Hold a shortcut, speak, and paste into any app. Native Rust, on-device speech recognition, and a Linux beta
+- [mlx-speech](https://github.com/appautomaton/mlx-speech) (MIT): Pure-MLX speech synthesis, voice cloning, dialogue, sound-effects, and ASR for Apple Silicon: Fish S2 Pro, VibeVoice, LongCat, MOSS, Step-Audio, Cohere ASR
 # Pipelines
 
 Emerging and popular repos that chain multiple AI audio, speech, or music models to solve real-world problems (voice agents, meeting tools, end-to-end studios, multi-model workflows).
 
 ## Applications
 
+- [ODS](https://github.com/Osmantic/ODS): ODS V3 Pre-Release: Public testing and refinement ahead of the official V3 launch. Turn your PC, Mac, or Linux box into a private AI server
 # Audio
 
 ## Benchmark
@@ -258,6 +262,7 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
 
+- [myna](https://github.com/canonical/myna): Myna is a lightweight speech-to-text application for Ubuntu Desktop
 ## Production
 
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
@@ -265,6 +270,7 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [Meta encodec](https://github.com/facebookresearch/encodec): State-of-the-art deep learning based audio codec supporting both mono 24 kHz audio and stereo 48 kHz audio
 - [pipecat](https://github.com/pipecat-ai/pipecat): Open Source framework for voice and multimodal conversational AI
 
+- [RAWcooked](https://github.com/MediaArea/RAWcooked): Encodes RAW audio-visual data into the Matroska container (MKV), using the video codec FFV1 for the image and audio codec FLAC for the sound
 ## Synthesis
 
 - [Coqui TTS](https://github.com/coqui-ai/TTS): a deep learning toolkit for Text-to-Speech, battle-tested in research and production
@@ -294,3 +300,6 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [soundbox](https://github.com/HamSanders/soundbox): Free, open-source, local alternative to ElevenLabs and Suno. AI sound effects, music with lyrics, text-to-speech and voice cloning on your own GPU (Stable Audio, ACE-Step and more). No account, no credits, offline. Windows/macOS app, HTTP API and a 21-tool MCP server for Claude Code and Cursor
+- [VoxCPM2_portable](https://github.com/timoncool/VoxCPM2_portable): Portable Windows build of VoxCPM2 — multilingual TTS (30 languages incl. Russian), Voice Design, Voice Cloning, and end-to-end LoRA fine-tuning (video/audio → dataset → training). One-click install
+- [my-neuro](https://github.com/morettt/my-neuro): This project lets you create your own AI desktop companion with customizable characters and voice conversations that respond in just 1 second. Features include long-term memory, visual recognition, voice cloning and LLM training. Compatible with various Live2D customizations
