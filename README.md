@@ -39,6 +39,9 @@ Friendly licenses for featured demos and commercial use: MIT, Apache-2.0, BSD-2/
 
 ## Model
 
+- [yovoice](https://github.com/leemysw/yovoice) (Apache-2.0): Open-source local AI audio & music studio for macOS & Windows. TTS, voice cloning, songs with lyrics, and multi-track scores — 100% offline, zero API fees
+- [openreader](https://github.com/richardr1126/openreader) (MIT): An open-source read-along document reader server with high-quality TTS options, synchronized highlighting, and audiobook export for EPUB, PDF, DOCX, TXT, and MD
+- [PocketTTS-Android-Engine](https://github.com/The-unknown-Shadowman/PocketTTS-Android-Engine) (MIT): Unofficial offline Pocket TTS engine for Android system TTS, with importable multilingual ONNX model packs and voice cloning
 # Pipelines
 
 Emerging and popular repos that chain multiple AI audio, speech, or music models to solve real-world problems (voice agents, meeting tools, end-to-end studios, multi-model workflows).
@@ -198,6 +201,8 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
 - [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
 
+- [claude-code-suno-musicgen-skill](https://github.com/fltman/claude-code-suno-musicgen-skill): Claude Code agent and skill for music generation using suno.com. Unfortunately Suno.com blocks clicking och create and download by using scripts
+- [Ruach_Studio](https://github.com/igrbible/Ruach_Studio): Finetuned YuE2 Ruach Studio Sound Heresy. Borderless Open Weights SUNO Killer based on YuE2 SOTA Model. Creator, Writer, Refiner, Artist, Librarian, Trainer — Six as One. Everything you missed in SUNO and such. Turn the songs of your Heart into thundering energy — clear and unmuffled. Thus we call it OSEM: Open Source, Engaged & Musical
 # Speech
 
 ## Model
@@ -258,6 +263,7 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
 
+- [speech-studio](https://github.com/timoncool/speech-studio): Free offline AI voice studio for Windows — text-to-speech with cloned and built-in voices, and speech recognition with speakers. Russian done right. 100% local, one native .exe, zero Python
 ## Production
 
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
@@ -265,6 +271,7 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [Meta encodec](https://github.com/facebookresearch/encodec): State-of-the-art deep learning based audio codec supporting both mono 24 kHz audio and stereo 48 kHz audio
 - [pipecat](https://github.com/pipecat-ai/pipecat): Open Source framework for voice and multimodal conversational AI
 
+- [RAWcooked](https://github.com/MediaArea/RAWcooked): Encodes RAW audio-visual data into the Matroska container (MKV), using the video codec FFV1 for the image and audio codec FLAC for the sound
 ## Synthesis
 
 - [Coqui TTS](https://github.com/coqui-ai/TTS): a deep learning toolkit for Text-to-Speech, battle-tested in research and production
@@ -294,3 +301,6 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [dub-studio](https://github.com/timoncool/dub-studio): Free offline AI video dubbing studio for Windows — voice cloning, translation, subtitles & on-screen-text localization. 100% local, one native .exe, zero Python
+- [VieNeuTTSApp](https://github.com/NguyenSiTrung/VieNeuTTSApp): Cross-platform, fully-offline Vietnamese/English text-to-speech desktop workstation powered by VieNeu-TTS v3 Turbo (ONNX/CUDA, Voice Cloning, EPUB Audiobooks, PySide6/QML)
+- [sexyvoice](https://github.com/gianpaj/sexyvoice): Voice Cloning, Voice Call, and Text-to-Speech platform. Perfect for content creators, developers, and storytellers 😉
