@@ -39,12 +39,16 @@ Friendly licenses for featured demos and commercial use: MIT, Apache-2.0, BSD-2/
 
 ## Model
 
+- [TTS-WebUI](https://github.com/rsxdalv/TTS-WebUI) (MIT): A single Gradio + React WebUI with extensions for ACE-Step, OmniVoice, Kimi Audio, Piper TTS, GPT-SoVITS, CosyVoice, XTTSv2, DIA, Kokoro, OpenVoice, ParlerTTS, Stable Audio, MMS, StyleTTS2, MAGNet, AudioGen, MusicGen, Tortoise, RVC, Vocos, Demucs, SeamlessM4T, and Bark!
+- [hex](https://github.com/anomalyco/hex) (MIT): Local-first voice dictation for macOS. Hold a shortcut, speak, and paste into any app. Native Rust, on-device speech recognition, and a Linux beta
+- [TTS-MultiModel](https://github.com/ReSerendipity/TTS-MultiModel) (Apache-2.0): 五引擎语音合成：VoxCPM2 / IndexTTS 2.5 / 2.0 / OpenVoice / Step-Audio-EditX，声音克隆、声音设计、剧本配音、流式生成，中英日韩界面 | Multi-engine TTS (5 engines): voice cloning, voice design, script dubbing & streaming, 5-language UI
 # Pipelines
 
 Emerging and popular repos that chain multiple AI audio, speech, or music models to solve real-world problems (voice agents, meeting tools, end-to-end studios, multi-model workflows).
 
 ## Applications
 
+- [phoneflow](https://github.com/getphoneflow/phoneflow): The Open Source Voice Agent Platform - Build voice agents by connecting nodes in a canvas, deploy them to handle inbound and outbound phone calls, and monitor every call, latency and cost
 # Audio
 
 ## Benchmark
@@ -198,6 +202,7 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
 - [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
 
+- [YuE-Studio](https://github.com/tonywestonuk/YuE-Studio): YuE Studio: YuE2 music generation as a native Mac app, tuned for Apple Silicon (GPU + Neural Engine pipeline)
 # Speech
 
 ## Model
@@ -258,6 +263,7 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
 
+- [opencode-voice](https://github.com/renjfk/opencode-voice): Speech-to-text and text-to-speech plugin for OpenCode
 ## Production
 
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
@@ -265,6 +271,7 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [Meta encodec](https://github.com/facebookresearch/encodec): State-of-the-art deep learning based audio codec supporting both mono 24 kHz audio and stereo 48 kHz audio
 - [pipecat](https://github.com/pipecat-ai/pipecat): Open Source framework for voice and multimodal conversational AI
 
+- [RAWcooked](https://github.com/MediaArea/RAWcooked): Encodes RAW audio-visual data into the Matroska container (MKV), using the video codec FFV1 for the image and audio codec FLAC for the sound
 ## Synthesis
 
 - [Coqui TTS](https://github.com/coqui-ai/TTS): a deep learning toolkit for Text-to-Speech, battle-tested in research and production
@@ -294,3 +301,6 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [rlx-models](https://github.com/MIT-RLX/rlx-models): ML model ports (ASR · TTS · LLM · VLM · vision · audio codecs) on the rlx multi-backend compiler + runtime — CPU/Metal/MLX/CUDA/wgpu
+- [sexyvoice](https://github.com/gianpaj/sexyvoice): Voice Cloning, Voice Call, and Text-to-Speech platform. Perfect for content creators, developers, and storytellers 😉
+- [XivVoices](https://github.com/keifufu/XivVoices): FFXIV TTS Plugin
