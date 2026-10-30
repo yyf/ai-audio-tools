@@ -39,12 +39,16 @@ Friendly licenses for featured demos and commercial use: MIT, Apache-2.0, BSD-2/
 
 ## Model
 
+- [YouDub-webui](https://github.com/liuzhao1225/YouDub-webui) (Apache-2.0): Open-source AI video localization and dubbing for YouTube/Bilibili: speech recognition, subtitle translation, voice cloning, audio mixing and rendering. 开源 AI 视频翻译配音工具。
+- [hyprwhspr](https://github.com/goodroot/hyprwhspr) (MIT): Native speech-to-text for Linux - Fast, accurate, private, and hackable system-wide dictation
+- [DotsTTS-Studio](https://github.com/timoncool/DotsTTS-Studio) (Apache-2.0): Portable Windows TTS - dots.tts (rednote-hilab): codec-token-free, 100+ languages, zero-shot voice cloning, live streaming. One-click, 100% offline, NVIDIA GPU
 # Pipelines
 
 Emerging and popular repos that chain multiple AI audio, speech, or music models to solve real-world problems (voice agents, meeting tools, end-to-end studios, multi-model workflows).
 
 ## Applications
 
+- [agentwire-dev](https://github.com/dotdevdotdev/agentwire-dev): A self-hosted, keyboard-driven cockpit for running a whole fleet of Claude Code agents at once. Worktrees, command palette, scheduler, voice — every layer stacks, so you ship far more than hand-juggling terminals. Your machine, your keys, no telemetry
 # Audio
 
 ## Benchmark
@@ -265,6 +269,7 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [Meta encodec](https://github.com/facebookresearch/encodec): State-of-the-art deep learning based audio codec supporting both mono 24 kHz audio and stereo 48 kHz audio
 - [pipecat](https://github.com/pipecat-ai/pipecat): Open Source framework for voice and multimodal conversational AI
 
+- [hqlc](https://github.com/feelfreelinux/hqlc): High quality, low complexity audio codec
 ## Synthesis
 
 - [Coqui TTS](https://github.com/coqui-ai/TTS): a deep learning toolkit for Text-to-Speech, battle-tested in research and production
@@ -294,3 +299,6 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [dub-studio](https://github.com/timoncool/dub-studio): Free offline AI video dubbing studio for Windows — voice cloning, translation, subtitles & on-screen-text localization. 100% local, one native .exe, zero Python
+- [Castwright](https://github.com/dudarenok-maker/Castwright): A local, multi-voice audiobook generator: an LLM casts every character in its own voice, kept consistent across a whole series — with voice design, per-line emotion, seven languages, and M4B / Audiobookshelf export. Runs on your own machine; you own the files. Kokoro · Qwen3-TTS
+- [VoxCPM2_portable](https://github.com/timoncool/VoxCPM2_portable): Portable Windows build of VoxCPM2 — multilingual TTS (30 languages incl. Russian), Voice Design, Voice Cloning, and end-to-end LoRA fine-tuning (video/audio → dataset → training). One-click install
