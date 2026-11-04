@@ -39,6 +39,9 @@ Friendly licenses for featured demos and commercial use: MIT, Apache-2.0, BSD-2/
 
 ## Model
 
+- [hex](https://github.com/anomalyco/hex) (MIT): Local voice dictation for mac, windows and linux
+- [awesome-ai-voice](https://github.com/wildminder/awesome-ai-voice) (MIT): List of open-source TTS, voice cloning, and music generation models
+- [T5Gemma-TTS](https://github.com/Aratako/T5Gemma-TTS) (MIT): Multilingual TTS model with voice cloning and duration control, based on T5Gemma encoder-decoder LLM
 # Pipelines
 
 Emerging and popular repos that chain multiple AI audio, speech, or music models to solve real-world problems (voice agents, meeting tools, end-to-end studios, multi-model workflows).
@@ -198,6 +201,7 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
 - [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
 
+- [Open-Iblis](https://github.com/MeiuxMeiux/Open-Iblis): Open Source core of the Iblis music generation suite
 # Speech
 
 ## Model
@@ -258,6 +262,9 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
 
+- [OpenTranscribe](https://github.com/attevon-llc/OpenTranscribe): Self-hosted AI-powered transcription platform with speaker diarization, search, and collaboration features. Built with Svelte, FastAPI, and Docker for easy deployment
+- [sayso](https://github.com/watzon/sayso): Dictation that runs on your own computer. Press a key, speak, and the text lands in the app you are using. Free and open source, for macOS, Windows, and Linux
+- [openclicky](https://github.com/prasanthsasikumar/openclicky): Free, open-source voice assistant for macOS: ask about your screen and a pointer shows you where, dictate anywhere (offline by default), hand tasks to a Codex agent. Your own key or a free account. MIT
 ## Production
 
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
@@ -294,3 +301,6 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [soundbox](https://github.com/HamSanders/soundbox): Free, open-source, local alternative to ElevenLabs and Suno. AI sound effects, music with lyrics, text-to-speech and voice cloning on your own GPU (Stable Audio, ACE-Step and more). No account, no credits, offline. Windows/macOS app, HTTP API and a 21-tool MCP server for Claude Code and Cursor
+- [sexyvoice](https://github.com/gianpaj/sexyvoice): Voice Cloning, Voice Call, and Text-to-Speech platform. Perfect for content creators, developers, and storytellers 😉
+- [VoxCPM2_portable](https://github.com/timoncool/VoxCPM2_portable): No longer developed. Use Speech Studio: https://github.com/timoncool/speech-studio. Portable Windows build of VoxCPM2 — multilingual TTS (30 languages incl. Russian), Voice Design, Voice Cloning, and end-to-end LoRA fine-tuning (video/audio → dataset → training). One-click install
