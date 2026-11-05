@@ -39,6 +39,9 @@ Friendly licenses for featured demos and commercial use: MIT, Apache-2.0, BSD-2/
 
 ## Model
 
+- [hex](https://github.com/anomalyco/hex) (MIT): Local voice dictation for mac, windows and linux
+- [claude-code-video-toolkit](https://github.com/digitalsamba/claude-code-video-toolkit) (MIT): AI-native video production toolkit for Claude Code
+- [DotsTTS-Studio](https://github.com/timoncool/DotsTTS-Studio) (Apache-2.0): No longer developed. Use Speech Studio: https://github.com/timoncool/speech-studio. Portable Windows TTS - dots.tts (rednote-hilab): codec-token-free, 100+ languages, zero-shot voice cloning, live streaming. One-click, 100% offline, NVIDIA GPU
 # Pipelines
 
 Emerging and popular repos that chain multiple AI audio, speech, or music models to solve real-world problems (voice agents, meeting tools, end-to-end studios, multi-model workflows).
@@ -198,6 +201,7 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
 - [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
 
+- [Open-Iblis](https://github.com/MeiuxMeiux/Open-Iblis): Open Source core of the Iblis music generation suite
 # Speech
 
 ## Model
@@ -258,6 +262,7 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
 
+- [parrotflow](https://github.com/znat/parrotflow): Scriptable local dictation that uses the text on your screen to fix names, and your rules to format numbers, dates, and links
 ## Production
 
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
@@ -265,6 +270,7 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [Meta encodec](https://github.com/facebookresearch/encodec): State-of-the-art deep learning based audio codec supporting both mono 24 kHz audio and stereo 48 kHz audio
 - [pipecat](https://github.com/pipecat-ai/pipecat): Open Source framework for voice and multimodal conversational AI
 
+- [gopus](https://github.com/thesyncim/gopus): Pure Go implementation of the Opus audio codec
 ## Synthesis
 
 - [Coqui TTS](https://github.com/coqui-ai/TTS): a deep learning toolkit for Text-to-Speech, battle-tested in research and production
@@ -294,3 +300,6 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [VoiceForge](https://github.com/Itzzavdheshh/VoiceForge): Browser-based assistive communication platform with voice cloning, text-to-speech, and real-time lip-synced video generation
+- [VoxCPM2_portable](https://github.com/timoncool/VoxCPM2_portable): No longer developed. Use Speech Studio: https://github.com/timoncool/speech-studio. Portable Windows build of VoxCPM2 — multilingual TTS (30 languages incl. Russian), Voice Design, Voice Cloning, and end-to-end LoRA fine-tuning (video/audio → dataset → training). One-click install
+- [M5-TTS](https://github.com/ASLP-lab/M5-TTS): M5-TTS is a lightweight 50M-parameter TTS language model supporting real-time CPU inference, multilingual and multi-dialect synthesis, zero-shot voice cloning, and custom voices
