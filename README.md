@@ -39,6 +39,9 @@ Friendly licenses for featured demos and commercial use: MIT, Apache-2.0, BSD-2/
 
 ## Model
 
+- [openscreen](https://github.com/getopenscreen/openscreen) (MIT): Record your screen, ship a demo. Free and open-source, GPU-accelerated, no watermarks, no subscriptions. Windows, macOS, Linux. Actively maintained
+- [asmr-dubber](https://github.com/EveningStudy/asmr-dubber) (MIT): 日语／英语／中文音视频 → 中文/英文配音与字幕。支持音色克隆、双语混音、RTF 空间处理、人声分离、批量处理和仅字幕导出。JA/EN/ZH media → Chinese/English dubbing & subtitles. Voice cloning, bilingual mixing, RTF spatial processing, vocal separation, batch processing & subtitle-only export
+- [OpenWhisper](https://github.com/Knuckles92/OpenWhisper) (MIT): Local dictation and meeting notes with Whisper or the OpenAI API. Custom Whisper models, MCP history access, and shared engines over LAN/Tailscale. Optional Parakeet/Nemotron (Windows x64, Linux x86_64), Qwen3-ASR/Moonshine (Windows x64), and Parakeet CPU/experimental MLX (Apple Silicon)
 # Pipelines
 
 Emerging and popular repos that chain multiple AI audio, speech, or music models to solve real-world problems (voice agents, meeting tools, end-to-end studios, multi-model workflows).
@@ -198,6 +201,8 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [awesome-YuE](https://github.com/RevolutionLA/awesome-YuE): Curated list of the YuE / YuE2 open-source music generation ecosystem — UIs, quantization, ComfyUI nodes, Mac/MLX ports, cloud serving & tutorials. 70+ projects
 - [SunoMCP](https://github.com/AceDataCloud/SunoMCP): MCP server for Suno AI music generation, lyrics, and cover workflows via Ace Data Cloud
 
+- [waivepulse](https://github.com/weellio/waivepulse): Local offline AI music generation and some editing - lyrics + genre tags → MP3 with vocals
+- [Open-Iblis](https://github.com/MeiuxMeiux/Open-Iblis): Open Source core of the Iblis music generation suite
 # Speech
 
 ## Model
@@ -258,6 +263,8 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
 
+- [sayso](https://github.com/watzon/sayso): Dictation that runs on your own computer. Press a key, speak, and the text lands in the app you are using. Free and open source, for macOS, Windows, and Linux
+- [tern](https://github.com/B0yko/tern): Local AI search for podcast and video archives on Apple Silicon: Whisper speech, Apple Vision OCR and SigLIP-2 visual search fused into one ranked list, with a trim editor and FCPXML export. FastAPI, vanilla JS, Tauri. Source-visible, all rights reserved
 ## Production
 
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
@@ -294,3 +301,6 @@ Emerging and popular repos that chain multiple AI audio, speech, or music models
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [soundbox](https://github.com/HamSanders/soundbox): Free, open-source, local alternative to ElevenLabs and Suno. AI sound effects, music with lyrics, text-to-speech and voice cloning on your own GPU (Stable Audio, ACE-Step and more). No account, no credits, offline. Windows/macOS app, HTTP API and a 21-tool MCP server for Claude Code and Cursor
+- [sexyvoice](https://github.com/gianpaj/sexyvoice): Voice Cloning, Voice Call, and Text-to-Speech platform. Perfect for content creators, developers, and storytellers 😉
+- [M5-TTS](https://github.com/ASLP-lab/M5-TTS): M5-TTS is a lightweight 50M-parameter TTS language model supporting real-time CPU inference, multilingual and multi-dialect synthesis, zero-shot voice cloning, and custom voices
