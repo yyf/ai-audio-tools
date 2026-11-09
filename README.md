@@ -9,6 +9,8 @@ Community list of open-source AI tools, models, and datasets for audio, music, a
   - [Model](#model)
 - [Pipelines](#pipelines)
   - [Applications](#applications)
+- [LoRA](#lora)
+  - [Applications](#applications-1)
 - [Audio](#audio)
   - [Benchmark](#benchmark)
   - [Dataset](#dataset)
@@ -35,13 +37,19 @@ Edit the README and make a PR
 
 # Commercial OK
 
-Friendly licenses for featured demos and commercial use: MIT, Apache-2.0, BSD-2/3, ISC, Unlicense, 0BSD, CC0. Prefer MIT / Apache-2.0 on code and weights (repo license ≠ weights). Skip for this section: GPL/AGPL, CC-BY-NC, CC-BY-SA, RAIL / research-only, unknown / gated dual-license. OK with care (not listed here): CC-BY-4.0, MPL-2.0, LGPL.
+Featured demos across the music-technology conference surface (see [yyf/music-technology-conferences](https://github.com/yyf/music-technology-conferences) — NIME, ICMC/SMC/TENOR, DAFx, ISMIR/DCASE, ICASSP/WASPAA/Interspeech, LAC, WAC, ADC, AES, and related ML/AI music venues). Topics include speech, music, sound effects, **acoustics**, spatial/immersive audio, DSP/plugins, and more. Entries are labeled by license tier — **Commercial OK** (MIT, Apache-2.0, BSD-2/3, ISC, Unlicense, 0BSD, CC0), **OK with care** (CC-BY-4.0, MPL-2.0, LGPL), **Restricted** (GPL/AGPL, CC-BY-NC, CC-BY-SA, RAIL / research-only, unknown). Prefer MIT / Apache-2.0 on code and weights (repo license ≠ weights).
 
 ## Model
 
 # Pipelines
 
-Emerging and popular repos that chain multiple AI audio, speech, or music models to solve real-world problems (voice agents, meeting tools, end-to-end studios, multi-model workflows).
+Emerging and popular AI audio pipelines that chain or orchestrate models for real-world use — voice agents, music creation, sound production, film, gaming, realtime, meeting tools, and end-to-end studios.
+
+## Applications
+
+# LoRA
+
+Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, and music applications.
 
 ## Applications
 

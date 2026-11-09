@@ -8,11 +8,15 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from scout import (  # noqa: E402
+    AUDIO_INDUSTRY_CONFERENCE_TOPICS,
     COMMERCIAL_OK_SECTION,
+    CONFERENCE_TOPICS_SOURCE,
     KEEP_THRESHOLD,
+    LORA_SECTION,
     MAX_PER_SECTION,
     MIN_CATEGORY_SCORE,
     MIN_COMMERCIAL_OK_PR_SLOTS,
+    MIN_LORA_PR_SLOTS,
     MIN_MODEL_PR_SLOTS,
     MIN_PIPELINE_PR_SLOTS,
     PIPELINES_SECTION,
@@ -20,10 +24,12 @@ from scout import (  # noqa: E402
     RunStats,
     build_pr_body,
     categorize,
+    format_license_annotation,
     license_tier,
     negative_hit,
     select_for_pr,
     should_route_commercial_ok,
+    should_route_lora,
     should_route_pipeline,
 )
 
@@ -348,11 +354,11 @@ def main() -> int:
         ("CC-BY-4.0", "ok_with_care"),
         ("MPL-2.0", "ok_with_care"),
         ("LGPL-3.0", "ok_with_care"),
-        ("GPL-3.0", "skip"),
-        ("AGPL-3.0", "skip"),
-        ("CC-BY-NC-4.0", "skip"),
-        ("CC-BY-SA-4.0", "skip"),
-        (None, "skip"),
+        ("GPL-3.0", "restricted"),
+        ("AGPL-3.0", "restricted"),
+        ("CC-BY-NC-4.0", "restricted"),
+        ("CC-BY-SA-4.0", "restricted"),
+        (None, "restricted"),
     ]
     ok_tiers = True
     for spdx, expect in license_cases:
@@ -360,34 +366,54 @@ def main() -> int:
         if got != expect:
             ok_tiers = False
             print(f"FAIL: license_tier({spdx!r}) -> {got!r} expected {expect!r}")
-    if ok_tiers:
-        print(f"OK: license_tier ({len(license_cases)} cases)")
+    ok_label = format_license_annotation("GPL-3.0", "restricted") == (
+        "GPL-3.0 · Restricted"
+    ) and format_license_annotation("MIT", "friendly") == ("MIT · Commercial OK")
+    if ok_tiers and ok_label:
+        print(f"OK: license_tier ({len(license_cases)} cases) + labels")
     else:
         failed += 1
+        if not ok_label:
+            print("FAIL: format_license_annotation")
 
     ok_route = (
         should_route_commercial_ok(("Audio", "Model"), [], "friendly")
+        and should_route_commercial_ok(("Audio", "Model"), [], "restricted")
         and should_route_commercial_ok(
-            ("Speech", "Synthesis"), ["text-to-speech"], "friendly"
+            ("Speech", "Synthesis"), ["text-to-speech"], "ok_with_care"
         )
         and should_route_commercial_ok(
-            ("Speech", "Recognition"), ["speech-recognition", "asr"], "friendly"
+            ("Music", "Generation"), ["sound-effects", "foley"], "restricted"
         )
         and should_route_commercial_ok(
-            ("Speech", "Recognition"), ["speech-to-text"], "friendly"
+            ("Audio", "Framework"), ["acoustics", "room-acoustics"], "friendly"
+        )
+        and should_route_commercial_ok(
+            ("Audio", "Framework"), ["spatial-audio", "ambisonics", "aes"], "restricted"
+        )
+        and should_route_commercial_ok(
+            ("Music", "Analysis"), ["ismir", "mir", "dcase"], "friendly"
+        )
+        and should_route_commercial_ok(
+            ("Audio", "Framework"), ["nime", "dafx", "adc"], "friendly"
         )
         and should_route_commercial_ok(
             ("Speech", "Recognition"), ["speech-translation"], "friendly"
         )
-        and not should_route_commercial_ok(("Audio", "Model"), [], "skip")
         and not should_route_commercial_ok(
-            ("Speech", "Synthesis"), ["text-to-speech"], "ok_with_care"
+            ("Speech", "Recognition"), ["unrelated-topic"], "friendly"
         )
     )
-    status = "OK" if ok_route else "FAIL"
-    if not ok_route:
+    ok_source = (
+        "music-technology-conferences" in CONFERENCE_TOPICS_SOURCE
+        and "nime" in AUDIO_INDUSTRY_CONFERENCE_TOPICS
+        and "aes" in AUDIO_INDUSTRY_CONFERENCE_TOPICS
+        and "ismir" in AUDIO_INDUSTRY_CONFERENCE_TOPICS
+    )
+    status = "OK" if ok_route and ok_source else "FAIL"
+    if not (ok_route and ok_source):
         failed += 1
-    print(f"{status}: should_route_commercial_ok")
+    print(f"{status}: should_route_commercial_ok (conference-repo topics)")
 
     stats3 = RunStats()
     commercial_pool = [
@@ -399,6 +425,15 @@ def main() -> int:
             license_spdx="MIT",
             license_tier_name="friendly",
             stars=80,
+        ),
+        _fake_candidate(
+            "org/gpl-sfx",
+            COMMERCIAL_OK_SECTION,
+            18,
+            68,
+            license_spdx="GPL-3.0",
+            license_tier_name="restricted",
+            stars=300,
         ),
         _fake_candidate(
             "org/apache-music",
@@ -420,22 +455,28 @@ def main() -> int:
         MIN_COMMERCIAL_OK_PR_SLOTS, len(commercial_pool)
     )
     ok_commercial_first = selected3 and selected3[0].category == COMMERCIAL_OK_SECTION
-    # Prefer higher stars among MIT/Apache commercial picks.
-    ok_apache_leads = selected3 and selected3[0].full_name == "org/apache-music"
-    body3 = build_pr_body("2026-10-22", RunStats(scanned=1), selected3)
+    # Prefer MIT/Apache over higher-star Restricted when seeding Commercial OK.
+    ok_prefers_friendly = selected3 and selected3[0].full_name == "org/apache-music"
+    body3 = build_pr_body("2026-11-09", RunStats(scanned=1), selected3)
     ok_commercial_body = (
         "Commercial OK — featured demos" in body3
-        and "| License |" in body3
-        and "org/apache-music" in body3
+        and "| License | Tier |" in body3
+        and "Restricted" in body3
         and body3.index("## Commercial OK") < body3.index("## Latest & popular models")
     )
     status = (
         "OK"
-        if ok_commercial and ok_commercial_first and ok_apache_leads and ok_commercial_body
+        if ok_commercial
+        and ok_commercial_first
+        and ok_prefers_friendly
+        and ok_commercial_body
         else "FAIL"
     )
     if not (
-        ok_commercial and ok_commercial_first and ok_apache_leads and ok_commercial_body
+        ok_commercial
+        and ok_commercial_first
+        and ok_prefers_friendly
+        and ok_commercial_body
     ):
         failed += 1
     print(
@@ -444,7 +485,7 @@ def main() -> int:
         f"first={selected3[0].full_name if selected3 else None}"
     )
 
-    # Pipelines: multi-model chaining / real-world apps.
+    # Pipelines: AI audio pipelines (speech/music/film/gaming/realtime).
     ok_pipe_route = (
         should_route_pipeline(
             "org/voice-agent",
@@ -453,10 +494,16 @@ def main() -> int:
             ("Speech", "Production"),
         )
         and should_route_pipeline(
-            "org/meeting-bot",
-            "End-to-end meeting transcription with whisper diarization and notes",
-            ["speech-to-text", "diarization"],
-            ("Speech", "Recognition"),
+            "org/music-studio",
+            "End-to-end music creation pipeline with musicgen and stem separation",
+            ["music-generation"],
+            ("Music", "Production"),
+        )
+        and should_route_pipeline(
+            "org/game-audio",
+            "Realtime game audio pipeline for foley and sound design",
+            ["game-audio", "foley"],
+            ("Audio", "Framework"),
         )
         and not should_route_pipeline(
             "org/plain-whisper",
@@ -493,12 +540,11 @@ def main() -> int:
             stars=60,
         ),
     ]
-    # Give descriptions that reinforce chain scoring for rank helper.
     pipeline_pool[0].description = (
         "Popular voice agent chaining speech-to-text, llm, and text-to-speech"
     )
     pipeline_pool[1].description = (
-        "Audio pipeline orchestration with ASR and TTS for real-world workflows"
+        "Music production pipeline with realtime sound design workflows"
     )
     hot_pool4 = [
         _fake_candidate(f"org/hot-asr-{i}", ("Speech", "Recognition"), 50 - i, 90 - i)
@@ -507,13 +553,11 @@ def main() -> int:
     selected4 = select_for_pr(pipeline_pool + hot_pool4, stats4)
     pipeline_count = sum(1 for c in selected4 if c.category == PIPELINES_SECTION)
     ok_pipe_slots = pipeline_count >= min(MIN_PIPELINE_PR_SLOTS, len(pipeline_pool))
-    # Pipelines come after Commercial OK but before generic Recognition when
-    # no commercial rows are present — first should be a pipeline.
     ok_pipe_first = selected4 and selected4[0].category == PIPELINES_SECTION
     ok_pipe_popular = selected4 and selected4[0].full_name == "org/hot-agent"
-    body4 = build_pr_body("2026-10-24", RunStats(scanned=1), selected4)
+    body4 = build_pr_body("2026-11-09", RunStats(scanned=1), selected4)
     ok_pipe_body = (
-        "Pipelines — multi-model real-world apps" in body4
+        "Pipelines — AI audio pipelines" in body4
         and "org/hot-agent" in body4
         and body4.index("## Pipelines") < body4.index("## Latest & popular models")
         and body4.index("## Commercial OK") < body4.index("## Pipelines")
@@ -531,7 +575,69 @@ def main() -> int:
         f"first={selected4[0].full_name if selected4 else None}"
     )
 
-    total = len(CASES) + len(WEAK) + len(NEGATIVE_CASES) + 7
+    # LoRA: popular/emerging AI audio adapters.
+    ok_lora_route = (
+        should_route_lora(
+            "org/tts-lora",
+            "LoRA adapters for multilingual text-to-speech fine-tuning",
+            ["lora", "tts"],
+            ("Speech", "Synthesis"),
+        )
+        and should_route_lora(
+            "org/music-peft",
+            "PEFT low-rank adaptation for music generation models",
+            ["peft", "music-generation"],
+            ("Music", "Generation"),
+        )
+        and not should_route_lora(
+            "org/llm-lora",
+            "LoRA fine-tunes for general LLM chat",
+            ["lora"],
+            ("Speech", "Recognition"),
+        )
+    )
+    status = "OK" if ok_lora_route else "FAIL"
+    if not ok_lora_route:
+        failed += 1
+    print(f"{status}: should_route_lora")
+
+    stats5 = RunStats()
+    lora_pool = [
+        _fake_candidate("org/hot-lora", LORA_SECTION, 20, 70, stars=350),
+        _fake_candidate("org/new-lora", LORA_SECTION, 18, 65, stars=40),
+    ]
+    lora_pool[0].description = "Popular LoRA for speech-to-text ASR adaptation"
+    lora_pool[1].description = "Emerging PEFT adapter for singing voice synthesis"
+    hot_pool5 = [
+        _fake_candidate(f"org/tool-{i}", ("Speech", "Recognition"), 50 - i, 90 - i)
+        for i in range(8)
+    ]
+    selected5 = select_for_pr(lora_pool + hot_pool5, stats5)
+    lora_count = sum(1 for c in selected5 if c.category == LORA_SECTION)
+    ok_lora_slots = lora_count >= min(MIN_LORA_PR_SLOTS, len(lora_pool))
+    ok_lora_first = selected5 and selected5[0].category == LORA_SECTION
+    ok_lora_popular = selected5 and selected5[0].full_name == "org/hot-lora"
+    body5 = build_pr_body("2026-11-09", RunStats(scanned=1), selected5)
+    ok_lora_body = (
+        "LoRA — AI audio adapters" in body5
+        and "org/hot-lora" in body5
+        and body5.index("## LoRA") < body5.index("## Latest & popular models")
+        and body5.index("## Pipelines") < body5.index("## LoRA")
+    )
+    status = (
+        "OK"
+        if ok_lora_slots and ok_lora_first and ok_lora_popular and ok_lora_body
+        else "FAIL"
+    )
+    if not (ok_lora_slots and ok_lora_first and ok_lora_popular and ok_lora_body):
+        failed += 1
+    print(
+        f"{status}: lora count={lora_count} "
+        f"(min={MIN_LORA_PR_SLOTS}); "
+        f"first={selected5[0].full_name if selected5 else None}"
+    )
+
+    total = len(CASES) + len(WEAK) + len(NEGATIVE_CASES) + 9
     print(f"\n{total - failed}/{total} passed")
     return 1 if failed else 0
 
