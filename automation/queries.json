@@ -1,11 +1,13 @@
 [
-  "topic:ai-audio (license:mit OR license:apache-2.0) stars:>10",
-  "(topic:text-to-speech OR topic:speech-recognition OR topic:speech-to-text OR topic:asr OR topic:stt OR topic:speech-synthesis OR topic:speech-translation OR topic:voice-cloning OR topic:speaker-diarization) (license:mit OR license:apache-2.0) stars:>10",
-  "topic:music-generation (license:mit OR license:apache-2.0) stars:>10",
-  "(\"voice agent\" OR \"audio pipeline\" OR \"speech pipeline\" OR pipecat OR \"multi-model\" OR orchestration) (audio OR speech OR voice OR tts OR asr) stars:>10",
-  "(\"meeting transcription\" OR \"end-to-end\") (whisper OR diarization OR \"speech-to-text\" OR asr) (tts OR agent OR pipeline OR llm) stars:>10",
-  "(\"foundation model\" OR \"pretrained model\" OR \"audio language model\" OR \"music foundation\" OR \"speech foundation\") (music OR film OR game OR Foley OR soundtrack OR \"sound design\" OR production OR cinematic) stars:>10",
+  "topic:ai-audio stars:>10",
+  "(topic:text-to-speech OR topic:speech-recognition OR topic:speech-to-text OR topic:asr OR topic:stt OR topic:speech-synthesis OR topic:speech-translation OR topic:voice-cloning OR topic:speaker-diarization OR topic:sound-effects OR topic:foley OR topic:sound-design) stars:>10",
+  "topic:music-generation stars:>10",
+  "(topic:acoustics OR topic:psychoacoustics OR topic:room-acoustics OR topic:spatial-audio OR topic:immersive-audio OR topic:ambisonics OR topic:binaural OR topic:audio-dsp OR topic:dafx OR topic:ismir OR topic:dcase OR topic:nime OR topic:aes OR topic:adc OR topic:web-audio OR topic:game-audio) stars:>10",
+  "(\"voice agent\" OR \"audio pipeline\" OR \"speech pipeline\" OR \"music pipeline\" OR pipecat OR \"multi-model\" OR orchestration) (audio OR speech OR voice OR music OR tts OR asr) stars:>10",
+  "(\"music production\" OR \"music creation\" OR \"sound production\" OR \"sound design\" OR \"film audio\" OR \"game audio\" OR realtime OR \"real-time\" OR \"meeting transcription\") (audio OR speech OR music OR pipeline OR agent OR studio) stars:>10",
+  "(lora OR peft OR \"low-rank\") (audio OR speech OR music OR tts OR asr OR voice OR foley OR singing OR acoustics) stars:>10",
+  "(\"foundation model\" OR \"pretrained model\" OR \"audio language model\" OR \"music foundation\" OR \"speech foundation\") (music OR film OR game OR Foley OR soundtrack OR \"sound design\" OR production OR cinematic OR acoustics) stars:>10",
   "\"text-to-speech\" OR \"speech recognition\" OR \"speech-to-text\" stars:>10",
   "\"music generation\" OR \"text-to-music\" OR MusicGen stars:>10",
-  "\"voice cloning\" OR \"neural codec\" OR \"audio codec\" stars:>10"
+  "\"voice cloning\" OR \"neural codec\" OR \"spatial audio\" OR acoustics OR ambisonics stars:>10"
 ]

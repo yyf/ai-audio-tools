@@ -20,7 +20,7 @@ from pathlib import Path
 
 # --- v1 locked config (keep in sync with automation/SPEC.md) ---
 
-MAX_QUERIES = 9
+MAX_QUERIES = 11
 MAX_RESULTS_PER_QUERY = 10
 MAX_CANDIDATES = 30
 MIN_STARS = 10
@@ -31,12 +31,15 @@ PR_THRESHOLD = 1
 MAX_PR_ENTRIES = 10
 MAX_PER_SECTION = 3  # max entries per Domain > Subsection in one PR
 # Reserve PR slots for Audio|Music|Speech > Model (latest open-source models task).
-MIN_MODEL_PR_SLOTS = 3
-# Reserve PR slots for Commercial OK > Model (friendly-license featured demos).
+MIN_MODEL_PR_SLOTS = 2
+# Reserve PR slots for Commercial OK > Model (featured demos; all licenses labeled).
 MIN_COMMERCIAL_OK_PR_SLOTS = 2
-# Reserve PR slots for Pipelines > Applications (multi-model real-world chaining).
+# Reserve PR slots for Pipelines > Applications (AI audio pipelines).
 MIN_PIPELINE_PR_SLOTS = 2
 MIN_PIPELINE_SCORE = 8  # chain / multi-capability floor for Pipelines routing
+# Reserve PR slots for LoRA > Applications (popular/emerging audio LoRAs).
+MIN_LORA_PR_SLOTS = 2
+MIN_LORA_SCORE = 6
 MIN_DESCRIPTION_LEN = 15  # skip empty / placeholder descriptions
 BOT_BRANCH_PREFIX = "bot/daily-candidates-"
 README_PATH = Path("README.md")
@@ -44,16 +47,19 @@ QUERIES_PATH = Path("automation/queries.json")
 REJECTED_PATH = Path("automation/rejected.md")
 
 # Featured demos / Commercial OK — repo SPDX from GitHub (weights may differ).
+# All license tiers are eligible; tier is labeled (prefer MIT/Apache in ranking).
 COMMERCIAL_OK_DOMAIN = "Commercial OK"
 COMMERCIAL_OK_SECTION = (COMMERCIAL_OK_DOMAIN, "Model")
 
-# Multi-model chaining apps that solve real-world problems.
+# Multi-model / end-to-end AI audio pipelines (speech, music, film, gaming, realtime).
 PIPELINES_DOMAIN = "Pipelines"
 PIPELINES_SECTION = (PIPELINES_DOMAIN, "Applications")
 PIPELINE_CHAIN_SIGNALS: list[tuple[str, int]] = [
     ("voice agent", 6),
     ("audio pipeline", 6),
     ("speech pipeline", 6),
+    ("music pipeline", 6),
+    ("sound pipeline", 5),
     ("multi-model", 6),
     ("model pipeline", 5),
     ("chains models", 5),
@@ -67,12 +73,29 @@ PIPELINE_CHAIN_SIGNALS: list[tuple[str, int]] = [
     ("meeting notes", 4),
     ("conversational ai", 4),
     ("conversational voice", 5),
+    ("music production", 5),
+    ("music creation", 5),
+    ("sound production", 5),
+    ("sound design", 5),
+    ("post-production", 4),
+    ("film audio", 5),
+    ("game audio", 5),
+    ("spatial audio", 5),
+    ("immersive audio", 5),
+    ("room acoustics", 5),
+    ("virtual acoustics", 5),
+    ("realtime", 4),
+    ("real-time", 4),
+    ("live audio", 4),
+    ("automotive audio", 4),
     ("workflow", 3),
     ("real-world", 3),
     ("production-ready", 3),
     ("pipecat", 5),
     ("voice ai platform", 5),
     ("telephony", 3),
+    ("daw", 3),
+    ("studio", 3),
 ]
 # Distinct capability families — hitting 2+ supports "chaining" intent.
 PIPELINE_CAPABILITY_FAMILIES: list[tuple[str, tuple[str, ...]]] = [
@@ -106,11 +129,59 @@ PIPELINE_CAPABILITY_FAMILIES: list[tuple[str, tuple[str, ...]]] = [
     ("llm", ("llm", "language model", "gpt", "agent")),
     (
         "music",
-        ("music generation", "musicgen", "text-to-music", "text to music"),
+        (
+            "music generation",
+            "musicgen",
+            "text-to-music",
+            "text to music",
+            "music production",
+            "music creation",
+        ),
+    ),
+    (
+        "sfx",
+        (
+            "sound effect",
+            "sound effects",
+            "foley",
+            "sound design",
+            "text-to-audio",
+            "text to audio",
+        ),
     ),
     ("vad", ("vad", "voice activity")),
     ("codec", ("neural codec", "audio codec", "encodec")),
+    ("realtime", ("realtime", "real-time", "streaming", "low-latency")),
 ]
+
+# LoRA / PEFT adapters for AI audio applications.
+LORA_DOMAIN = "LoRA"
+LORA_SECTION = (LORA_DOMAIN, "Applications")
+LORA_SIGNALS: list[tuple[str, int]] = [
+    ("lora", 7),
+    ("lo-ra", 6),
+    ("peft", 6),
+    ("low-rank adaptation", 7),
+    ("low-rank", 4),
+    ("adapter weight", 4),
+    ("finetune", 3),
+    ("fine-tune", 3),
+    ("fine tuning", 3),
+]
+LORA_AUDIO_CONTEXT: list[tuple[str, int]] = [
+    ("audio", 3),
+    ("speech", 3),
+    ("music", 3),
+    ("voice", 3),
+    ("tts", 4),
+    ("asr", 4),
+    ("text-to-speech", 4),
+    ("speech-to-text", 4),
+    ("sound effect", 4),
+    ("foley", 4),
+    ("singing", 3),
+]
+
 FRIENDLY_LICENSES = {
     "mit",
     "apache-2.0",
@@ -130,10 +201,80 @@ OK_WITH_CARE_LICENSES = {
     "lgpl-2.1",
     "lgpl-3.0",
 }
-# Topics used by the daily Commercial OK discovery / routing
-# (audio + music + any speech: ASR, TTS, STS, diarization, etc.).
-COMMERCIAL_OK_TOPICS = {
+# Conference topic surface for Commercial OK discovery / routing.
+# Source of truth for *which conferences* matter:
+#   https://github.com/yyf/music-technology-conferences
+# Sections below mirror that README; GitHub topic slugs are derived from each
+# conference community so scout finds can be reviewed against your list.
+CONFERENCE_TOPICS_SOURCE = (
+    "https://github.com/yyf/music-technology-conferences"
+)
+AUDIO_INDUSTRY_CONFERENCE_TOPICS: set[str] = {
+    # --- New Interfaces — NIME ---
+    "nime",
+    "new-interfaces",
+    "musical-interfaces",
+    "music-expression",
+    "hci",
+    "gesture",
+    # --- Computer Music — ICMC, SMC, TENOR ---
+    "icmc",
+    "smc",
+    "tenor",
+    "computer-music",
+    "sound-and-music-computing",
+    "music-notation",
+    "music-representation",
+    "algorithmic-composition",
+    # --- Audio Effects — DAFx ---
+    "dafx",
+    "digital-audio-effects",
+    "audio-effects",
+    "audio-dsp",
+    "digital-signal-processing",
+    "physical-modeling",
+    "granular-synthesis",
+    "audio-synthesis",
+    # --- Machine Learning — ISMIR, DCASE, LLM4MA, AI4Music, AIMC, EAIM (+ ML venues) ---
+    "ismir",
+    "dcase",
+    "music-information-retrieval",
+    "mir",
+    "acoustic-scene-classification",
+    "sound-event-detection",
+    "ai-music",
     "ai-audio",
+    "audio-ai",
+    "music-generation",
+    "text-to-music",
+    "text-to-audio",
+    "audio-generation",
+    "generative-audio",
+    "generative-music",
+    "audio-language-model",
+    "music-llm",
+    "machine-learning",
+    "deep-learning",
+    "neural-audio",
+    "neural-audio-codec",
+    "foundation-model",
+    "clap",
+    "source-separation",
+    "beat-tracking",
+    "audio-transcription",
+    # --- Signal Processing — ICASSP, WASPAA, InterSpeech ---
+    "icassp",
+    "waspaa",
+    "interspeech",
+    "acoustics",
+    "speech",
+    "signal-processing",
+    "psychoacoustics",
+    "room-acoustics",
+    "virtual-acoustics",
+    "acoustic-modeling",
+    "impulse-response",
+    "reverberation",
     "text-to-speech",
     "speech-to-text",
     "speech-recognition",
@@ -145,13 +286,64 @@ COMMERCIAL_OK_TOPICS = {
     "voice-conversion",
     "speaker-diarization",
     "diarization",
+    "speaker-recognition",
     "asr",
     "stt",
     "tts",
-    "music-generation",
-    "text-to-music",
-    "text-to-audio",
+    "singing-voice-synthesis",
+    # --- OS-specific — LAC ---
+    "lac",
+    "linux-audio",
+    # --- Web/Network Audio — WAC, IS2 ---
+    "wac",
+    "web-audio",
+    "networked-audio",
+    "internet-of-sounds",
+    # --- Audio Plugin Development — ADC ---
+    "adc",
+    "audio-plugins",
+    "vst",
+    "juce",
+    "realtime-audio",
+    "real-time-audio",
+    "low-latency",
+    "game-audio",
+    "embedded-audio",
+    "procedural-audio",
+    # --- Audio Engineering — AES ---
+    "aes",
+    "spatial-audio",
+    "immersive-audio",
+    "3d-audio",
+    "ambisonics",
+    "binaural",
+    "surround-sound",
+    "dolby-atmos",
+    "vr-audio",
+    "ar-audio",
+    "hrtf",
+    "head-related-transfer-function",
+    "loudspeakers",
+    "headphones",
+    "microphones",
+    "recording",
+    "broadcast-audio",
+    "live-sound",
+    "sound-reinforcement",
+    "high-resolution-audio",
+    "audio-forensics",
+    "automotive-audio",
+    "hearables",
+    "foley",
+    "sound-design",
+    "sound-effects",
+    "sound-effect",
+    "audio-watermark",
+    "watermarking",
+    "deepfake-detection",
 }
+# Commercial OK routing uses the conference-derived topic surface above.
+COMMERCIAL_OK_TOPICS = set(AUDIO_INDUSTRY_CONFERENCE_TOPICS)
 
 NOTABLE_ORGS = {
     "nvidia",
@@ -174,8 +366,9 @@ NOTABLE_ORGS = {
 }
 
 # Domain-first categorization aligned with README ToC:
-#   Commercial OK > Model        (friendly-license featured demos; routed post-score)
-#   Pipelines > Applications     (multi-model chaining for real-world problems)
+#   Commercial OK > Model        (featured demos; all licenses labeled)
+#   Pipelines > Applications     (AI audio pipelines: speech/music/film/gaming/…)
+#   LoRA > Applications          (popular/emerging audio LoRA / PEFT adapters)
 #   Audio  > Benchmark | Dataset | Annotation | Model | Security | Framework
 #   Music  > Model | Benchmark | Analysis | Production | Generation
 #   Speech > Model | Benchmark | Recognition | Production | Synthesis
@@ -219,44 +412,17 @@ NEGATIVE_KEYWORDS: list[str] = [
 ]
 
 # Bonus when GitHub topics include these (cleaner signal than free-text).
-TOPIC_BONUS: set[str] = {
-    "tts",
-    "text-to-speech",
-    "speech-recognition",
-    "speech-to-text",
-    "speech-translation",
-    "asr",
-    "stt",
-    "voice-cloning",
-    "voice-conversion",
-    "speaker-recognition",
-    "diarization",
-    "music-generation",
-    "text-to-music",
-    "text-to-audio",
-    "audio-generation",
-    "ai-audio",
-    "source-separation",
-    "music-information-retrieval",
-    "mir",
-    "audio-watermark",
-    "watermarking",
-    "deepfake-detection",
-    "audio-language-model",
-    "clap",
-    "neural-audio-codec",
-    "speech-synthesis",
-    "singing-voice-synthesis",
-    "foundation-model",
+# Confidence bonus when GitHub topics match curated tags (includes industry
+# conference surface + pipeline/LoRA extras).
+TOPIC_BONUS: set[str] = set(AUDIO_INDUSTRY_CONFERENCE_TOPICS) | {
     "pretrained-model",
-    "foley",
-    "sound-design",
-    "game-audio",
     "voice-agent",
     "voice-ai",
     "audio-pipeline",
     "speech-pipeline",
     "pipecat",
+    "lora",
+    "peft",
 }
 
 # Ideal applications for the latest-models task (soft preference, not a hard filter).
@@ -586,7 +752,7 @@ class Candidate:
     rationale: str
     dedupe_note: str = "not in README"
     license_spdx: str | None = None
-    license_tier: str = "skip"  # friendly | ok_with_care | skip
+    license_tier: str = "restricted"  # friendly | ok_with_care | restricted
 
 
 @dataclass
@@ -663,14 +829,14 @@ def repo_license_spdx(repo: dict) -> str | None:
 
 
 def license_tier(spdx: str | None) -> str:
-    """Classify license for featured demos / Commercial OK.
+    """Classify license for labeling (Commercial OK includes all tiers).
 
     friendly: MIT, Apache-2.0, BSD-2/3, ISC, Unlicense, 0BSD, CC0
-    ok_with_care: CC-BY-4.0, MPL-2.0, LGPL (allowed in general ToC, not Commercial OK)
-    skip: GPL/AGPL, CC-BY-NC, CC-BY-SA, RAIL/research-only, unknown/gated
+    ok_with_care: CC-BY-4.0, MPL-2.0, LGPL
+    restricted: GPL/AGPL, CC-BY-NC, CC-BY-SA, RAIL/research-only, unknown
     """
     if not spdx:
-        return "skip"
+        return "restricted"
     key = spdx.lower().replace("_", "-")
     if key in FRIENDLY_LICENSES:
         return "friendly"
@@ -683,8 +849,27 @@ def license_tier(spdx: str | None) -> str:
         or "cc-by-sa" in key
         or "rail" in key
     ):
-        return "skip"
-    return "skip"
+        return "restricted"
+    return "restricted"
+
+
+def license_tier_label(tier: str) -> str:
+    """Human-readable license tier for README / PR labels."""
+    return {
+        "friendly": "Commercial OK",
+        "ok_with_care": "OK with care",
+        "restricted": "Restricted",
+        # Back-compat if older fixtures still use "skip".
+        "skip": "Restricted",
+    }.get(tier, "Unknown")
+
+
+def format_license_annotation(spdx: str | None, tier: str) -> str:
+    """e.g. 'MIT · Commercial OK' or 'GPL-3.0 · Restricted'."""
+    tier_label = license_tier_label(tier)
+    if spdx:
+        return f"{spdx} · {tier_label}"
+    return f"unknown · {tier_label}"
 
 
 def should_route_commercial_ok(
@@ -692,10 +877,13 @@ def should_route_commercial_ok(
     topics: list[str] | set[str],
     tier: str,
 ) -> bool:
-    """Route friendly-license model / topic hits into Commercial OK > Model."""
-    if tier != "friendly":
-        return False
-    if category[0] in {COMMERCIAL_OK_DOMAIN, PIPELINES_DOMAIN}:
+    """Route model / commercial-topic hits into Commercial OK > Model.
+
+    All license tiers are eligible; prefer MIT/Apache via ranking/scoring.
+    `tier` is kept for call-site compatibility and labeling.
+    """
+    del tier  # labeling only — do not filter Commercial OK by license
+    if category[0] in {COMMERCIAL_OK_DOMAIN, PIPELINES_DOMAIN, LORA_DOMAIN}:
         return False
     if category[1] == "Model":
         return True
@@ -734,8 +922,8 @@ def should_route_pipeline(
     topics: list[str] | set[str],
     category: tuple[str, str],
 ) -> bool:
-    """Route multi-model chaining apps into Pipelines > Applications."""
-    if category[0] in {COMMERCIAL_OK_DOMAIN, PIPELINES_DOMAIN}:
+    """Route AI audio pipeline apps into Pipelines > Applications."""
+    if category[0] in {COMMERCIAL_OK_DOMAIN, PIPELINES_DOMAIN, LORA_DOMAIN}:
         return False
     # Single foundation/pretrained models stay in Model / Commercial OK bands.
     if category[1] == "Model" and category[0] in {"Audio", "Music", "Speech"}:
@@ -744,6 +932,42 @@ def should_route_pipeline(
         return chain >= MIN_PIPELINE_SCORE + 4
     score, _ = pipeline_chain_score(full_name, description, topics)
     return score >= MIN_PIPELINE_SCORE
+
+
+def lora_score(
+    full_name: str,
+    description: str,
+    topics: list[str] | set[str],
+) -> tuple[int, list[str]]:
+    """Score LoRA / PEFT signals in an AI audio context."""
+    topic_str = " ".join(topics)
+    blob = f"{full_name} {description} {topic_str}".lower()
+    lora_pts, _ = _weighted_score(blob, LORA_SIGNALS)
+    audio_pts, _ = _weighted_score(blob, LORA_AUDIO_CONTEXT)
+    labels: list[str] = [
+        phrase
+        for phrase, _weight in LORA_SIGNALS
+        if _phrase_matches(blob, phrase)
+    ]
+    if audio_pts > 0:
+        labels.append("audio context")
+    # Require some audio/speech/music context so generic LLM LoRAs stay out.
+    if lora_pts <= 0 or audio_pts <= 0:
+        return 0, labels
+    return lora_pts + min(6, audio_pts), labels
+
+
+def should_route_lora(
+    full_name: str,
+    description: str,
+    topics: list[str] | set[str],
+    category: tuple[str, str],
+) -> bool:
+    """Route audio LoRA / PEFT adapters into LoRA > Applications."""
+    if category[0] in {COMMERCIAL_OK_DOMAIN, PIPELINES_DOMAIN, LORA_DOMAIN}:
+        return False
+    score, _ = lora_score(full_name, description, topics)
+    return score >= MIN_LORA_SCORE
 
 
 def search_repositories(query: str) -> list[dict]:
@@ -955,7 +1179,7 @@ def score_repo(
         if category == COMMERCIAL_OK_SECTION:
             score += 2
 
-    # Pipelines: emerging + popular multi-model chaining for real-world problems.
+    # Pipelines: emerging + popular AI audio pipelines (speech/music/film/gaming/…).
     if category == PIPELINES_SECTION:
         chain, chain_labels = pipeline_chain_score(
             repo.get("full_name") or "",
@@ -965,7 +1189,23 @@ def score_repo(
         if chain >= MIN_PIPELINE_SCORE:
             score += min(10, 4 + chain // 3)
             reasons.append(
-                f"multi-model pipeline ({', '.join(chain_labels[:3]) or 'signals'})"
+                f"audio pipeline ({', '.join(chain_labels[:3]) or 'signals'})"
+            )
+        if stars >= 30 and pushed_at >= recency_cutoff:
+            score += 3
+            reasons.append("emerging + popular")
+
+    # LoRA: popular + emerging adapters for AI audio applications.
+    if category == LORA_SECTION:
+        lora_pts, lora_labels = lora_score(
+            repo.get("full_name") or "",
+            description,
+            topics,
+        )
+        if lora_pts >= MIN_LORA_SCORE:
+            score += min(10, 4 + lora_pts // 2)
+            reasons.append(
+                f"audio LoRA ({', '.join(lora_labels[:3]) or 'signals'})"
             )
         if stars >= 30 and pushed_at >= recency_cutoff:
             score += 3
@@ -991,10 +1231,11 @@ def _is_pipeline_candidate(c: Candidate) -> bool:
 
 
 def _is_model_candidate(c: Candidate) -> bool:
-    """Audio|Music|Speech > Model (excludes Commercial OK / Pipelines bands)."""
+    """Audio|Music|Speech > Model (excludes featured bands)."""
     return c.category[1] == "Model" and c.category[0] not in {
         COMMERCIAL_OK_DOMAIN,
         PIPELINES_DOMAIN,
+        LORA_DOMAIN,
     }
 
 
@@ -1010,23 +1251,34 @@ def _pipeline_rank_score(c: Candidate) -> int:
 
 
 def _preferred_license_rank(c: Candidate) -> int:
-    """Lower is better: MIT/Apache first among friendly licenses."""
+    """Lower is better: MIT/Apache, then other friendly, then ok_with_care, then restricted."""
     if not c.license_spdx:
-        return 2
+        return 3
     key = c.license_spdx.lower().replace("_", "-")
     if key in PREFERRED_COMMERCIAL_LICENSES:
         return 0
     if c.license_tier == "friendly":
         return 1
-    return 2
+    if c.license_tier == "ok_with_care":
+        return 2
+    return 3
+
+
+def _is_lora_candidate(c: Candidate) -> bool:
+    return c.category == LORA_SECTION
+
+
+def _lora_rank_score(c: Candidate) -> int:
+    score, _ = lora_score(c.full_name, c.description, [])
+    return score
 
 
 def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidate]:
     """Rank by ToC fit, then confidence; cap per README section.
 
-    Reserves Commercial OK, Pipelines (multi-model real-world apps), then
-    Audio|Music|Speech > Model slots. Prefer popular + recent for pipelines
-    and models; soft-prefer MIT/Apache for Commercial OK.
+    Reserves Commercial OK, Pipelines, LoRA, then Audio|Music|Speech > Model.
+    Prefer popular + recent for pipelines/LoRA/models; soft-prefer MIT/Apache
+    for Commercial OK (all license tiers labeled).
     """
     ranked = sorted(
         candidates,
@@ -1047,6 +1299,15 @@ def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidat
             -c.stars,
             -c.pushed_at.timestamp(),
             -_pipeline_rank_score(c),
+            -c.confidence,
+        ),
+    )
+    loras = sorted(
+        [c for c in ranked if _is_lora_candidate(c)],
+        key=lambda c: (
+            -c.stars,
+            -c.pushed_at.timestamp(),
+            -_lora_rank_score(c),
             -c.confidence,
         ),
     )
@@ -1082,7 +1343,7 @@ def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidat
         selected_names.add(c.full_name)
         return True
 
-    # 1) Seed Commercial OK (friendly-license featured demos).
+    # 1) Seed Commercial OK (featured demos; all licenses labeled).
     commercial_added = 0
     for c in commercial:
         if commercial_added >= MIN_COMMERCIAL_OK_PR_SLOTS:
@@ -1090,7 +1351,7 @@ def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidat
         if try_add(c):
             commercial_added += 1
 
-    # 2) Seed Pipelines (emerging + popular multi-model real-world apps).
+    # 2) Seed Pipelines (emerging + popular AI audio pipelines).
     pipeline_added = 0
     for c in pipelines:
         if pipeline_added >= MIN_PIPELINE_PR_SLOTS:
@@ -1098,7 +1359,15 @@ def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidat
         if try_add(c):
             pipeline_added += 1
 
-    # 3) Seed Audio|Music|Speech > Model band.
+    # 3) Seed LoRA (popular + emerging audio LoRA / PEFT).
+    lora_added = 0
+    for c in loras:
+        if lora_added >= MIN_LORA_PR_SLOTS:
+            break
+        if try_add(c):
+            lora_added += 1
+
+    # 4) Seed Audio|Music|Speech > Model band.
     model_added = 0
     for c in models:
         if model_added >= MIN_MODEL_PR_SLOTS:
@@ -1106,28 +1375,30 @@ def select_for_pr(candidates: list[Candidate], stats: RunStats) -> list[Candidat
         if try_add(c):
             model_added += 1
 
-    # 4) Fill remaining slots with the overall ranked list.
+    # 5) Fill remaining slots with the overall ranked list.
     for c in ranked:
         if len(selected) >= MAX_PR_ENTRIES:
             break
         try_add(c)
 
-    # Order: Commercial OK → Pipelines → ToC models → others.
+    # Order: Commercial OK → Pipelines → LoRA → ToC models → others.
     def _band(c: Candidate) -> int:
         if _is_commercial_ok_candidate(c):
             return 0
         if _is_pipeline_candidate(c):
             return 1
-        if _is_model_candidate(c):
+        if _is_lora_candidate(c):
             return 2
-        return 3
+        if _is_model_candidate(c):
+            return 3
+        return 4
 
     selected.sort(
         key=lambda c: (
             _band(c),
             _preferred_license_rank(c) if _is_commercial_ok_candidate(c) else 0,
-            -c.stars if _band(c) <= 2 else 0,
-            -c.pushed_at.timestamp() if _band(c) <= 2 else 0,
+            -c.stars if _band(c) <= 3 else 0,
+            -c.pushed_at.timestamp() if _band(c) <= 3 else 0,
             -c.category_score,
             -c.confidence,
             -c.stars,
@@ -1205,9 +1476,12 @@ def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) 
 
             spdx = repo_license_spdx(repo)
             tier = license_tier(spdx)
-            # Pipelines (multi-model real-world apps) before Commercial OK Model.
+            # Featured bands: Pipelines → LoRA → Commercial OK (all licenses labeled).
             if should_route_pipeline(full_name, description, topics, category):
                 category = PIPELINES_SECTION
+                category_score = max(category_score, MIN_CATEGORY_SCORE)
+            elif should_route_lora(full_name, description, topics, category):
+                category = LORA_SECTION
                 category_score = max(category_score, MIN_CATEGORY_SCORE)
             elif should_route_commercial_ok(category, topics, tier):
                 category = COMMERCIAL_OK_SECTION
@@ -1250,10 +1524,11 @@ def collect_candidates(existing: set[str], rejected: set[str], stats: RunStats) 
 def format_readme_line(candidate: Candidate) -> str:
     name = candidate.full_name.split("/")[-1]
     desc = candidate.description.rstrip(".")
-    if _is_commercial_ok_candidate(candidate) and candidate.license_spdx:
-        return (
-            f"- [{name}]({candidate.html_url}) ({candidate.license_spdx}): {desc}"
+    if _is_commercial_ok_candidate(candidate):
+        ann = format_license_annotation(
+            candidate.license_spdx, candidate.license_tier
         )
+        return f"- [{name}]({candidate.html_url}) ({ann}): {desc}"
     return f"- [{name}]({candidate.html_url}): {desc}"
 
 
@@ -1349,6 +1624,14 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
             -_pipeline_rank_score(c),
         ),
     )
+    loras = sorted(
+        [c for c in candidates if _is_lora_candidate(c)],
+        key=lambda c: (
+            -c.stars,
+            -c.pushed_at.timestamp(),
+            -_lora_rank_score(c),
+        ),
+    )
     models = _sort_models_latest_popular(
         [c for c in candidates if _is_model_candidate(c)]
     )
@@ -1358,6 +1641,7 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
         for c in candidates
         if not _is_commercial_ok_candidate(c)
         and not _is_pipeline_candidate(c)
+        and not _is_lora_candidate(c)
         and not _is_model_candidate(c)
     ]
     keep = [c for c in others if c.confidence >= KEEP_THRESHOLD]
@@ -1368,10 +1652,12 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
         f"- Run date: {run_date}",
         f"- Candidates scanned: {stats.scanned}",
         f"- High-quality (≥{HIGH_QUALITY_THRESHOLD}): {len(candidates)}",
-        f"- Commercial OK (featured demos): {len(commercial)} "
+        f"- Commercial OK (featured demos, licenses labeled): {len(commercial)} "
         f"(reserved up to {MIN_COMMERCIAL_OK_PR_SLOTS})",
-        f"- Pipelines (multi-model real-world apps): {len(pipelines)} "
+        f"- Pipelines (AI audio pipelines): {len(pipelines)} "
         f"(reserved up to {MIN_PIPELINE_PR_SLOTS})",
+        f"- LoRA (audio adapters): {len(loras)} "
+        f"(reserved up to {MIN_LORA_PR_SLOTS})",
         f"- Latest & popular models (Audio|Music|Speech > Model): {len(models)} "
         f"(reserved up to {MIN_MODEL_PR_SLOTS})",
         f"- Keep (≥{KEEP_THRESHOLD}): {len(keep)} · Review ({HIGH_QUALITY_THRESHOLD}–{KEEP_THRESHOLD - 1}): {len(review)}",
@@ -1405,9 +1691,11 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
         [
             "## Commercial OK — featured demos",
             "",
-            "Friendly licenses only (MIT, Apache-2.0, BSD-2/3, ISC, Unlicense, 0BSD, "
-            "CC0). Prefer **MIT / Apache-2.0**. Repo license ≠ weights — verify "
-            "weight terms before shipping. Ordered by preferred license, then stars.",
+            "Models for featured demos. **All licenses included** and labeled: "
+            "Commercial OK (MIT/Apache/BSD/…), OK with care (CC-BY/MPL/LGPL), "
+            "Restricted (GPL/AGPL/NC/SA/unknown). Prefer **MIT / Apache-2.0** in "
+            "ranking. Repo license ≠ weights — verify weight terms. Ordered by "
+            "license preference, then stars.",
             "",
         ]
     )
@@ -1416,25 +1704,27 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
     else:
         lines.extend(
             [
-                "| Repo | License | Stars | Updated | Conf | Description |",
-                "|------|---------|------:|---------|------|-------------|",
+                "| Repo | License | Tier | Stars | Updated | Conf | Description |",
+                "|------|---------|------|------:|---------|------|-------------|",
             ]
         )
         for c in commercial:
             lines.append(
                 f"| [{c.full_name}]({c.html_url}) | {c.license_spdx or '—'} | "
-                f"{c.stars} | {c.pushed_at.date().isoformat()} | {c.confidence} | "
+                f"{license_tier_label(c.license_tier)} | {c.stars} | "
+                f"{c.pushed_at.date().isoformat()} | {c.confidence} | "
                 f"{_md_cell(c.description)} |"
             )
         lines.append("")
 
     lines.extend(
         [
-            "## Pipelines — multi-model real-world apps",
+            "## Pipelines — AI audio pipelines",
             "",
-            "Emerging and popular repos that **chain multiple AI audio / speech / "
-            "music models** to solve real-world problems (voice agents, meeting "
-            "tools, end-to-end studios). Ordered by **stars** then **last push**.",
+            "Emerging and popular repos that chain or orchestrate AI audio models "
+            "for real-world use: speech agents, **music creation**, **sound "
+            "production**, **film**, **gaming**, **realtime**, meeting tools, and "
+            "end-to-end studios. Ordered by **stars** then **last push**.",
             "",
         ]
     )
@@ -1448,6 +1738,33 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
             ]
         )
         for c in pipelines:
+            lines.append(
+                f"| [{c.full_name}]({c.html_url}) | {c.stars} | "
+                f"{c.pushed_at.date().isoformat()} | {c.confidence} | "
+                f"{_md_cell(c.description)} |"
+            )
+        lines.append("")
+
+    lines.extend(
+        [
+            "## LoRA — AI audio adapters",
+            "",
+            "Popular and emerging **LoRA / PEFT** adapters and fine-tunes for AI "
+            "audio, speech, and music applications. Ordered by **stars** then "
+            "**last push**.",
+            "",
+        ]
+    )
+    if not loras:
+        lines.extend(["_None in this run._", ""])
+    else:
+        lines.extend(
+            [
+                "| Repo | Stars | Updated | Conf | Description |",
+                "|------|------:|---------|------|-------------|",
+            ]
+        )
+        for c in loras:
             lines.append(
                 f"| [{c.full_name}]({c.html_url}) | {c.stars} | "
                 f"{c.pushed_at.date().isoformat()} | {c.confidence} | "
@@ -1495,7 +1812,8 @@ def build_pr_body(run_date: str, stats: RunStats, candidates: list[Candidate]) -
         cat = f"{c.category[0]} > {c.category[1]}"
         band = "Keep" if c.confidence >= KEEP_THRESHOLD else "Review"
         license_line = (
-            f"- **License:** {c.license_spdx or 'unknown'} ({c.license_tier})"
+            f"- **License:** "
+            f"{format_license_annotation(c.license_spdx, c.license_tier)}"
         )
         lines.extend(
             [

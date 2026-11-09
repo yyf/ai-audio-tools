@@ -183,18 +183,18 @@ No Hugging Face, arXiv, web crawls, or LLM calls.
 
 1. Load `README.md` → normalized GitHub URL dedupe set
 2. Load optional `automation/rejected.md` skip list
-3. Run bounded searches from `automation/queries.json` (first three are
-   **Commercial OK** topic queries; next are **Pipelines** multi-model /
-   voice-agent queries; then latest open-source models / general audio)
+3. Run bounded searches from `automation/queries.json` (Commercial OK
+   topics incl. sound effects; Pipelines for speech/music/film/gaming/
+   realtime; LoRA audio adapters; then foundation / general audio)
 4. Rule-based **confidence** score (0–100) and **category** assignment
    (domain-first ToC matching), plus **license tier** from GitHub SPDX
 5. Keep candidates with confidence **≥ 55**, category score
    **≥ MIN_CATEGORY_SCORE (7)**, description length
    **≥ MIN_DESCRIPTION_LEN**, and no **NEGATIVE_KEYWORDS** hit
-6. Route **multi-model chaining** hits to **Pipelines > Applications**,
-   else **friendly-license** model / commercial-topic hits to
-   **Commercial OK > Model**; reserve **MIN_COMMERCIAL_OK_PR_SLOTS**,
-   **MIN_PIPELINE_PR_SLOTS**, then **MIN_MODEL_PR_SLOTS**
+6. Route **Pipelines** → **LoRA** → **Commercial OK** (all licenses
+   labeled); reserve **MIN_COMMERCIAL_OK_PR_SLOTS**,
+   **MIN_PIPELINE_PR_SLOTS**, **MIN_LORA_PR_SLOTS**, then
+   **MIN_MODEL_PR_SLOTS**
 7. **If count = 0 →** exit 0 (no PR)
 8. **If count ≥ 1 →** close open `bot/daily-candidates-*` PRs, create bot
    branch, insert README lines, push, open PR
@@ -204,6 +204,7 @@ No Hugging Face, arXiv, web crawls, or LLM calls.
 ```
 Commercial OK > Model
 Pipelines     > Applications
+LoRA          > Applications
 Audio  > Benchmark | Dataset | Annotation | Model | Security | Framework
 Music  > Model | Benchmark | Analysis | Production | Generation
 Speech > Model | Benchmark | Recognition | Production | Synthesis
@@ -223,20 +224,27 @@ Category assignment is **domain-first** then subsection (see
 6. Hard reject via `NEGATIVE_KEYWORDS` (discord bots, music players,
    homelab, quiz apps, generic LLM UIs, etc.) before scoring
 7. Bonus via `TOPIC_BONUS` when GitHub topics match curated tags
-8. **License tiers (Commercial OK / featured demos):**
-   - **friendly** → MIT, Apache-2.0, BSD-2/3, ISC, Unlicense, 0BSD, CC0
-     (eligible for `Commercial OK > Model`; prefer MIT / Apache-2.0)
-   - **ok_with_care** → CC-BY-4.0, MPL-2.0, LGPL (general ToC only)
-   - **skip for featured** → GPL/AGPL, CC-BY-NC, CC-BY-SA, RAIL /
+8. **License tiers (Commercial OK / featured demos):** all tiers are
+   eligible and **labeled** on README/PR lines:
+   - **friendly → "Commercial OK"** — MIT, Apache-2.0, BSD-2/3, ISC,
+     Unlicense, 0BSD, CC0 (preferred in ranking)
+   - **ok_with_care → "OK with care"** — CC-BY-4.0, MPL-2.0, LGPL
+   - **restricted → "Restricted"** — GPL/AGPL, CC-BY-NC, CC-BY-SA, RAIL /
      research-only, unknown / TBD / gated dual-license
-   - Note: repo license ≠ weights — Commercial OK list prefers MIT/Apache
-     on code; maintainers should still verify weight terms
-9. **Pipelines (multi-model real-world apps):** route when
-   `pipeline_chain_score` ≥ `MIN_PIPELINE_SCORE` (chain / orchestration /
-   voice-agent signals, ideally 2+ capability families like ASR+TTS).
-   Prefer emerging (recent push) + popular (stars). Takes priority over
-   Commercial OK when chaining evidence is present.
-10. **Latest & popular (models):** dedicated PR section for
+   - Topics: `AUDIO_INDUSTRY_CONFERENCE_TOPICS` in `scout.py`, derived from
+     [yyf/music-technology-conferences](https://github.com/yyf/music-technology-conferences)
+     (`CONFERENCE_TOPICS_SOURCE`). Sections mirror that README (NIME, ICMC/
+     SMC/TENOR, DAFx, ISMIR/DCASE + AI music, ICASSP/WASPAA/Interspeech,
+     LAC, WAC/IS2, ADC, AES). Update the set when that list changes.
+   - Note: repo license ≠ weights — verify weight terms
+9. **Pipelines (AI audio pipelines):** route when
+   `pipeline_chain_score` ≥ `MIN_PIPELINE_SCORE` (voice agents, music
+   creation / production, sound design, film, gaming, realtime, meeting
+   tools; ideally 2+ capability families). Prefer emerging + popular.
+10. **LoRA (AI audio adapters):** route when `lora_score` ≥
+    `MIN_LORA_SCORE` (LoRA/PEFT + audio/speech/music context). Rank by
+    stars then last push.
+11. **Latest & popular (models):** dedicated PR section for
    Audio|Music|Speech > Model ordered by stars then last push. Soft
    preference via `PRODUCTION_APPLICATION_SIGNALS` after
    popularity/recency.
@@ -278,11 +286,9 @@ caps at `MAX_PER_SECTION` (3) per Domain > Subsection.
 - [Name](url): short description
 ```
 
-**PR body:** dedicated **Commercial OK — featured demos** table, then
-**Pipelines — multi-model real-world apps** table (stars + last push),
-then **Latest & popular models (Audio / Music / Speech)** table, then
-Keep (≥70) and Review (55–69) for remaining finds; plus entry details
-and skipped list.
+**PR body:** **Commercial OK** (License + Tier columns), **Pipelines**,
+**LoRA**, **Latest & popular models**, then Keep/Review; plus entry
+details and skipped list.
 
 **Footer:** `This PR is proposal-only. Do not auto-merge.`
 
@@ -352,16 +358,14 @@ The workflow and script must **never**:
 | Negatives   | NEGATIVE_KEYWORDS hard-skip before scoring                    |
 | Topics      | TOPIC_BONUS adds confidence when GitHub topics match          |
 | Section cap | <= 3 entries per Domain > Subsection (MAX_PER_SECTION)        |
-| Commercial  | Queries #1–3 topic+MIT/Apache; reserve <=                     |
-| OK          | MIN_COMMERCIAL_OK_PR_SLOTS (2); friendly SPDX only            |
-| Pipelines   | Queries #4–5 multi-model / voice-agent; reserve <=            |
-|             | MIN_PIPELINE_PR_SLOTS (2); chain score >= MIN_PIPELINE_SCORE |
-| Model focus | Reserve <= MIN_MODEL_PR_SLOTS (3) Audio|Music|Speech Model;  |
-|             | PR section ordered by stars then last push; soft-prefer     |
-|             | music/film/gaming/new-media production upside               |
+| Commercial  | Topics incl. sound effects; reserve <= 2; all licenses       |
+| OK          | labeled (prefer MIT/Apache in rank)                           |
+| Pipelines   | Speech/music/film/gaming/realtime pipelines; reserve <= 2   |
+| LoRA        | Audio LoRA/PEFT; reserve <= 2; rank stars then last push    |
+| Model focus | Reserve <= 2 Audio|Music|Speech Model; stars then last push |
 | Keep band   | confidence >= 70 highlighted separately in PR body            |
-| Max per PR  | 10 (Commercial OK → Pipelines → models → rest)              |
-| Queries     | <= 9 (MAX_QUERIES); Commercial OK then Pipelines first        |
+| Max per PR  | 10 (Commercial OK → Pipelines → LoRA → models → rest)       |
+| Queries     | <= 11 (MAX_QUERIES)                                           |
 | Schedule    | Weekdays ~9:00 AM America/Los_Angeles (cron 17:00 UTC)       |
 | Stale bot   | Close open bot/daily-candidates-* PRs before new one        |
 | PRs         |                                                             |
@@ -384,17 +388,18 @@ The workflow and script must **never**:
 
 ## Tuning
 
-- **Queries:** edit `automation/queries.json` (max 9 used; prefer quoted
-  phrases; keep #1–3 Commercial OK and #4–5 Pipelines discovery)
+- **Queries:** edit `automation/queries.json` (max 11 used; prefer quoted
+  phrases; Commercial OK / Pipelines / LoRA discovery first)
 - **Keywords / scoring / licenses:** edit `DOMAIN_SIGNALS`,
   `SUBSECTION_SIGNALS`, `NEGATIVE_KEYWORDS`, `TOPIC_BONUS`,
-  `FRIENDLY_LICENSES`, `PIPELINE_CHAIN_SIGNALS`, and scoring in
-  `automation/scout.py`
+  `FRIENDLY_LICENSES`, `PIPELINE_CHAIN_SIGNALS`, `LORA_SIGNALS`, and
+  scoring in `automation/scout.py`
 - **Reject list:** add URLs to `automation/rejected.md`
 - **Threshold / caps:** constants at top of `automation/scout.py`
   (`MIN_CATEGORY_SCORE`, `MIN_MODEL_SECTION_SCORE`, `MIN_MODEL_PR_SLOTS`,
   `MIN_COMMERCIAL_OK_PR_SLOTS`, `MIN_PIPELINE_PR_SLOTS`,
-  `MIN_PIPELINE_SCORE`, `HIGH_QUALITY_THRESHOLD`, `MAX_PER_SECTION`, …)
+  `MIN_PIPELINE_SCORE`, `MIN_LORA_PR_SLOTS`, `MIN_LORA_SCORE`,
+  `HIGH_QUALITY_THRESHOLD`, `MAX_PER_SECTION`, …)
 
 ---
 
@@ -435,5 +440,12 @@ The workflow and script must **never**:
 |            | and related speech topics (not TTS-only)                      |
 | 2026-10-24 | Pipelines section + scout: multi-model chaining apps that     |
 |            | solve real-world problems (emerging + popular PR band)        |
+| 2026-11-09 | Commercial OK: sound-effects topics; label all licenses       |
+|            | (no GPL/NC skip). Pipelines broadened (music/film/gaming/     |
+|            | realtime). LoRA focus band for AI audio adapters              |
+| 2026-11-09 | Commercial OK topics → AES/ADC-style industry surface         |
+|            | (acoustics, spatial, DSP, game/automotive, …) for review      |
+| 2026-11-09 | Conference topics keyed off yyf/music-technology-conferences  |
+|            | (NIME→AES sections as source of truth)                        |
 +------------+--------------------------------------------------------------+
 ```
