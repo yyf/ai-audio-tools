@@ -41,18 +41,24 @@ Featured demos across the music-technology conference surface (see [yyf/music-te
 
 ## Model
 
+- [hex](https://github.com/anomalyco/hex) (MIT · Commercial OK): Local voice dictation for mac, windows and linux
+- [NaSuno-SongHumanizer](https://github.com/AhmadHassan-BTed/NaSuno-SongHumanizer) (MIT · Commercial OK): AI audio watermark removal & forensic anti-attribution toolkit. Neutralizes Suno, Udio, and neural fingerprints with ISO 226 perceptual masking
+- [fish-audio-hermes](https://github.com/100yenadmin/fish-audio-hermes) (Apache-2.0 · Commercial OK): Your Hermes agent speaks and listens with Fish Audio: expressive voices in 80+ languages, voice design, live dictation
 # Pipelines
 
 Emerging and popular AI audio pipelines that chain or orchestrate models for real-world use — voice agents, music creation, sound production, film, gaming, realtime, meeting tools, and end-to-end studios.
 
 ## Applications
 
+- [muesli](https://github.com/Muesli-HQ/muesli): Muesli: agent-native local meeting transcription + dictation for macOS (Granola + WisprFlow + Littlebird alternative)
+- [juturna](https://github.com/meetecho/juturna): A python library for fast data pipeline prototyping
 # LoRA
 
 Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, and music applications.
 
 ## Applications
 
+- [yeufonic](https://github.com/yeufonic/yeufonic): A web interface (and more) for YuE2: cover a recording or write a song from a prompt, edit the score, extract the stems, create your own LoRA, import them, export them, share them with fellow yeufonic users. Installs via Docker containers on Linux or Windows. or directly via an installer for Windows and MacOS
 # Audio
 
 ## Benchmark
