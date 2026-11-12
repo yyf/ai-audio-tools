@@ -41,18 +41,24 @@ Featured demos across the music-technology conference surface (see [yyf/music-te
 
 ## Model
 
+- [hex](https://github.com/anomalyco/hex) (MIT · Commercial OK): Local voice dictation for mac, windows and linux
+- [NaSuno-SongHumanizer](https://github.com/AhmadHassan-BTed/NaSuno-SongHumanizer) (MIT · Commercial OK): AI audio watermark removal & forensic anti-attribution toolkit. Neutralizes Suno, Udio, and neural fingerprints with ISO 226 perceptual masking
+- [TTS-Audio-Suite](https://github.com/diodiogod/TTS-Audio-Suite) (unknown · Restricted): A ComfyUI custom node integration for local multi-engine multi-language Text-to-Speech and Voice Conversion. Supports: RVC, Echo-TTS, Qwen3-TTS, Cozy Voice 3, Step Audio EditX, IndexTTS-2, Chatterbox (classic and multilingual), F5-TTS, Higgs Audio 2, 3, and VibeVoice with unlimited text length, SRT timing, Character support, and many audio tools
 # Pipelines
 
 Emerging and popular AI audio pipelines that chain or orchestrate models for real-world use — voice agents, music creation, sound production, film, gaming, realtime, meeting tools, and end-to-end studios.
 
 ## Applications
 
+- [ODS](https://github.com/Osmantic/ODS): ODS V3 Pre-Release: Public testing and refinement ahead of the official V3 launch. Turn your PC, Mac, or Linux box into a private AI server
 # LoRA
 
 Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, and music applications.
 
 ## Applications
 
+- [Ruach_Studio](https://github.com/igrbible/Ruach_Studio): Ruach Studio: The Ultimate YuE2 Studio for local AI music generation. YuE2 Musician, Drama 3 Narrator, QWEN Writer, Refiner (30+ nodes, Piano Roll, DAW), QWEN IMAGE Cover Artist, MiniMax H3 Videographer, LoRA Trainer, Librarian. SUNO AI alternative
+- [yeufonic](https://github.com/yeufonic/yeufonic): A web interface (and more) for YuE2: cover a recording or write a song from a prompt, edit the score, extract the stems, create your own LoRA, import them, export them, share them with fellow yeufonic users. Installs via Docker containers on Linux or Windows. or directly via an installer for Windows and MacOS
 # Audio
 
 ## Benchmark
