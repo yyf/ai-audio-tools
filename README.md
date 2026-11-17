@@ -41,12 +41,17 @@ Featured demos across the music-technology conference surface (see [yyf/music-te
 
 ## Model
 
+- [openscreen](https://github.com/getopenscreen/openscreen) (MIT · Commercial OK): Record your screen, ship a demo. Free and open-source, GPU-accelerated, no watermarks, no subscriptions. Windows, macOS, Linux. Actively maintained
+- [hex](https://github.com/anomalyco/hex) (MIT · Commercial OK): Local voice dictation for mac, windows and linux
+- [speech-kit-obsidian-plugin](https://github.com/brittain9/speech-kit-obsidian-plugin) (MIT · Commercial OK): Speech and language toolkit for Obsidian
 # Pipelines
 
 Emerging and popular AI audio pipelines that chain or orchestrate models for real-world use — voice agents, music creation, sound production, film, gaming, realtime, meeting tools, and end-to-end studios.
 
 ## Applications
 
+- [Mimi](https://github.com/yuxino/Mimi): 把电脑或麦克风声音转成实时翻译字幕。Live translated subtitles from computer or microphone audio
+- [AnyCaptions](https://github.com/EduardoViniciusJ/AnyCaptions): Real-time captions and translation for any audio — fully local, no cloud. Speech recognition, 37-language translation and voice dictation
 # LoRA
 
 Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, and music applications.
