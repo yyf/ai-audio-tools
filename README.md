@@ -41,12 +41,18 @@ Featured demos across the music-technology conference surface (see [yyf/music-te
 
 ## Model
 
+- [hex](https://github.com/anomalyco/hex) (MIT · Commercial OK): Local voice dictation for mac, windows and linux
+- [NaSuno-SongHumanizer](https://github.com/AhmadHassan-BTed/NaSuno-SongHumanizer) (MIT · Commercial OK): AI audio watermark removal & forensic anti-attribution toolkit. Neutralizes Suno, Udio, and neural fingerprints with ISO 226 perceptual masking
+- [zonos-api](https://github.com/manascb1344/zonos-api) (Apache-2.0 · Commercial OK): Production-ready FastAPI wrapper for Zonos TTS models with GPU acceleration, voice cloning, and emotion control. Supports both Transformer and Hybrid variants. ⚠️ UNSTABLE API - INITIAL RELEASE
 # Pipelines
 
 Emerging and popular AI audio pipelines that chain or orchestrate models for real-world use — voice agents, music creation, sound production, film, gaming, realtime, meeting tools, and end-to-end studios.
 
 ## Applications
 
+- [ODS](https://github.com/Osmantic/ODS): ODS V3 Pre-Release: Public testing and refinement ahead of the official V3 launch. Turn your PC, Mac, or Linux box into a private AI server
+- [ZONOS3-Mini](https://github.com/Zyphra/ZONOS3-Mini): compact zero-shot voice-cloning TTS with state-of-the-art performance, leading voice control, real-time on-device
+- [telnyx-code-examples](https://github.com/team-telnyx/telnyx-code-examples): Production-ready code examples for Telnyx AI Communications Infrastructure — Voice AI, SMS, SIP, and IoT APIs
 # LoRA
 
 Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, and music applications.
@@ -302,3 +308,4 @@ Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, a
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [drifting-tts](https://github.com/kadirnar/drifting-tts): One-step Turkish text-to-speech trained with a drifting objective (Kyutai learned-temperature recipe)
