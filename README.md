@@ -41,12 +41,18 @@ Featured demos across the music-technology conference surface (see [yyf/music-te
 
 ## Model
 
+- [NaSuno-SongHumanizer](https://github.com/AhmadHassan-BTed/NaSuno-SongHumanizer) (MIT · Commercial OK): AI audio watermark removal & forensic anti-attribution toolkit. Neutralizes Suno, Udio, and neural fingerprints with ISO 226 perceptual masking
+- [yogurt](https://github.com/FrigadeHQ/yogurt) (MIT · Commercial OK): Private AI meeting notes that stay on your computer. A free, open-source alternative to Granola for Mac, Windows and Linux
+- [soundbox](https://github.com/HamSanders/soundbox) (unknown · Restricted): Free, open-source, local alternative to ElevenLabs and Suno. AI sound effects, music with lyrics, text-to-speech and voice cloning on your own GPU (Stable Audio, ACE-Step and more). No account, no credits, offline. Windows/macOS app, HTTP API and a 21-tool MCP server for Claude Code and Cursor
 # Pipelines
 
 Emerging and popular AI audio pipelines that chain or orchestrate models for real-world use — voice agents, music creation, sound production, film, gaming, realtime, meeting tools, and end-to-end studios.
 
 ## Applications
 
+- [mlx-audio](https://github.com/Neywa-Labs/mlx-audio): A text-to-speech (TTS), speech-to-text (STT) and speech-to-speech (STS) library built on Apple's MLX framework, providing efficient speech analysis on Apple Silicon
+- [Mimi](https://github.com/yuxino/Mimi): 把电脑或麦克风声音转成实时翻译字幕。Live translated subtitles from computer or microphone audio
+- [portable-hermes-agent](https://github.com/aivrar/portable-hermes-agent): Hermes Agent made portable desktop for Windows — 100 tools, GUI, local models via LM Studio, TTS, Music, ComfyUI, workflows, tool maker. No install. No Docker. No admin rights
 # LoRA
 
 Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, and music applications.
