@@ -41,12 +41,16 @@ Featured demos across the music-technology conference surface (see [yyf/music-te
 
 ## Model
 
+- [hex](https://github.com/anomalyco/hex) (MIT · Commercial OK): Local voice dictation for mac, windows and linux
+- [NaSuno-SongHumanizer](https://github.com/AhmadHassan-BTed/NaSuno-SongHumanizer) (MIT · Commercial OK): AI audio watermark removal & forensic anti-attribution toolkit. Neutralizes Suno, Udio, and neural fingerprints with ISO 226 perceptual masking
+- [keyscribe](https://github.com/rsperko/keyscribe) (GPL-3.0 · Restricted): Local-first macOS voice dictation with on-device speech recognition, no telemetry, spoken edits, and optional BYOK AI rewrite modes
 # Pipelines
 
 Emerging and popular AI audio pipelines that chain or orchestrate models for real-world use — voice agents, music creation, sound production, film, gaming, realtime, meeting tools, and end-to-end studios.
 
 ## Applications
 
+- [transcriber](https://github.com/arnoulddw/transcriber): Self-hosted AI transcription: file and live speech-to-text with OpenAI, AssemblyAI, Gemini and OpenRouter, reusable LLM workflows and a REST API. Personal by default, team mode with RBAC and admin analytics when you need it
 # LoRA
 
 Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, and music applications.
