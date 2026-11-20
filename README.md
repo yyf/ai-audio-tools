@@ -41,6 +41,9 @@ Featured demos across the music-technology conference surface (see [yyf/music-te
 
 ## Model
 
+- [Douyin_TikTok_Download_API](https://github.com/Evil0ctal/Douyin_TikTok_Download_API) (Apache-2.0 · Commercial OK): 🚀 自托管的抖音、TikTok、B 站数据采集与无水印视频下载 API，支持 AI agent 通过 MCP 调用与离线语音转文字，Docker 一键部署。| Self-hosted TikTok, Douyin & Bilibili scraper and no-watermark video downloader — async REST API, MCP server for AI agents, CLI and web console, plus offline speech-to-text for downloaded videos. Self-healing identity pool, PostgreSQL archive, one docker compose up
+- [hex](https://github.com/anomalyco/hex) (MIT · Commercial OK): Local voice dictation for mac, windows and linux
+- [soundbox](https://github.com/HamSanders/soundbox) (unknown · Restricted): Free, open-source, local alternative to ElevenLabs and Suno. AI sound effects, music with lyrics, text-to-speech and voice cloning on your own GPU (Stable Audio, ACE-Step and more). No account, no credits, offline. Windows/macOS app, HTTP API and a 21-tool MCP server for Claude Code and Cursor
 # Pipelines
 
 Emerging and popular AI audio pipelines that chain or orchestrate models for real-world use — voice agents, music creation, sound production, film, gaming, realtime, meeting tools, and end-to-end studios.
@@ -53,6 +56,8 @@ Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, a
 
 ## Applications
 
+- [Ruach_Studio](https://github.com/igrbible/Ruach_Studio): Ruach Studio: The Ultimate YuE2 Studio for local AI music generation. YuE2 Musician, Drama 3 & Higgs v3 Narrator, QWEN Writer, Refiner (30+ nodes, Piano Roll, DAW), QWEN IMAGE Cover Artist, MiniMax H3 Videographer, LoRA Trainer, Librarian. SUNO AI alternative
+- [yeufonic](https://github.com/yeufonic/yeufonic): A web interface (and more) for YuE2: cover a recording or write a song from a prompt, edit the score, extract the stems, create your own voice or import RVC, create your own LoRA, import them, export them, share them with fellow yeufonic users. Installs via Docker on Linux or Windows. or directly via an installer for Windows, Linux, and MacOS
 # Audio
 
 ## Benchmark
@@ -266,6 +271,7 @@ Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, a
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
 
+- [Voice-Transcriptor](https://github.com/leoerdman/Voice-Transcriptor): Desktop speech-to-text with global hotkeys and auto-paste: live mic transcription via local Whisper (offline) or Deepgram, file/video transcription, searchable local history, and AI text cleanup. macOS, Windows, Linux
 ## Production
 
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
