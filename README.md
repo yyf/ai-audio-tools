@@ -41,6 +41,9 @@ Featured demos across the music-technology conference surface (see [yyf/music-te
 
 ## Model
 
+- [Handy](https://github.com/cjpais/Handy) (MIT · Commercial OK): A free, open source, and extensible speech-to-text application that works completely offline
+- [hex](https://github.com/anomalyco/hex) (MIT · Commercial OK): Local voice dictation for mac, windows and linux
+- [TTS-WebUI](https://github.com/rsxdalv/TTS-WebUI) (MIT · Commercial OK): A single Gradio + React WebUI with extensions for ACE-Step, OmniVoice, Kimi Audio, Piper TTS, GPT-SoVITS, CosyVoice, XTTSv2, DIA, Kokoro, OpenVoice, ParlerTTS, Stable Audio, MMS, StyleTTS2, MAGNet, AudioGen, MusicGen, Tortoise, RVC, Vocos, Demucs, SeamlessM4T, and Bark!
 # Pipelines
 
 Emerging and popular AI audio pipelines that chain or orchestrate models for real-world use — voice agents, music creation, sound production, film, gaming, realtime, meeting tools, and end-to-end studios.
@@ -53,6 +56,8 @@ Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, a
 
 ## Applications
 
+- [yeufonic](https://github.com/yeufonic/yeufonic): A web interface (and more) for YuE2: cover a recording or write a song from a prompt, edit the score, extract the stems, create your own voice or import RVC, create your own LoRA, import them, export them, share them with fellow yeufonic users. Installs via Docker on Linux or Windows. or directly via an installer for Windows, Linux, and MacOS
+- [pratidhvani](https://github.com/svayatta/pratidhvani): Open, self-hosted voice cloning for Indian languages that keeps a speaker's accent and dialect. Built for archival recordings, with consent and an inaudible watermark. प्रतिध्वनि: Sanskrit for "echo"
 # Audio
 
 ## Benchmark
@@ -302,3 +307,4 @@ Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, a
 - [OpenVoiceUI](https://github.com/MCERQUA/OpenVoiceUI): Voice-powered AI assistant platform — connect any LLM, any TTS, with a live web canvas, music generation, and agent orchestration using openclaw. Install: npx openvoiceui setup
 - [speech-android](https://github.com/soniqo/speech-android): On-device speech SDK for Android — ASR, TTS, VAD, and noise cancellation powered by ONNX Runtime with Qualcomm NNAPI acceleration
 - [Pandrator](https://github.com/lukaszliniewicz/Pandrator): Turn PDFs and EPUBs into audiobooks; subtitles or videos into dubbed videos (including translation), and more. For free. Pandrator uses local models, including voice-cloning (instant, RVC-enhanced, XTTS fine-tuning) and LLM processing. It aspires to be a user-friendly app with a GUI, an installer and all-in-one packages
+- [tts-bench](https://github.com/5uck1ess/tts-bench): Speed and samples benchmark: for all types of text to speech (TTS) models on Windows/Linux/Mac
