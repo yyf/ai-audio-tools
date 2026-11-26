@@ -41,18 +41,23 @@ Featured demos across the music-technology conference surface (see [yyf/music-te
 
 ## Model
 
+- [hex](https://github.com/anomalyco/hex) (MIT · Commercial OK): Local voice dictation for mac, windows and linux
+- [yogurt](https://github.com/FrigadeHQ/yogurt) (MIT · Commercial OK): Private AI meeting notes that stay on your computer. No meeting bot. Free and open source for Mac, Windows and Linux. An alternative to Granola, Otter and Fireflies
+- [yazses](https://github.com/MSKazemi/yazses) (Apache-2.0 · Commercial OK): Free, open-source, fully-offline-by-default voice dictation for Linux (X11 & Wayland), macOS & Windows. Hold a key, speak, release — on-device faster-whisper types it into any app. Also transcribes recordings & captures meetings with speaker labels. No cloud, no account, no subscription
 # Pipelines
 
 Emerging and popular AI audio pipelines that chain or orchestrate models for real-world use — voice agents, music creation, sound production, film, gaming, realtime, meeting tools, and end-to-end studios.
 
 ## Applications
 
+- [OpenVideoHarness](https://github.com/ZLHad/OpenVideoHarness): A controllable workflow for making videos with code, open source: say one sentence, a coding agent (Claude Code, Codex) writes the code and renders the film, and you direct every step in a visual Studio. 用代码做视频的一套可控工作流：说一句话，agent 写代码出片；每一步看得见、改得动、能重做，你在 Studio 里当导演。
 # LoRA
 
 Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, and music applications.
 
 ## Applications
 
+- [audiocraft-finetune-lab](https://github.com/abdelkhalk93-star/audiocraft-finetune-lab): MusicGen Pro Trainer 2026: The Ultimate AI Music Studio Guide
 # Audio
 
 ## Benchmark
