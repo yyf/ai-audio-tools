@@ -41,6 +41,9 @@ Featured demos across the music-technology conference surface (see [yyf/music-te
 
 ## Model
 
+- [claude-code-video-toolkit](https://github.com/digitalsamba/claude-code-video-toolkit) (MIT · Commercial OK): Make videos with Claude Code: script, AI voiceover, music, video clips and render, on open-source models that cost cents
+- [awesome-voice-typing](https://github.com/primaprashant/awesome-voice-typing) (MIT · Commercial OK): Curated list of open-source speech-to-text and voice typing tools for Linux, macOS, Windows, Android, and iOS. Offline, local, and cloud
+- [yazses](https://github.com/MSKazemi/yazses) (Apache-2.0 · Commercial OK): Free, open-source, fully-offline-by-default voice dictation for Linux (X11 & Wayland), macOS & Windows. Hold a key, speak, release — on-device faster-whisper types it into any app. Also transcribes recordings & captures meetings with speaker labels. No cloud, no account, no subscription
 # Pipelines
 
 Emerging and popular AI audio pipelines that chain or orchestrate models for real-world use — voice agents, music creation, sound production, film, gaming, realtime, meeting tools, and end-to-end studios.
@@ -53,6 +56,8 @@ Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, a
 
 ## Applications
 
+- [Ruach_Studio](https://github.com/igrbible/Ruach_Studio): Ruach Studio: The Ultimate YuE2 Studio for local AI music generation. YuE2 Musician, Drama 3 & Higgs v3 Narrator, QWEN Writer, Refiner (30+ nodes, Piano Roll, DAW), QWEN IMAGE Cover Artist, MiniMax H3 Videographer, LoRA Trainer, Librarian. SUNO AI alternative
+- [yeufonic](https://github.com/yeufonic/yeufonic): A web interface (and more) for YuE2: cover a recording or write a song from a prompt, edit the score, extract the stems, create your own voice or import RVC, create your own LoRA, import them, export them, share them with fellow yeufonic users. Installs via Docker on Linux or Windows. or directly via an installer for Windows, Linux, and MacOS
 # Audio
 
 ## Benchmark
