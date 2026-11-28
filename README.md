@@ -41,18 +41,23 @@ Featured demos across the music-technology conference surface (see [yyf/music-te
 
 ## Model
 
+- [MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo) (MIT · Commercial OK): 利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow
+- [awesome-voice-typing](https://github.com/primaprashant/awesome-voice-typing) (MIT · Commercial OK): Curated list of open-source speech-to-text and voice typing tools for Linux, macOS, Windows, Android, and iOS. Offline, local, and cloud
+- [speechdock](https://github.com/yohasebe/speechdock) (Apache-2.0 · Commercial OK): Turn any audio into text and any text into speech — menu bar app with system/app audio capture, live subtitles, OCR, and translation
 # Pipelines
 
 Emerging and popular AI audio pipelines that chain or orchestrate models for real-world use — voice agents, music creation, sound production, film, gaming, realtime, meeting tools, and end-to-end studios.
 
 ## Applications
 
+- [OpenVideoHarness](https://github.com/ZLHad/OpenVideoHarness): A controllable workflow for making videos with code, open source: say one sentence, a coding agent (Claude Code, Codex) writes the code and renders the film, and you direct every step in a visual Studio. 用代码做视频的一套可控工作流：说一句话，agent 写代码出片；每一步看得见、改得动、能重做，你在 Studio 里当导演。
 # LoRA
 
 Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, and music applications.
 
 ## Applications
 
+- [yeufonic](https://github.com/yeufonic/yeufonic): A frontend for YuE2: cover a recording or write a song from a prompt, edit the score, extract the stems, create your own voice or import RVC, create your own LoRA, import them, export them, share them with fellow yeufonic users. Installs via Docker on Linux or Windows. or directly via an installer for Windows, Linux, and MacOS
 # Audio
 
 ## Benchmark
@@ -266,6 +271,7 @@ Popular and emerging LoRA / PEFT adapters and fine-tunes for AI audio, speech, a
 - [annyang](https://github.com/TalAter/annyang): 💬 Speech recognition for your site
 - [vocalinux](https://github.com/VocaHQ/vocalinux): Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper & VOSK engines, GPU-accelerated, works on X11 + Wayland!
 
+- [BenNevis](https://github.com/ZhaoZeyu1995/BenNevis): A Diffrentiable WFST-based End-to-End Automatic Speech Recognition toollkit with flexible topology support
 ## Production
 
 - [Descript audio codec](https://github.com/descriptinc/descript-audio-codec): State-of-the-art audio codec with 90x compression factor. Supports 44.1kHz, 24kHz, and 16kHz mono/stereo audio
